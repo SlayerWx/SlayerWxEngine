@@ -1,5 +1,5 @@
 #include "baseGame/BaseGame.h"
-class Game : BaseGame
+class Game : public BaseGame
 {
 private:
 	Shape shape;
