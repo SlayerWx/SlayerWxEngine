@@ -6,10 +6,12 @@ void Game::Play()
 	UpdateEngine();
 }
 
+void Game::Start()
+{
+	shape = Shape();
+}
 void Game::Update()
 {
+	shape.Draw();
 }
 
-void Game::Draw()
-{
-}

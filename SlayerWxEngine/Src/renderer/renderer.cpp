@@ -8,10 +8,10 @@ Renderer::Renderer()
 {
 }
 
-void Renderer::Draw()
+void Renderer::Draw(float* vertex,unsigned int* index)
 {
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 18, VertexTriangle, GL_STATIC_DRAW);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * 3, IndexTriangle, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 18, vertex, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * 3, index, GL_STATIC_DRAW);
 	glDrawElements(GL_TRIANGLES,3,GL_UNSIGNED_INT,0);
 
 }

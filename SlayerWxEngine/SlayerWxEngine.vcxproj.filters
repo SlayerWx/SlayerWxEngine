@@ -19,6 +19,15 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{f7eeaf63-aef3-412a-a22e-eb001992da1a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\shape">
+      <UniqueIdentifier>{0cc2a9cb-9bb8-462f-9c52-d58f359077a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\entity">
+      <UniqueIdentifier>{b35560f4-d244-46f8-b026-094a7fa32c34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\entity2D">
+      <UniqueIdentifier>{305d8ce4-552a-4eec-949e-98231aae0c45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\baseGame\BaseGame.cpp">
@@ -29,6 +38,15 @@
     </ClCompile>
     <ClCompile Include="Src\renderer\renderer.cpp">
       <Filter>Src\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\shape\Shape.cpp">
+      <Filter>Src\shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\entity\Entity.cpp">
+      <Filter>Src\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\entity2D\Entity2D.cpp">
+      <Filter>Src\entity2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +61,15 @@
     </ClInclude>
     <ClInclude Include="Src\renderer\renderer.h">
       <Filter>Src\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\shape\Shape.h">
+      <Filter>Src\shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\entity\Entity.h">
+      <Filter>Src\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\entity2D\Entity2D.h">
+      <Filter>Src\entity2D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

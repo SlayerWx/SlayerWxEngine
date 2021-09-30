@@ -2,8 +2,10 @@
 class Game : BaseGame
 {
 private:
+	Shape shape;
+	void Start(); 
 	void Update();
-	void Draw();
+
 public:
 	void Play();
 };

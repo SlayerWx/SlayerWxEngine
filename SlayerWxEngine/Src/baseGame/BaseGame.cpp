@@ -55,7 +55,6 @@ void BaseGame::UpdateBegin()
 
 void BaseGame::UpdateEnd()
 {
-	renderer->Draw();
 	window->SwapBuffer();
 	/* Poll for and process events
 	check what events are occurring: keyboard, mouse, window events, etc.*/

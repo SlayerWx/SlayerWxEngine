@@ -6,7 +6,7 @@ class SlayerWxEngine_API Renderer
 private:
 public:
 	Renderer();
-	void Draw();
+	void Draw(float* vertex, unsigned int* index);
 	unsigned int VBO = 0; // VertexBufferObject
 	unsigned int VAO = 0; // VertexArrayObject
 	unsigned int EBO = 0; // ElementsBufferObject

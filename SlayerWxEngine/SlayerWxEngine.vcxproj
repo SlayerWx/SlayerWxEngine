@@ -20,13 +20,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\baseGame\BaseGame.cpp" />
+    <ClCompile Include="Src\entity2D\Entity2D.cpp" />
+    <ClCompile Include="Src\entity\Entity.cpp" />
     <ClCompile Include="Src\renderer\renderer.cpp" />
+    <ClCompile Include="Src\shape\Shape.cpp" />
     <ClCompile Include="Src\window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\baseGame\BaseGame.h" />
+    <ClInclude Include="Src\entity2D\Entity2D.h" />
+    <ClInclude Include="Src\entity\Entity.h" />
     <ClInclude Include="Src\export\export.h" />
     <ClInclude Include="Src\renderer\renderer.h" />
+    <ClInclude Include="Src\shape\Shape.h" />
     <ClInclude Include="Src\window\window.h" />
   </ItemGroup>
   <ItemGroup>

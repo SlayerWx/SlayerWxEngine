@@ -1,7 +1,7 @@
 #ifndef BASEGAME_H
 #define BASEGAME_H
-#include "renderer/renderer.h"
 #include "window/window.h"
+#include "shape/Shape.h"
 struct GLFWmonitor;
 struct GLFWwindow;
 class SlayerWxEngine_API BaseGame
@@ -26,7 +26,6 @@ public:
 	void UpdateEngine();
 	void virtual Start() = 0;
 	void virtual Update() = 0;
-	void virtual Draw() = 0;
 };
 #endif
 

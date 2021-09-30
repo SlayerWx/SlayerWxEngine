@@ -1,13 +1,14 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 #include "export/export.h"
+#include "renderer/renderer.h"
+
 class SlayerWxEngine_API Entity
 {
 public:
+	Renderer* renderer;
 	Entity();
-	~Entity();
-
-private:
-
+	Entity(Renderer* renderer);
 };
-#endif
+
+#endif // !ENTITY_H
