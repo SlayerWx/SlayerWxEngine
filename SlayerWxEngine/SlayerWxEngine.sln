@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SlayerWxEngine", "SlayerWxEngine\SlayerWxEngine.vcxproj", "{AB5742C2-708D-436D-9C21-C9B1B5303A04}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj", "{1486F343-2ACF-4188-9136-6A2ECCD60252}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AB5742C2-708D-436D-9C21-C9B1B5303A04} = {AB5742C2-708D-436D-9C21-C9B1B5303A04}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +26,14 @@ Global
 		{AB5742C2-708D-436D-9C21-C9B1B5303A04}.Release|x64.Build.0 = Release|x64
 		{AB5742C2-708D-436D-9C21-C9B1B5303A04}.Release|x86.ActiveCfg = Release|Win32
 		{AB5742C2-708D-436D-9C21-C9B1B5303A04}.Release|x86.Build.0 = Release|Win32
+		{1486F343-2ACF-4188-9136-6A2ECCD60252}.Debug|x64.ActiveCfg = Debug|x64
+		{1486F343-2ACF-4188-9136-6A2ECCD60252}.Debug|x64.Build.0 = Debug|x64
+		{1486F343-2ACF-4188-9136-6A2ECCD60252}.Debug|x86.ActiveCfg = Debug|Win32
+		{1486F343-2ACF-4188-9136-6A2ECCD60252}.Debug|x86.Build.0 = Debug|Win32
+		{1486F343-2ACF-4188-9136-6A2ECCD60252}.Release|x64.ActiveCfg = Release|x64
+		{1486F343-2ACF-4188-9136-6A2ECCD60252}.Release|x64.Build.0 = Release|x64
+		{1486F343-2ACF-4188-9136-6A2ECCD60252}.Release|x86.ActiveCfg = Release|Win32
+		{1486F343-2ACF-4188-9136-6A2ECCD60252}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
