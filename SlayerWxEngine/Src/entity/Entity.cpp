@@ -16,7 +16,6 @@ Entity::Entity()
 Entity::Entity(Renderer* renderer)
 {
 	this->renderer = renderer;
-	model = glm::mat4(1.0f); //init entity
 	rotateX = glm::mat4(1.0f);
 	rotateY = glm::mat4(1.0f);
 	rotateZ = glm::mat4(1.0f);

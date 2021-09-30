@@ -16,7 +16,7 @@ int BaseGame::EngineInit(int width, int height, const char* title)// GLFWmonitor
 	/* Initialize the library */
 	if (!glfwInit())
 		return -1;
-	if (WindowInit(width, height, title))
+	else if (WindowInit(width, height, title))
 		return -1;
 	glewInit();
 	RendererInit();
