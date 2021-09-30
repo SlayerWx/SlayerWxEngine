@@ -29,3 +29,9 @@ GLFWwindow* Window::GetWindow()
 {
 	return window;
 }
+
+void Window::SwapBuffer()
+{
+    /* Swap front and back buffers */
+    glfwSwapBuffers(window);
+}

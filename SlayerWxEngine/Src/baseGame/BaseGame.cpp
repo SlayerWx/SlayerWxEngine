@@ -23,7 +23,7 @@ int BaseGame::EngineInit(int width, int height, const char* title)// GLFWmonitor
 
 int BaseGame::WindowInit(int width, int height, const char* title)// GLFWmonitor* monitor, GLFWwindow* share)
 {
-	window = new Window(width,height,title,NULL,NULL);
+	window = new Window(width, height, title, NULL, NULL);
 	if (!window)
 	{
 		return -1;
@@ -43,7 +43,7 @@ void BaseGame::UpdateBegin()
 
 void BaseGame::UpdateEnd()
 {
-	renderer->SwapBuffer(window->GetWindow());
+	window->SwapBuffer();
 	/* Poll for and process events
 	check what events are occurring: keyboard, mouse, window events, etc.*/
 	glfwPollEvents();

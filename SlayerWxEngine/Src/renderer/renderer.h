@@ -1,6 +1,7 @@
 #ifndef RENDERER_H
 #define RENDERER_H
-#include "window/window.h"
+#include "export/export.h"
+//#include "window/window.h"
 struct GLFWwindow;
 class SlayerWxEngine_API Renderer
 {
@@ -8,7 +9,6 @@ private:
 public:
 	Renderer();
 	void BeginDraw();
-	void SwapBuffer(GLFWwindow* window);
 	
 };
 // settings
