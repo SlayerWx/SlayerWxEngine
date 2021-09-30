@@ -8,6 +8,7 @@ Entity::Entity()
 	rotateZ = glm::mat4(1.0f);
 	scale = glm::mat4(1.0f);
 	translate = glm::mat4(1.0f);
+
 	SetPosition(0, 0, 0);
 	Rotate(0, 0, 0);
 	Scale(1, 1, 1);
@@ -16,7 +17,8 @@ Entity::Entity()
 Entity::Entity(Renderer* renderer)
 {
 	this->renderer = renderer;
-	model = glm::mat4(1.0f); //init entity
+
+	model = glm::mat4(1.0f);
 	rotateX = glm::mat4(1.0f);
 	rotateY = glm::mat4(1.0f);
 	rotateZ = glm::mat4(1.0f);
@@ -92,8 +94,8 @@ void Entity::Scale(float x, float y, float z)
 void Entity::Rotate(float x, float y, float z)
 {
 	RotateX(x);
-	RotateX(y);
-	RotateX(z);
+	RotateY(y);
+	RotateZ(z);
 }
 
 void Entity::Translate(float x, float y, float z)

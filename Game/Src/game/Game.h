@@ -3,10 +3,9 @@ class Game : public BaseGame
 {
 private:
 	Shape shape;
-	void Start(); 
 	void Update();
-
+	void Start();
 public:
+	Game();
 	void Play();
 };
-

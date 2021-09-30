@@ -5,7 +5,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
-class SlayerWxEngine_API Entity
+class SlayerWxEngine_API Entity 
 {
 protected:
 	glm::mat4 model;
@@ -35,4 +35,4 @@ public:
 	void Translate(float x, float y, float z);
 };
 
-#endif // !ENTITY_H
+#endif

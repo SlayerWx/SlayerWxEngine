@@ -16,7 +16,7 @@ int BaseGame::EngineInit(int width, int height, const char* title)// GLFWmonitor
 	/* Initialize the library */
 	if (!glfwInit())
 		return -1;
-	if (WindowInit(width, height, title))
+	else if (WindowInit(width, height, title))
 		return -1;
 	glewInit();
 	RendererInit();
@@ -38,9 +38,10 @@ void BaseGame::RendererInit()
 {
 	renderer->CreateBuffers();
 	renderer->BindBuffers();
-	renderer->CreateProgram("../SlayerWxEngine/Shader/VertexShader.SWshader",
-							"../SlayerWxEngine/Shader/FragmentShader.SWshader");
+	
+	renderer->CreateProgram("../SlayerWxEngine/Shader/VertexShader.SWshader","../SlayerWxEngine/Shader/FragmentShader.SWshader");
 	renderer->DefVertexAttribute();
+
 	renderer->CallUniformShaders();
 }
 bool BaseGame::Running()

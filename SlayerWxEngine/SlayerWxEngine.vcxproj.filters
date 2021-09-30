@@ -19,14 +19,14 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{f7eeaf63-aef3-412a-a22e-eb001992da1a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\shape">
-      <UniqueIdentifier>{0cc2a9cb-9bb8-462f-9c52-d58f359077a4}</UniqueIdentifier>
+    <Filter Include="Src\Entity">
+      <UniqueIdentifier>{2eeeb282-ab20-47e4-8618-1cd16353b1d2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\entity">
-      <UniqueIdentifier>{b35560f4-d244-46f8-b026-094a7fa32c34}</UniqueIdentifier>
+    <Filter Include="Src\Entity2D">
+      <UniqueIdentifier>{1eba1921-0a54-4ab9-a389-f30e515f883a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\entity2D">
-      <UniqueIdentifier>{305d8ce4-552a-4eec-949e-98231aae0c45}</UniqueIdentifier>
+    <Filter Include="Src\Shape">
+      <UniqueIdentifier>{943423c0-a53c-4b60-8594-189d7473384f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -39,14 +39,14 @@
     <ClCompile Include="Src\renderer\renderer.cpp">
       <Filter>Src\renderer</Filter>
     </ClCompile>
+    <ClCompile Include="Src\entity2D\Entity2D.cpp">
+      <Filter>Src\Entity2D</Filter>
+    </ClCompile>
     <ClCompile Include="Src\shape\Shape.cpp">
-      <Filter>Src\shape</Filter>
+      <Filter>Src\Shape</Filter>
     </ClCompile>
     <ClCompile Include="Src\entity\Entity.cpp">
-      <Filter>Src\entity</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\entity2D\Entity2D.cpp">
-      <Filter>Src\entity2D</Filter>
+      <Filter>Src\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -62,14 +62,14 @@
     <ClInclude Include="Src\renderer\renderer.h">
       <Filter>Src\renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Src\entity2D\Entity2D.h">
+      <Filter>Src\Entity2D</Filter>
+    </ClInclude>
     <ClInclude Include="Src\shape\Shape.h">
-      <Filter>Src\shape</Filter>
+      <Filter>Src\Shape</Filter>
     </ClInclude>
     <ClInclude Include="Src\entity\Entity.h">
-      <Filter>Src\entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\entity2D\Entity2D.h">
-      <Filter>Src\entity2D</Filter>
+      <Filter>Src\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

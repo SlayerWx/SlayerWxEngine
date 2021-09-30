@@ -3,10 +3,11 @@
 #include "export/export.h"
 #include "entity/Entity.h"
 
-class SlayerWxEngine_API Entity2D : public Entity {
+class SlayerWxEngine_API Entity2D : public Entity
+{
 public:
 	Entity2D();
-	Entity2D(Renderer* _renderer);
+	Entity2D(Renderer* renderer);
 };
 
-#endif // !ENTITY2D_H
+#endif
