@@ -113,7 +113,7 @@
       <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>"$(ProjectDir)postComp.bat" "$(ProjectDir)bin\Debug\Win32" "$(SolutionDir)\Game"</Command>
+      <Command>"$(ProjectDir)postCompile.bat" "$(ProjectDir)\bin\Debug\Win32" "$(SolutionDir)Game"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -135,7 +135,7 @@
       <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>"$(ProjectDir)postComp.bat" "$(ProjectDir)bin\Debug\Win32" "$(SolutionDir)\Game"</Command>
+      <Command>"$(ProjectDir)postCompile.bat" "$(ProjectDir)\bin\Debug\Win32" "$(SolutionDir)Game"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

@@ -1,3 +1,2 @@
-copy %1SlayerWxEngine.dll %2 /y
-xcopy %1
+copy %1\SlayerWxEngine.dll %2\ /y
 pause
