@@ -2,9 +2,88 @@
 
 Entity::Entity()
 {
+
 }
 
 Entity::Entity(Renderer* renderer)
 {
 	this->renderer = renderer;
+}
+
+void Entity::UpdateModel()
+{
+	model = translate * rotateX * rotateY * rotateZ * scale;
+}
+
+void Entity::RotateX(float x)
+{
+	rotation[0] = x;
+	glm::vec3 axis = { 0.0f, 0.0f, 1.0f };
+	axis[0] = 1.0f;
+	axis[1] = 0.0f;
+	axis[2] = 0.0f;
+
+	rotateX = glm::rotate(glm::mat4(1.0f), x, axis);
+	UpdateModel();
+}
+
+void Entity::RotateY(float y)
+{
+	rotation[1] = y;
+	glm::vec3 axis = { 0.0f, 0.0f, 1.0f };
+	axis[0] = 0.0f;
+	axis[1] = 1.0f;
+	axis[2] = 0.0f;
+
+	rotateY = glm::rotate(glm::mat4(1.0f), y, axis);
+	UpdateModel();
+}
+
+void Entity::RotateZ(float z)
+{
+	rotation[2] = z;
+	glm::vec3 axis = { 0.0f, 0.0f, 1.0f };
+	axis[0] = 0.0f;
+	axis[1] = 0.0f;
+	axis[2] = 1.0f;
+
+	rotateZ = glm::rotate(glm::mat4(1.0f), z, axis);
+	UpdateModel();
+}
+
+void Entity::SetPosition(float x, float y, float z)
+{
+	position[0] = x;
+	position[1] = y;
+	position[2] = z;
+
+	translate = glm::translate(glm::mat4(1.0f), position);
+	UpdateModel();
+}
+
+void Entity::Scale(float x, float y, float z)
+{
+	localScale[0] = x;
+	localScale[1] = y;
+	localScale[2] = z;
+
+	scale = glm::scale(glm::mat4(1.0f), localScale);
+	UpdateModel();
+}
+
+void Entity::Rotate(float x, float y, float z)
+{
+	RotateX(x);
+	RotateX(y);
+	RotateX(z);
+}
+
+void Entity::Translate(float x, float y, float z)
+{
+	position[0] += x;
+	position[1] += y;
+	position[2] += z;
+
+	translate = glm::translate(glm::mat4(1.0f), position);
+	UpdateModel();
 }
