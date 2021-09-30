@@ -7,7 +7,7 @@
 
 class SlayerWxEngine_API Entity
 {
-private:
+protected:
 	glm::mat4 model;
 	glm::mat4 translate;
 	glm::mat4 rotateX;

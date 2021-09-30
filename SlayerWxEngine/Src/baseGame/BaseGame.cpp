@@ -41,7 +41,7 @@ void BaseGame::RendererInit()
 	renderer->CreateProgram("../SlayerWxEngine/Shader/VertexShader.SWshader",
 							"../SlayerWxEngine/Shader/FragmentShader.SWshader");
 	renderer->DefVertexAttribute();
-	
+	renderer->CallUniformShaders();
 }
 bool BaseGame::Running()
 {
