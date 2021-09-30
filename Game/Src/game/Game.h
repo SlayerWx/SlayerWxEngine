@@ -2,8 +2,8 @@
 class Game : BaseGame
 {
 private:
-	void Update() override;
-	void Draw() override;
+	void Update();
+	void Draw();
 public:
 	void Play();
 };

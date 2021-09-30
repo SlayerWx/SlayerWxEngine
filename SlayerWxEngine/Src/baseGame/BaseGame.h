@@ -6,9 +6,10 @@ struct GLFWmonitor;
 struct GLFWwindow;
 class SlayerWxEngine_API BaseGame
 {
-private:
+protected:
 	Window* window;
 	Renderer* renderer;
+private:
 	void UpdateBegin();
 	void UpdateEnd();
 	void EngineEnd();
@@ -23,6 +24,7 @@ public:
 	
 	bool Running();
 	void UpdateEngine();
+	void virtual Start() = 0;
 	void virtual Update() = 0;
 	void virtual Draw() = 0;
 };

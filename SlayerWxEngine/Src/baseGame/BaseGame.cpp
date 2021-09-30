@@ -63,6 +63,7 @@ void BaseGame::UpdateEnd()
 }
 void BaseGame::UpdateEngine()
 {
+	Start();
 	while (Running())
 	{
 		UpdateBegin();
