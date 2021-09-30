@@ -13,6 +13,7 @@ public:
 	void WindowContext();
 	bool ShouldClose();
 	GLFWwindow* GetWindow();
+	void ClearBackground();
 	void SwapBuffer();
 };
 #endif

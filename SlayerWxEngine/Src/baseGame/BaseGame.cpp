@@ -38,6 +38,7 @@ bool BaseGame::Running()
 
 void BaseGame::UpdateBegin()
 {
+	window->ClearBackground();
 	renderer->BeginDraw();
 }
 

@@ -8,7 +8,5 @@ Renderer::Renderer()
 
 void Renderer::BeginDraw()
 {
-	/* Start Render here */
-	glClear(GL_COLOR_BUFFER_BIT);
 
 }
