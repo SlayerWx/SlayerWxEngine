@@ -16,7 +16,9 @@ public:
 	BaseGame();
 	~BaseGame();
 	int EngineInit(int width, int height, const char* title );// GLFWmonitor* monitor, GLFWwindow* share);
-	int WindowInit(int width, int height, const char* title);// GLFWmonitor* monitor, GLFWwindow* share);
+	int WindowInit(int width, int height, const char* title);
+	void RendererInit();
+	// GLFWmonitor* monitor, GLFWwindow* share);
 	//void SetFramebufferSizeCallback();
 	
 	bool Running();

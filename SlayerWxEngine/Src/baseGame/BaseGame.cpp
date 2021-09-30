@@ -18,6 +18,9 @@ int BaseGame::EngineInit(int width, int height, const char* title)// GLFWmonitor
 		return -1;
 	else if (WindowInit(width, height, title))
 		return -1;
+
+	RendererInit();
+
 	return 0;
 }
 
@@ -30,6 +33,11 @@ int BaseGame::WindowInit(int width, int height, const char* title)// GLFWmonitor
 	}
 	window->WindowContext();
 	return 0;
+}
+void BaseGame::RendererInit()
+{
+	renderer->CreateBuffers();
+	renderer->BindBuffers();
 }
 bool BaseGame::Running()
 {
