@@ -16,6 +16,9 @@
     <Filter Include="Src\window">
       <UniqueIdentifier>{9609b3bb-c3d6-4c64-b24d-f7bb3a623e65}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{f7eeaf63-aef3-412a-a22e-eb001992da1a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\baseGame\BaseGame.cpp">
@@ -41,5 +44,13 @@
     <ClInclude Include="Src\renderer\renderer.h">
       <Filter>Src\renderer</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader\FragmentShader.SWshader">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shader\VertexShader.SWshader">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -29,6 +29,10 @@
     <ClInclude Include="Src\renderer\renderer.h" />
     <ClInclude Include="Src\window\window.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader\FragmentShader.SWshader" />
+    <None Include="Shader\VertexShader.SWshader" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

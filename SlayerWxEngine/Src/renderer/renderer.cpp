@@ -8,8 +8,11 @@ Renderer::Renderer()
 {
 }
 
-void Renderer::BeginDraw()
+void Renderer::Draw()
 {
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 18, VertexTriangle, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * 3, IndexTriangle, GL_STATIC_DRAW);
+	glDrawElements(GL_TRIANGLES,3,GL_UNSIGNED_INT,0);
 
 }
 
@@ -27,7 +30,19 @@ void Renderer::BindBuffers()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO); //first: type buffer to bound
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO); //second: the buffer
 }
-unsigned int CompileShader(unsigned int type, const char* shaderPath) { //first: ShaderType(Fragment, vertex)
+void Renderer::DefVertexAttribute()
+{
+	//first: defPosMemoryShader(Layout),second:countData, three: TypeDataAttribute, four: Normalize
+	//five: countDataForVertex * SizeOf(typeData), six:StartCount (void*)0) the first point in data to count
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0); //activate first: defPosMemoryShader(Layout)
+
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+}
+
+
+unsigned int Renderer::CompileShader(unsigned int type, const char* shaderPath) { //first: ShaderType(Fragment, vertex)
 																		//second:Dir to archive
 	unsigned int id = glCreateShader(type); // Create Shader
 	
@@ -62,12 +77,12 @@ unsigned int CompileShader(unsigned int type, const char* shaderPath) { //first:
 	return id;
 }
 
-void Renderer::CreateProgram(const char* vertexShaderPath, const char* pixelShaderPath) {
+void Renderer::CreateProgram(const char* vertexShaderPath, const char* fragmentShaderPath) {
 																					//first: vertex archive
 																					//second: fragmentShader
 	program = glCreateProgram(); // create program
 	unsigned int vertex = CompileShader(GL_VERTEX_SHADER, vertexShaderPath);
-	unsigned int fragment = CompileShader(GL_FRAGMENT_SHADER, pixelShaderPath);
+	unsigned int fragment = CompileShader(GL_FRAGMENT_SHADER, fragmentShaderPath);
 
 	glAttachShader(program, vertex); //attach with program
 	glAttachShader(program, fragment); //attach with program

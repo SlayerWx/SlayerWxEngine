@@ -38,6 +38,9 @@ void BaseGame::RendererInit()
 {
 	renderer->CreateBuffers();
 	renderer->BindBuffers();
+	
+	renderer->CreateProgram("../../Shader/VertexShader.SWshader","../../Shader/FragmentShader.SWshader");
+	renderer->DefVertexAttribute();
 }
 bool BaseGame::Running()
 {
@@ -47,11 +50,11 @@ bool BaseGame::Running()
 void BaseGame::UpdateBegin()
 {
 	window->ClearBackground();
-	renderer->BeginDraw();
 }
 
 void BaseGame::UpdateEnd()
 {
+	renderer->Draw();
 	window->SwapBuffer();
 	/* Poll for and process events
 	check what events are occurring: keyboard, mouse, window events, etc.*/
