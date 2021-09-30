@@ -6,17 +6,24 @@ BaseGame::BaseGame()
 		window = new Window();
 		renderer = new Renderer();
 }
-int BaseGame::EngineInit()
+BaseGame::~BaseGame()
+{
+	if (window != NULL) delete window;
+	if (renderer != NULL) delete renderer;
+}
+int BaseGame::EngineInit(int width, int height, const char* title)// GLFWmonitor* monitor, GLFWwindow* share)
 {
 	/* Initialize the library */
 	if (!glfwInit())
 		return -1;
+	else if (WindowInit(width, height, title))
+		return -1;
 	return 0;
 }
 
-int BaseGame::WindowInit(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
+int BaseGame::WindowInit(int width, int height, const char* title)// GLFWmonitor* monitor, GLFWwindow* share)
 {
-	window = new Window(width,height,title,monitor,share);
+	window = new Window(width,height,title,NULL,NULL);
 	if (!window)
 	{
 		return -1;

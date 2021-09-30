@@ -13,9 +13,11 @@ private:
 	void EngineEnd();
 public:
 	BaseGame();
-	int EngineInit();
-	int WindowInit(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);
+	~BaseGame();
+	int EngineInit(int width, int height, const char* title );// GLFWmonitor* monitor, GLFWwindow* share);
+	int WindowInit(int width, int height, const char* title);// GLFWmonitor* monitor, GLFWwindow* share);
 	//void SetFramebufferSizeCallback();
+	
 	bool Running();
 	void UpdateEngine();
 	void virtual Update() = 0;
