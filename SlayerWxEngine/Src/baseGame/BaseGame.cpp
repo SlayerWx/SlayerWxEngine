@@ -38,7 +38,8 @@ void BaseGame::RendererInit()
 {
 	renderer->CreateBuffers();
 	renderer->BindBuffers();
-	renderer->CreateProgram("../../Shader/VertexShader.SWshader", "../../Shader/FragmentShader.SWshader");
+	renderer->CreateProgram("../SlayerWxEngine/Shader/VertexShader.SWshader",
+							"../SlayerWxEngine/Shader/FragmentShader.SWshader");
 	renderer->DefVertexAttribute();
 	
 }
@@ -54,7 +55,7 @@ void BaseGame::UpdateBegin()
 
 void BaseGame::UpdateEnd()
 {
-	//renderer->Draw();
+	renderer->Draw();
 	window->SwapBuffer();
 	/* Poll for and process events
 	check what events are occurring: keyboard, mouse, window events, etc.*/
