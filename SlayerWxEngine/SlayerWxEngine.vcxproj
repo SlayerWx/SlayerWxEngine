@@ -112,6 +112,9 @@
       <AdditionalLibraryDirectories>$(ProjectDir)Lib\glfw\lib-vc2019;$(ProjectDir)Lib\glew\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>"$(ProjectDir)postComp.bat" "$(ProjectDir)bin\Debug\Win32" "$(SolutionDir)\Game"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -131,6 +134,9 @@
       <AdditionalLibraryDirectories>$(ProjectDir)Lib\glfw\lib-vc2019;$(ProjectDir)Lib\glew\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>"$(ProjectDir)postComp.bat" "$(ProjectDir)bin\Debug\Win32" "$(SolutionDir)\Game"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
