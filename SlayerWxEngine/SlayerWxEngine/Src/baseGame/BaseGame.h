@@ -8,15 +8,16 @@ class SlayerWxEngine_API BaseGame
 private:
 	Window* window;
 	Renderer* renderer;
+	void UpdateBegin();
+	void UpdateEnd();
+	void EngineEnd();
 public:
 	BaseGame();
 	int EngineInit();
 	int WindowInit(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);
 	//void SetFramebufferSizeCallback();
 	bool Running();
-	void UpdateBegin();
-	void UpdateEnd();
-	void EngineEnd();
+	void UpdateEngine();
 	void virtual Update() = 0;
 	void virtual Draw() = 0;
 };

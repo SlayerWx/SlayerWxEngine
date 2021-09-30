@@ -41,7 +41,16 @@ void BaseGame::UpdateEnd()
 	check what events are occurring: keyboard, mouse, window events, etc.*/
 	glfwPollEvents();
 }
-
+void BaseGame::UpdateEngine()
+{
+	while (Running())
+	{
+		UpdateBegin();
+		Update();
+		UpdateEnd();
+	}
+	EngineEnd();
+}
 void BaseGame::EngineEnd()
 {
 	glfwTerminate();
