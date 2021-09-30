@@ -16,9 +16,9 @@ int BaseGame::EngineInit(int width, int height, const char* title)// GLFWmonitor
 	/* Initialize the library */
 	if (!glfwInit())
 		return -1;
-	else if (WindowInit(width, height, title))
+	if (WindowInit(width, height, title))
 		return -1;
-
+	glewInit();
 	RendererInit();
 
 	return 0;
@@ -38,9 +38,9 @@ void BaseGame::RendererInit()
 {
 	renderer->CreateBuffers();
 	renderer->BindBuffers();
-	
-	renderer->CreateProgram("../../Shader/VertexShader.SWshader","../../Shader/FragmentShader.SWshader");
+	renderer->CreateProgram("../../Shader/VertexShader.SWshader", "../../Shader/FragmentShader.SWshader");
 	renderer->DefVertexAttribute();
+	
 }
 bool BaseGame::Running()
 {
@@ -54,7 +54,7 @@ void BaseGame::UpdateBegin()
 
 void BaseGame::UpdateEnd()
 {
-	renderer->Draw();
+	//renderer->Draw();
 	window->SwapBuffer();
 	/* Poll for and process events
 	check what events are occurring: keyboard, mouse, window events, etc.*/
