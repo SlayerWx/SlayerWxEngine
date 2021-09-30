@@ -2,7 +2,7 @@
 
 Game::Game() 
 {
-	shape = Shape();
+	shape = Shape(renderer);
 }
 
 void Game::Play()
