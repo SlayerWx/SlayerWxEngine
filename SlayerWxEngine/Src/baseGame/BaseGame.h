@@ -28,3 +28,4 @@ public:
 	void virtual Update() = 0;
 };
 #endif
+

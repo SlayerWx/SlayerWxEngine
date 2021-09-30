@@ -2,7 +2,7 @@
 #define RENDERER_H
 #include "export/export.h"
 #include "glm/glm.hpp"
-#include"glm/gtc/type_ptr.hpp"
+#include "glm/gtc/type_ptr.hpp"
 class SlayerWxEngine_API Renderer
 {
 private:
@@ -18,9 +18,9 @@ public:
 	void BindBuffers();
 	unsigned int CompileShader(unsigned int type, const char* shaderPath);
 	void CreateProgram(const char* vertexShaderPath, const char* pixelShaderPath);
+	void CallUniformShaders();
 	void UpdateUniformShaders(glm::mat4 modelMatrix);
 	void DefVertexAttribute();
-	void CallUniformShaders();
 };
 // settings
 //const unsigned int SCR_WIDTH = 800;
