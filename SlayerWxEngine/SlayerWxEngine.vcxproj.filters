@@ -28,6 +28,12 @@
     <Filter Include="Src\Shape">
       <UniqueIdentifier>{943423c0-a53c-4b60-8594-189d7473384f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\input">
+      <UniqueIdentifier>{dea26810-2d63-40dd-81f0-21fd2c34508f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\input\keycode">
+      <UniqueIdentifier>{f1f9f6ef-0cf8-4482-9cc5-78ba6a445942}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\baseGame\BaseGame.cpp">
@@ -47,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="Src\entity\Entity.cpp">
       <Filter>Src\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\input\Input.cpp">
+      <Filter>Src\input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +79,12 @@
     </ClInclude>
     <ClInclude Include="Src\entity\Entity.h">
       <Filter>Src\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\input\Input.h">
+      <Filter>Src\input</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\input\keycode\Keycode.h">
+      <Filter>Src\input\keycode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

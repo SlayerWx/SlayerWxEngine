@@ -5,11 +5,13 @@ BaseGame::BaseGame()
 {
 		window = new Window();
 		renderer = new Renderer();
+		input = new Input();
 }
 BaseGame::~BaseGame()
 {
 	if (window != NULL) delete window;
 	if (renderer != NULL) delete renderer;
+	if (input != NULL) delete input;
 }
 int BaseGame::EngineInit(int width, int height, const char* title)// GLFWmonitor* monitor, GLFWwindow* share)
 {
@@ -71,6 +73,12 @@ void BaseGame::UpdateEngine()
 		UpdateEnd();
 	}
 	EngineEnd();
+}
+bool BaseGame::GetKey(int keycode)
+{
+	//return input->GetKey(GLFW_KEY_A, window->GetWindow());
+	//return input->GetKey(KEYCODE_A, window->GetWindow());
+	return input->GetKey(keycode, window->GetWindow());
 }
 void BaseGame::EngineEnd()
 {

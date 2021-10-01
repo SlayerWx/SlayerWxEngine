@@ -3,6 +3,7 @@
 #include "renderer/renderer.h"
 #include "window/window.h"
 #include "shape/Shape.h"
+#include "input/Input.h"
 struct GLFWmonitor;
 struct GLFWwindow;
 class SlayerWxEngine_API BaseGame
@@ -14,6 +15,7 @@ private:
 	void UpdateBegin();
 	void UpdateEnd();
 	void EngineEnd();
+	Input* input;
 public:
 	BaseGame();
 	~BaseGame();
@@ -25,5 +27,7 @@ public:
 	void UpdateEngine();
 	void virtual Update() = 0;
 	void virtual Start() = 0;
+
+	bool GetKey(int keycode);
 };
 #endif
