@@ -25,45 +25,60 @@ float scaleX = 1;
 float scaleY = 1;
 float scaleZ = 1;
 const float valueModif = 0.001f;
+float cameraX = 0.1;
+float cameraY = 0.1;
+float cameraZ = 0.1;
 void Game::Update()
 {
 
-	Input(KEYCODE_A, x, -valueModif);
-	Input(KEYCODE_D, x, +valueModif);
+	Input(KEYCODE_F, x, -valueModif);
+	Input(KEYCODE_H, x, +valueModif);
 
-	Input(KEYCODE_S, y, -valueModif);
-	Input(KEYCODE_W, y, +valueModif);
+	Input(KEYCODE_G, y, -valueModif);
+	Input(KEYCODE_T, y, +valueModif);
 
-	Input(KEYCODE_H, scaleY, -valueModif* 10);
-	Input(KEYCODE_Y, scaleY, +valueModif* 10);
+	Input(KEYCODE_K, scaleY, -valueModif* 10);
+	Input(KEYCODE_I, scaleY, +valueModif* 10);
 
-	Input(KEYCODE_G, scaleX, -valueModif* 10);
-	Input(KEYCODE_J, scaleX, +valueModif* 10);
+	Input(KEYCODE_J, scaleX, -valueModif* 10);
+	Input(KEYCODE_L, scaleX, +valueModif* 10);
 
-	Input(KEYCODE_T, scaleZ, -valueModif* 10);
-	Input(KEYCODE_U, scaleZ, +valueModif* 10);
+	Input(KEYCODE_U, scaleZ, -valueModif* 10);
+	Input(KEYCODE_O, scaleZ, +valueModif* 10);
+
+	Input(KEYCODE_A, cameraX, -valueModif * 10);
+	Input(KEYCODE_D, cameraX, +valueModif * 10);
+
+	Input(KEYCODE_S, cameraY, -valueModif * 10);
+	Input(KEYCODE_W, cameraY, +valueModif * 10);
+	
+
+	CameraMove(cameraX, cameraY, cameraZ);
+	
 
 	if (right)a += 0.0001;
 	else a -= 0.0001;;
 	if (a > 2) right = false;
 	else if (a < 0) right = true;
 
-	shape.Rotate(0,0,a);
+	shape.Rotate(a,a,a);
 	shape.Scale(0.1+a,1,1);
-	shape.SetPosition(-1+a, 0, 0);
-	shape.SetColor(0.3f,0.3f,0.3f);
+	shape.SetPosition(-1+a, 0, -5);
+	//shape.SetColor(0.3f,0.3f,0.8f);
 
-	shape2.SetPosition(x, y, 0);
+	shape2.SetPosition(x, y, -5);
 
 	shape2.Scale(scaleX, scaleY, scaleZ);
 
 	shape.Draw();
 	shape2.Draw();
 }
-void Game::Input(int keycode,float &variable,float modif)
+bool Game::Input(int keycode,float &variable,float modif)
 {
 	if (GetKey(keycode))
 	{
 		variable += modif;
+		return true;
 	}
+	return false;
 }

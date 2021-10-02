@@ -6,7 +6,7 @@ private:
 	Shape shape2;
 	void Start();
 	void Update();
-	void Input(int keycode, float &variable, float modif);
+	bool Input(int keycode, float &variable, float modif);
 public:
 	Game();
 	void Play();

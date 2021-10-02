@@ -27,11 +27,13 @@ public:
 	void UpdateProjection();
 	void UpdateViewUniformShaders(glm::mat4 viewMatrix);
 	void UpdateView();
+	void CameraMove(float x, float y, float z);
+	float cameraSpeed = 0.01f; // adjust accordingly
 	glm::mat4 projection; //size/count of pixel inside the viewport
 	glm::mat4 view; //move the "camera" but really move all object in the inverse
 	glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);;
-	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);;
+	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 };
 // settings
 //const unsigned int SCR_WIDTH = 800;
