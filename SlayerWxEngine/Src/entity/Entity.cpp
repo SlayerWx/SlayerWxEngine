@@ -33,7 +33,9 @@ Entity::Entity(Renderer* renderer)
 
 void Entity::UpdateModel()
 {
-	model = translate * rotateX * rotateY * rotateZ * scale * projection;
+	model = translate * rotateX * rotateY * rotateZ * scale * mvp;
+
+
 }
 
 void Entity::RotateX(float x)

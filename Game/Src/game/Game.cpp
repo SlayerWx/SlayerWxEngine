@@ -49,11 +49,12 @@ void Game::Update()
 	else if (a < 0) right = true;
 
 	shape.Rotate(0,0,a);
-	shape.Scale(0.1+a,1,1);
+	//shape.Scale(0.1+a,1,1);
 	shape.SetPosition(-1+a, 0, 0);
 	shape.SetColor(0.3f,0.3f,0.3f);
 
 	shape2.SetPosition(x, y, 0);
+
 	shape2.Scale(scaleX, scaleY, scaleZ);
 
 	shape.Draw();

@@ -19,8 +19,10 @@ protected:
 	glm::vec3 rotation;
 	glm::vec3 localScale;
 
-	glm::mat4 projection = glm::ortho(0.0f,2.0f,-1.5f,1.5f,1.0f,-1.0f);
-
+	// size/distance in window
+	glm::mat4 projection = glm::ortho(-800.0f,800.0f,-600.0f,600.0f,100.0f,-100.0f);
+	glm::mat4 view = glm::translate(glm::mat4(1.0f),glm::vec3(-200,1,1));
+	glm::mat4 mvp = projection * view;
 	void UpdateModel();
 
 	void RotateX(float x);
