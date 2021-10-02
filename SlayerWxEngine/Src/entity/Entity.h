@@ -24,6 +24,7 @@ protected:
 	void RotateX(float x);
 	void RotateY(float y);
 	void RotateZ(float z);
+
 public:
 	Renderer* renderer;
 	Entity();

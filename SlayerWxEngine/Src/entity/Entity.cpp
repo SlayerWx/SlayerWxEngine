@@ -9,6 +9,7 @@ Entity::Entity()
 	scale = glm::mat4(1.0f);
 	translate = glm::mat4(1.0f);
 
+
 	SetPosition(0, 0, 0);
 	Rotate(0, 0, 0);
 	Scale(1, 1, 1);

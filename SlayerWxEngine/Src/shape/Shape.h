@@ -18,6 +18,7 @@ private:
 public:
 	Shape();
 	Shape(Renderer* renderer);
+	void SetColor(float R, float G, float B);
 	void Draw();
 };
 

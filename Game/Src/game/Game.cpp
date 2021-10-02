@@ -21,9 +21,9 @@ float a = 0;
 bool right = true;
 float x = 0;
 float y = 0;
-float scaleX = 0;
-float scaleY = 0;
-float scaleZ = 0;
+float scaleX = 1;
+float scaleY = 1;
+float scaleZ = 1;
 const float valueModif = 0.0001f;
 void Game::Update()
 {
@@ -51,9 +51,10 @@ void Game::Update()
 	shape.Rotate(0,0,a);
 	shape.Scale(0.1+a,1,1);
 	shape.SetPosition(-1+a, 0, 0);
+	shape.SetColor(0.3f,0.3f,0.3f);
 
 	shape2.SetPosition(x, y, 0);
-	shape2.Rotate(scaleX, scaleY, scaleZ);
+	shape2.Scale(scaleX, scaleY, scaleZ);
 
 	shape.Draw();
 	shape2.Draw();

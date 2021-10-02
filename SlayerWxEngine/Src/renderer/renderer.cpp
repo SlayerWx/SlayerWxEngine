@@ -12,8 +12,8 @@ Renderer::Renderer()
 void Renderer::Draw(float* vertex, unsigned int* index, glm::mat4 modelMatrix)
 {
 	UpdateUniformShaders(modelMatrix);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 18, vertex, GL_STATIC_DRAW);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * 3, index, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 18, vertex, GL_STATIC_DRAW); //set info to buffer
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * 3, index, GL_STATIC_DRAW); //set info to buffer
 	glDrawElements(GL_TRIANGLES,3,GL_UNSIGNED_INT,0);
 }
 
@@ -50,7 +50,9 @@ void Renderer::CallUniformShaders()
 void Renderer::UpdateUniformShaders(glm::mat4 modelMatrix)
 {
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(modelMatrix)); //update model in the shader
+	
 }
+
 
 
 unsigned int Renderer::CompileShader(unsigned int type, const char* shaderPath) { //first: ShaderType(Fragment, vertex)
