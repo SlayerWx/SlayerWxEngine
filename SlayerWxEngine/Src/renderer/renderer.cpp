@@ -66,8 +66,8 @@ void Renderer::UpdateProjection()
 	//degrees in radians, window resolution, near, far
 	//projection = glm::perspective(glm::radians(45.0f),800.0f/600.0f,0.1f,100.0f);
 	
-	//x left, x right, y down, y up, z back, z front
-	projection = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f);// , 1.0f, -1.0f);
+	//x left, x right, y down, y up, near, far
+	projection = glm::ortho(-2.0f, +2.0f, -1.5f, +1.5f, 0.1f, 100.0f);
 }
 void Renderer::UpdateViewUniformShaders(glm::mat4 viewMatrix)
 {

@@ -8,7 +8,7 @@ Game::Game()
 
 void Game::Play()
 {
-	EngineInit(800,600,"MY EPIC GAME");
+	EngineInit(800,600,"MY EPIC FAIL");
 	UpdateEngine();
 }
 
