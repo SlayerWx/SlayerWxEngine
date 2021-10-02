@@ -34,6 +34,9 @@ public:
 	void Scale(float x, float y, float z);
 	void Rotate(float x, float y, float z);
 	void Translate(float x, float y, float z);
+	float GetPositionX();
+	float GetPositionY();
+	float GetPositionZ();
 };
 
 #endif

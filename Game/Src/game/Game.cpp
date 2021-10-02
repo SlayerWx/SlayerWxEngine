@@ -24,7 +24,7 @@ float y = 0;
 float scaleX = 1;
 float scaleY = 1;
 float scaleZ = 1;
-const float valueModif = 0.0001f;
+const float valueModif = 0.001f;
 void Game::Update()
 {
 
@@ -49,7 +49,7 @@ void Game::Update()
 	else if (a < 0) right = true;
 
 	shape.Rotate(0,0,a);
-	//shape.Scale(0.1+a,1,1);
+	shape.Scale(0.1+a,1,1);
 	shape.SetPosition(-1+a, 0, 0);
 	shape.SetColor(0.3f,0.3f,0.3f);
 

@@ -110,3 +110,15 @@ void Entity::Translate(float x, float y, float z)
 	translate = glm::translate(glm::mat4(1.0f), position);
 	UpdateModel();
 }
+float Entity::GetPositionX()
+{
+	return position.x;
+}
+float Entity::GetPositionY()
+{
+	return position.y;
+}
+float Entity::GetPositionZ()
+{
+	return position.z;
+}
