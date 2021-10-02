@@ -2,8 +2,8 @@
 #include <iostream>
 Game::Game() 
 {
-	shape = Shape(renderer);
-	shape2 = Shape(renderer);
+	shape = Shape();
+	shape2 = Shape();
 }
 
 void Game::Play()

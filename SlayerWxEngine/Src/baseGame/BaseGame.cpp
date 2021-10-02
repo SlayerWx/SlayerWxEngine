@@ -5,6 +5,7 @@ BaseGame::BaseGame()
 {
 		window = new Window();
 		renderer = new Renderer();
+		renderer->SetStaticRenderer(renderer);
 		input = new Input();
 }
 BaseGame::~BaseGame()

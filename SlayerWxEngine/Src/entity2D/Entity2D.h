@@ -7,7 +7,6 @@ class SlayerWxEngine_API Entity2D : public Entity
 {
 public:
 	Entity2D();
-	Entity2D(Renderer* renderer);
 };
 
 #endif

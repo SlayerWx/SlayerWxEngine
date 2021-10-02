@@ -2,22 +2,7 @@
 
 Entity::Entity()
 {
-	model = glm::mat4(1.0f);
-	rotateX = glm::mat4(1.0f);
-	rotateY = glm::mat4(1.0f);
-	rotateZ = glm::mat4(1.0f);
-	scale = glm::mat4(1.0f);
-	translate = glm::mat4(1.0f);
-
-
-	SetPosition(0, 0, 0);
-	Rotate(0, 0, 0);
-	Scale(1, 1, 1);
-}
-
-Entity::Entity(Renderer* renderer)
-{
-	this->renderer = renderer;
+	renderer = renderer->GetStaticRenderer();
 
 	model = glm::mat4(1.0f);
 	rotateX = glm::mat4(1.0f);

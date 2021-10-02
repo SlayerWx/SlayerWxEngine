@@ -4,6 +4,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+
+Renderer* Renderer::myRef;
 Renderer::Renderer()
 {
 
@@ -92,6 +94,14 @@ void Renderer::CameraMove(float x,float y, float z)
 	//cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 	//d
 	//cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+}
+void Renderer::SetStaticRenderer(Renderer* newRef)
+{
+	myRef = newRef;
+}
+Renderer* Renderer::GetStaticRenderer()
+{
+	return myRef;
 }
 unsigned int Renderer::CompileShader(unsigned int type, const char* shaderPath) { //first: ShaderType(Fragment, vertex)
 																		//second:Dir to archive

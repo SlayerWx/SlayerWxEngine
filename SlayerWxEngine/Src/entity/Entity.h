@@ -28,7 +28,6 @@ protected:
 public:
 	Renderer* renderer;
 	Entity();
-	Entity(Renderer* renderer);
 
 	void SetPosition(float x, float y, float z);
 	void Scale(float x, float y, float z);
