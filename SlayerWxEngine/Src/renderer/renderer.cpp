@@ -11,14 +11,14 @@ Renderer::Renderer()
 
 }
 
-void Renderer::Draw(float* vertex, unsigned int* index, glm::mat4 modelMatrix)
+void Renderer::Draw(float* vertex,int vertexLength, unsigned int* index,int indexLength, glm::mat4 modelMatrix)
 {
 	UpdateModelUniformShaders(modelMatrix);
 	UpdateProjectUniformShaders(projection);
 	UpdateViewUniformShaders(view);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 18, vertex, GL_STATIC_DRAW); //set info to buffer
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * 3, index, GL_STATIC_DRAW); //set info to buffer
-	glDrawElements(GL_TRIANGLES,3,GL_UNSIGNED_INT,0);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertexLength, vertex, GL_STATIC_DRAW); //set info to buffer
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * indexLength, index, GL_STATIC_DRAW); //set info to buffer
+	glDrawElements(GL_TRIANGLES,indexLength,GL_UNSIGNED_INT,0);
 }
 
 void Renderer::CreateBuffers()

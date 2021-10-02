@@ -2,8 +2,9 @@
 #include <iostream>
 Game::Game() 
 {
-	shape = Shape();
-	shape2 = Shape();
+	triangleAuto = Shape(Shape::Triangle);
+	squareAuto = Shape(Shape::Square);
+	shape = Shape(Shape::Square);
 }
 
 void Game::Play()
@@ -14,8 +15,8 @@ void Game::Play()
 
 void Game::Start() 
 {
-	shape.SetPosition(0.0f, 0.0f, 0.0f);
-	shape2.SetPosition(-5.0f,0.0f,0.0f);
+	triangleAuto.SetPosition(0.0f, 0.0f, 0.0f);
+	shape.SetPosition(-5.0f,0.0f,0.0f);
 }
 float a = 0;
 bool right = true;
@@ -58,20 +59,25 @@ void Game::Update()
 
 	if (right)a += 0.0001;
 	else a -= 0.0001;;
-	if (a > 2) right = false;
+	if (a > 4) right = false;
 	else if (a < 0) right = true;
 
-	shape.Rotate(a,a,a);
-	shape.Scale(0.1+a,1,1);
-	shape.SetPosition(-1+a, 0, -5);
-	//shape.SetColor(0.3f,0.3f,0.8f);
+	triangleAuto.Rotate(a,a,a);
+	triangleAuto.Scale(0.1+a,1,1);
+	triangleAuto.SetPosition(-2+a, -1.2, -5);
+	triangleAuto.SetColor(0.f,0.3,0.8);
 
-	shape2.SetPosition(x, y, -5);
+	squareAuto.Rotate(0,0,a);
+	squareAuto.SetPosition(-2.0,1.5,-5);
+	squareAuto.SetColor(0.0,1.0,0.0);
 
-	shape2.Scale(scaleX, scaleY, scaleZ);
+	shape.SetPosition(x, y, -5);
 
+	shape.Scale(scaleX, scaleY, scaleZ);
+
+	triangleAuto.Draw();
+	squareAuto.Draw();
 	shape.Draw();
-	shape2.Draw();
 }
 bool Game::Input(int keycode,float &variable,float modif)
 {

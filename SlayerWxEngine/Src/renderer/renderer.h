@@ -11,7 +11,7 @@ private:
 	unsigned int viewLoc;
 public:
 	Renderer();
-	void Draw(float* vertex, unsigned int* index, glm::mat4 modelMatrix);
+	void Draw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix);
 	unsigned int VBO = 0; // VertexBufferObject
 	unsigned int VAO = 0; // VertexArrayObject
 	unsigned int EBO = 0; // ElementsBufferObject

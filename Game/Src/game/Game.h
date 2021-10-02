@@ -2,8 +2,9 @@
 class Game : public BaseGame
 {
 private:
+	Shape triangleAuto;
+	Shape squareAuto;
 	Shape shape;
-	Shape shape2;
 	void Start();
 	void Update();
 	bool Input(int keycode, float &variable, float modif);
