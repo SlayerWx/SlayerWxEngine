@@ -21,6 +21,9 @@ public:
 	void DefVertexAttribute();
 	void CallUniformShaders();
 	void UpdateUniformShaders(glm::mat4 modelMatrix);
+	glm::mat4 proyection;
+	glm::mat4 view;
+	
 };
 // settings
 //const unsigned int SCR_WIDTH = 800;

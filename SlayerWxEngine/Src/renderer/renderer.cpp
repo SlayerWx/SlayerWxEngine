@@ -45,8 +45,9 @@ void Renderer::DefVertexAttribute()
 void Renderer::CallUniformShaders()
 {
 	model = glGetUniformLocation(program, "model");//search the model in the shader
+	model = glGetUniformLocation(program, "model");//search the model in the shader
+	model = glGetUniformLocation(program, "model");//search the model in the shader
 }
-
 void Renderer::UpdateUniformShaders(glm::mat4 modelMatrix)
 {
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(modelMatrix)); //update model in the shader
