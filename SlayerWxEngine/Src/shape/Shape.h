@@ -7,9 +7,9 @@ class SlayerWxEngine_API Shape : public Entity2D
 {
 private:
 	float VertexTriangle[18] = {
-	-200.5f, -200.5f, 0.0f,   0.0f, 0.0f, 1.0f,// X,Y,Z  R,G,B
-	 200.5f, -200.5f, 0.0f,   1.0f, 1.0f, 0.0f,
-	 0.0f,    100.5f, 0.0f,   1.0f, 0.0f, 0.0f
+	-1000.5f, -1000.5f, 0.0f,   0.0f, 0.0f, 1.0f,// X,Y,Z  R,G,B
+	 1000.5f, -1000.5f, 0.0f,   1.0f, 1.0f, 0.0f,
+	 0.0f,  1000.5f, 0.0f,   1.0f, 0.0f, 0.0f
 	};
 
 	unsigned int IndexTriangle[3] = {

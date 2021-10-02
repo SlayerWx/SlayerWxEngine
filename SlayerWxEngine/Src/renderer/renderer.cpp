@@ -11,7 +11,9 @@ Renderer::Renderer()
 
 void Renderer::Draw(float* vertex, unsigned int* index, glm::mat4 modelMatrix)
 {
-	UpdateUniformShaders(modelMatrix);
+	UpdateModelUniformShaders(modelMatrix);
+	UpdateProjectUniformShaders(projection);
+	UpdateViewUniformShaders(view);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 18, vertex, GL_STATIC_DRAW); //set info to buffer
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * 3, index, GL_STATIC_DRAW); //set info to buffer
 	glDrawElements(GL_TRIANGLES,3,GL_UNSIGNED_INT,0);
@@ -44,18 +46,39 @@ void Renderer::DefVertexAttribute()
 
 void Renderer::CallUniformShaders()
 {
-	model = glGetUniformLocation(program, "model");//search the model in the shader
-	model = glGetUniformLocation(program, "model");//search the model in the shader
-	model = glGetUniformLocation(program, "model");//search the model in the shader
+	modelLoc = glGetUniformLocation(program, "model");//search the model in the shader
+	projectLoc = glGetUniformLocation(program, "proj");//search the project in the shader
+	viewLoc = glGetUniformLocation(program, "view");//search the view in the shader
 }
-void Renderer::UpdateUniformShaders(glm::mat4 modelMatrix)
+void Renderer::UpdateModelUniformShaders(glm::mat4 modelMatrix)
 {
-	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(modelMatrix)); //update model in the shader
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(modelMatrix)); //update model in the shader
 	
 }
+void Renderer::UpdateProjectUniformShaders(glm::mat4 projectMatrix)
+{
+	UpdateProjection();
+	glUniformMatrix4fv(projectLoc, 1, GL_FALSE, glm::value_ptr(projectMatrix)); //update project in the shader
 
+}
+void Renderer::UpdateProjection()
+{
+	//degrees in radians, window resolution, near, far
+	projection = glm::perspective(glm::radians(45.0f),800.0f/600.0f,0.1f,100.0f);
+	
+	//x left, x right, y down, y up, z back, z front
+	//projection = glm::ortho(0.0f, 1280.0f, 0.0f, 720.0f);// , 1.0f, -1.0f);
+}
+void Renderer::UpdateViewUniformShaders(glm::mat4 viewMatrix)
+{
+	UpdateView();
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(viewMatrix)); //update view in the shader
 
-
+}
+void Renderer::UpdateView()
+{
+	view = glm::lookAt(cameraPos,cameraPos+cameraFront,cameraPos+cameraUp);
+}
 unsigned int Renderer::CompileShader(unsigned int type, const char* shaderPath) { //first: ShaderType(Fragment, vertex)
 																		//second:Dir to archive
 	unsigned int id = glCreateShader(type); // Create Shader
