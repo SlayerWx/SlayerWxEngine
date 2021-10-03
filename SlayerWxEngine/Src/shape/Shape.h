@@ -2,7 +2,10 @@
 #define SHAPE_H
 #include "export/export.h"
 #include "entity2D/Entity2D.h"
-
+ enum class SlayerWxEngine_API ShapeType
+{
+	 Triangle, Square
+};
 class SlayerWxEngine_API Shape : public Entity2D
 {
 private:
@@ -33,10 +36,6 @@ private:
 		1, 3, 2
 	};
 public:
-	static enum ShapeType
-	{
-		Triangle, Square
-	};
 	Shape();
 	Shape(ShapeType type);
 	void SetColor(float R, float G, float B);
@@ -44,4 +43,4 @@ public:
 	ShapeType myType;
 };
 
-#endif // !SHAPE_H
+#endif

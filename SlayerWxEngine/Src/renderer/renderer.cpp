@@ -8,7 +8,9 @@
 Renderer* Renderer::myRef;
 Renderer::Renderer()
 {
-
+	//modelLoc = 0;
+	//projectLoc = 0;
+	//viewLoc = 0;
 }
 
 void Renderer::Draw(float* vertex,int vertexLength, unsigned int* index,int indexLength, glm::mat4 modelMatrix)

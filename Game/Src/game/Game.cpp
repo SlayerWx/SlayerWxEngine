@@ -2,9 +2,9 @@
 #include <iostream>
 Game::Game() 
 {
-	triangleAuto = Shape(Shape::Triangle);
-	squareAuto = Shape(Shape::Square);
-	shape = Shape(Shape::Square);
+	triangleAuto = Shape(ShapeType::Triangle);
+	squareAuto = Shape(ShapeType::Square);
+	shape = Shape(ShapeType::Square);
 }
 
 void Game::Play()

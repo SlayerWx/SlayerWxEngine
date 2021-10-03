@@ -12,7 +12,8 @@ void Shape::SetColor(float R,float G, float B)
 {
 	switch (myType)
 	{
-	case Triangle:
+	case ShapeType::Triangle:
+	default:
 
 		VertexTriangle[3] = R;
 		VertexTriangle[4] = G;
@@ -26,7 +27,7 @@ void Shape::SetColor(float R,float G, float B)
 		VertexTriangle[16] = G;
 		VertexTriangle[17] = B;
 		break;
-	case Square:
+	case ShapeType::Square:
 		VertexSquare[3] = R;
 		VertexSquare[4] = G;
 		VertexSquare[5] = B;
@@ -49,10 +50,10 @@ void Shape::Draw()
 {
 	switch (myType)
 	{
-	case Triangle:
+	case ShapeType::Triangle:
 		renderer->Draw(VertexTriangle,vertexTriangleLength, IndexTriangle,indexTriangleLength, model);
 		break;
-	case Square:
+	case ShapeType::Square:
 		renderer->Draw(VertexSquare,vertexSquareLength, IndexSquare,indexSquareLength, model);
 		break;
 	}

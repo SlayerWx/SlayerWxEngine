@@ -1,8 +1,9 @@
 #ifndef INPUT_H
 #define INPUT_H
+#include "export/Export.h"
 #include "keycode/Keycode.h"
 struct GLFWwindow;
-class Input
+class SlayerWxEngine_API Input
 {
 private:
 
