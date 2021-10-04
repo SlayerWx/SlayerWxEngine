@@ -29,6 +29,7 @@ public:
 	void virtual Start() = 0;
 
 	bool GetKey(int keycode);
-	void CameraMove(float x, float y, float z);
+	void SetCameraPosition(float x, float y, float z);
+	void CameraMove(CameraDirection direction);
 };
 #endif

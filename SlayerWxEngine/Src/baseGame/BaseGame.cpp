@@ -81,9 +81,14 @@ bool BaseGame::GetKey(int keycode)
 	//return input->GetKey(KEYCODE_A, window->GetWindow());
 	return input->GetKey(keycode, window->GetWindow());
 }
-void BaseGame::CameraMove(float x,float y, float z)
+void BaseGame::SetCameraPosition(float x,float y, float z)
 {
-	renderer->CameraMove(x,y,z);
+	renderer->SetCameraPosition(x,y,z);
+}
+
+void BaseGame::CameraMove(CameraDirection direction)
+{
+	renderer->CameraMove(direction);
 }
 
 void BaseGame::EngineEnd()

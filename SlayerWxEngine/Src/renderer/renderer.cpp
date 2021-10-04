@@ -8,9 +8,11 @@
 Renderer* Renderer::myRef;
 Renderer::Renderer()
 {
-	//modelLoc = 0;
-	//projectLoc = 0;
-	//viewLoc = 0;
+	modelLoc = 0;
+	projectLoc = 0;
+	viewLoc = 0;
+	projection = glm::mat4();
+	view = glm::mat4();
 }
 
 void Renderer::Draw(float* vertex,int vertexLength, unsigned int* index,int indexLength, glm::mat4 modelMatrix)
@@ -83,19 +85,36 @@ void Renderer::UpdateView()
 {
 	view = glm::lookAt(cameraPos,cameraPos+cameraFront,cameraUp);
 }
-void Renderer::CameraMove(float x,float y, float z)
+void Renderer::SetCameraPosition(float x,float y, float z)
 {
 	cameraPos.x = x;
 	cameraPos.y = y;
 	cameraPos.z = z;
-	//w
-	//cameraPos += cameraSpeed * cameraFront;
-	//s
-	//cameraPos -= cameraSpeed * cameraFront;
-	//a
-	//cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
-	//d
-	//cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+}
+void Renderer::CameraMove(CameraDirection direction)
+{
+	switch (direction)
+	{
+	case CameraDirection::front:
+		cameraPos += cameraSpeed * cameraFront;
+		break;
+	case CameraDirection::back:
+		cameraPos -= cameraSpeed * cameraFront;
+		break;
+	case CameraDirection::up:
+		cameraPos += cameraSpeed * cameraUp;
+		break;
+	case CameraDirection::down:
+		cameraPos -= cameraSpeed * cameraUp;
+		break;
+	case CameraDirection::left:
+		cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+		break;
+	case CameraDirection::right:
+		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+		break;
+	}
+	
 }
 void Renderer::SetStaticRenderer(Renderer* newRef)
 {

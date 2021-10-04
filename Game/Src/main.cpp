@@ -1,8 +1,9 @@
 #include "game/Game.h"
 
-void main()
+int main(void)
 {
 	Game* myGame = new Game();
 	myGame->Play();
 	if(myGame != nullptr) delete myGame;
+	return 0;
 }

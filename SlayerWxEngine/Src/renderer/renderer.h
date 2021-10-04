@@ -3,6 +3,10 @@
 #include "export/export.h"
 #include "glm/glm.hpp"
 #include"glm/gtc/type_ptr.hpp"
+enum class CameraDirection
+{
+	left,right,up,down,front,back
+};
 class SlayerWxEngine_API Renderer
 {
 private:
@@ -27,7 +31,8 @@ public:
 	void UpdateProjection();
 	void UpdateViewUniformShaders(glm::mat4 viewMatrix);
 	void UpdateView();
-	void CameraMove(float x, float y, float z);
+	void SetCameraPosition(float x, float y, float z);
+	void CameraMove(CameraDirection direction);
 	float cameraSpeed = 0.01f; // adjust accordingly
 	glm::mat4 projection; //size/count of pixel inside the viewport
 	glm::mat4 view; //move the "camera" but really move all object in the inverse

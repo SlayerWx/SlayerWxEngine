@@ -1,5 +1,5 @@
-#ifndef KEYCODE_H
-#define KEYCODE_H
+#ifndef KEYCODE_HH
+#define KEYCODE_HH
 
 #define KEYCODE_A                  65
 #define KEYCODE_B                  66
@@ -28,4 +28,4 @@
 #define KEYCODE_Y                  89
 #define KEYCODE_Z                  90
 
-#endif;
+#endif

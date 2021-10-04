@@ -18,17 +18,17 @@ void Game::Start()
 	triangleAuto.SetPosition(0.0f, 0.0f, 0.0f);
 	shape.SetPosition(-5.0f,0.0f,0.0f);
 }
-float a = 0;
+float a = 0.0f;
 bool right = true;
-float x = 0;
-float y = 0;
-float scaleX = 1;
-float scaleY = 1;
-float scaleZ = 1;
+float x = 0.0f;
+float y = 0.0f;
+float scaleX = 1.0f;
+float scaleY = 1.0f;
+float scaleZ = 1.0f;
 const float valueModif = 0.001f;
-float cameraX = 0.1;
-float cameraY = 0.1;
-float cameraZ = 0.1;
+float cameraX = 0.1f;
+float cameraY = 0.1f;
+float cameraZ = 0.1f;
 void Game::Update()
 {
 
@@ -38,42 +38,45 @@ void Game::Update()
 	Input(KEYCODE_G, y, -valueModif);
 	Input(KEYCODE_T, y, +valueModif);
 
-	Input(KEYCODE_K, scaleY, -valueModif* 10);
-	Input(KEYCODE_I, scaleY, +valueModif* 10);
+	Input(KEYCODE_K, scaleY, -valueModif* 10.0f);
+	Input(KEYCODE_I, scaleY, +valueModif* 10.0f);
 
-	Input(KEYCODE_J, scaleX, -valueModif* 10);
-	Input(KEYCODE_L, scaleX, +valueModif* 10);
+	Input(KEYCODE_J, scaleX, -valueModif* 10.0f);
+	Input(KEYCODE_L, scaleX, +valueModif* 10.0f);
 
-	Input(KEYCODE_U, scaleZ, -valueModif* 10);
-	Input(KEYCODE_O, scaleZ, +valueModif* 10);
+	Input(KEYCODE_U, scaleZ, -valueModif* 10.0f);
+	Input(KEYCODE_O, scaleZ, +valueModif* 10.0f);
 
-	Input(KEYCODE_A, cameraX, -valueModif * 10);
-	Input(KEYCODE_D, cameraX, +valueModif * 10);
+	Input(KEYCODE_A, cameraX, -valueModif * 10.0f);
+	Input(KEYCODE_D, cameraX, +valueModif * 10.0f);
 
-	Input(KEYCODE_S, cameraY, -valueModif * 10);
-	Input(KEYCODE_W, cameraY, +valueModif * 10);
+	Input(KEYCODE_S, cameraY, -valueModif * 10.0f);
+	Input(KEYCODE_W, cameraY, +valueModif * 10.0f);
 	
 
-	CameraMove(cameraX, cameraY, cameraZ);
-	
+	//SetCameraPosition(cameraX, cameraY, cameraZ);
 
-	if (right)a += 0.0001;
-	else a -= 0.0001;;
-	if (a > 4) right = false;
-	else if (a < 0) right = true;
+	if (right)a += 0.0001f;
+	else a -= 0.0001f;
+	if (a > 4.0f) right = false;
+	else if (a < 0.0f) right = true;
 
 	triangleAuto.Rotate(a,a,a);
-	triangleAuto.Scale(0.1+a,1,1);
-	triangleAuto.SetPosition(-2+a, -1.2, -5);
-	triangleAuto.SetColor(0.f,0.3,0.8);
+	triangleAuto.Scale(0.1f+a,1.0f,1.0f);
+	triangleAuto.SetPosition(-2.0f+a, -1.2f, -5.0f);
+	triangleAuto.SetColor(0.0f,0.3f,0.8f);
 
-	squareAuto.Rotate(0,0,a);
-	squareAuto.SetPosition(-2.0,1.5,-5);
-	squareAuto.SetColor(0.0,1.0,0.0);
+	squareAuto.Rotate(0.0f,0.0f,a);
+	squareAuto.SetPosition(-2.0f,1.5f,-5.0f);
+	squareAuto.SetColor(0.0f,1.0f,0.0f);
 
-	shape.SetPosition(x, y, -5);
+	shape.SetPosition(x, y, -5.0f);
 
 	shape.Scale(scaleX, scaleY, scaleZ);
+	if (GetKey(KEYCODE_Z))
+	{
+		CameraMove(CameraDirection::down);
+	}
 
 	triangleAuto.Draw();
 	squareAuto.Draw();
@@ -83,6 +86,7 @@ bool Game::Input(int keycode,float &variable,float modif)
 {
 	if (GetKey(keycode))
 	{
+
 		variable += modif;
 		return true;
 	}
