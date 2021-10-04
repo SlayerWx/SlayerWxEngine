@@ -75,7 +75,13 @@ void Game::Update()
 	shape.Scale(scaleX, scaleY, scaleZ);
 	if (GetKey(KEYCODE_Z))
 	{
-		CameraMove(CameraDirection::down);
+		//CameraMove(CameraDirection::down);
+		SetCameraProjection(CameraProjection::orthogonal);
+	}
+	else
+	{
+		SetCameraProjection(CameraProjection::perspective);
+
 	}
 
 	triangleAuto.Draw();

@@ -7,6 +7,10 @@ enum class CameraDirection
 {
 	left,right,up,down,front,back
 };
+enum class CameraProjection
+{
+	perspective, orthogonal
+};
 class SlayerWxEngine_API Renderer
 {
 private:
@@ -42,6 +46,7 @@ public:
 	static Renderer* myRef;
 	void SetStaticRenderer(Renderer* newRef);
 	Renderer* GetStaticRenderer();
+	CameraProjection cameraProjection;
 };
 // settings
 //const unsigned int SCR_WIDTH = 800;

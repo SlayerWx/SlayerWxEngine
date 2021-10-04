@@ -90,6 +90,14 @@ void BaseGame::CameraMove(CameraDirection direction)
 {
 	renderer->CameraMove(direction);
 }
+void BaseGame::SetCameraProjection(CameraProjection selection)
+{
+	renderer->cameraProjection = selection;
+}
+CameraProjection BaseGame::GetCameraProjection()
+{
+	return renderer->cameraProjection;
+}
 
 void BaseGame::EngineEnd()
 {

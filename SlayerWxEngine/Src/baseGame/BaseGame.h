@@ -31,5 +31,7 @@ public:
 	bool GetKey(int keycode);
 	void SetCameraPosition(float x, float y, float z);
 	void CameraMove(CameraDirection direction);
+	void SetCameraProjection(CameraProjection selection);
+	CameraProjection GetCameraProjection();
 };
 #endif

@@ -13,6 +13,7 @@ Renderer::Renderer()
 	viewLoc = 0;
 	projection = glm::mat4();
 	view = glm::mat4();
+	cameraProjection = CameraProjection::perspective;
 }
 
 void Renderer::Draw(float* vertex,int vertexLength, unsigned int* index,int indexLength, glm::mat4 modelMatrix)
@@ -69,11 +70,18 @@ void Renderer::UpdateProjectUniformShaders(glm::mat4 projectMatrix)
 }
 void Renderer::UpdateProjection()
 {
-	//degrees in radians, window resolution, near, far
-	projection = glm::perspective(glm::radians(45.0f),800.0f/600.0f,0.001f,100.0f);
-	
-	//x left, x right, y down, y up, near, far
-	//projection = glm::ortho(-2.0f, +2.0f, -1.5f, +1.5f, 0.1f, 100.0f);
+	switch (cameraProjection)
+	{
+	default:
+	case CameraProjection::perspective:
+		//degrees in radians, window resolution, near, far
+		projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.001f, 100.0f);
+		break;
+	case CameraProjection::orthogonal:
+		//x left, x right, y down, y up, near, far
+		projection = glm::ortho(-2.0f, +2.0f, -1.5f, +1.5f, 0.1f, 100.0f);
+		break;
+	}
 }
 void Renderer::UpdateViewUniformShaders(glm::mat4 viewMatrix)
 {
