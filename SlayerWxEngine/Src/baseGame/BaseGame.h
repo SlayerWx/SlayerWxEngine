@@ -4,14 +4,14 @@
 #include "window/window.h"
 #include "shape/Shape.h"
 #include "input/Input.h"
+#include "export/export.h"
 struct GLFWmonitor;
 struct GLFWwindow;
 class SlayerWxEngine_API BaseGame
 {
-protected:
+private:
 	Window* window;
 	Renderer* renderer;
-private:
 	void UpdateBegin();
 	void UpdateEnd();
 	void EngineEnd();
@@ -30,7 +30,7 @@ public:
 
 	bool GetKey(int keycode);
 	void SetCameraPosition(float x, float y, float z);
-	void CameraMove(CameraDirection direction);
+	void CameraMove(CameraDirection direction, float speed);
 	void SetCameraProjection(CameraProjection selection);
 	CameraProjection GetCameraProjection();
 };

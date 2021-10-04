@@ -70,16 +70,17 @@ void Renderer::UpdateProjectUniformShaders(glm::mat4 projectMatrix)
 }
 void Renderer::UpdateProjection()
 {
+
 	switch (cameraProjection)
 	{
 	default:
 	case CameraProjection::perspective:
 		//degrees in radians, window resolution, near, far
-		projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.001f, 100.0f);
+		projection = glm::perspective(glm::radians(45.0f), 800.0f/ 600.0f, 0.001f, 100.0f);
 		break;
 	case CameraProjection::orthogonal:
 		//x left, x right, y down, y up, near, far
-		projection = glm::ortho(-2.0f, +2.0f, -1.5f, +1.5f, 0.1f, 100.0f);
+		projection = glm::ortho(0.0f, 4.0f, 0.0f, 4.0f, 0.1f, 100.0f);
 		break;
 	}
 }
@@ -99,27 +100,27 @@ void Renderer::SetCameraPosition(float x,float y, float z)
 	cameraPos.y = y;
 	cameraPos.z = z;
 }
-void Renderer::CameraMove(CameraDirection direction)
+void Renderer::CameraMove(CameraDirection direction,float speed , float deltaTime)
 {
 	switch (direction)
 	{
 	case CameraDirection::front:
-		cameraPos += cameraSpeed * cameraFront;
+		cameraPos += (speed * deltaTime) * cameraFront;
 		break;
 	case CameraDirection::back:
-		cameraPos -= cameraSpeed * cameraFront;
+		cameraPos -= (speed * deltaTime) * cameraFront;
 		break;
 	case CameraDirection::up:
-		cameraPos += cameraSpeed * cameraUp;
+		cameraPos += (speed * deltaTime) * cameraUp;
 		break;
 	case CameraDirection::down:
-		cameraPos -= cameraSpeed * cameraUp;
+		cameraPos -= (speed * deltaTime) * cameraUp;
 		break;
 	case CameraDirection::left:
-		cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+		cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * (speed * deltaTime);
 		break;
 	case CameraDirection::right:
-		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * (speed * deltaTime);
 		break;
 	}
 	

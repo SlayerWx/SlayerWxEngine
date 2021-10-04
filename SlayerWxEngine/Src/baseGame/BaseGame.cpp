@@ -1,6 +1,7 @@
 #include "BaseGame.h"
 #include <glew.h>
 #include <glfw3.h>
+#include "globalUtility/Utility/Utility.h"
 BaseGame::BaseGame()
 {
 		window = new Window();
@@ -55,6 +56,7 @@ bool BaseGame::Running()
 void BaseGame::UpdateBegin()
 {
 	window->ClearBackground();
+	UpdateDeltaTime();
 }
 
 void BaseGame::UpdateEnd()
@@ -77,8 +79,6 @@ void BaseGame::UpdateEngine()
 }
 bool BaseGame::GetKey(int keycode)
 {
-	//return input->GetKey(GLFW_KEY_A, window->GetWindow());
-	//return input->GetKey(KEYCODE_A, window->GetWindow());
 	return input->GetKey(keycode, window->GetWindow());
 }
 void BaseGame::SetCameraPosition(float x,float y, float z)
@@ -86,9 +86,9 @@ void BaseGame::SetCameraPosition(float x,float y, float z)
 	renderer->SetCameraPosition(x,y,z);
 }
 
-void BaseGame::CameraMove(CameraDirection direction)
+void BaseGame::CameraMove(CameraDirection direction, float speed)
 {
-	renderer->CameraMove(direction);
+	renderer->CameraMove(direction,speed, DeltaTime());
 }
 void BaseGame::SetCameraProjection(CameraProjection selection)
 {
@@ -98,7 +98,6 @@ CameraProjection BaseGame::GetCameraProjection()
 {
 	return renderer->cameraProjection;
 }
-
 void BaseGame::EngineEnd()
 {
 	glfwTerminate();

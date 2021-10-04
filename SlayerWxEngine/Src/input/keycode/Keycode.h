@@ -27,5 +27,6 @@
 #define KEYCODE_X                  88
 #define KEYCODE_Y                  89
 #define KEYCODE_Z                  90
+#define KEYCODE_SPACE              32
 
 #endif

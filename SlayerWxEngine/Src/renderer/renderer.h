@@ -36,8 +36,7 @@ public:
 	void UpdateViewUniformShaders(glm::mat4 viewMatrix);
 	void UpdateView();
 	void SetCameraPosition(float x, float y, float z);
-	void CameraMove(CameraDirection direction);
-	float cameraSpeed = 0.01f; // adjust accordingly
+	void CameraMove(CameraDirection direction, float speed,float deltaTime);
 	glm::mat4 projection; //size/count of pixel inside the viewport
 	glm::mat4 view; //move the "camera" but really move all object in the inverse
 	glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);

@@ -31,7 +31,6 @@ float cameraY = 0.1f;
 float cameraZ = 0.1f;
 void Game::Update()
 {
-
 	Input(KEYCODE_F, x, -valueModif);
 	Input(KEYCODE_H, x, +valueModif);
 
@@ -47,12 +46,29 @@ void Game::Update()
 	Input(KEYCODE_U, scaleZ, -valueModif* 10.0f);
 	Input(KEYCODE_O, scaleZ, +valueModif* 10.0f);
 
-	Input(KEYCODE_A, cameraX, -valueModif * 10.0f);
-	Input(KEYCODE_D, cameraX, +valueModif * 10.0f);
+	//Input(KEYCODE_A, cameraX, -valueModif * 10.0f);
+	//Input(KEYCODE_D, cameraX, +valueModif * 10.0f);
 
-	Input(KEYCODE_S, cameraY, -valueModif * 10.0f);
-	Input(KEYCODE_W, cameraY, +valueModif * 10.0f);
-	
+	//Input(KEYCODE_Q, cameraY, -valueModif * 10.0f);
+	//Input(KEYCODE_E, cameraY, +valueModif * 10.0f);
+
+	//Input(KEYCODE_S, cameraZ, -valueModif * 10.0f);
+	//Input(KEYCODE_W, cameraZ, +valueModif * 10.0f);
+
+	if (GetKey(KEYCODE_W))
+		CameraMove(CameraDirection::front, 10.0f);
+	if (GetKey(KEYCODE_S))
+		CameraMove(CameraDirection::back, 10.0f);
+
+	if (GetKey(KEYCODE_A))
+		CameraMove(CameraDirection::left, 10.0f);
+	if (GetKey(KEYCODE_D))
+		CameraMove(CameraDirection::right, 10.0f);
+
+	if (GetKey(KEYCODE_Q))
+		CameraMove(CameraDirection::up, 10.0f);
+	if (GetKey(KEYCODE_E))
+		CameraMove(CameraDirection::down, 10.0f);
 
 	//SetCameraPosition(cameraX, cameraY, cameraZ);
 
@@ -63,19 +79,18 @@ void Game::Update()
 
 	triangleAuto.Rotate(a,a,a);
 	triangleAuto.Scale(0.1f+a,1.0f,1.0f);
-	triangleAuto.SetPosition(-2.0f+a, -1.2f, -5.0f);
+	triangleAuto.SetPosition(+a-2.0f, -1.5f, -5.0f);
 	triangleAuto.SetColor(0.0f,0.3f,0.8f);
 
 	squareAuto.Rotate(0.0f,0.0f,a);
-	squareAuto.SetPosition(-2.0f,1.5f,-5.0f);
+	squareAuto.SetPosition(-1.9f,+1.5f,-5.0f);
 	squareAuto.SetColor(0.0f,1.0f,0.0f);
 
 	shape.SetPosition(x, y, -5.0f);
 
 	shape.Scale(scaleX, scaleY, scaleZ);
-	if (GetKey(KEYCODE_Z))
-	{
-		//CameraMove(CameraDirection::down);
+	if (GetKey(KEYCODE_SPACE))
+	{		
 		SetCameraProjection(CameraProjection::orthogonal);
 	}
 	else
