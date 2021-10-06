@@ -9,7 +9,6 @@ void UpdateDeltaTime()
 	float currentFrame = glfwGetTime();
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
-	std::cout << deltaTime << std::endl;
 }
 float DeltaTime()
 {

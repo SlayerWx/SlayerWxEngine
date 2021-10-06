@@ -14,6 +14,10 @@ Renderer::Renderer()
 	projection = glm::mat4();
 	view = glm::mat4();
 	cameraProjection = CameraProjection::perspective;
+
+	yaw = YAW;
+	pitch = PITCH;
+	UpdateCameraVectors();
 }
 
 void Renderer::Draw(float* vertex,int vertexLength, unsigned int* index,int indexLength, glm::mat4 modelMatrix)
@@ -125,6 +129,31 @@ void Renderer::CameraMove(CameraDirection direction,float speed , float deltaTim
 	}
 	
 }
+void Renderer::UpdateCameraVectors()
+{
+	// calculate the new Front vector
+	glm::vec3 front;
+	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	front.y = sin(glm::radians(pitch));
+	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+	cameraFront = glm::normalize(front);
+	// also re-calculate the Right and Up vector
+	right = glm::normalize(glm::cross(cameraFront, cameraUp));  // normalize the vectors, because their length gets 
+									//closer to 0 the more you look up or down which results in slower movement.
+	up = glm::normalize(glm::cross(right, cameraFront));
+}
+void Renderer::CameraRotate(float speedX,float speedY)
+{
+	yaw += speedX;
+	pitch -= speedY;
+	if (pitch >= 89.1f)
+		pitch = -89.0f;
+	if (pitch < -89.1f)
+		pitch = 89.0f;
+	std::cout << pitch << std::endl;
+	UpdateCameraVectors();
+	
+}
 void Renderer::SetStaticRenderer(Renderer* newRef)
 {
 	myRef = newRef;
@@ -133,6 +162,7 @@ Renderer* Renderer::GetStaticRenderer()
 {
 	return myRef;
 }
+
 unsigned int Renderer::CompileShader(unsigned int type, const char* shaderPath) { //first: ShaderType(Fragment, vertex)
 																		//second:Dir to archive
 	unsigned int id = glCreateShader(type); // Create Shader

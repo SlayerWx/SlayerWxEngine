@@ -46,6 +46,15 @@ public:
 	void SetStaticRenderer(Renderer* newRef);
 	Renderer* GetStaticRenderer();
 	CameraProjection cameraProjection;
+	void UpdateCameraVectors();
+	void CameraRotate(float speedX, float speedY);
+	const float YAW = -90.0f;
+	const float PITCH = 0.0f;
+	const float SPEED = 2.5f;
+	float yaw = 0.0f;
+	float pitch = 0.0f;
+	glm::vec3 up = glm::vec3();
+	glm::vec3 right = glm::vec3();
 };
 // settings
 //const unsigned int SCR_WIDTH = 800;

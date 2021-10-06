@@ -29,6 +29,8 @@ const float valueModif = 0.001f;
 float cameraX = 0.1f;
 float cameraY = 0.1f;
 float cameraZ = 0.1f;
+float cameraSpeedRotateX = 0.07f;
+float cameraSpeedRotateY = 0.07f;
 void Game::Update()
 {
 	Input(KEYCODE_F, x, -valueModif);
@@ -69,6 +71,16 @@ void Game::Update()
 		CameraMove(CameraDirection::up, 10.0f);
 	if (GetKey(KEYCODE_E))
 		CameraMove(CameraDirection::down, 10.0f);
+
+
+	if (GetKey(KEYCODE_KP_6))
+		CameraRotate(cameraSpeedRotateX, 0);
+	if (GetKey(KEYCODE_KP_2))
+		CameraRotate(0, cameraSpeedRotateY);
+	if (GetKey(KEYCODE_KP_4))
+		CameraRotate(-cameraSpeedRotateX, 0);
+	if (GetKey(KEYCODE_KP_8))
+		CameraRotate(0, -cameraSpeedRotateY);
 
 	//SetCameraPosition(cameraX, cameraY, cameraZ);
 

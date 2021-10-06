@@ -90,6 +90,10 @@ void BaseGame::CameraMove(CameraDirection direction, float speed)
 {
 	renderer->CameraMove(direction,speed, DeltaTime());
 }
+void BaseGame::CameraRotate(float speedX, float speedY)
+{
+	renderer->CameraRotate(speedX,speedY);
+}
 void BaseGame::SetCameraProjection(CameraProjection selection)
 {
 	renderer->cameraProjection = selection;
