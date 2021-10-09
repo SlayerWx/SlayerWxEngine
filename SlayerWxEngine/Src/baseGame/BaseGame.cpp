@@ -24,7 +24,6 @@ int BaseGame::EngineInit(int width, int height, const char* title)// GLFWmonitor
 		return -1;
 	glewInit();
 	RendererInit();
-
 	return 0;
 }
 
@@ -40,6 +39,7 @@ int BaseGame::WindowInit(int width, int height, const char* title)// GLFWmonitor
 }
 void BaseGame::RendererInit()
 {
+	glEnable(GL_DEPTH_TEST);
 	renderer->CreateBuffers();
 	renderer->BindBuffers();
 	
