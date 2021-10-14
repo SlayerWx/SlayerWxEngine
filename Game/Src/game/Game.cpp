@@ -98,12 +98,12 @@ void Game::Update()
 	squareAuto.SetPosition(-1.9f,+1.5f,-5.0f);
 	squareAuto.SetColor(0.0f,1.0f,0.0f);
 
-	shape.SetPosition(x, y, -5.0f);
+	shape.SetPosition(x, y, -4.0f);
 
 	shape.Scale(scaleX, scaleY, scaleZ);
 	if (GetKey(KEYCODE_SPACE))
 	{		
-		SetCameraProjection(CameraProjection::orthogonal);
+		SetCameraProjection(CameraProjection::ortho);
 	}
 	else
 	{

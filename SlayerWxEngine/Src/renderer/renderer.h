@@ -9,7 +9,7 @@ enum class CameraDirection
 };
 enum class CameraProjection
 {
-	perspective, orthogonal
+	perspective, ortho
 };
 class SlayerWxEngine_API Renderer
 {
@@ -50,7 +50,6 @@ public:
 	void CameraRotate(float speedX, float speedY);
 	const float YAW = -90.0f;
 	const float PITCH = 0.0f;
-	const float SPEED = 2.5f;
 	float yaw = 0.0f;
 	float pitch = 0.0f;
 	glm::vec3 up = glm::vec3();

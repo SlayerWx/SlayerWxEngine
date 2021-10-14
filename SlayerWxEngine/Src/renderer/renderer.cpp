@@ -11,10 +11,9 @@ Renderer::Renderer()
 	modelLoc = 0;
 	projectLoc = 0;
 	viewLoc = 0;
-	projection = glm::mat4();
-	view = glm::mat4();
+	projection = glm::mat4(1.0f);
+	view = glm::mat4(1.0f);
 	cameraProjection = CameraProjection::perspective;
-
 	yaw = YAW;
 	pitch = PITCH;
 	UpdateCameraVectors();
@@ -82,9 +81,9 @@ void Renderer::UpdateProjection()
 		//degrees in radians, window resolution, near, far
 		projection = glm::perspective(glm::radians(45.0f), 800.0f/ 600.0f, 0.001f, 100.0f);
 		break;
-	case CameraProjection::orthogonal:
+	case CameraProjection::ortho:
 		//x left, x right, y down, y up, near, far
-		projection = glm::ortho(0.0f, 4.0f, 0.0f, 4.0f, 0.1f, 100.0f);
+		projection = glm::ortho(-1.5f, 1.5f, -1.0f, 1.0f, 0.1f, 100.0f);
 		break;
 	}
 }
@@ -150,7 +149,6 @@ void Renderer::CameraRotate(float speedX,float speedY)
 		pitch = -89.0f;
 	if (pitch < -89.1f)
 		pitch = 89.0f;
-	std::cout << pitch << std::endl;
 	UpdateCameraVectors();
 	
 }
