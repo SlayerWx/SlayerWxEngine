@@ -13,28 +13,24 @@ void Game::Play()
 	UpdateEngine();
 }
 
+void Game::Start() 
+{
+	triangleAuto.SetPosition(0.0f, 0.0f, 0.0f);
+	shape.SetPosition(-5.0f,0.0f,0.0f);
+}
 float a = 0.0f;
 bool right = true;
 float x = 0.0f;
 float y = 0.0f;
-float scaleX = 50.0f;
-float scaleY = 50.0f;
-float scaleZ = 50.0f;
-const float valueModif = 0.50f;
+float scaleX = 1.0f;
+float scaleY = 1.0f;
+float scaleZ = 1.0f;
+const float valueModif = 0.001f;
 float cameraX = 0.1f;
 float cameraY = 0.1f;
 float cameraZ = 0.1f;
 float cameraSpeedRotateX = 0.07f;
 float cameraSpeedRotateY = 0.07f;
-void Game::Start() 
-{
-	triangleAuto.SetPosition(-300.0f, -200.0f, 0.0f);
-	squareAuto.SetPosition(-300.0f,200.0f,0.0f);
-	shape.Scale(scaleX, scaleY, scaleZ);
-	triangleAuto.Scale(scaleX, scaleY, scaleZ);
-	squareAuto.Scale(scaleX, scaleY, scaleZ);
-}
-
 void Game::Update()
 {
 	Input(KEYCODE_F, x, -valueModif);
@@ -62,19 +58,19 @@ void Game::Update()
 	//Input(KEYCODE_W, cameraZ, +valueModif * 10.0f);
 
 	if (GetKey(KEYCODE_W))
-		CameraMove(CameraDirection::front, 50.0f);
+		CameraMove(CameraDirection::front, 10.0f);
 	if (GetKey(KEYCODE_S))
-		CameraMove(CameraDirection::back, 50.0f);
+		CameraMove(CameraDirection::back, 10.0f);
 
 	if (GetKey(KEYCODE_A))
-		CameraMove(CameraDirection::left, 50.0f);
+		CameraMove(CameraDirection::left, 10.0f);
 	if (GetKey(KEYCODE_D))
-		CameraMove(CameraDirection::right, 50.0f);
+		CameraMove(CameraDirection::right, 10.0f);
 
 	if (GetKey(KEYCODE_Q))
-		CameraMove(CameraDirection::up, 50.0f);
+		CameraMove(CameraDirection::up, 10.0f);
 	if (GetKey(KEYCODE_E))
-		CameraMove(CameraDirection::down, 50.0f);
+		CameraMove(CameraDirection::down, 10.0f);
 
 
 	if (GetKey(KEYCODE_KP_6))
@@ -88,25 +84,26 @@ void Game::Update()
 
 	//SetCameraPosition(cameraX, cameraY, cameraZ);
 
-	if (right)a += 0.001f;
-	else a -= 0.001f;
-	if (a > 6.0f) right = false;
+	if (right)a += 0.0001f;
+	else a -= 0.0001f;
+	if (a > 4.0f) right = false;
 	else if (a < 0.0f) right = true;
 
 	triangleAuto.Rotate(a,a,a);
-	triangleAuto.Scale(scaleX+a, scaleY, scaleZ);
-	triangleAuto.SetPosition(+a * 100.0f- 300.0f, -200.0f, -5.0f);
+	triangleAuto.Scale(0.1f+a,1.0f,1.0f);
+	triangleAuto.SetPosition(+a-2.0f, -1.5f, -5.0f);
 	triangleAuto.SetColor(0.0f,0.3f,0.8f);
 
 	squareAuto.Rotate(0.0f,0.0f,a);
+	squareAuto.SetPosition(-1.9f,+1.5f,-5.0f);
 	squareAuto.SetColor(0.0f,1.0f,0.0f);
 
-	shape.SetPosition(x, y, 100.0f);
+	shape.SetPosition(x, y, -5.0f);
 
 	shape.Scale(scaleX, scaleY, scaleZ);
 	if (GetKey(KEYCODE_SPACE))
 	{		
-		SetCameraProjection(CameraProjection::ortho);
+		SetCameraProjection(CameraProjection::orthogonal);
 	}
 	else
 	{
