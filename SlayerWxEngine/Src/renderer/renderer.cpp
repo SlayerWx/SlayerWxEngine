@@ -28,7 +28,25 @@ void Renderer::Draw(float* vertex,int vertexLength, unsigned int* index,int inde
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * indexLength, index, GL_STATIC_DRAW); //set info to buffer
 	glDrawElements(GL_TRIANGLES,indexLength,GL_UNSIGNED_INT,0);
 }
+void Renderer::SpriteDraw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix,bool alpha)
+{
+	if (alpha)
+	{
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+	}
+	else
+	{
 
+		glDisable(GL_BLEND);
+	}
+	UpdateModelUniformShaders(modelMatrix);
+	UpdateProjectUniformShaders(projection);
+	UpdateViewUniformShaders(view);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertexLength, vertex, GL_STATIC_DRAW); //set info to buffer
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * indexLength, index, GL_STATIC_DRAW); //set info to buffer
+	glDrawElements(GL_TRIANGLES, indexLength, GL_UNSIGNED_INT, 0);
+}
 void Renderer::CreateBuffers()
 {
 	glGenVertexArrays(1, &VAO); // first: Specifies the number of vertex array object
@@ -53,7 +71,19 @@ void Renderer::DefVertexAttribute()
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 }
-
+void Renderer::DefVertexSpriteAttribute()
+{
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// color attribute
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+	// texture coord attribute
+	glUniform1i(glGetUniformLocation(program,"texture"), 0);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(7 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+}
 void Renderer::CallUniformShaders()
 {
 	modelLoc = glGetUniformLocation(program, "model");//search the model in the shader

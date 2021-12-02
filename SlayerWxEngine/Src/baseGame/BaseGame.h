@@ -3,6 +3,7 @@
 #include "renderer/renderer.h"
 #include "window/window.h"
 #include "shape/Shape.h"
+#include "sprite/Sprite.h"
 #include "input/Input.h"
 #include "export/export.h"
 struct GLFWmonitor;

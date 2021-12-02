@@ -27,6 +27,8 @@
     <ClCompile Include="Src\input\Input.cpp" />
     <ClCompile Include="Src\renderer\renderer.cpp" />
     <ClCompile Include="Src\shape\Shape.cpp" />
+    <ClCompile Include="Src\sprite\Sprite.cpp" />
+    <ClCompile Include="Src\textureImporter\TextureImporter.cpp" />
     <ClCompile Include="Src\window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -40,10 +42,15 @@
     <ClInclude Include="Src\input\keycode\Keycode.h" />
     <ClInclude Include="Src\renderer\renderer.h" />
     <ClInclude Include="Src\shape\Shape.h" />
+    <ClInclude Include="Src\sprite\Sprite.h" />
+    <ClInclude Include="Src\textureImporter\stb_image\stb_image.h" />
+    <ClInclude Include="Src\textureImporter\TextureImporter.h" />
     <ClInclude Include="Src\window\window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\FragmentShader.SWshader" />
+    <None Include="Shader\SpriteFragmentShader.SWshader" />
+    <None Include="Shader\SpriteVertexShader.SWshader" />
     <None Include="Shader\VertexShader.SWshader" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

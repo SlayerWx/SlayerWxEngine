@@ -2,9 +2,9 @@
 #include <iostream>
 Game::Game() 
 {
-	triangleAuto = Shape(ShapeType::Triangle);
-	squareAuto = Shape(ShapeType::Square);
-	shape = Shape(ShapeType::Square);
+	//triangleAuto = Shape(ShapeType::Triangle);
+	//squareAuto = Shape(ShapeType::Square);
+	//shape = Shape(ShapeType::Square);
 }
 
 void Game::Play()
@@ -15,8 +15,17 @@ void Game::Play()
 
 void Game::Start() 
 {
-	triangleAuto.SetPosition(0.0f, 0.0f, 0.0f);
-	shape.SetPosition(-5.0f,0.0f,0.0f);
+	//triangleAuto.SetPosition(0.0f, 0.0f, 0.0f);
+	//shape.SetPosition(-5.0f,0.0f,0.0f);
+	itsfineSprite = Sprite("assets/This_Is_Fine.png");
+	dog = Sprite("assets/logo.png");
+	ncat = Sprite("assets/logoCat.png");
+	itsfineSprite.SetPosition(0.0f,0.0f,-2.0f);
+	itsfineSprite.Scale(1.0f,1.0f,1.0f);
+	dog.SetPosition(-0.5f, 0.0f, -1.0f);
+	dog.Scale(1.0f, 1.0f, 1.0f);
+	ncat.SetPosition(0.5f, 0.0f, 0.0f);
+	ncat.Scale(1.0f, 1.0f, 1.0f);
 }
 float a = 0.0f;
 bool right = true;
@@ -89,18 +98,18 @@ void Game::Update()
 	if (a > 4.0f) right = false;
 	else if (a < 0.0f) right = true;
 
-	triangleAuto.Rotate(a,a,a);
-	triangleAuto.Scale(0.1f+a,1.0f,1.0f);
-	triangleAuto.SetPosition(+a-2.0f, -1.5f, -5.0f);
-	triangleAuto.SetColor(0.0f,0.3f,0.8f);
-
-	squareAuto.Rotate(0.0f,0.0f,a);
-	squareAuto.SetPosition(-1.9f,+1.5f,-5.0f);
-	squareAuto.SetColor(0.0f,1.0f,0.0f);
-
-	shape.SetPosition(x, y, -4.0f);
-
-	shape.Scale(scaleX, scaleY, scaleZ);
+	//triangleAuto.Rotate(a,a,a);
+	//triangleAuto.Scale(0.1f+a,1.0f,1.0f);
+	//triangleAuto.SetPosition(+a-2.0f, -1.5f, -5.0f);
+	//triangleAuto.SetColor(0.0f,0.3f,0.8f);
+	//
+	//squareAuto.Rotate(0.0f,0.0f,a);
+	//squareAuto.SetPosition(-1.9f,+1.5f,-5.0f);
+	//squareAuto.SetColor(0.0f,1.0f,0.0f);
+	//
+	//shape.SetPosition(x, y, -4.0f);
+	//
+	//shape.Scale(scaleX, scaleY, scaleZ);
 	if (GetKey(KEYCODE_SPACE))
 	{		
 		SetCameraProjection(CameraProjection::ortho);
@@ -111,9 +120,12 @@ void Game::Update()
 
 	}
 
-	triangleAuto.Draw();
-	squareAuto.Draw();
-	shape.Draw();
+	//triangleAuto.Draw();
+	//squareAuto.Draw();
+	//shape.Draw();
+	itsfineSprite.Draw();
+	dog.Draw();
+	ncat.Draw();
 }
 bool Game::Input(int keycode,float &variable,float modif)
 {

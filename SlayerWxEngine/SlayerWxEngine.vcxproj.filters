@@ -40,6 +40,15 @@
     <Filter Include="Src\globalUtility\Utility">
       <UniqueIdentifier>{19fda69b-c689-4dc7-9a2b-38dba2ee91cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\textureImporter">
+      <UniqueIdentifier>{f9cf7e81-64e9-45d9-b7a3-2aeeb1499f9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\textureImporter\stb_img">
+      <UniqueIdentifier>{253adab8-03ef-4620-a6ae-5c22b547719d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\sprite">
+      <UniqueIdentifier>{963c7e10-d600-4866-91d2-1e63db13ac75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\baseGame\BaseGame.cpp">
@@ -68,6 +77,12 @@
     </ClCompile>
     <ClCompile Include="Src\globalUtility\Utility\Utility.cpp">
       <Filter>Src\globalUtility\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\textureImporter\TextureImporter.cpp">
+      <Filter>Src\textureImporter</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\sprite\Sprite.cpp">
+      <Filter>Src\sprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,12 +119,27 @@
     <ClInclude Include="Src\globalUtility\Utility\Utility.h">
       <Filter>Src\globalUtility\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="Src\textureImporter\TextureImporter.h">
+      <Filter>Src\textureImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\textureImporter\stb_image\stb_image.h">
+      <Filter>Src\textureImporter\stb_img</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\sprite\Sprite.h">
+      <Filter>Src\sprite</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\FragmentShader.SWshader">
       <Filter>Shader</Filter>
     </None>
     <None Include="Shader\VertexShader.SWshader">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shader\SpriteFragmentShader.SWshader">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shader\SpriteVertexShader.SWshader">
       <Filter>Shader</Filter>
     </None>
   </ItemGroup>

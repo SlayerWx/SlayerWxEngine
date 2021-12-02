@@ -20,6 +20,7 @@ private:
 public:
 	Renderer();
 	void Draw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix);
+	void SpriteDraw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix, bool alpha);
 	unsigned int VBO = 0; // VertexBufferObject
 	unsigned int VAO = 0; // VertexArrayObject
 	unsigned int EBO = 0; // ElementsBufferObject
@@ -29,6 +30,7 @@ public:
 	unsigned int CompileShader(unsigned int type, const char* shaderPath);
 	void CreateProgram(const char* vertexShaderPath, const char* pixelShaderPath);
 	void DefVertexAttribute();
+	void DefVertexSpriteAttribute();
 	void CallUniformShaders();
 	void UpdateModelUniformShaders(glm::mat4 modelMatrix);
 	void UpdateProjectUniformShaders(glm::mat4 projectMatrix);
