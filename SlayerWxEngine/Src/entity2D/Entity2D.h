@@ -7,6 +7,9 @@ class SlayerWxEngine_API Entity2D : public Entity
 {
 public:
 	Entity2D();
+	bool canCollision = false;
+	bool CheckCollisionAABB(Entity2D vs);
+	
 };
 
 #endif

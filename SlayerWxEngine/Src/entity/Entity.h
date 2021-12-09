@@ -18,13 +18,12 @@ protected:
 	glm::vec3 position;
 	glm::vec3 rotation;
 	glm::vec3 localScale;
-
+	glm::vec3 lastPosition;
 	void UpdateModel();
 
 	void RotateX(float x);
 	void RotateY(float y);
 	void RotateZ(float z);
-
 public:
 	Renderer* renderer;
 	Entity();

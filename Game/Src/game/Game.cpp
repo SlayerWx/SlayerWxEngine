@@ -25,6 +25,8 @@ void Game::Start()
 	dog = Sprite("assets/logo.png");
 	ncat = Sprite("assets/logoCat.png");
 	link = Sprite("assets/link.png");
+	dog.canCollision = true;
+	link.canCollision = true;
 	rightAnim = new Animation();
 	rightAnim->AddFrame(0, 0, 96, 104, 961, 831, 0.001, 10);
 	upAnim = new Animation();
@@ -69,6 +71,7 @@ float cameraSpeedRotateX = 0.07f;
 float cameraSpeedRotateY = 0.07f;
 void Game::Update()
 {
+
 	Input(KEYCODE_F, x, -valueModif);
 	Input(KEYCODE_H, x, +valueModif);
 
@@ -179,7 +182,7 @@ void Game::Update()
 		SetCameraProjection(CameraProjection::perspective);
 
 	}
-
+	link.CheckCollisionAABB(dog);
 	link.Update();
 	itsfineSprite.Draw();
 	dog.Draw();
