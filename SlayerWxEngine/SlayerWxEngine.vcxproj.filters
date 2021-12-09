@@ -93,7 +93,6 @@
     <ClCompile Include="Src\sprite\Sprite.cpp">
       <Filter>Src\sprite</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatorController.cpp" />
     <ClCompile Include="Src\animatorController\Animation\Animation.cpp">
       <Filter>Src\AnimatorController\Animation</Filter>
     </ClCompile>
@@ -144,7 +143,6 @@
     <ClInclude Include="Src\sprite\Sprite.h">
       <Filter>Src\sprite</Filter>
     </ClInclude>
-    <ClInclude Include="AnimatorController.h" />
     <ClInclude Include="Src\animatorController\Animation\Animation.h">
       <Filter>Src\AnimatorController\Animation</Filter>
     </ClInclude>
