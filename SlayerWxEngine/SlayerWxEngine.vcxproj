@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatorController.cpp" />
+    <ClCompile Include="Src\animatorController\Animation\Animation.cpp" />
+    <ClCompile Include="Src\animatorController\Frame\Frame.cpp" />
     <ClCompile Include="Src\baseGame\BaseGame.cpp" />
     <ClCompile Include="Src\entity2D\Entity2D.cpp" />
     <ClCompile Include="Src\entity\Entity.cpp" />
@@ -32,6 +35,9 @@
     <ClCompile Include="Src\window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimatorController.h" />
+    <ClInclude Include="Src\animatorController\Animation\Animation.h" />
+    <ClInclude Include="Src\animatorController\Frame\Frame.h" />
     <ClInclude Include="Src\baseGame\BaseGame.h" />
     <ClInclude Include="Src\entity2D\Entity2D.h" />
     <ClInclude Include="Src\entity\Entity.h" />

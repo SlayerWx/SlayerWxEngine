@@ -2,6 +2,7 @@
 #define SPRITE_H
 #include "entity2D/Entity2D.h"
 #include "textureImporter/TextureImporter.h"
+#include "animatorController/Animation/Animation.h"
 class SlayerWxEngine_API Sprite : public Entity2D
 {
 private:
@@ -20,10 +21,17 @@ private:
     };
     TextureData data;
     bool alpha = false;
+    Animation* actualAnim;
+    unsigned int previousFrameIndex= 99;
+    unsigned int currentFrameIndex = 0;
 public:
-
+    void SetTextureCoordinate(float u0, float v0, float u1, float v1,
+        float u2, float v2, float u3, float v3);
     Sprite();
     Sprite(const char* filePath);
+    void SetAnimation(Animation* anim);
+    Animation* GetAnimation();
+    void Update();
     void Draw();
 };
 #endif

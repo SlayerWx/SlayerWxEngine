@@ -12,20 +12,47 @@ void Game::Play()
 	EngineInit(800,600,"MY EPIC FAIL");
 	UpdateEngine();
 }
-
-void Game::Start() 
+enum State
+{
+	Sleft, Sright, Sup, Sdown
+};
+State linkState = Sdown;
+void Game::Start()
 {
 	//triangleAuto.SetPosition(0.0f, 0.0f, 0.0f);
 	//shape.SetPosition(-5.0f,0.0f,0.0f);
 	itsfineSprite = Sprite("assets/This_Is_Fine.png");
 	dog = Sprite("assets/logo.png");
 	ncat = Sprite("assets/logoCat.png");
-	itsfineSprite.SetPosition(0.0f,0.0f,-2.0f);
+	link = Sprite("assets/link.png");
+	rightAnim = new Animation();
+	rightAnim->AddFrame(0, 0, 96, 104, 961, 831, 0.001, 10);
+	upAnim = new Animation();
+	upAnim->AddFrame(0, 103, 96, 104, 961, 831, 0.001, 10);
+	leftAnim = new Animation();
+	leftAnim->AddFrame(2, 208, 96, 102, 961, 831, 0.001, 10);
+	downAnim = new Animation();
+	downAnim->AddFrame(2, 312, 96, 102, 961, 831, 0.001, 10);
+	idleRightAnim = new Animation();
+	idleRightAnim->AddFrame(2, 415, 96, 102, 961, 831, 0.007, 3);
+	idleUpAnim = new Animation();
+	idleUpAnim->AddFrame(2, 517, 96, 102, 961, 831, 0.007, 1);
+	idleLeftAnim = new Animation();
+	idleLeftAnim->AddFrame(2, 620, 96, 102, 961, 831, 0.007, 3);
+	idleDownAnim = new Animation();
+	idleDownAnim->AddFrame(2, 723, 96, 102, 961, 831, 0.007, 3);
+
+	link.SetAnimation(idleDownAnim);
+
+	itsfineSprite.SetPosition(0.0f,0.0f,2.0f);
 	itsfineSprite.Scale(1.0f,1.0f,1.0f);
-	dog.SetPosition(-0.5f, 0.0f, -1.0f);
+	dog.SetPosition(-3.5f, 0.0f, -1.0f);
 	dog.Scale(1.0f, 1.0f, 1.0f);
-	ncat.SetPosition(0.5f, 0.0f, 0.0f);
+	ncat.SetPosition(-2.5f, 0.0f, 0.0f);
 	ncat.Scale(1.0f, 1.0f, 1.0f);
+	link.SetPosition(4.0f,0.0f,-2.0f);
+	link.Scale(1.0f,1.0f,1.0f);
+	
 }
 float a = 0.0f;
 bool right = true;
@@ -57,14 +84,47 @@ void Game::Update()
 	Input(KEYCODE_U, scaleZ, -valueModif* 10.0f);
 	Input(KEYCODE_O, scaleZ, +valueModif* 10.0f);
 
-	//Input(KEYCODE_A, cameraX, -valueModif * 10.0f);
-	//Input(KEYCODE_D, cameraX, +valueModif * 10.0f);
+	if (GetKey(KEYCODE_1))
+	{
+		linkState = Sleft;
+		link.SetAnimation(leftAnim);
+		link.SetPosition(link.GetPositionX()-0.001f, link.GetPositionY(), link.GetPositionZ());
+	}
+	else if (linkState == Sleft)
+	{
+		link.SetAnimation(idleLeftAnim);
+	}
+	if (GetKey(KEYCODE_2))
+	{
+		linkState = Sright;
+		link.SetAnimation(rightAnim);
+		link.SetPosition(link.GetPositionX() + 0.001f, link.GetPositionY(), link.GetPositionZ());
+	}
+	else if (linkState == Sright)
+	{
+		link.SetAnimation(idleRightAnim);
+	}
+	if (GetKey(KEYCODE_3))
+	{
+		linkState = Sup;
+		link.SetAnimation(upAnim);
+		link.SetPosition(link.GetPositionX(), link.GetPositionY() + 0.001f, link.GetPositionZ());
+	}
+	else if (linkState == Sup)
+	{
+		link.SetAnimation(idleUpAnim);
+	}
+	if (GetKey(KEYCODE_4))
+	{
+		linkState = Sdown;
+		link.SetAnimation(downAnim);
+		link.SetPosition(link.GetPositionX(), link.GetPositionY() - 0.001f, link.GetPositionZ());
+	}
+	else if (linkState == Sdown)
+	{
+		link.SetAnimation(idleDownAnim);
+	}
 
-	//Input(KEYCODE_Q, cameraY, -valueModif * 10.0f);
-	//Input(KEYCODE_E, cameraY, +valueModif * 10.0f);
-
-	//Input(KEYCODE_S, cameraZ, -valueModif * 10.0f);
-	//Input(KEYCODE_W, cameraZ, +valueModif * 10.0f);
 
 	if (GetKey(KEYCODE_W))
 		CameraMove(CameraDirection::front, 10.0f);
@@ -120,12 +180,14 @@ void Game::Update()
 
 	}
 
-	//triangleAuto.Draw();
-	//squareAuto.Draw();
-	//shape.Draw();
+	link.Update();
 	itsfineSprite.Draw();
 	dog.Draw();
 	ncat.Draw();
+	link.Draw();
+	//triangleAuto.Draw();
+	//squareAuto.Draw();
+	//shape.Draw();
 }
 bool Game::Input(int keycode,float &variable,float modif)
 {
