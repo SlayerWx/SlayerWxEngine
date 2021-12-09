@@ -3,8 +3,8 @@
 Entity2D::Entity2D() : Entity()
 {
 }
-
-bool Entity2D::CheckCollisionAABB(Entity2D vs)
+#include <iostream>
+bool Entity2D::CheckCollisionAABB(Entity2D& vs)
 {
 	if (canCollision &&  vs.canCollision)
 	{
@@ -13,7 +13,27 @@ bool Entity2D::CheckCollisionAABB(Entity2D vs)
 			position.y < vs.position.y + vs.localScale[1] &&
 			position.y + localScale[1] > vs.position.y)
 		{
-			position = lastPosition;
+			if (vs.weight < strength)
+			{
+				bool helpWeight = false;
+				if (vs.weight == 0)
+				{
+					helpWeight = true;
+					vs.weight = 0.00001;
+				}
+				vs.SetPosition(vs.GetPositionX() + (position.x - lastPosition.x),
+								vs.GetPositionY() + (position.y - lastPosition.y),
+								vs.GetPositionZ());
+				if (helpWeight)
+				{
+					vs.weight = 0.0f;
+				}
+			}
+			else
+			{
+
+				position = lastPosition;
+			}
 			return true;
 		}
 	}
