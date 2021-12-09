@@ -72,7 +72,7 @@ void Sprite::SetTextureCoordinate(float u0, float v0, float u1, float v1, float 
 	vertexSprite[16] =  u1; //right 
 	vertexSprite[17] =  v1; //down
 					  
-	vertexSprite[25] =  u0; //let   
+	vertexSprite[25] =  u0; //left   
 	vertexSprite[26] =  v0; //down      
 					  
 	vertexSprite[34] =  u2; //left

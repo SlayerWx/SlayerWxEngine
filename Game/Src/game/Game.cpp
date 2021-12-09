@@ -27,6 +27,7 @@ void Game::Start()
 	link = Sprite("assets/link.png");
 	dog.canCollision = true;
 	link.canCollision = true;
+	link.strength = 1;
 	rightAnim = new Animation();
 	rightAnim->AddFrame(0, 0, 96, 104, 961, 831, 0.001, 10);
 	upAnim = new Animation();
@@ -201,4 +202,16 @@ bool Game::Input(int keycode,float &variable,float modif)
 		return true;
 	}
 	return false;
+}
+void Game::Delete()
+{
+	if (rightAnim) delete rightAnim;
+	if(leftAnim) delete leftAnim;
+	if(rightAnim) delete rightAnim;
+	if(upAnim) delete upAnim;
+	if(downAnim) delete downAnim;
+	if(idleRightAnim) delete idleRightAnim;
+	if(idleUpAnim) delete idleUpAnim;
+	if(idleLeftAnim) delete idleLeftAnim;
+	if(idleDownAnim) delete idleDownAnim;
 }

@@ -106,5 +106,7 @@ CameraProjection BaseGame::GetCameraProjection()
 }
 void BaseGame::EngineEnd()
 {
+	Delete();
+
 	glfwTerminate();
 }

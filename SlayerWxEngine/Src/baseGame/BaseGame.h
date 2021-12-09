@@ -28,7 +28,7 @@ public:
 	void UpdateEngine();
 	void virtual Update() = 0;
 	void virtual Start() = 0;
-
+	void virtual Delete() = 0;
 	bool GetKey(int keycode);
 	void SetCameraPosition(float x, float y, float z);
 	void CameraMove(CameraDirection direction, float speed);

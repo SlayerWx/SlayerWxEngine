@@ -13,6 +13,7 @@ private:
 	void Start();
 	void Update();
 	bool Input(int keycode, float &variable, float modif);
+	void Delete();
 	Animation* leftAnim;
 	Animation* rightAnim;
 	Animation* upAnim;
