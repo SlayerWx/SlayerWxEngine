@@ -207,7 +207,6 @@ void Game::Delete()
 {
 	if (rightAnim) delete rightAnim;
 	if(leftAnim) delete leftAnim;
-	if(rightAnim) delete rightAnim;
 	if(upAnim) delete upAnim;
 	if(downAnim) delete downAnim;
 	if(idleRightAnim) delete idleRightAnim;
