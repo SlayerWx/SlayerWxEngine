@@ -1,10 +1,11 @@
 #include "Game.h"
 #include <iostream>
-Game::Game() 
+
+Game::Game()
 {
-	//triangleAuto = Shape(ShapeType::Triangle);
-	//squareAuto = Shape(ShapeType::Square);
-	//shape = Shape(ShapeType::Square);
+	triangleAuto = Shape(ShapeType::Triangle);
+	squareAuto = Shape(ShapeType::Square);
+	shape = Shape(ShapeType::Square);
 }
 
 void Game::Play()
@@ -19,42 +20,9 @@ enum State
 State linkState = Sdown;
 void Game::Start()
 {
-	//triangleAuto.SetPosition(0.0f, 0.0f, 0.0f);
-	//shape.SetPosition(-5.0f,0.0f,0.0f);
-	itsfineSprite = Sprite("assets/This_Is_Fine.png");
-	dog = Sprite("assets/logo.png");
-	ncat = Sprite("assets/logoCat.png");
-	link = Sprite("assets/link.png");
-	dog.canCollision = true;
-	link.canCollision = true;
-	link.strength = 1;
-	rightAnim = new Animation();
-	rightAnim->AddFrame(0, 0, 96, 104, 961, 831, 0.001, 10);
-	upAnim = new Animation();
-	upAnim->AddFrame(0, 103, 96, 104, 961, 831, 0.001, 10);
-	leftAnim = new Animation();
-	leftAnim->AddFrame(2, 208, 96, 102, 961, 831, 0.001, 10);
-	downAnim = new Animation();
-	downAnim->AddFrame(2, 312, 96, 102, 961, 831, 0.001, 10);
-	idleRightAnim = new Animation();
-	idleRightAnim->AddFrame(2, 415, 96, 102, 961, 831, 0.007, 3);
-	idleUpAnim = new Animation();
-	idleUpAnim->AddFrame(2, 517, 96, 102, 961, 831, 0.007, 1);
-	idleLeftAnim = new Animation();
-	idleLeftAnim->AddFrame(2, 620, 96, 102, 961, 831, 0.007, 3);
-	idleDownAnim = new Animation();
-	idleDownAnim->AddFrame(2, 723, 96, 102, 961, 831, 0.007, 3);
-
-	link.SetAnimation(idleDownAnim);
-
-	itsfineSprite.SetPosition(0.0f,0.0f,2.0f);
-	itsfineSprite.Scale(1.0f,1.0f,1.0f);
-	dog.SetPosition(-3.5f, 0.0f, -1.0f);
-	dog.Scale(1.0f, 1.0f, 1.0f);
-	ncat.SetPosition(-2.5f, 0.0f, 0.0f);
-	ncat.Scale(1.0f, 1.0f, 1.0f);
-	link.SetPosition(4.0f,0.0f,-2.0f);
-	link.Scale(1.0f,1.0f,1.0f);
+	
+	SpriteStart();
+	//ShapeStart();
 	
 }
 float a = 0.0f;
@@ -88,11 +56,142 @@ void Game::Update()
 	Input(KEYCODE_U, scaleZ, -valueModif* 10.0f);
 	Input(KEYCODE_O, scaleZ, +valueModif* 10.0f);
 
+	SpriteUpdate();
+
+
+	if (GetKey(KEYCODE_W))
+		CameraMove(CameraDirection::front, 10.0f);
+	if (GetKey(KEYCODE_S))
+		CameraMove(CameraDirection::back, 10.0f);
+
+	if (GetKey(KEYCODE_A))
+		CameraMove(CameraDirection::left, 10.0f);
+	if (GetKey(KEYCODE_D))
+		CameraMove(CameraDirection::right, 10.0f);
+
+	if (GetKey(KEYCODE_Q))
+		CameraMove(CameraDirection::up, 10.0f);
+	if (GetKey(KEYCODE_E))
+		CameraMove(CameraDirection::down, 10.0f);
+
+
+	if (GetKey(KEYCODE_KP_6))
+		CameraRotate(cameraSpeedRotateX, 0);
+	if (GetKey(KEYCODE_KP_2))
+		CameraRotate(0, cameraSpeedRotateY);
+	if (GetKey(KEYCODE_KP_4))
+		CameraRotate(-cameraSpeedRotateX, 0);
+	if (GetKey(KEYCODE_KP_8))
+		CameraRotate(0, -cameraSpeedRotateY);
+
+	//SetCameraPosition(cameraX, cameraY, cameraZ);
+
+	if (right)a += 0.0001f;
+	else a -= 0.0001f;
+	if (a > 4.0f) right = false;
+	else if (a < 0.0f) right = true;
+
+	//ShapeUpdate();
+
+	if (GetKey(KEYCODE_SPACE))
+	{		
+		SetCameraProjection(CameraProjection::ortho);
+	}
+	else
+	{
+		SetCameraProjection(CameraProjection::perspective);
+
+	}
+
+	SpriteDraw();
+	//ShapeDraw();
+}
+bool Game::Input(int keycode,float &variable,float modif)
+{
+	if (GetKey(keycode))
+	{
+
+		variable += modif;
+		return true;
+	}
+	return false;
+}
+void Game::Delete()
+{
+	if (rightAnim) delete rightAnim;
+	if(leftAnim) delete leftAnim;
+	if(upAnim) delete upAnim;
+	if(downAnim) delete downAnim;
+	if(idleRightAnim) delete idleRightAnim;
+	if(idleUpAnim) delete idleUpAnim;
+	if(idleLeftAnim) delete idleLeftAnim;
+	if(idleDownAnim) delete idleDownAnim;
+}
+void Game::ShapeStart()
+{
+	triangleAuto.SetPosition(0.0f, 0.0f, 0.0f);
+	shape.SetPosition(-5.0f,0.0f,0.0f);
+}
+void Game::SpriteStart()
+{
+	itsfineSprite = Sprite("assets/This_Is_Fine.png");
+	dog = Sprite("assets/logo.png");
+	ncat = Sprite("assets/logoCat.png");
+	link = Sprite("assets/link.png");
+	dog.canCollision = true;
+	link.canCollision = true;
+	link.strength = 1;
+	rightAnim = new Animation();
+	rightAnim->AddFrame(0, 0, 96, 104, 961, 831, 0.001, 10);
+	upAnim = new Animation();
+	upAnim->AddFrame(0, 103, 96, 104, 961, 831, 0.001, 10);
+	leftAnim = new Animation();
+	leftAnim->AddFrame(2, 208, 96, 102, 961, 831, 0.001, 10);
+	downAnim = new Animation();
+	downAnim->AddFrame(2, 312, 96, 102, 961, 831, 0.001, 10);
+	idleRightAnim = new Animation();
+	idleRightAnim->AddFrame(2, 415, 96, 102, 961, 831, 0.007, 3);
+	idleUpAnim = new Animation();
+	idleUpAnim->AddFrame(2, 517, 96, 102, 961, 831, 0.007, 1);
+	idleLeftAnim = new Animation();
+	idleLeftAnim->AddFrame(2, 620, 96, 102, 961, 831, 0.007, 3);
+	idleDownAnim = new Animation();
+	idleDownAnim->AddFrame(2, 723, 96, 102, 961, 831, 0.007, 3);
+	link.SetAnimation(idleDownAnim);
+
+	itsfineSprite.SetPosition(0.0f, 0.0f, 2.0f);
+	itsfineSprite.Scale(1.0f, 1.0f, 1.0f);
+	dog.SetPosition(-3.5f, 0.0f, -1.0f);
+	dog.Scale(1.0f, 1.0f, 1.0f);
+	ncat.SetPosition(-2.5f, 0.0f, 0.0f);
+	ncat.Scale(1.0f, 1.0f, 1.0f);
+	link.SetPosition(4.0f, 0.0f, -2.0f);
+	link.Scale(1.0f, 1.0f, 1.0f);
+
+}
+void Game::ShapeUpdate()
+{
+
+	triangleAuto.Rotate(a,a,a);
+	triangleAuto.Scale(0.1f+a,1.0f,1.0f);
+	triangleAuto.SetPosition(+a-2.0f, -1.5f, -5.0f);
+	triangleAuto.SetColor(0.0f,0.3f,0.8f);
+	
+	squareAuto.Rotate(0.0f,0.0f,a);
+	squareAuto.SetPosition(-1.9f,+1.5f,-5.0f);
+	squareAuto.SetColor(0.0f,1.0f,0.0f);
+	
+	shape.SetPosition(x, y, -4.0f);
+	
+	shape.Scale(scaleX, scaleY, scaleZ);
+}
+void Game::SpriteUpdate()
+{
 	if (GetKey(KEYCODE_1))
 	{
 		linkState = Sleft;
 		link.SetAnimation(leftAnim);
-		link.SetPosition(link.GetPositionX()-0.001f, link.GetPositionY(), link.GetPositionZ());
+		link.SetPosition(link.GetPositionX() - 0.001f, link.GetPositionY(), link.GetPositionZ());
 	}
 	else if (linkState == Sleft)
 	{
@@ -128,89 +227,21 @@ void Game::Update()
 	{
 		link.SetAnimation(idleDownAnim);
 	}
-
-
-	if (GetKey(KEYCODE_W))
-		CameraMove(CameraDirection::front, 10.0f);
-	if (GetKey(KEYCODE_S))
-		CameraMove(CameraDirection::back, 10.0f);
-
-	if (GetKey(KEYCODE_A))
-		CameraMove(CameraDirection::left, 10.0f);
-	if (GetKey(KEYCODE_D))
-		CameraMove(CameraDirection::right, 10.0f);
-
-	if (GetKey(KEYCODE_Q))
-		CameraMove(CameraDirection::up, 10.0f);
-	if (GetKey(KEYCODE_E))
-		CameraMove(CameraDirection::down, 10.0f);
-
-
-	if (GetKey(KEYCODE_KP_6))
-		CameraRotate(cameraSpeedRotateX, 0);
-	if (GetKey(KEYCODE_KP_2))
-		CameraRotate(0, cameraSpeedRotateY);
-	if (GetKey(KEYCODE_KP_4))
-		CameraRotate(-cameraSpeedRotateX, 0);
-	if (GetKey(KEYCODE_KP_8))
-		CameraRotate(0, -cameraSpeedRotateY);
-
-	//SetCameraPosition(cameraX, cameraY, cameraZ);
-
-	if (right)a += 0.0001f;
-	else a -= 0.0001f;
-	if (a > 4.0f) right = false;
-	else if (a < 0.0f) right = true;
-
-	//triangleAuto.Rotate(a,a,a);
-	//triangleAuto.Scale(0.1f+a,1.0f,1.0f);
-	//triangleAuto.SetPosition(+a-2.0f, -1.5f, -5.0f);
-	//triangleAuto.SetColor(0.0f,0.3f,0.8f);
-	//
-	//squareAuto.Rotate(0.0f,0.0f,a);
-	//squareAuto.SetPosition(-1.9f,+1.5f,-5.0f);
-	//squareAuto.SetColor(0.0f,1.0f,0.0f);
-	//
-	//shape.SetPosition(x, y, -4.0f);
-	//
-	//shape.Scale(scaleX, scaleY, scaleZ);
-	if (GetKey(KEYCODE_SPACE))
-	{		
-		SetCameraProjection(CameraProjection::ortho);
-	}
-	else
-	{
-		SetCameraProjection(CameraProjection::perspective);
-
-	}
+}
+void Game::SpriteDraw()
+{
 	link.CheckCollisionAABB(dog);
 	link.Update();
 	itsfineSprite.Draw();
 	dog.Draw();
 	ncat.Draw();
 	link.Draw();
-	//triangleAuto.Draw();
-	//squareAuto.Draw();
-	//shape.Draw();
-}
-bool Game::Input(int keycode,float &variable,float modif)
-{
-	if (GetKey(keycode))
-	{
 
-		variable += modif;
-		return true;
-	}
-	return false;
 }
-void Game::Delete()
+void Game::ShapeDraw()
 {
-	if (rightAnim) delete rightAnim;
-	if(leftAnim) delete leftAnim;
-	if(upAnim) delete upAnim;
-	if(downAnim) delete downAnim;
-	if(idleRightAnim) delete idleRightAnim;
-	if(idleUpAnim) delete idleUpAnim;
-	if(idleLeftAnim) delete idleLeftAnim;
-	if(idleDownAnim) delete idleDownAnim;
+	triangleAuto.Draw();
+	squareAuto.Draw();
+	shape.Draw();
+
 }

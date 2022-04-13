@@ -22,6 +22,12 @@ private:
 	Animation* idleUpAnim;
 	Animation* idleLeftAnim;
 	Animation* idleDownAnim;
+	void SpriteStart();
+	void ShapeStart();
+	void SpriteUpdate();
+	void ShapeUpdate();
+	void SpriteDraw();
+	void ShapeDraw();
 public:
 	Game();
 	void Play();
