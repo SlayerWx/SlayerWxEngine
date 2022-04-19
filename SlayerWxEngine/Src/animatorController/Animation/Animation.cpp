@@ -53,12 +53,12 @@ void Animation::AddFrame(float xFrame, float yFrame, float widthFrame, float hei
 		frame.coords[3].V = ((yFrame + heightFrame) / textureHegiht);
 		myFrames.push_back(frame);
 
-		cout << "~~~~~~~~~~~~~~~~~~~~~ Frame "<< i+1 <<" ~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-		cout << frame.coords[2].U << " * " << frame.coords[3].U << endl;
-		cout << frame.coords[0].U << " * " << frame.coords[1].U << endl;
+		//cout << "~~~~~~~~~~~~~~~~~~~~~ Frame "<< i+1 <<" ~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+		//cout << frame.coords[2].U << " * " << frame.coords[3].U << endl;
+		//cout << frame.coords[0].U << " * " << frame.coords[1].U << endl;
 		frameXIndex += widthFrame;
 	}
-	cout << "~~~~~~~~~~~~~~~~ END ANIM ~~~~~~~~~~~~~~~~~~~~~" << endl;
+	//cout << "~~~~~~~~~~~~~~~~ END ANIM ~~~~~~~~~~~~~~~~~~~~~" << endl;
 }
 
 void Animation::Update()

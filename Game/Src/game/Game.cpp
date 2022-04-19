@@ -227,11 +227,12 @@ void Game::SpriteUpdate()
 	{
 		link.SetAnimation(idleDownAnim);
 	}
+	link.CheckCollisionAABB(dog);
+	link.Update();
 }
 void Game::SpriteDraw()
 {
-	link.CheckCollisionAABB(dog);
-	link.Update();
+	
 	itsfineSprite.Draw();
 	dog.Draw();
 	ncat.Draw();
