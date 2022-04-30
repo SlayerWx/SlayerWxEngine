@@ -2,11 +2,16 @@
 #include <iostream>
 Sprite::Sprite() : Entity2D()
 {
-	//c++ xd
+	actualAnim = nullptr;
+	data.height = 0;
+	data.width = 0;
+	data.nrChannels = 0;
+	data.texture = 0;
 }
 
 Sprite::Sprite(const char* filePath) : Entity2D()
 {
+	actualAnim = nullptr;
 	data = TextureImporter::ImportTexture(filePath);
 	if(data.nrChannels == 4)
 	alpha = true;

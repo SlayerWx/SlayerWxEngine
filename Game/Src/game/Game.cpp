@@ -3,6 +3,14 @@
 
 Game::Game()
 {
+	downAnim = nullptr;
+	idleDownAnim = nullptr;
+	leftAnim = nullptr;
+	idleLeftAnim = nullptr;
+	idleRightAnim = nullptr;
+	rightAnim = nullptr;
+	upAnim = nullptr;
+	idleUpAnim = nullptr;
 	triangleAuto = Shape(ShapeType::Triangle);
 	squareAuto = Shape(ShapeType::Square);
 	shape = Shape(ShapeType::Square);
