@@ -43,12 +43,10 @@ void BaseGame::RendererInit()
 	renderer->CreateBuffers();
 	renderer->BindBuffers();
 	
-	//renderer->CreateProgram("../SlayerWxEngine/Shader/VertexShader.SWshader","../SlayerWxEngine/Shader/FragmentShader.SWshader");
-	renderer->CreateProgram("../SlayerWxEngine/Shader/SpriteVertexShader.SWshader", "../SlayerWxEngine/Shader/SpriteFragmentShader.SWshader");
-
-	//renderer->DefVertexAttribute();
-	renderer->DefVertexSpriteAttribute();
-	renderer->CallUniformShaders();
+	renderer->CreateShaders();
+	renderer->DefVertexAttribute();
+	//renderer->DefVertexSpriteAttribute();
+	//renderer->CallUniformShaders();
 }
 bool BaseGame::Running()
 {

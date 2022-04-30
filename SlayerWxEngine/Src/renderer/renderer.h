@@ -3,6 +3,7 @@
 #include "export/export.h"
 #include "glm/glm.hpp"
 #include"glm/gtc/type_ptr.hpp"
+#include "shader/Shader.h"
 enum class CameraDirection
 {
 	left,right,up,down,front,back
@@ -19,19 +20,18 @@ private:
 	unsigned int viewLoc;
 public:
 	Renderer();
+	~Renderer();
+	void CreateShaders();
 	void Draw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix);
 	void SpriteDraw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix, bool alpha);
 	unsigned int VBO = 0; // VertexBufferObject
 	unsigned int VAO = 0; // VertexArrayObject
 	unsigned int EBO = 0; // ElementsBufferObject
-	unsigned int program = 0; // ProgramShader
 	void CreateBuffers();
 	void BindBuffers();
-	unsigned int CompileShader(unsigned int type, const char* shaderPath);
-	void CreateProgram(const char* vertexShaderPath, const char* pixelShaderPath);
 	void DefVertexAttribute();
 	void DefVertexSpriteAttribute();
-	void CallUniformShaders();
+	void CallUniformShaders(Shader* shader);
 	void UpdateModelUniformShaders(glm::mat4 modelMatrix);
 	void UpdateProjectUniformShaders(glm::mat4 projectMatrix);
 	void UpdateProjection();
@@ -56,6 +56,8 @@ public:
 	float pitch = 0.0f;
 	glm::vec3 up = glm::vec3();
 	glm::vec3 right = glm::vec3();
+	Shader* pixelShader;
+	Shader* textureShader;
 };
 // settings
 //const unsigned int SCR_WIDTH = 800;

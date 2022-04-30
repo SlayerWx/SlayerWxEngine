@@ -11,6 +11,7 @@ Game::Game()
 	rightAnim = nullptr;
 	upAnim = nullptr;
 	idleUpAnim = nullptr;
+
 	triangleAuto = Shape(ShapeType::Triangle);
 	squareAuto = Shape(ShapeType::Square);
 	shape = Shape(ShapeType::Square);
@@ -30,7 +31,7 @@ void Game::Start()
 {
 	
 	SpriteStart();
-	//ShapeStart();
+	ShapeStart();
 	
 }
 float a = 0.0f;
@@ -99,7 +100,7 @@ void Game::Update()
 	if (a > 4.0f) right = false;
 	else if (a < 0.0f) right = true;
 
-	//ShapeUpdate();
+	ShapeUpdate();
 
 	if (GetKey(KEYCODE_SPACE))
 	{		
@@ -112,7 +113,7 @@ void Game::Update()
 	}
 
 	SpriteDraw();
-	//ShapeDraw();
+	ShapeDraw();
 }
 bool Game::Input(int keycode,float &variable,float modif)
 {

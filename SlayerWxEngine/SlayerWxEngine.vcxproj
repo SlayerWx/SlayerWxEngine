@@ -28,6 +28,7 @@
     <ClCompile Include="Src\globalUtility\Utility\Utility.cpp" />
     <ClCompile Include="Src\input\Input.cpp" />
     <ClCompile Include="Src\renderer\renderer.cpp" />
+    <ClCompile Include="Src\shader\Shader.cpp" />
     <ClCompile Include="Src\shape\Shape.cpp" />
     <ClCompile Include="Src\sprite\Sprite.cpp" />
     <ClCompile Include="Src\textureImporter\TextureImporter.cpp" />
@@ -45,6 +46,7 @@
     <ClInclude Include="Src\input\Input.h" />
     <ClInclude Include="Src\input\keycode\Keycode.h" />
     <ClInclude Include="Src\renderer\renderer.h" />
+    <ClInclude Include="Src\shader\Shader.h" />
     <ClInclude Include="Src\shape\Shape.h" />
     <ClInclude Include="Src\sprite\Sprite.h" />
     <ClInclude Include="Src\textureImporter\stb_image\stb_image.h" />

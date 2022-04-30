@@ -1,9 +1,6 @@
 #include "renderer.h"
 #include <glew.h>
 #include <glfw3.h>
-#include <iostream>
-#include <fstream>
-#include <sstream>
 
 Renderer* Renderer::myRef;
 Renderer::Renderer()
@@ -16,11 +13,32 @@ Renderer::Renderer()
 	cameraProjection = CameraProjection::perspective;
 	yaw = YAW;
 	pitch = PITCH;
+	pixelShader = nullptr;
+	textureShader = nullptr;
 	UpdateCameraVectors();
+}
+
+Renderer::~Renderer()
+{
+	if (pixelShader) delete pixelShader;
+	if (textureShader) delete textureShader;
+}
+
+void Renderer::CreateShaders()
+{
+	pixelShader = new Shader();
+	pixelShader->CreateProgram("../SlayerWxEngine/Shader/VertexShader.SWshader", "../SlayerWxEngine/Shader/FragmentShader.SWshader");
+	textureShader = new Shader();
+	textureShader->CreateProgram("../SlayerWxEngine/Shader/SpriteVertexShader.SWshader", "../SlayerWxEngine/Shader/SpriteFragmentShader.SWshader");
+	CallUniformShaders(textureShader);
 }
 
 void Renderer::Draw(float* vertex,int vertexLength, unsigned int* index,int indexLength, glm::mat4 modelMatrix)
 {
+
+	DefVertexAttribute();
+	CallUniformShaders(pixelShader);
+	pixelShader->ActiveProgram();
 	UpdateModelUniformShaders(modelMatrix);
 	UpdateProjectUniformShaders(projection);
 	UpdateViewUniformShaders(view);
@@ -30,7 +48,11 @@ void Renderer::Draw(float* vertex,int vertexLength, unsigned int* index,int inde
 }
 void Renderer::SpriteDraw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix,bool alpha)
 {
-	if (alpha)
+
+	DefVertexSpriteAttribute();
+	CallUniformShaders(textureShader);
+	textureShader->ActiveProgram();
+	if (alpha) // TODO: clean pls
 	{
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
@@ -83,11 +105,11 @@ void Renderer::DefVertexSpriteAttribute()
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(7 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 }
-void Renderer::CallUniformShaders()
+void Renderer::CallUniformShaders(Shader* shader)
 {
-	modelLoc = glGetUniformLocation(program, "model");//search the model in the shader
-	projectLoc = glGetUniformLocation(program, "proj");//search the project in the shader
-	viewLoc = glGetUniformLocation(program, "view");//search the view in the shader
+	modelLoc = glGetUniformLocation(shader->GetProgram(), "model");//search the model in the shader
+	projectLoc = glGetUniformLocation(shader->GetProgram(), "proj");//search the project in the shader
+	viewLoc = glGetUniformLocation(shader->GetProgram(), "view");//search the view in the shader
 }
 void Renderer::UpdateModelUniformShaders(glm::mat4 modelMatrix)
 {
@@ -188,59 +210,4 @@ void Renderer::SetStaticRenderer(Renderer* newRef)
 Renderer* Renderer::GetStaticRenderer()
 {
 	return myRef;
-}
-
-unsigned int Renderer::CompileShader(unsigned int type, const char* shaderPath) { //first: ShaderType(Fragment, vertex)
-																		//second:Dir to archive
-	unsigned int id = glCreateShader(type); // Create Shader
-	
-	std::string sourceShaderCode; //store source archive
-	
-	std::ifstream sourceShaderFile; // interact to archive
-	
-	sourceShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-	
-	try {
-	    sourceShaderFile.open(shaderPath); 
-	    std::stringstream shaderStream;
-	
-		shaderStream << sourceShaderFile.rdbuf(); //conversion to StreamString
-	
-	    sourceShaderFile.close();
-	
-	    sourceShaderCode = shaderStream.str(); //conversion to string
-	}
-	catch (std::ifstream::failure& e) {
-	    std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
-	}
-	
-	const char* srcCode = sourceShaderCode.c_str(); // conversion to char
-	
-	glShaderSource(id, 1, &srcCode, nullptr); //Set source to Shader
-											// First: Shader, Second: conunt elements in the string
-											// three: Specifies an array of pointers to strings containing the source
-											// four: Specifies an array of string lengths
-	glCompileShader(id); //Complie Shader
-	
-	return id;
-}
-
-void Renderer::CreateProgram(const char* vertexShaderPath, const char* fragmentShaderPath)
-{
-																					//first: vertex archive
-																					//second: fragmentShader
-	program = glCreateProgram(); // create program
-	unsigned int vertex = CompileShader(GL_VERTEX_SHADER, vertexShaderPath);
-	unsigned int fragment = CompileShader(GL_FRAGMENT_SHADER, fragmentShaderPath);
-
-	glAttachShader(program, vertex); //attach with program
-	glAttachShader(program, fragment); //attach with program
-	glLinkProgram(program); // Link with OpenGL
-	glValidateProgram(program); //validate
-	glUseProgram(program); 
-
-	glDetachShader(program, vertex); //UnAttach
-	glDetachShader(program, fragment);//UnAttach
-	glDeleteShader(vertex); //delete
-	glDeleteShader(fragment); //delete
 }

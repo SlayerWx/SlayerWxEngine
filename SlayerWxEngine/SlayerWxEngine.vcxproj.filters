@@ -49,13 +49,16 @@
     <Filter Include="Src\sprite">
       <UniqueIdentifier>{963c7e10-d600-4866-91d2-1e63db13ac75}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\AnimatorController">
+    <Filter Include="Src\shader">
+      <UniqueIdentifier>{28b71fdc-f066-4767-9310-b66d3bc58fde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\animatorController">
       <UniqueIdentifier>{c2d06e8f-2c10-49be-8ce1-9360f590ded5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\AnimatorController\Frame">
+    <Filter Include="Src\animatorController\Frame">
       <UniqueIdentifier>{168d6f83-7ef6-452b-b712-67592893db51}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\AnimatorController\Animation">
+    <Filter Include="Src\animatorController\Animation">
       <UniqueIdentifier>{94c3d382-5eef-42a3-9ec8-cbd48cf4ee38}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -94,10 +97,13 @@
       <Filter>Src\sprite</Filter>
     </ClCompile>
     <ClCompile Include="Src\animatorController\Animation\Animation.cpp">
-      <Filter>Src\AnimatorController\Animation</Filter>
+      <Filter>Src\animatorController\Animation</Filter>
     </ClCompile>
     <ClCompile Include="Src\animatorController\Frame\Frame.cpp">
-      <Filter>Src\AnimatorController\Frame</Filter>
+      <Filter>Src\animatorController\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\shader\Shader.cpp">
+      <Filter>Src\shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -144,10 +150,13 @@
       <Filter>Src\sprite</Filter>
     </ClInclude>
     <ClInclude Include="Src\animatorController\Animation\Animation.h">
-      <Filter>Src\AnimatorController\Animation</Filter>
+      <Filter>Src\animatorController\Animation</Filter>
     </ClInclude>
     <ClInclude Include="Src\animatorController\Frame\Frame.h">
-      <Filter>Src\AnimatorController\Frame</Filter>
+      <Filter>Src\animatorController\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\shader\Shader.h">
+      <Filter>Src\shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
