@@ -83,24 +83,24 @@ bool BaseGame::GetKey(int keycode)
 }
 void BaseGame::SetCameraPosition(float x,float y, float z)
 {
-	renderer->SetCameraPosition(x,y,z);
+	renderer->GetCamera()->SetCameraPosition(x,y,z);
 }
 
 void BaseGame::CameraMove(CameraDirection direction, float speed)
 {
-	renderer->CameraMove(direction,speed, DeltaTime());
+	renderer->GetCamera()->CameraMove(direction,speed, DeltaTime());
 }
 void BaseGame::CameraRotate(float speedX, float speedY)
 {
-	renderer->CameraRotate(speedX,speedY);
+	renderer->GetCamera()->CameraRotate(speedX,speedY);
 }
 void BaseGame::SetCameraProjection(CameraProjection selection)
 {
-	renderer->cameraProjection = selection;
+	renderer->GetCamera()->cameraProjection = selection;
 }
 CameraProjection BaseGame::GetCameraProjection()
 {
-	return renderer->cameraProjection;
+	return renderer->GetCamera()->cameraProjection;
 }
 void BaseGame::EngineEnd()
 {
