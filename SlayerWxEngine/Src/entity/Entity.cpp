@@ -105,3 +105,8 @@ float Entity::GetPositionZ()
 {
 	return position.z;
 }
+
+glm::vec3 Entity::GetPosition()
+{
+	return position;
+}

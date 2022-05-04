@@ -1,6 +1,6 @@
 #include "Game.h"
 #include <iostream>
-
+CameraType cameraState = CameraType::free;
 Game::Game()
 {
 	downAnim = nullptr;
@@ -238,6 +238,10 @@ void Game::SpriteUpdate()
 	}
 	link.CheckCollisionAABB(dog);
 	link.Update();
+	if (GetKey(KEYCODE_5)) cameraState = CameraType::free;
+	if (GetKey(KEYCODE_6)) cameraState = CameraType::FirstPerson;
+	if (GetKey(KEYCODE_7)) cameraState = CameraType::ThridPerson;
+		CameraFollowObj(cameraState, link.GetPosition(), 5);
 }
 void Game::SpriteDraw()
 {

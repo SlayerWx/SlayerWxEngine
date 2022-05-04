@@ -102,6 +102,16 @@ CameraProjection BaseGame::GetCameraProjection()
 {
 	return renderer->GetCamera()->cameraProjection;
 }
+
+/// <summary>
+/// if want use the camera in free format then objPosReference dont is used and distanceFromReferene is used in thirdPerson and Isometric
+/// </summary>
+/// <param name="type"></param>
+/// <param name="objPosReference"></param>
+void BaseGame::CameraFollowObj(CameraType type, glm::vec3 objPosReference, float distanceFromReferene)
+{
+	renderer->GetCamera()->CameraFollowObj(type, objPosReference,distanceFromReferene);
+}
 void BaseGame::EngineEnd()
 {
 	Delete();

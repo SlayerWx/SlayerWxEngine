@@ -11,6 +11,10 @@ enum class CameraProjection
 {
 	perspective, ortho
 };
+enum class CameraType
+{
+	free, FirstPerson, ThridPerson, isometric
+};
 class SlayerWxEngine_API Camera
 {
 public:
@@ -29,6 +33,7 @@ public:
 	CameraProjection cameraProjection;
 	void UpdateCameraVectors();
 	void CameraRotate(float speedX, float speedY);
+	void CameraFollowObj(CameraType type, glm::vec3 objPosReference, float distanceFromReferene);
 	const float YAW = -90.0f;
 	const float PITCH = 0.0f;
 	float yaw = 0.0f;
@@ -37,6 +42,7 @@ public:
 	glm::vec3 right = glm::vec3();
 
 private:
+	CameraType cameraTypeState = CameraType::free;
 
 };
 #endif 

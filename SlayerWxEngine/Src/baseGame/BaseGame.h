@@ -35,5 +35,6 @@ public:
 	void CameraRotate(float speedX, float speedY);
 	void SetCameraProjection(CameraProjection selection);
 	CameraProjection GetCameraProjection();
+	void CameraFollowObj(CameraType type, glm::vec3 objPosReference, float distanceFromReferene);
 };
 #endif

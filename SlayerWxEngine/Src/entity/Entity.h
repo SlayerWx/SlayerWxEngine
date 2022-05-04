@@ -37,6 +37,7 @@ public:
 	float GetPositionX();
 	float GetPositionY();
 	float GetPositionZ();
+	glm::vec3 GetPosition();
 };
 
 #endif
