@@ -4,13 +4,13 @@
 #include <iostream>
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
-void UpdateDeltaTime()
+void SlayerWxEngine_API UpdateDeltaTime()
 {
 	float currentFrame = glfwGetTime();
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
 }
-float DeltaTime()
+float SlayerWxEngine_API DeltaTime()
 {
 	return deltaTime;
 }

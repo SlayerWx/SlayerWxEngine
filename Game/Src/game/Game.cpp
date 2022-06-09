@@ -41,62 +41,62 @@ float y = 0.0f;
 float scaleX = 1.0f;
 float scaleY = 1.0f;
 float scaleZ = 1.0f;
-const float valueModif = 0.001f;
+const float valueModif = 500.0f;
 float cameraX = 0.1f;
 float cameraY = 0.1f;
 float cameraZ = 0.1f;
-float cameraSpeedRotateX = 0.07f;
-float cameraSpeedRotateY = 0.07f;
+float cameraSpeedRotateX = 5.07f;
+float cameraSpeedRotateY = 5.07f;
 void Game::Update()
 {
 
-	Input(KEYCODE_F, x, -valueModif);
-	Input(KEYCODE_H, x, +valueModif);
+	Input(KEYCODE_F, x, -valueModif * DeltaTime());
+	Input(KEYCODE_H, x, +valueModif * DeltaTime());
 
-	Input(KEYCODE_G, y, -valueModif);
-	Input(KEYCODE_T, y, +valueModif);
+	Input(KEYCODE_G, y, -valueModif * DeltaTime());
+	Input(KEYCODE_T, y, +valueModif * DeltaTime());
 
-	Input(KEYCODE_K, scaleY, -valueModif* 10.0f);
-	Input(KEYCODE_I, scaleY, +valueModif* 10.0f);
+	Input(KEYCODE_K, scaleY, -valueModif* 10.0f * DeltaTime());
+	Input(KEYCODE_I, scaleY, +valueModif* 10.0f * DeltaTime());
 
-	Input(KEYCODE_J, scaleX, -valueModif* 10.0f);
-	Input(KEYCODE_L, scaleX, +valueModif* 10.0f);
+	Input(KEYCODE_J, scaleX, -valueModif* 10.0f * DeltaTime());
+	Input(KEYCODE_L, scaleX, +valueModif* 10.0f * DeltaTime());
 
-	Input(KEYCODE_U, scaleZ, -valueModif* 10.0f);
-	Input(KEYCODE_O, scaleZ, +valueModif* 10.0f);
+	Input(KEYCODE_U, scaleZ, -valueModif* 10.0f * DeltaTime());
+	Input(KEYCODE_O, scaleZ, +valueModif* 10.0f * DeltaTime());
 
 	SpriteUpdate();
 
 
 	if (GetKey(KEYCODE_W))
-		CameraMove(CameraDirection::front, 10.0f);
+		CameraMove(CameraDirection::front, 200.0f * DeltaTime());
 	if (GetKey(KEYCODE_S))
-		CameraMove(CameraDirection::back, 10.0f);
+		CameraMove(CameraDirection::back, 200.0f * DeltaTime());
 
 	if (GetKey(KEYCODE_A))
-		CameraMove(CameraDirection::left, 10.0f);
+		CameraMove(CameraDirection::left, 200.0f * DeltaTime());
 	if (GetKey(KEYCODE_D))
-		CameraMove(CameraDirection::right, 10.0f);
+		CameraMove(CameraDirection::right, 200.0f * DeltaTime());
 
 	if (GetKey(KEYCODE_Q))
-		CameraMove(CameraDirection::up, 10.0f);
+		CameraMove(CameraDirection::up, 200.0f * DeltaTime());
 	if (GetKey(KEYCODE_E))
-		CameraMove(CameraDirection::down, 10.0f);
+		CameraMove(CameraDirection::down, 200.0f * DeltaTime());
 
 
 	if (GetKey(KEYCODE_KP_6))
-		CameraRotate(cameraSpeedRotateX, 0);
+		CameraRotate(cameraSpeedRotateX * DeltaTime(), 0);
 	if (GetKey(KEYCODE_KP_2))
-		CameraRotate(0, cameraSpeedRotateY);
+		CameraRotate(0, cameraSpeedRotateY * DeltaTime());
 	if (GetKey(KEYCODE_KP_4))
-		CameraRotate(-cameraSpeedRotateX, 0);
+		CameraRotate(-cameraSpeedRotateX * DeltaTime(), 0);
 	if (GetKey(KEYCODE_KP_8))
-		CameraRotate(0, -cameraSpeedRotateY);
+		CameraRotate(0, -cameraSpeedRotateY * DeltaTime());
 
 	//SetCameraPosition(cameraX, cameraY, cameraZ);
 
-	if (right)a += 0.0001f;
-	else a -= 0.0001f;
+	if (right)a += 0.0001f * DeltaTime();
+	else a -= 0.0001f * DeltaTime();
 	if (a > 4.0f) right = false;
 	else if (a < 0.0f) right = true;
 
@@ -200,7 +200,7 @@ void Game::SpriteUpdate()
 	{
 		linkState = Sleft;
 		link.SetAnimation(leftAnim);
-		link.SetPosition(link.GetPositionX() - 0.001f, link.GetPositionY(), link.GetPositionZ());
+		link.SetPosition(link.GetPositionX() - 5.0f * DeltaTime(), link.GetPositionY(), link.GetPositionZ());
 	}
 	else if (linkState == Sleft)
 	{
@@ -210,7 +210,7 @@ void Game::SpriteUpdate()
 	{
 		linkState = Sright;
 		link.SetAnimation(rightAnim);
-		link.SetPosition(link.GetPositionX() + 0.001f, link.GetPositionY(), link.GetPositionZ());
+		link.SetPosition(link.GetPositionX() + 5.0f * DeltaTime(), link.GetPositionY(), link.GetPositionZ());
 	}
 	else if (linkState == Sright)
 	{
@@ -220,7 +220,7 @@ void Game::SpriteUpdate()
 	{
 		linkState = Sup;
 		link.SetAnimation(upAnim);
-		link.SetPosition(link.GetPositionX(), link.GetPositionY() + 0.001f, link.GetPositionZ());
+		link.SetPosition(link.GetPositionX(), link.GetPositionY() + 5.0f * DeltaTime(), link.GetPositionZ());
 	}
 	else if (linkState == Sup)
 	{
@@ -230,7 +230,7 @@ void Game::SpriteUpdate()
 	{
 		linkState = Sdown;
 		link.SetAnimation(downAnim);
-		link.SetPosition(link.GetPositionX(), link.GetPositionY() - 0.001f, link.GetPositionZ());
+		link.SetPosition(link.GetPositionX(), link.GetPositionY() - 5.0f * DeltaTime(), link.GetPositionZ());
 	}
 	else if (linkState == Sdown)
 	{
