@@ -5,12 +5,14 @@
 #include"glm/gtc/type_ptr.hpp"
 #include "shader/Shader.h"
 #include "camera/Camera.h"
+#include "light/Light.h"
 class SlayerWxEngine_API Renderer
 {
 private:
 	unsigned int modelLoc;
 	unsigned int projectLoc;
 	unsigned int viewLoc;
+	unsigned int lightLoc;
 public:
 	Renderer();
 	~Renderer();
@@ -35,6 +37,7 @@ public:
 	Shader* textureShader;
 	Camera* cam;
 	Camera* GetCamera();
+	void DrawLight(Shader* shader);
 };
 // settings
 //const unsigned int SCR_WIDTH = 800;

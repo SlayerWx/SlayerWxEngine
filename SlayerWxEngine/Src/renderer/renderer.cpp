@@ -8,6 +8,7 @@ Renderer::Renderer()
 	modelLoc = 0;
 	projectLoc = 0;
 	viewLoc = 0;
+	lightLoc = 0;
 	pixelShader = nullptr;
 	textureShader = nullptr;
 	cam = new Camera();
@@ -44,9 +45,9 @@ void Renderer::Draw(float* vertex,int vertexLength, unsigned int* index,int inde
 }
 void Renderer::SpriteDraw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix,bool alpha)
 {
-
 	DefVertexSpriteAttribute();
 	CallUniformShaders(textureShader);
+	DrawLight(textureShader);
 	textureShader->ActiveProgram();
 	if (alpha) // TODO: clean pls
 	{
@@ -138,4 +139,9 @@ Renderer* Renderer::GetStaticRenderer()
 Camera* Renderer::GetCamera()
 {
 	return cam;
+}
+
+void Renderer::DrawLight(Shader* shader)
+{
+	 glUniform3fv(glGetUniformLocation(shader->GetProgram(), "light.ambient"), 1, &Light::ambient[0]);
 }

@@ -32,7 +32,7 @@ void Game::Start()
 	
 	SpriteStart();
 	ShapeStart();
-	
+	Light::SetAmbientLight(1.0, 0.5, 0.31);
 }
 float a = 0.0f;
 bool right = true;

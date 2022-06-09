@@ -64,6 +64,9 @@
     <Filter Include="Src\camera">
       <UniqueIdentifier>{41c64dbd-bc11-4944-bd6b-a2f2be4a80c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\light">
+      <UniqueIdentifier>{8092810f-6037-45ba-90b8-9b58ce1b1205}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\baseGame\BaseGame.cpp">
@@ -110,6 +113,9 @@
     </ClCompile>
     <ClCompile Include="Src\camera\Camera.cpp">
       <Filter>Src\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\light\Light.cpp">
+      <Filter>Src\light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="Src\camera\Camera.h">
       <Filter>Src\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\light\Light.h">
+      <Filter>Src\light</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
