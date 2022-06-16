@@ -4,6 +4,7 @@
 #include "window/window.h"
 #include "shape/Shape.h"
 #include "sprite/Sprite.h"
+#include "material2D/Material2D.h"
 #include "input/Input.h"
 #include "export/export.h"
 struct GLFWmonitor;

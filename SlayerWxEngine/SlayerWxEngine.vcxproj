@@ -29,6 +29,7 @@
     <ClCompile Include="Src\globalUtility\Utility\Utility.cpp" />
     <ClCompile Include="Src\input\Input.cpp" />
     <ClCompile Include="Src\light\Light.cpp" />
+    <ClCompile Include="Src\material2D\Material2D.cpp" />
     <ClCompile Include="Src\renderer\renderer.cpp" />
     <ClCompile Include="Src\shader\Shader.cpp" />
     <ClCompile Include="Src\shape\Shape.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="Src\input\Input.h" />
     <ClInclude Include="Src\input\keycode\Keycode.h" />
     <ClInclude Include="Src\light\Light.h" />
+    <ClInclude Include="Src\material2D\Material2D.h" />
     <ClInclude Include="Src\renderer\renderer.h" />
     <ClInclude Include="Src\shader\Shader.h" />
     <ClInclude Include="Src\shape\Shape.h" />
@@ -59,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\FragmentShader.SWshader" />
+    <None Include="Shader\MaterialFragmentShader.SWshader" />
+    <None Include="Shader\MaterialVertexShader.SWshader" />
     <None Include="Shader\SpriteFragmentShader.SWshader" />
     <None Include="Shader\SpriteVertexShader.SWshader" />
     <None Include="Shader\VertexShader.SWshader" />

@@ -178,6 +178,10 @@ void Game::SpriteStart()
 	link.Scale(1.0f, 1.0f, 1.0f);
 
 }
+void Game::MaterialStart()
+{
+	mat1 = Material2D("assets/rick.png");
+}
 void Game::ShapeUpdate()
 {
 
@@ -243,6 +247,9 @@ void Game::SpriteUpdate()
 	if (GetKey(KEYCODE_7)) cameraState = CameraType::ThridPerson;
 		CameraFollowObj(cameraState, link.GetPosition(), 5);
 }
+void Game::MaterialUpdate()
+{
+}
 void Game::SpriteDraw()
 {
 	
@@ -258,4 +265,8 @@ void Game::ShapeDraw()
 	squareAuto.Draw();
 	shape.Draw();
 
+}
+void Game::MaterialDraw()
+{
+	mat1.Draw();
 }

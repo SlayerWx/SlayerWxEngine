@@ -27,6 +27,8 @@ void Renderer::CreateShaders()
 	pixelShader->CreateProgram("../SlayerWxEngine/Shader/VertexShader.SWshader", "../SlayerWxEngine/Shader/FragmentShader.SWshader");
 	textureShader = new Shader();
 	textureShader->CreateProgram("../SlayerWxEngine/Shader/SpriteVertexShader.SWshader", "../SlayerWxEngine/Shader/SpriteFragmentShader.SWshader");
+	materialShader = new Shader();
+	materialShader->CreateProgram("../SlayerWxEngine/Shader/MaterialVertexShader.SWshader", "../SlayerWxEngine/Shader/MaterialFragmentShader.SWshader");
 	CallUniformShaders(textureShader);
 }
 
@@ -53,6 +55,29 @@ void Renderer::SpriteDraw(float* vertex, int vertexLength, unsigned int* index, 
 	{
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+	}
+	else
+	{
+
+		glDisable(GL_BLEND);
+	}
+	UpdateModelUniformShaders(modelMatrix);
+	UpdateProjectUniformShaders(cam->projection);
+	UpdateViewUniformShaders(cam->view);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertexLength, vertex, GL_STATIC_DRAW); //set info to buffer
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * indexLength, index, GL_STATIC_DRAW); //set info to buffer
+	glDrawElements(GL_TRIANGLES, indexLength, GL_UNSIGNED_INT, 0);
+}
+void Renderer::MaterialDraw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix, bool alpha)
+{
+	DefVertexMaterialAttribute();
+	CallUniformShaders(materialShader);
+	DrawLight(materialShader);
+	materialShader->ActiveProgram();
+	if (alpha) // TODO: clean pls
+	{
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 	else
 	{
@@ -97,6 +122,18 @@ void Renderer::DefVertexSpriteAttribute()
 	glEnableVertexAttribArray(0);
 	// color attribute
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+	// texture coord attribute
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(7 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+}
+void Renderer::DefVertexMaterialAttribute()
+{
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// normal attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 	// texture coord attribute
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(7 * sizeof(float)));

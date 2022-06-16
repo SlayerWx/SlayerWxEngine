@@ -19,6 +19,7 @@ public:
 	void CreateShaders();
 	void Draw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix);
 	void SpriteDraw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix, bool alpha);
+	void MaterialDraw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix, bool alpha);
 	unsigned int VBO = 0; // VertexBufferObject
 	unsigned int VAO = 0; // VertexArrayObject
 	unsigned int EBO = 0; // ElementsBufferObject
@@ -26,6 +27,7 @@ public:
 	void BindBuffers();
 	void DefVertexAttribute();
 	void DefVertexSpriteAttribute();
+	void DefVertexMaterialAttribute();
 	void CallUniformShaders(Shader* shader);
 	void UpdateModelUniformShaders(glm::mat4 modelMatrix);
 	void UpdateProjectUniformShaders(glm::mat4 projectMatrix);
@@ -35,6 +37,7 @@ public:
 	Renderer* GetStaticRenderer();
 	Shader* pixelShader;
 	Shader* textureShader;
+	Shader* materialShader;
 	Camera* cam;
 	Camera* GetCamera();
 	void DrawLight(Shader* shader);

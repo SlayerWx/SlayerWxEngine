@@ -10,6 +10,7 @@ private:
 	Sprite dog;
 	Sprite ncat;
 	Sprite link;
+	Material2D mat1;
 	void Start();
 	void Update();
 	bool Input(int keycode, float &variable, float modif);
@@ -23,11 +24,14 @@ private:
 	Animation* idleLeftAnim;
 	Animation* idleDownAnim;
 	void SpriteStart();
+	void MaterialStart();
 	void ShapeStart();
 	void SpriteUpdate();
+	void MaterialUpdate();
 	void ShapeUpdate();
 	void SpriteDraw();
 	void ShapeDraw();
+	void MaterialDraw();
 public:
 	Game();
 	void Play();

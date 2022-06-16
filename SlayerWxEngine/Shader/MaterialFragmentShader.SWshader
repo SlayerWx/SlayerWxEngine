@@ -1,0 +1,35 @@
+#version 330 core
+
+out vec3 OutNormal;
+
+out vec4 outColor;
+out vec2 TexCoord;
+uniform sampler2D texture0;
+out vec3 FragPos;
+
+struct Light
+{
+    vec3 ambient;
+};
+
+uniform Light light;
+
+struct Material
+{
+	vec4 color;
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+	float shininess;
+};
+uniform Material material;
+
+void main(){
+	vec3 norm = normalize(OutNormal);
+
+    vec4 texColor = texture(texture0, TexCoord);
+
+    if(texColor.a < 0.1)
+    discard;
+    gl_FragColor = texColor * (outColor * vec4(light.ambient,1.0));
+}

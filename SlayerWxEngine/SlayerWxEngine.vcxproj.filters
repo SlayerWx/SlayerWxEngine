@@ -67,6 +67,9 @@
     <Filter Include="Src\light">
       <UniqueIdentifier>{8092810f-6037-45ba-90b8-9b58ce1b1205}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\material2D">
+      <UniqueIdentifier>{6615787c-dc02-4af8-afbe-8776eaee4347}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\baseGame\BaseGame.cpp">
@@ -116,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="Src\light\Light.cpp">
       <Filter>Src\light</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\material2D\Material2D.cpp">
+      <Filter>Src\material2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +182,9 @@
     <ClInclude Include="Src\light\Light.h">
       <Filter>Src\light</Filter>
     </ClInclude>
+    <ClInclude Include="Src\material2D\Material2D.h">
+      <Filter>Src\material2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\FragmentShader.SWshader">
@@ -188,6 +197,12 @@
       <Filter>Shader</Filter>
     </None>
     <None Include="Shader\SpriteVertexShader.SWshader">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shader\MaterialFragmentShader.SWshader">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shader\MaterialVertexShader.SWshader">
       <Filter>Shader</Filter>
     </None>
   </ItemGroup>
