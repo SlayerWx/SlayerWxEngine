@@ -32,6 +32,7 @@ void Game::Start()
 	
 	SpriteStart();
 	ShapeStart();
+	MaterialStart();
 	Light::SetAmbientLight(1.0, 0.5, 0.31);
 }
 float a = 0.0f;
@@ -45,8 +46,8 @@ const float valueModif = 500.0f;
 float cameraX = 0.1f;
 float cameraY = 0.1f;
 float cameraZ = 0.1f;
-float cameraSpeedRotateX = 5.07f;
-float cameraSpeedRotateY = 5.07f;
+float cameraSpeedRotateX = 200.07f;
+float cameraSpeedRotateY = 200.07f;
 void Game::Update()
 {
 
@@ -69,19 +70,19 @@ void Game::Update()
 
 
 	if (GetKey(KEYCODE_W))
-		CameraMove(CameraDirection::front, 200.0f * DeltaTime());
+		CameraMove(CameraDirection::front, 4000.0f * DeltaTime());
 	if (GetKey(KEYCODE_S))
-		CameraMove(CameraDirection::back, 200.0f * DeltaTime());
+		CameraMove(CameraDirection::back, 4000.0f * DeltaTime());
 
 	if (GetKey(KEYCODE_A))
-		CameraMove(CameraDirection::left, 200.0f * DeltaTime());
+		CameraMove(CameraDirection::left, 4000.0f * DeltaTime());
 	if (GetKey(KEYCODE_D))
-		CameraMove(CameraDirection::right, 200.0f * DeltaTime());
+		CameraMove(CameraDirection::right, 4000.0f * DeltaTime());
 
 	if (GetKey(KEYCODE_Q))
-		CameraMove(CameraDirection::up, 200.0f * DeltaTime());
+		CameraMove(CameraDirection::up, 4000.0f * DeltaTime());
 	if (GetKey(KEYCODE_E))
-		CameraMove(CameraDirection::down, 200.0f * DeltaTime());
+		CameraMove(CameraDirection::down, 4000.0f * DeltaTime());
 
 
 	if (GetKey(KEYCODE_KP_6))
@@ -101,7 +102,7 @@ void Game::Update()
 	else if (a < 0.0f) right = true;
 
 	ShapeUpdate();
-
+	MaterialUpdate();
 	if (GetKey(KEYCODE_SPACE))
 	{		
 		SetCameraProjection(CameraProjection::ortho);
@@ -114,6 +115,7 @@ void Game::Update()
 
 	SpriteDraw();
 	ShapeDraw();
+	MaterialDraw();
 }
 bool Game::Input(int keycode,float &variable,float modif)
 {
@@ -181,6 +183,8 @@ void Game::SpriteStart()
 void Game::MaterialStart()
 {
 	mat1 = Material2D("assets/rick.png");
+	mat1.SetPosition(0.0f, 1.0f, 2.0f);
+	mat1.Scale(1.0f, 1.0f, 1.0f);
 }
 void Game::ShapeUpdate()
 {
