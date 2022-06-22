@@ -50,8 +50,8 @@ void Renderer::SpriteDraw(float* vertex, int vertexLength, unsigned int* index, 
 {
 	DefVertexSpriteAttribute();
 	CallUniformShaders(textureShader);
-	DrawLight(textureShader);
 	textureShader->ActiveProgram();
+	DrawLight(textureShader);
 	if (alpha) // TODO: clean pls
 	{
 		glEnable(GL_BLEND);
@@ -73,8 +73,8 @@ void Renderer::MaterialDraw(float* vertex, int vertexLength, unsigned int* index
 {
 	DefVertexMaterialAttribute();
 	CallUniformShaders(materialShader);
-	DrawLight(materialShader);
 	materialShader->ActiveProgram();
+	DrawLight(materialShader);
 	if (alpha) // TODO: clean pls
 	{
 		glEnable(GL_BLEND);
@@ -181,5 +181,6 @@ Camera* Renderer::GetCamera()
 
 void Renderer::DrawLight(Shader* shader)
 {
-	 glUniform3fv(glGetUniformLocation(shader->GetProgram(), "light.ambient"), 1, &Light::ambient[0]);
+	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "ambient.color"), 1, &Light::ambient[0]);
+	glUniform1f(glGetUniformLocation(shader->GetProgram(), "ambient.str"), Light::ambientStrength);
 }

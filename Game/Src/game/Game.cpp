@@ -34,6 +34,7 @@ void Game::Start()
 	ShapeStart();
 	MaterialStart();
 	Light::SetAmbientLight(1.0, 0.5, 0.31);
+	Light::SetAmbientSrength(0.5);
 }
 float a = 0.0f;
 bool right = true;

@@ -6,12 +6,13 @@ in vec2 TexCoord;
 uniform sampler2D texture0;
 //uniform sampler2D texture2;
 
-struct Light
+struct Ambient
 {
-    vec3 ambient;
+    vec3 color;
+    float str;
 };
 
-uniform Light light;
+uniform Ambient ambient;
 
 struct Material
 {
@@ -28,11 +29,8 @@ void main(){
     vec3 norm = normalize(outNormal);
 
     vec4 texColor = texture(texture0, TexCoord);
-    vec4 color = vec4(1.0,1.0,1.0,1.0);
-    if(texColor.a < 0.1) //when escuchas algo en discord y funciona :D
-    discard;
-    //vec4 light = vec4(1.0, 0.5, 0.31,1.0);
-    gl_FragColor = texColor * vec4(light.ambient,1.0);
-    // linearly interpolate between both textures (80% container, 20% awesomeface)
-    //mix(texture(texture1, TexCoord),texture(texture2, TexCoord),0.2);
+    if(texColor.a < 0.1) discard;
+
+    vec3 ambientResult = ambient.color * ambient.str;
+    gl_FragColor = texColor * vec4(ambientResult,1.0);
 }
