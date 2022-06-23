@@ -12,12 +12,19 @@ Material2D::Material2D(const char* filePath) : Entity2D()
 	data = TextureImporter::ImportTexture(filePath);
 	if (data.nrChannels == 4)
 		alpha = true;
+
+	material.color = glm::vec4(1.0,1.0,0.0,1.0);
+	material.ambient = glm::vec3(1.0,1.0,1.0);
+	material.diffuse = glm::vec3(1.0,1.0,1.0);
+	material.shininess = 1;
+	material.specular = glm::vec3(1.0,1.0,1.0);
 }
 
 void Material2D::Draw()
 {
 	TextureImporter::BindTexture(data.texture);
-	renderer->MaterialDraw(vertexMaterial, vertexLength, index, indexLength, model, alpha);
+	renderer->MaterialDraw(vertexMaterial, vertexLength, index, indexLength, model, alpha,material.color,material.ambient,material.diffuse,
+		material.specular,material.shininess);
 }
 
 void Material2D::SetTextureCoordinate(float u0, float v0, float u1, float v1, float u2, float v2, float u3, float v3)
