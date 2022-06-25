@@ -1,5 +1,5 @@
-#include "Material2D.h"
-Material2D::Material2D() : Entity2D()
+#include "Cube.h"
+Cube::Cube() : Entity()
 {
 	data.height = 0;
 	data.width = 0;
@@ -7,7 +7,7 @@ Material2D::Material2D() : Entity2D()
 	data.texture = 0;
 }
 
-Material2D::Material2D(const char* filePath) : Entity2D()
+Cube::Cube(const char* filePath) : Entity()
 {
 	data = TextureImporter::ImportTexture(filePath);
 	if (data.nrChannels == 4)
@@ -20,14 +20,14 @@ Material2D::Material2D(const char* filePath) : Entity2D()
 	material.specular = glm::vec3(1.0,1.0,1.0);
 }
 
-void Material2D::Draw()
+void Cube::Draw()
 {
 	TextureImporter::BindTexture(data.texture);
 	renderer->MaterialDraw(vertexMaterial, vertexLength, index, indexLength, model, alpha,material.color,material.ambient,material.diffuse,
 		material.specular,material.shininess);
 }
 
-void Material2D::SetTextureCoordinate(float u0, float v0, float u1, float v1, float u2, float v2, float u3, float v3)
+void Cube::SetTextureCoordinate(float u0, float v0, float u1, float v1, float u2, float v2, float u3, float v3)
 {
 	vertexMaterial[6] = u3; //right
 	vertexMaterial[7] = v3; //up

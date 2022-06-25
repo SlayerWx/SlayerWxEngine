@@ -22,9 +22,6 @@
     <Filter Include="Src\Entity">
       <UniqueIdentifier>{2eeeb282-ab20-47e4-8618-1cd16353b1d2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Entity2D">
-      <UniqueIdentifier>{1eba1921-0a54-4ab9-a389-f30e515f883a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Src\Shape">
       <UniqueIdentifier>{943423c0-a53c-4b60-8594-189d7473384f}</UniqueIdentifier>
     </Filter>
@@ -67,7 +64,10 @@
     <Filter Include="Src\light">
       <UniqueIdentifier>{8092810f-6037-45ba-90b8-9b58ce1b1205}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\material2D">
+    <Filter Include="Src\entity2D">
+      <UniqueIdentifier>{1eba1921-0a54-4ab9-a389-f30e515f883a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\cube">
       <UniqueIdentifier>{6615787c-dc02-4af8-afbe-8776eaee4347}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -82,7 +82,7 @@
       <Filter>Src\renderer</Filter>
     </ClCompile>
     <ClCompile Include="Src\entity2D\Entity2D.cpp">
-      <Filter>Src\Entity2D</Filter>
+      <Filter>Src\entity2D</Filter>
     </ClCompile>
     <ClCompile Include="Src\shape\Shape.cpp">
       <Filter>Src\Shape</Filter>
@@ -120,8 +120,8 @@
     <ClCompile Include="Src\light\Light.cpp">
       <Filter>Src\light</Filter>
     </ClCompile>
-    <ClCompile Include="Src\material2D\Material2D.cpp">
-      <Filter>Src\material2D</Filter>
+    <ClCompile Include="Src\cube\Cube.cpp">
+      <Filter>Src\cube</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,7 +138,7 @@
       <Filter>Src\renderer</Filter>
     </ClInclude>
     <ClInclude Include="Src\entity2D\Entity2D.h">
-      <Filter>Src\Entity2D</Filter>
+      <Filter>Src\entity2D</Filter>
     </ClInclude>
     <ClInclude Include="Src\shape\Shape.h">
       <Filter>Src\Shape</Filter>
@@ -182,8 +182,8 @@
     <ClInclude Include="Src\light\Light.h">
       <Filter>Src\light</Filter>
     </ClInclude>
-    <ClInclude Include="Src\material2D\Material2D.h">
-      <Filter>Src\material2D</Filter>
+    <ClInclude Include="Src\cube\Cube.h">
+      <Filter>Src\cube</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

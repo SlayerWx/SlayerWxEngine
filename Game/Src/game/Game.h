@@ -10,7 +10,7 @@ private:
 	Sprite dog;
 	Sprite ncat;
 	Sprite link;
-	Material2D mat1;
+	Cube mat1;
 	void Start();
 	void Update();
 	bool Input(int keycode, float &variable, float modif);
