@@ -13,7 +13,7 @@ Cube::Cube(const char* filePath) : Entity()
 	if (data.nrChannels == 4)
 		alpha = true;
 
-	material.color = glm::vec4(1.0,1.0,0.0,1.0);
+	material.color = glm::vec4(0.0,0.0,1.0,1.0);
 	material.ambient = glm::vec3(1.0,1.0,1.0);
 	material.diffuse = glm::vec3(1.0,1.0,1.0);
 	material.shininess = 1;

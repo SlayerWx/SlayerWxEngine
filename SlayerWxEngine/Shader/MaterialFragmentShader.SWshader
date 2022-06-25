@@ -25,15 +25,15 @@ uniform Material material;
 
 vec4 CalDiffuseColor(vec3 _lightPos , vec3 _fragPos, vec3 _norm, vec3 _lightColor, vec3 _ambientResult);
 
-void main(){
-
-    vec3 lightPos = vec3(1.0,1.0,1.0);
-    vec3 lightColor = vec3(1.0,1.0,1.0);
+void main()
+{
+    vec3 lightPos = vec3(0.0f, 1.0f, 10.0f);
+    vec3 lightColor = vec3(0.0,1.0,1.0); //if u change the blue color to zero then u dont see the diffuse
     vec4 texColor = texture(texture0, TexCoord);
     //if(texColor.a < 0.1) discard;
     vec3 norm = normalize(outNormal);
-
-
+    
+    
     vec3 ambientResult = (ambient.color * material.ambient) * ambient.str;
     //gl_FragColor = texColor * vec4(ambientResult,1.0);
     //gl_FragColor = material.color * vec4(ambientResult,1.0);
@@ -44,8 +44,10 @@ void main(){
 vec4 CalDiffuseColor(vec3 _lightPos , vec3 _fragPos, vec3 _norm, vec3 _lightColor, vec3 _ambientResult)
 {
     vec3 _lightDir = normalize(_lightPos - _fragPos);  
-
+    
     float _diff = max(dot(_norm, _lightDir), 0.0);
     vec3 _diffuse = _diff * _lightColor;
     return vec4((_ambientResult + _diffuse),1.0) * material.color;
+    
+
 }

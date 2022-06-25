@@ -33,8 +33,8 @@ void Game::Start()
 	SpriteStart();
 	ShapeStart();
 	MaterialStart();
-	//Light::SetAmbientLight(1.0, 0.5, 0.31);
-	Light::SetAmbientLight(1.0, 1.0,1.0);
+	Light::SetAmbientLight(1.0, 0.5, 0.31);
+	//Light::SetAmbientLight(0.0, 0.0,1.0);
 	Light::SetAmbientSrength(1.0);
 }
 float a = 0.0f;
