@@ -15,7 +15,7 @@ Cube::Cube(const char* filePath) : Entity()
 
 	material.color = glm::vec4(1.0,1.0,0.0,1.0);
 	material.ambient = glm::vec3(1.0,1.0,1.0);
-	material.diffuse = glm::vec3(1.0,1.0,1.0);
+	material.diffuse = glm::vec3(1.0,1.0, 1.0);
 	material.shininess = 1;
 	material.specular = glm::vec3(1.0,1.0,1.0);
 }

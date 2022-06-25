@@ -37,7 +37,7 @@ void Game::Start()
 	Light::SetAmbientSrength(1.0);
 	dirLight.color = glm::vec3(0.0, 1.0, 0.0);
 	dirLight.diffuseIntensity = 0.5;
-	dirLight.direction = glm::vec3(0.5, 0.5, 0.5);
+	dirLight.direction = glm::vec3(0.3, 0.2, 0.5);
 	Light::SetACtualDirectionalLight(dirLight);
 }
 float a = 0.0f;

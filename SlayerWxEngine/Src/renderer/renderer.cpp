@@ -188,12 +188,14 @@ void Renderer::DrawLight(Shader* shader)
 	glUniform1f(glGetUniformLocation(shader->GetProgram(), "ambient.str"), Light::ambientStrength);
 	SetDirectionalLight(shader);
 }
+#include <iostream>
+using namespace std;
 void Renderer::SetMaterial(Shader* shader, glm::vec4 &color, glm::vec3 &ambient, glm::vec3 &diffuse, glm::vec3 &specular, float &shininess)
 {
 	glUniform4fv(glGetUniformLocation(shader->GetProgram(), "material.color"), 1, &color[0]);
 	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "material.ambient"), 1, &ambient[0]);
-	glUniform4fv(glGetUniformLocation(shader->GetProgram(), "material.diffuse"), 1, &diffuse[0]);
-	glUniform4fv(glGetUniformLocation(shader->GetProgram(), "material.specular"), 1, &specular[0]);
+	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "material.diffuse"), 1, &diffuse[0]);
+	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "material.specular"), 1, &specular[0]);
 	glUniform1f(glGetUniformLocation(shader->GetProgram(), "material.shininess"), shininess);
 }
 void Renderer::SetDirectionalLight(Shader* shader)

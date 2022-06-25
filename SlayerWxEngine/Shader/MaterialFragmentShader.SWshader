@@ -51,6 +51,7 @@ vec4 CalDirectionalLight(vec3 _ambientResult) //diffuse
 {
     
     float _diff = max(dot(normalize(outNormal), directionalLight.direction), 0.0);
-    vec3 _diffuse = (_diff * directionalLight.diffuseIntensity) * directionalLight.color;
+    vec3 aux = material.diffuse;
+    vec3 _diffuse = (directionalLight.color * _diff * material.diffuse) * directionalLight.diffuseIntensity;
     return vec4(_diffuse,1.0);
 }
