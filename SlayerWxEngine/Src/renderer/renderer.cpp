@@ -2,6 +2,7 @@
 #include <glew.h>
 #include <glfw3.h>
 
+#include <iostream>
 Renderer* Renderer::myRef;
 Renderer::Renderer()
 {
@@ -70,7 +71,7 @@ void Renderer::SpriteDraw(float* vertex, int vertexLength, unsigned int* index, 
 	glDrawElements(GL_TRIANGLES, indexLength, GL_UNSIGNED_INT, 0);
 }
 void Renderer::MaterialDraw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix, bool alpha,
-	glm::vec4 color,glm::vec3 ambient,glm::vec3 diffuse,glm::vec3 specular,float shininess)
+	glm::vec4 &color,glm::vec3 &ambient,glm::vec3 &diffuse,glm::vec3 &specular,float &shininess)
 {
 	DefVertexMaterialAttribute();
 	CallUniformShaders(materialShader);
@@ -185,14 +186,19 @@ void Renderer::DrawLight(Shader* shader)
 {
 	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "ambient.color"), 1, &Light::ambient[0]);
 	glUniform1f(glGetUniformLocation(shader->GetProgram(), "ambient.str"), Light::ambientStrength);
+	SetDirectionalLight(shader);
 }
-
-void Renderer::SetMaterial(Shader* shader, glm::vec4 color, glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, float shininess)
+void Renderer::SetMaterial(Shader* shader, glm::vec4 &color, glm::vec3 &ambient, glm::vec3 &diffuse, glm::vec3 &specular, float &shininess)
 {
-
 	glUniform4fv(glGetUniformLocation(shader->GetProgram(), "material.color"), 1, &color[0]);
 	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "material.ambient"), 1, &ambient[0]);
 	glUniform4fv(glGetUniformLocation(shader->GetProgram(), "material.diffuse"), 1, &diffuse[0]);
 	glUniform4fv(glGetUniformLocation(shader->GetProgram(), "material.specular"), 1, &specular[0]);
 	glUniform1f(glGetUniformLocation(shader->GetProgram(), "material.shininess"), shininess);
+}
+void Renderer::SetDirectionalLight(Shader* shader)
+{
+	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "directionalLight.direction"), 1, &Light::actualDirectionalLight.direction[0]);
+	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "directionalLight.color"), 1, &Light::actualDirectionalLight.color[0]);
+	glUniform1f(glGetUniformLocation(shader->GetProgram(), "directionalLight.diffuseIntensity"), Light::actualDirectionalLight.diffuseIntensity);
 }
