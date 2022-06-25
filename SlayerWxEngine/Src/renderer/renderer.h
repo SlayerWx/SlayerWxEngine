@@ -43,6 +43,7 @@ public:
 	void DrawLight(Shader* shader);
 	void SetMaterial(Shader* shader, glm::vec4 &color, glm::vec3 &ambient, glm::vec3 &diffuse, glm::vec3 &specular, float &shininess);
 	void SetDirectionalLight(Shader* shader);
+	void SetSpotLight(Shader* shader);
 };
 // settings
 //const unsigned int SCR_WIDTH = 800;

@@ -77,6 +77,8 @@ void Renderer::MaterialDraw(float* vertex, int vertexLength, unsigned int* index
 	CallUniformShaders(materialShader);
 	materialShader->ActiveProgram();
 	DrawLight(materialShader);
+	SetDirectionalLight(materialShader);
+	SetSpotLight(materialShader);
 	SetMaterial(materialShader,color,ambient,diffuse,specular,shininess);
 	if (alpha) // TODO: clean pls
 	{
@@ -186,7 +188,6 @@ void Renderer::DrawLight(Shader* shader)
 {
 	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "ambient.color"), 1, &Light::ambient[0]);
 	glUniform1f(glGetUniformLocation(shader->GetProgram(), "ambient.str"), Light::ambientStrength);
-	SetDirectionalLight(shader);
 }
 #include <iostream>
 using namespace std;
@@ -200,7 +201,17 @@ void Renderer::SetMaterial(Shader* shader, glm::vec4 &color, glm::vec3 &ambient,
 }
 void Renderer::SetDirectionalLight(Shader* shader)
 {
+	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "directionalLight.position"), 1, &Light::actualDirectionalLight.position[0]);
 	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "directionalLight.direction"), 1, &Light::actualDirectionalLight.direction[0]);
 	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "directionalLight.color"), 1, &Light::actualDirectionalLight.color[0]);
 	glUniform1f(glGetUniformLocation(shader->GetProgram(), "directionalLight.diffuseIntensity"), Light::actualDirectionalLight.diffuseIntensity);
+}
+
+void Renderer::SetSpotLight(Shader* shader)
+{
+	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "spotLight.position"), 1, &Light::actualSpotLight.position[0]);
+	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "spotLight.direction"), 1, &Light::actualSpotLight.direction[0]);
+	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "spotLight.color"), 1, &Light::actualSpotLight.color[0]);
+	glUniform1f(glGetUniformLocation(shader->GetProgram(), "spotLight.specularIntensity"), Light::actualSpotLight.specularIntensity);
+	glUniform1f(glGetUniformLocation(shader->GetProgram(), "spotLight.shininess"), Light::actualSpotLight.shininess);
 }

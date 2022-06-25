@@ -33,12 +33,21 @@ void Game::Start()
 	SpriteStart();
 	ShapeStart();
 	MaterialStart();
-	Light::SetAmbientLight(1.0, 0.5, 0.31);
-	Light::SetAmbientSrength(1.0);
+	Light::SetAmbientLight(1.0f, 1.0f, 1.0f);
+	Light::SetAmbientSrength(0.3);
+	dirLight.position = glm::vec3(4.0f, 2.0f, 3.0f);
 	dirLight.color = glm::vec3(0.0, 1.0, 0.0);
 	dirLight.diffuseIntensity = 0.5;
 	dirLight.direction = glm::vec3(0.3, 0.2, 0.5);
-	Light::SetACtualDirectionalLight(dirLight);
+	Light::SetActualDirectionalLight(dirLight);
+	spot.color = glm::vec3(0.0, 1.0, 0.0);
+	spot.specularIntensity = 0.5;
+	spot.position = glm::vec3(-0.5f, 2.0f, -0.5f);
+	spot.direction = glm::vec3(0.0,0.0,1.0);
+	spot.shininess = 32.0f;
+
+	lightCUbe.SetPosition(spot.position.x,spot.position.y,spot.position.z);
+	Light::SetActualSpotLight(spot);
 }
 float a = 0.0f;
 bool right = true;
@@ -188,8 +197,13 @@ void Game::SpriteStart()
 void Game::MaterialStart()
 {
 	mat1 = Cube("assets/rick.png");
-	mat1.SetPosition(0.0f, 1.0f, 2.0f);
+	mat1.SetPosition(3.0f, 1.0f, 2.0f);
 	mat1.Scale(1.0f, 1.0f, 1.0f);
+
+
+	lightCUbe = Cube("assets/rick.png");
+	lightCUbe.SetPosition(3.0f, 1.0f, 2.0f);
+	lightCUbe.Scale(0.3f, 0.3f, 0.3f);
 }
 void Game::ShapeUpdate()
 {
@@ -258,6 +272,9 @@ void Game::SpriteUpdate()
 }
 void Game::MaterialUpdate()
 {
+
+
+	Light::SetActualSpotLight(spot);
 }
 void Game::SpriteDraw()
 {
@@ -278,4 +295,5 @@ void Game::ShapeDraw()
 void Game::MaterialDraw()
 {
 	mat1.Draw();
+	lightCUbe.Draw();
 }

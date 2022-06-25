@@ -4,6 +4,7 @@ class Game : public BaseGame
 {
 private:
 	DirectionalLight dirLight;
+	SpotLight spot;
 	Shape triangleAuto;
 	Shape squareAuto;
 	Shape shape;
@@ -12,6 +13,7 @@ private:
 	Sprite ncat;
 	Sprite link;
 	Cube mat1;
+	Cube lightCUbe;
 	void Start();
 	void Update();
 	bool Input(int keycode, float &variable, float modif);
