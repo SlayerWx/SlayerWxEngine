@@ -67,6 +67,7 @@ void Animation::Update()
 	while (currentTime > length)
 	{
 		currentTime -= length;
+		if (currentTime < 0.0f) currentTime = 0.0f;
 	}
 	currentFrame = static_cast<int>(currentTime/(length / myFrames.size()));
 }
