@@ -1,6 +1,8 @@
 #include "Entity.h"
-
-Entity::Entity()
+#include "dataManager/DataManager.h"
+int Entity::count = 0;
+#include <iostream>
+Entity::Entity(std::string _name)
 {
 	renderer = renderer->GetStaticRenderer();
 
@@ -14,6 +16,14 @@ Entity::Entity()
 	SetPosition(0, 0, 0);
 	Rotate(0, 0, 0);
 	Scale(1, 1, 1);
+	id = count++;
+	name = _name;
+	DataManager* data = DataManager::Get();
+	if (name == "cube")
+	{
+		data->addEntity(this, id);
+		data->setSelectedEntity(this);
+	}
 }
 
 void Entity::UpdateModel()

@@ -8,12 +8,14 @@ BaseGame::BaseGame()
 		renderer = new Renderer();
 		renderer->SetStaticRenderer(renderer);
 		input = new Input();
+		myGui = new MyGui();
 }
 BaseGame::~BaseGame()
 {
 	if (window != NULL) delete window;
 	if (renderer != NULL) delete renderer;
 	if (input != NULL) delete input;
+	if (myGui != NULL) delete myGui;
 }
 int BaseGame::EngineInit(int width, int height, const char* title)// GLFWmonitor* monitor, GLFWwindow* share)
 {
@@ -35,6 +37,7 @@ int BaseGame::WindowInit(int width, int height, const char* title)// GLFWmonitor
 		return -1;
 	}
 	window->WindowContext();
+	myGui->CreateContext(window->GetWindow());
 	return 0;
 }
 void BaseGame::RendererInit()
@@ -56,11 +59,16 @@ bool BaseGame::Running()
 void BaseGame::UpdateBegin()
 {
 	window->ClearBackground();
+	myGui->BeginUpdate();
 	UpdateDeltaTime();
+	myGui->Inspector();
+	myGui->Update();
+
 }
 
 void BaseGame::UpdateEnd()
 {
+	myGui->EndUpdate();
 	window->SwapBuffer();
 	/* Poll for and process events
 	check what events are occurring: keyboard, mouse, window events, etc.*/

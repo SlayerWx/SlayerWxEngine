@@ -3,8 +3,7 @@
 class Game : public BaseGame
 {
 private:
-	DirectionalLight dirLight;
-	SpotLight spot;
+	Light* light;
 	Shape triangleAuto;
 	Shape squareAuto;
 	Shape shape;

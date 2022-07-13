@@ -70,6 +70,12 @@
     <Filter Include="Src\cube">
       <UniqueIdentifier>{6615787c-dc02-4af8-afbe-8776eaee4347}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\gui">
+      <UniqueIdentifier>{e7483089-2993-42df-88c1-253ae830af7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\dataManager">
+      <UniqueIdentifier>{3c3d2492-b648-4eaa-a6e2-fc0e12dab75e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\baseGame\BaseGame.cpp">
@@ -122,6 +128,24 @@
     </ClCompile>
     <ClCompile Include="Src\cube\Cube.cpp">
       <Filter>Src\cube</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\gui\imgui.cpp">
+      <Filter>Src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\gui\imgui_demo.cpp">
+      <Filter>Src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\gui\imgui_draw.cpp">
+      <Filter>Src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\gui\imgui_impl_glfw_gl3.cpp">
+      <Filter>Src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\gui\MyGui.cpp">
+      <Filter>Src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\dataManager\DataManager.cpp">
+      <Filter>Src\dataManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +208,33 @@
     </ClInclude>
     <ClInclude Include="Src\cube\Cube.h">
       <Filter>Src\cube</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\gui\imconfig.h">
+      <Filter>Src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\gui\imgui.h">
+      <Filter>Src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\gui\imgui_impl_glfw_gl3.h">
+      <Filter>Src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\gui\imgui_internal.h">
+      <Filter>Src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\gui\stb_rect_pack.h">
+      <Filter>Src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\gui\stb_textedit.h">
+      <Filter>Src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\gui\stb_truetype.h">
+      <Filter>Src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\gui\MyGui.h">
+      <Filter>Src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\dataManager\DataManager.h">
+      <Filter>Src\dataManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

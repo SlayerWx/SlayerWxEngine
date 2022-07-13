@@ -19,7 +19,7 @@ public:
 	void CreateShaders();
 	void Draw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix);
 	void SpriteDraw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix, bool alpha);
-	void MaterialDraw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix, bool alpha, glm::vec4 &color, glm::vec3 &ambient, glm::vec3 &diffuse, glm::vec3 &specular, float &shininess);
+	void MaterialDraw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix, bool alpha, glm::vec4& color, glm::vec3& ambient, glm::vec3& diffuse, glm::vec3& specular, float& shininess);
 	unsigned int VBO = 0; // VertexBufferObject
 	unsigned int VAO = 0; // VertexArrayObject
 	unsigned int EBO = 0; // ElementsBufferObject
@@ -40,10 +40,8 @@ public:
 	Shader* materialShader;
 	Camera* cam;
 	Camera* GetCamera();
-	void DrawLight(Shader* shader);
+	void DrawMaterialLight();
 	void SetMaterial(Shader* shader, glm::vec4 &color, glm::vec3 &ambient, glm::vec3 &diffuse, glm::vec3 &specular, float &shininess);
-	void SetDirectionalLight(Shader* shader);
-	void SetSpotLight(Shader* shader);
 };
 // settings
 //const unsigned int SCR_WIDTH = 800;

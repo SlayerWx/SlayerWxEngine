@@ -33,21 +33,13 @@ void Game::Start()
 	SpriteStart();
 	ShapeStart();
 	MaterialStart();
-	Light::SetAmbientLight(1.0f, 1.0f, 1.0f);
-	Light::SetAmbientSrength(0.3);
-	dirLight.position = glm::vec3(4.0f, 2.0f, 3.0f);
-	dirLight.color = glm::vec3(0.0, 1.0, 0.0);
-	dirLight.diffuseIntensity = 0.5;
-	dirLight.direction = glm::vec3(0.3, 0.2, 0.5);
-	Light::SetActualDirectionalLight(dirLight);
-	spot.color = glm::vec3(0.0, 1.0, 0.0);
-	spot.specularIntensity = 0.5;
-	spot.position = glm::vec3(-0.5f, 2.0f, -0.5f);
-	spot.direction = glm::vec3(0.0,0.0,1.0);
-	spot.shininess = 32.0f;
+	light = new Light(  glm::vec3(-1,1.5,5),
+						glm::vec3(0.0f,0.0f,1.0f),
+						glm::vec3(0.2,0.2,0.2),
+						glm::vec3(0.5,0.5,0.5),
+						glm::vec3(1.0,1.0,1.0));
 
-	lightCUbe.SetPosition(spot.position.x,spot.position.y,spot.position.z);
-	Light::SetActualSpotLight(spot);
+	lightCUbe.SetPosition(light->position.x, light->position.y, light->position.z);
 }
 float a = 0.0f;
 bool right = true;
@@ -196,12 +188,12 @@ void Game::SpriteStart()
 }
 void Game::MaterialStart()
 {
-	mat1 = Cube("assets/rick.png");
+	mat1 = Cube("cube", "assets/rick.png");
 	mat1.SetPosition(3.0f, 1.0f, 2.0f);
 	mat1.Scale(1.0f, 1.0f, 1.0f);
 
 
-	lightCUbe = Cube("assets/rick.png");
+	lightCUbe = Cube("lightCube", "assets/rick.png");
 	lightCUbe.SetPosition(3.0f, 1.0f, 2.0f);
 	lightCUbe.Scale(0.3f, 0.3f, 0.3f);
 }
@@ -225,46 +217,21 @@ void Game::SpriteUpdate()
 {
 	if (GetKey(KEYCODE_1))
 	{
-		linkState = Sleft;
-		link.SetAnimation(leftAnim);
-		link.SetPosition(link.GetPositionX() - 5.0f * DeltaTime(), link.GetPositionY(), link.GetPositionZ());
-	}
-	else if (linkState == Sleft)
-	{
-		link.SetAnimation(idleLeftAnim);
+		light->position = glm::vec3(light->position.x + 10.0f * DeltaTime(), light->position.y, light->position.z);
 	}
 	if (GetKey(KEYCODE_2))
 	{
-		linkState = Sright;
-		link.SetAnimation(rightAnim);
-		link.SetPosition(link.GetPositionX() + 5.0f * DeltaTime(), link.GetPositionY(), link.GetPositionZ());
-	}
-	else if (linkState == Sright)
-	{
-		link.SetAnimation(idleRightAnim);
+		light->position = glm::vec3(light->position.x -10.0f * DeltaTime(), light->position.y, light->position.z);
 	}
 	if (GetKey(KEYCODE_3))
 	{
-		linkState = Sup;
-		link.SetAnimation(upAnim);
-		link.SetPosition(link.GetPositionX(), link.GetPositionY() + 5.0f * DeltaTime(), link.GetPositionZ());
-	}
-	else if (linkState == Sup)
-	{
-		link.SetAnimation(idleUpAnim);
+		light->position = glm::vec3(light->position.x, light->position.y, light->position.z + 10.0f * DeltaTime());
 	}
 	if (GetKey(KEYCODE_4))
 	{
-		linkState = Sdown;
-		link.SetAnimation(downAnim);
-		link.SetPosition(link.GetPositionX(), link.GetPositionY() - 5.0f * DeltaTime(), link.GetPositionZ());
+		light->position = glm::vec3(light->position.x, light->position.y, light->position.z -10.0f * DeltaTime());
+
 	}
-	else if (linkState == Sdown)
-	{
-		link.SetAnimation(idleDownAnim);
-	}
-	link.CheckCollisionAABB(dog);
-	link.Update();
 	if (GetKey(KEYCODE_5)) cameraState = CameraType::free;
 	if (GetKey(KEYCODE_6)) cameraState = CameraType::FirstPerson;
 	if (GetKey(KEYCODE_7)) cameraState = CameraType::ThridPerson;
@@ -273,8 +240,7 @@ void Game::SpriteUpdate()
 void Game::MaterialUpdate()
 {
 
-
-	Light::SetActualSpotLight(spot);
+	lightCUbe.SetPosition(light->position.x, light->position.y, light->position.z);
 }
 void Game::SpriteDraw()
 {

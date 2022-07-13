@@ -7,6 +7,7 @@
 #include "cube/Cube.h"
 #include "input/Input.h"
 #include "export/export.h"
+#include "gui/MyGui.h"
 struct GLFWmonitor;
 struct GLFWwindow;
 class SlayerWxEngine_API BaseGame
@@ -14,6 +15,7 @@ class SlayerWxEngine_API BaseGame
 private:
 	Window* window;
 	Renderer* renderer;
+	MyGui* myGui;
 	void UpdateBegin();
 	void UpdateEnd();
 	void EngineEnd();

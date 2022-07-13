@@ -2,39 +2,37 @@
 #define LIGHT_H
 #include "export/export.h"
 #include "glm/glm.hpp"
-
-struct SlayerWxEngine_API DirectionalLight
-{
-	glm::vec3 position;
-	glm::vec3 direction;
-	glm::vec3 color;
-	float diffuseIntensity;
-};
-struct SlayerWxEngine_API SpotLight
-{
-	glm::vec3 position;
-	glm::vec3 color;
-	glm::vec3 direction;
-	float specularIntensity;
-	float shininess;
-};
+#include <list>
+//struct SlayerWxEngine_API DirectionalLight
+//{
+//	glm::vec3 position;
+//	glm::vec3 direction;
+//	glm::vec3 color;
+//	float diffuseIntensity;
+//};
+//struct SlayerWxEngine_API SpotLight
+//{
+//	glm::vec3 position;
+//	glm::vec3 color;
+//	glm::vec3 direction;
+//	glm::vec3 diffuse;
+//	glm::vec3 specular;
+//	float specularIntensity;
+//	float shininess;
+//};
 
 class SlayerWxEngine_API Light
 {
-
 public:
-	Light();
+	glm::vec3 position;
+	glm::vec3 color;
+	glm::vec3 ambient;
+	glm::vec3 diffuse;
+	glm::vec3 specular;
+
+	Light(glm::vec3 pos, glm::vec3 colour, glm::vec3 ambien, glm::vec3 diffu, glm::vec3 specul);
 	~Light();
-	static void SetAmbientLight(float r,float g,float b);
-	static glm::vec3 GetAmbientLight();
-	static void SetAmbientSrength(glm::float32 newStr);
-	static glm::float32 GetAmbientStrength();
-	static DirectionalLight actualDirectionalLight;
-	static SpotLight actualSpotLight;
-	static glm::vec3 ambient;
-	static float ambientStrength;
-	static void SetActualDirectionalLight(DirectionalLight dirLight);
-	static void SetActualSpotLight(SpotLight spot);
 
 };
+extern std::list<Light*> SlayerWxEngine_API lights;
 #endif

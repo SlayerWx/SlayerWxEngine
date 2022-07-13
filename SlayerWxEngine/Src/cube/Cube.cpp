@@ -1,5 +1,5 @@
 #include "Cube.h"
-Cube::Cube() : Entity()
+Cube::Cube() : Entity("Entity")
 {
 	data.height = 0;
 	data.width = 0;
@@ -7,13 +7,13 @@ Cube::Cube() : Entity()
 	data.texture = 0;
 }
 
-Cube::Cube(const char* filePath) : Entity()
+Cube::Cube(std::string name,const char* filePath) : Entity(name)
 {
 	data = TextureImporter::ImportTexture(filePath);
 	if (data.nrChannels == 4)
 		alpha = true;
 
-	material.color = glm::vec4(1.0,0.5,1.0,1.0);
+	material.color = glm::vec4(1.0,1.0,1.0,1.0);
 	material.ambient = glm::vec3(1.0,1.0,1.0);
 	material.diffuse = glm::vec3(1.0,1.0, 1.0);
 	material.shininess = 1;
@@ -22,6 +22,7 @@ Cube::Cube(const char* filePath) : Entity()
 
 void Cube::Draw()
 {
+
 	TextureImporter::BindTexture(data.texture);
 	renderer->MaterialDraw(vertexMaterial, vertexLength, index, indexLength, model, alpha,material.color,material.ambient,material.diffuse,
 		material.specular,material.shininess);

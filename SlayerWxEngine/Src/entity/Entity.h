@@ -4,7 +4,7 @@
 #include "renderer/renderer.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
-
+#include <iostream>
 class SlayerWxEngine_API Entity 
 {
 protected:
@@ -15,10 +15,8 @@ protected:
 	glm::mat4 rotateZ;
 	glm::mat4 scale;
 
-	glm::vec3 position;
-	glm::vec3 rotation;
-	glm::vec3 localScale;
-	glm::vec3 lastPosition;
+
+
 	void UpdateModel();
 
 	void RotateX(float x);
@@ -26,7 +24,7 @@ protected:
 	void RotateZ(float z);
 public:
 	Renderer* renderer;
-	Entity();
+	Entity(std::string _name);
 	float weight = 0;
 	float strength = 0;
 
@@ -38,6 +36,13 @@ public:
 	float GetPositionY();
 	float GetPositionZ();
 	glm::vec3 GetPosition();
+	std::string name = " ";
+	static int count;
+	int id;
+	glm::vec3 position;
+	glm::vec3 rotation;
+	glm::vec3 localScale;
+	glm::vec3 lastPosition;
 };
 
 #endif

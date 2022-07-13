@@ -52,7 +52,6 @@ void Renderer::SpriteDraw(float* vertex, int vertexLength, unsigned int* index, 
 	DefVertexSpriteAttribute();
 	CallUniformShaders(textureShader);
 	textureShader->ActiveProgram();
-	DrawLight(textureShader);
 	if (alpha) // TODO: clean pls
 	{
 		glEnable(GL_BLEND);
@@ -76,9 +75,7 @@ void Renderer::MaterialDraw(float* vertex, int vertexLength, unsigned int* index
 	DefVertexMaterialAttribute();
 	CallUniformShaders(materialShader);
 	materialShader->ActiveProgram();
-	DrawLight(materialShader);
-	SetDirectionalLight(materialShader);
-	SetSpotLight(materialShader);
+	DrawMaterialLight();
 	SetMaterial(materialShader,color,ambient,diffuse,specular,shininess);
 	if (alpha) // TODO: clean pls
 	{
@@ -184,13 +181,18 @@ Camera* Renderer::GetCamera()
 	return cam;
 }
 
-void Renderer::DrawLight(Shader* shader)
+
+void Renderer::DrawMaterialLight() //to MaterialShader
 {
-	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "ambient.color"), 1, &Light::ambient[0]);
-	glUniform1f(glGetUniformLocation(shader->GetProgram(), "ambient.str"), Light::ambientStrength);
+	glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "viewPos"), 1, &cam->cameraPos[0]);
+	for(Light* light : lights)
+	{
+		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "light.position"), 1, &light->position[0]);
+		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "light.ambient"), 1, &light->ambient[0]);
+		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "light.diffuse"), 1, &light->diffuse[0]);
+		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "light.specular"), 1, &light->specular[0]);
+	}
 }
-#include <iostream>
-using namespace std;
 void Renderer::SetMaterial(Shader* shader, glm::vec4 &color, glm::vec3 &ambient, glm::vec3 &diffuse, glm::vec3 &specular, float &shininess)
 {
 	glUniform4fv(glGetUniformLocation(shader->GetProgram(), "material.color"), 1, &color[0]);
@@ -198,20 +200,4 @@ void Renderer::SetMaterial(Shader* shader, glm::vec4 &color, glm::vec3 &ambient,
 	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "material.diffuse"), 1, &diffuse[0]);
 	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "material.specular"), 1, &specular[0]);
 	glUniform1f(glGetUniformLocation(shader->GetProgram(), "material.shininess"), shininess);
-}
-void Renderer::SetDirectionalLight(Shader* shader)
-{
-	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "directionalLight.position"), 1, &Light::actualDirectionalLight.position[0]);
-	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "directionalLight.direction"), 1, &Light::actualDirectionalLight.direction[0]);
-	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "directionalLight.color"), 1, &Light::actualDirectionalLight.color[0]);
-	glUniform1f(glGetUniformLocation(shader->GetProgram(), "directionalLight.diffuseIntensity"), Light::actualDirectionalLight.diffuseIntensity);
-}
-
-void Renderer::SetSpotLight(Shader* shader)
-{
-	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "spotLight.position"), 1, &Light::actualSpotLight.position[0]);
-	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "spotLight.direction"), 1, &Light::actualSpotLight.direction[0]);
-	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "spotLight.color"), 1, &Light::actualSpotLight.color[0]);
-	glUniform1f(glGetUniformLocation(shader->GetProgram(), "spotLight.specularIntensity"), Light::actualSpotLight.specularIntensity);
-	glUniform1f(glGetUniformLocation(shader->GetProgram(), "spotLight.shininess"), Light::actualSpotLight.shininess);
 }

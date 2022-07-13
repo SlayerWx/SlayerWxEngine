@@ -2,6 +2,8 @@
 #define MATERIAL2D_H
 #include "entity2D/Entity2D.h"
 #include "textureImporter/TextureImporter.h"
+#include "gui/MyGui.h"
+#include <iostream>
 struct SlayerWxEngine_API Material
 {
     glm::vec4 color;
@@ -69,7 +71,7 @@ public:
     void SetTextureCoordinate(float u0, float v0, float u1, float v1,
         float u2, float v2, float u3, float v3);
     Cube();
-    Cube(const char* filePath);
+    Cube(std::string name,const char* filePath);
     void Draw();
 };
 #endif
