@@ -198,10 +198,10 @@ void Renderer::SetMaterial(Shader* shader, glm::vec4 &color, glm::vec3 &ambient,
 	glUniform4fv(glGetUniformLocation(shader->GetProgram(), "material.color"), 1, &color[0]);
 	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "material.ambient"), 1, &ambient[0]);
 
-	glUniform1f(glGetUniformLocation(shader->GetProgram(), "material.diffuse"), diffuse);
+	glUniform1i(glGetUniformLocation(shader->GetProgram(), "material.diffuse"), diffuse);
 	
-	if(specular) glUniform1f(glGetUniformLocation(shader->GetProgram(), "material.diffuse"), 2);
-	else glUniform1f(glGetUniformLocation(shader->GetProgram(), "material.diffuse"), 0);
+	if(specular) glUniform1i(glGetUniformLocation(shader->GetProgram(), "material.specular"), 2);
+	else glUniform1i(glGetUniformLocation(shader->GetProgram(), "material.specular"), 0);
 
 	glUniform1f(glGetUniformLocation(shader->GetProgram(), "material.shininess"), shininess);
 }

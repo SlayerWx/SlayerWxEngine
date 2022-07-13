@@ -32,17 +32,17 @@ TextureData TextureImporter::ImportTexture(const char* filePath)
 
 void TextureImporter::BindTexture(unsigned int data)
 {
-	glBindTexture(GL_TEXTURE_2D,data);
 	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, data);
 }
 void TextureImporter::BindTexture1(unsigned int data)
 {
 
-	glBindTexture(GL_TEXTURE_2D, data);
 	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, data);
 }
 void TextureImporter::BindTexture2(unsigned int data)
 {
-	glBindTexture(GL_TEXTURE_2D, data);
 	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, data);
 }

@@ -36,13 +36,13 @@ Cube::Cube(std::string name, const char* filePath, const char* diffuse, const ch
 		alpha = true;
 
 	material.color = glm::vec4(1.0, 1.0, 1.0, 1.0);
-	material.ambient = glm::vec3(1.0, 1.0, 1.0);
-	material.shininess = 256;
+	material.ambient = glm::vec3(0.5, 0.5, 0.5);
+	material.shininess = 32;
 }
 void Cube::Draw()
 {
 
-	TextureImporter::BindTexture(data.texture);
+	//TextureImporter::BindTexture(data.texture);
 
 	if (material.diffuse.nrChannels > 0) TextureImporter::BindTexture1(material.diffuse.texture);
 	if (material.specular.nrChannels > 0) TextureImporter::BindTexture2(material.specular.texture);

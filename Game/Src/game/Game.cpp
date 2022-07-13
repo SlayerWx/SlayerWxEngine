@@ -34,9 +34,9 @@ void Game::Start()
 	ShapeStart();
 	MaterialStart();
 	light = new Light(  glm::vec3(-1,1.5,5),
-						glm::vec3(0.0f,0.0f,1.0f),
-						glm::vec3(0.2,0.2,0.2),
-						glm::vec3(0.7,0.7,0.7),
+						glm::vec3(1.0f,1.0f,1.0f),
+						glm::vec3(0.1,0.1,0.1),
+						glm::vec3(0.5,0.5,0.5),
 						glm::vec3(1.0,1.0,1.0));
 
 	lightCUbe.SetPosition(light->position.x, light->position.y, light->position.z);
