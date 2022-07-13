@@ -188,7 +188,7 @@ void Game::SpriteStart()
 }
 void Game::MaterialStart()
 {
-	mat1 = Cube("cube", "assets/rick.png");
+	mat1 = Cube("cube", "assets/container.png", "assets/container.png");
 	mat1.SetPosition(3.0f, 1.0f, 2.0f);
 	mat1.Scale(1.0f, 1.0f, 1.0f);
 

@@ -8,7 +8,7 @@ struct SlayerWxEngine_API Material
 {
     glm::vec4 color;
     glm::vec3 ambient;
-    glm::vec3 diffuse;
+    TextureData diffuse;
     glm::vec3 specular;
     float shininess;
 };
@@ -71,7 +71,8 @@ public:
     void SetTextureCoordinate(float u0, float v0, float u1, float v1,
         float u2, float v2, float u3, float v3);
     Cube();
-    Cube(std::string name,const char* filePath);
+    Cube(std::string name, const char* filePath);
+    Cube(std::string name,const char* filePath, const char* diffuse);
     void Draw();
 };
 #endif

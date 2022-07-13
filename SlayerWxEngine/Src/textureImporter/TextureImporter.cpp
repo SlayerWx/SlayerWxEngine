@@ -35,3 +35,14 @@ void TextureImporter::BindTexture(unsigned int data)
 	glBindTexture(GL_TEXTURE_2D,data);
 	glActiveTexture(GL_TEXTURE0);
 }
+void TextureImporter::BindTexture1(unsigned int data)
+{
+
+	glBindTexture(GL_TEXTURE_2D, data);
+	glActiveTexture(GL_TEXTURE1);
+}
+void TextureImporter::BindTexture2(unsigned int data)
+{
+	glBindTexture(GL_TEXTURE_2D, data);
+	glActiveTexture(GL_TEXTURE2);
+}

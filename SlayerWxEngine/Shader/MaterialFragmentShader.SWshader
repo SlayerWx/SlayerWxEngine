@@ -10,7 +10,7 @@ struct Material
 {
 	vec4 color;
 	vec3 ambient;
-	vec3 diffuse;
+	sampler2D diffuse;
 	vec3 specular;
 	float shininess;
 };
@@ -39,22 +39,22 @@ void main()
 
     vec3 ambient = CalAmbient() * material.ambient;
     
-    vec3 diff = CalDiffuse(ambient,norm,lightDir) * material.diffuse;
-    vec3 spec =  CalSpecular(norm,lightDir) * material.specular;
+    vec3 diff = CalDiffuse(ambient,norm,lightDir);
+    vec3 spec =  CalSpecular(norm,lightDir);
 
-    gl_FragColor = vec4(ambient + diff + spec,1.0) * material.color;
+    gl_FragColor = vec4(ambient + diff + spec,1.0) * texture(texture0,TexCoord) * material.color;
 
 } 
 
 vec3 CalAmbient()
 {
-    return light.ambient * material.ambient;
+    return light.ambient * material.ambient * texture(material.diffuse,TexCoord).rgb;
 }
 
 vec3 CalDiffuse(vec3 _ambientResult,vec3 norm, vec3 lightDir)  //diffuse
 {
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = light.diffuse * (diff * material.diffuse);
+    vec3 diffuse = light.diffuse * (diff * texture(material.diffuse,TexCoord).rgb);
     return diffuse;
 }
 vec3 CalSpecular(vec3 norm, vec3 lightDir) // specular
