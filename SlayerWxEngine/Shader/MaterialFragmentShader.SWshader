@@ -27,8 +27,8 @@ struct Light {
 uniform Light light;  
 
 
-vec3 CalAmbient();
-vec3 CalDiffuse(vec3 _ambientResult,vec3 norm, vec3 lightDir);
+vec3 CalAmbient(vec4 _diffTexture);
+vec3 CalDiffuse(vec3 _ambientResult,vec3 norm, vec3 lightDir,vec4 _diffTexture);
 vec3 CalSpecular(vec3 norm, vec3 lightDir);
 
 
@@ -36,25 +36,25 @@ void main()
 {
     vec3 norm = normalize(outNormal);
     vec3 lightDir = normalize(light.position - fragPos);
-
-    vec3 ambient = CalAmbient();
     
-    vec3 diff = CalDiffuse(ambient,norm,lightDir);
+    vec4 diffTexture = texture(material.diffuse,TexCoord);
+    vec3 ambient = CalAmbient(diffTexture);
+    
+    vec3 diff = CalDiffuse(ambient,norm,lightDir,diffTexture);
     vec3 spec =  CalSpecular(norm,lightDir);
-    float alphaTexture = texture(texture0,TexCoord).a;
-    gl_FragColor = vec4(ambient + diff + spec,alphaTexture)/** texture(texture0,TexCoord) * material.color*/;
+    gl_FragColor = vec4(ambient + diff + spec,diffTexture.a) * material.color;
 
 } 
 
-vec3 CalAmbient()
+vec3 CalAmbient(vec4 _diffTexture)
 {
-    return light.ambient * material.ambient * texture(material.diffuse,TexCoord).rgb;
+    return light.ambient * material.ambient * _diffTexture.rgb;
 }
 
-vec3 CalDiffuse(vec3 _ambientResult,vec3 norm, vec3 lightDir)  //diffuse
+vec3 CalDiffuse(vec3 _ambientResult,vec3 norm, vec3 lightDir,vec4 _diffTexture)  //diffuse
 {
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = light.diffuse * diff * texture(material.diffuse,TexCoord).rgb;
+    vec3 diffuse = light.diffuse * diff * _diffTexture.rgb;
     return diffuse;
 }
 vec3 CalSpecular(vec3 norm, vec3 lightDir) // specular

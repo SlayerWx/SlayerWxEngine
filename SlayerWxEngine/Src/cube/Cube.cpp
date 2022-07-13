@@ -42,7 +42,7 @@ Cube::Cube(std::string name, const char* filePath, const char* diffuse, const ch
 void Cube::Draw()
 {
 
-	//TextureImporter::BindTexture(data.texture);
+	TextureImporter::BindTexture(data.texture);
 
 	if (material.diffuse.nrChannels > 0) TextureImporter::BindTexture1(material.diffuse.texture);
 	if (material.specular.nrChannels > 0) TextureImporter::BindTexture2(material.specular.texture);
