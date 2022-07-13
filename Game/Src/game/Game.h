@@ -3,7 +3,9 @@
 class Game : public BaseGame
 {
 private:
-	Light* light;
+	DirectionalLight myDirLight;
+	PointLight* point1;
+	SpotLight* pot1;
 	Shape triangleAuto;
 	Shape squareAuto;
 	Shape shape;
@@ -13,6 +15,7 @@ private:
 	Sprite link;
 	Cube mat1;
 	Cube lightCUbe;
+	Cube spotlightCUbe;
 	void Start();
 	void Update();
 	bool Input(int keycode, float &variable, float modif);

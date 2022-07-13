@@ -6,6 +6,8 @@
 #include "shader/Shader.h"
 #include "camera/Camera.h"
 #include "light/Light.h"
+#include <iostream>   
+#include <string>   
 class SlayerWxEngine_API Renderer
 {
 private:
@@ -41,6 +43,8 @@ public:
 	Camera* cam;
 	Camera* GetCamera();
 	void DrawMaterialLight();
+	const char* CastStringToChar(std::string str, std::string str2);
+
 	void SetMaterial(Shader* shader, glm::vec4 &color, glm::vec3 &ambient,bool diffuse, bool specular, float &shininess);
 };
 // settings

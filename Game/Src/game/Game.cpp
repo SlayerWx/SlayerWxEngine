@@ -33,13 +33,19 @@ void Game::Start()
 	SpriteStart();
 	ShapeStart();
 	MaterialStart();
-	light = new Light(  glm::vec3(-1,1.5,5),
-						glm::vec3(1.0f,1.0f,1.0f),
-						glm::vec3(0.1,0.1,0.1),
-						glm::vec3(0.5,0.5,0.5),
-						glm::vec3(1.0,1.0,1.0));
-
-	lightCUbe.SetPosition(light->position.x, light->position.y, light->position.z);
+	myDirLight.ambient = glm::vec3(0.1, 0.1, 0.1);
+	myDirLight.diffuse = glm::vec3(0.5, 0.5, 0.5);
+	myDirLight.specular = glm::vec3(1.0, 1.0, 1.0);
+	myDirLight.direction = glm::vec3(-1, 0, 0);
+	myDirLight.color = glm::vec3(1.0, 1.0, 1.0);
+	myDirLight.enable = 1;
+	DirectionalLightning::SetNewActualLight(myDirLight);
+	point1 = new PointLight(glm::vec3(-1, 2, 5), glm::vec3(1, 1, 1), glm::vec3(0.1, 0.1, 0.1), glm::vec3(0.5, 0.5, 0.5),
+		glm::vec3(1, 1, 1));
+	pot1 = new SpotLight(glm::vec3(3,1,0),glm::vec3(0,0,1),0.9,0.9,0.9,1,0.9,glm::vec3(0,1,0),glm::vec3(0.1,0.1,0.1),glm::vec3(0.5,0.5,0.5),glm::vec3(0.7,0.7,0.7));
+	point1->SetPointLight(point1);
+	lightCUbe.SetPosition(point1->position.x, point1->position.y, point1->position.z);
+	spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
 }
 float a = 0.0f;
 bool right = true;
@@ -196,6 +202,10 @@ void Game::MaterialStart()
 	lightCUbe = Cube("lightCube", "assets/rick.png");
 	lightCUbe.SetPosition(3.0f, 1.0f, 2.0f);
 	lightCUbe.Scale(0.3f, 0.3f, 0.3f);
+
+	spotlightCUbe = Cube("lightCube", "assets/bob.png");
+	spotlightCUbe.SetPosition(3.0f, 1.0f, 2.0f);
+	spotlightCUbe.Scale(0.3f, 0.3f, 0.3f);
 }
 void Game::ShapeUpdate()
 {
@@ -217,21 +227,24 @@ void Game::SpriteUpdate()
 {
 	if (GetKey(KEYCODE_1))
 	{
-		light->position = glm::vec3(light->position.x + 10.0f * DeltaTime(), light->position.y, light->position.z);
+		point1->position = glm::vec3(point1->position.x + 10.0f * DeltaTime(), point1->position.y, point1->position.z);
 	}
 	if (GetKey(KEYCODE_2))
 	{
-		light->position = glm::vec3(light->position.x -10.0f * DeltaTime(), light->position.y, light->position.z);
+		point1->position = glm::vec3(point1->position.x -10.0f * DeltaTime(), point1->position.y, point1->position.z);
 	}
 	if (GetKey(KEYCODE_3))
 	{
-		light->position = glm::vec3(light->position.x, light->position.y, light->position.z + 10.0f * DeltaTime());
+		point1->position = glm::vec3(point1->position.x, point1->position.y, point1->position.z + 10.0f * DeltaTime());
 	}
 	if (GetKey(KEYCODE_4))
 	{
-		light->position = glm::vec3(light->position.x, light->position.y, light->position.z -10.0f * DeltaTime());
+		point1->position = glm::vec3(point1->position.x, point1->position.y, point1->position.z -10.0f * DeltaTime());
 
 	}
+	point1->SetPointLight(point1);
+	pot1->SetSpot(pot1);
+	spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
 	if (GetKey(KEYCODE_5)) cameraState = CameraType::free;
 	if (GetKey(KEYCODE_6)) cameraState = CameraType::FirstPerson;
 	if (GetKey(KEYCODE_7)) cameraState = CameraType::ThridPerson;
@@ -240,7 +253,7 @@ void Game::SpriteUpdate()
 void Game::MaterialUpdate()
 {
 
-	lightCUbe.SetPosition(light->position.x, light->position.y, light->position.z);
+	lightCUbe.SetPosition(point1->position.x, point1->position.y, point1->position.z);
 }
 void Game::SpriteDraw()
 {
@@ -262,4 +275,5 @@ void Game::MaterialDraw()
 {
 	mat1.Draw();
 	lightCUbe.Draw();
+	spotlightCUbe.Draw();
 }
