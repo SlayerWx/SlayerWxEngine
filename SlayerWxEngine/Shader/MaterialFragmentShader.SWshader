@@ -42,7 +42,7 @@ void main()
     vec3 diff = CalDiffuse(ambient,norm,lightDir);
     vec3 spec =  CalSpecular(norm,lightDir);
     float alphaTexture = texture(texture0,TexCoord).a;
-    gl_FragColor = vec4(ambient + diff + spec,1.0)/** texture(texture0,TexCoord) * material.color*/;
+    gl_FragColor = vec4(ambient + diff + spec,alphaTexture)/** texture(texture0,TexCoord) * material.color*/;
 
 } 
 
