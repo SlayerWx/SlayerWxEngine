@@ -9,7 +9,7 @@ struct SlayerWxEngine_API Material
     glm::vec4 color;
     glm::vec3 ambient;
     TextureData diffuse;
-    glm::vec3 specular;
+    TextureData specular;
     float shininess;
 };
 class SlayerWxEngine_API Cube : public Entity
@@ -73,6 +73,7 @@ public:
     Cube();
     Cube(std::string name, const char* filePath);
     Cube(std::string name,const char* filePath, const char* diffuse);
+    Cube(std::string name, const char* filePath, const char* diffuse, const char* specular);
     void Draw();
 };
 #endif

@@ -15,7 +15,6 @@ Cube::Cube(std::string name, const char* filePath) : Entity(name)
 	material.color = glm::vec4(1.0, 1.0, 1.0, 1.0);
 	material.ambient = glm::vec3(1.0, 1.0, 1.0);
 	material.shininess = 1;
-	material.specular = glm::vec3(1.0, 1.0, 1.0);
 }
 Cube::Cube(std::string name,const char* filePath, const char* diffuse) : Entity(name)
 {
@@ -27,19 +26,30 @@ Cube::Cube(std::string name,const char* filePath, const char* diffuse) : Entity(
 	material.color = glm::vec4(1.0,1.0,1.0,1.0);
 	material.ambient = glm::vec3(1.0,1.0,1.0);
 	material.shininess = 1;
-	material.specular = glm::vec3(1.0,1.0,1.0);
 }
+Cube::Cube(std::string name, const char* filePath, const char* diffuse, const char* specular) : Entity(name)
+{
+	data = TextureImporter::ImportTexture(filePath);
+	material.diffuse = TextureImporter::ImportTexture(diffuse);
+	material.specular = TextureImporter::ImportTexture(specular);
+	if (data.nrChannels == 4)
+		alpha = true;
 
+	material.color = glm::vec4(1.0, 1.0, 1.0, 1.0);
+	material.ambient = glm::vec3(1.0, 1.0, 1.0);
+	material.shininess = 1;
+}
 void Cube::Draw()
 {
 
 	TextureImporter::BindTexture(data.texture);
 
 	if (material.diffuse.nrChannels > 0) TextureImporter::BindTexture1(material.diffuse.texture);
+	if (material.specular.nrChannels > 0) TextureImporter::BindTexture2(material.specular.texture);
 
 	renderer->MaterialDraw(vertexMaterial, vertexLength, index, indexLength, model, alpha,material.color
 		,material.ambient,   material.diffuse.nrChannels>0,
-		material.specular,   material.shininess);
+		material.specular.nrChannels > 0,   material.shininess);
 }
 
 void Cube::SetTextureCoordinate(float u0, float v0, float u1, float v1, float u2, float v2, float u3, float v3)
