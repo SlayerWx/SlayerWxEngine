@@ -197,11 +197,23 @@ void Renderer::SetMaterial(Shader* shader, glm::vec4 &color, glm::vec3 &ambient,
 {
 	glUniform4fv(glGetUniformLocation(shader->GetProgram(), "material.color"), 1, &color[0]);
 	glUniform3fv(glGetUniformLocation(shader->GetProgram(), "material.ambient"), 1, &ambient[0]);
-
+	
 	glUniform1i(glGetUniformLocation(shader->GetProgram(), "material.diffuse"), diffuse);
 	
 	if(specular) glUniform1i(glGetUniformLocation(shader->GetProgram(), "material.specular"), 2);
 	else glUniform1i(glGetUniformLocation(shader->GetProgram(), "material.specular"), 0);
 
 	glUniform1f(glGetUniformLocation(shader->GetProgram(), "material.shininess"), shininess);
+
+	//dirLight
+	//glm::vec3 direction = glm::vec3(-1,0,0); 
+	//glUniform3fv(glGetUniformLocation(shader->GetProgram(), "dirLight.direction"), 1, &direction[0]);
+	//glm::vec3 _ambient = glm::vec3(0.3,0.3,0.3);
+	//glUniform3fv(glGetUniformLocation(shader->GetProgram(), "dirLight.ambient"), 1, &_ambient[0]);
+	//glm::vec3 _diffuse = glm::vec3(0.5,0.5,0.5);
+	//glUniform3fv(glGetUniformLocation(shader->GetProgram(), "dirLight.diffuse"), 1, &_diffuse[0]);
+	//glm::vec3 _specular = glm::vec3(1,1,1);
+	//glUniform3fv(glGetUniformLocation(shader->GetProgram(), "dirLight.specular"), 1, &_specular[0]);
+	//glm::vec3 _color = glm::vec3(0,1,0);
+	//glUniform3fv(glGetUniformLocation(shader->GetProgram(), "dirLight.color"), 1, &_color[0]);
 }

@@ -26,43 +26,110 @@ struct Light {
 
 uniform Light light;  
 
+struct DirLight{
+    int enable;
+    vec3 direction;
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    vec3 color;
+};
+uniform DirLight dirLight;
 
-vec3 CalAmbient(vec4 _diffTexture);
-vec3 CalDiffuse(vec3 _ambientResult,vec3 norm, vec3 lightDir,vec4 _diffTexture);
-vec3 CalSpecular(vec3 norm, vec3 lightDir);
+struct SpotLight {
+    int enable;
+    vec3 color;
+    vec3 position;
+    vec3 direction;
+    float cutOff;
+    float outerCutOff;
+  
+    float constant;
+    float linear;
+    float quadratic;
+  
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;       
+};
+uniform SpotLight spotLight;
 
+vec4 CalPointLight(vec3 norm);
+vec4 CalDirLight(vec3 norm);
 
 void main()
 {
     vec3 norm = normalize(outNormal);
+
+
+    //gl_FragColor = CalPointLight(norm);
+    gl_FragColor = CalDirLight(norm);
+} 
+
+vec4 CalPointLight(vec3 norm)
+{
+
     vec3 lightDir = normalize(light.position - fragPos);
     
     vec4 diffTexture = texture(material.diffuse,TexCoord);
-    vec3 ambient = CalAmbient(diffTexture);
-    
-    vec3 diff = CalDiffuse(ambient,norm,lightDir,diffTexture);
-    vec3 spec =  CalSpecular(norm,lightDir);
-    gl_FragColor = vec4(ambient + diff + spec,diffTexture.a) * material.color;
 
-} 
+    //ambient
+    vec3 ambient = light.ambient * material.ambient * diffTexture.rgb;
 
-vec3 CalAmbient(vec4 _diffTexture)
-{
-    return light.ambient * material.ambient * _diffTexture.rgb;
-}
-
-vec3 CalDiffuse(vec3 _ambientResult,vec3 norm, vec3 lightDir,vec4 _diffTexture)  //diffuse
-{
+    // diffuse
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = light.diffuse * diff * _diffTexture.rgb;
-    return diffuse;
-}
-vec3 CalSpecular(vec3 norm, vec3 lightDir) // specular
-{
+    vec3 diffuse = light.diffuse * diff * diffTexture.rgb;
 
+    // specular
     vec3 viewDir = normalize(viewPos - fragPos);
     vec3 reflectDir = reflect(-lightDir, norm);  
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
     vec3 specular = light.specular * spec * texture(material.specular,TexCoord).rgb;  
-   return specular;
+    //combine
+    return vec4(ambient + diffuse + specular,diffTexture.a);
+}
+
+vec4 CalDirLight(vec3 norm)
+{
+    vec4 diffTexture = texture(material.diffuse,TexCoord);
+    vec3 viewDir = normalize(viewPos - fragPos);
+    vec3 lightDir = normalize(-dirLight.direction);
+    //ambient
+    vec3 ambient = dirLight.ambient * material.ambient * diffTexture.rgb;
+    // diffuse
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = dirLight.diffuse * diff * diffTexture.rgb;
+    // specular
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    // combine
+    vec3 specular = dirLight.specular * spec * diffTexture.rgb;
+    return vec4((ambient + diffuse + specular)* dirLight.color,diffTexture.a);
+}
+vec4 CalSpotLight(vec3 norm)
+{
+    vec4 diffTexture = texture(material.diffuse,TexCoord);
+    vec3 lightDir = normalize(spotLight.position - fragPos);
+    vec3 viewDir = normalize(viewPos - fragPos);
+    //ambient
+    vec3 ambient = light.ambient * diffTexture.rgb;
+    // diffuse 
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = light.diffuse * diff * diffTexture.rgb;
+    // specular 
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    vec3 specular = light.specular * spec * diffTexture.rgb;
+    // attenuation
+    float _distance = length(spotLight.position - fragPos);
+    float attenuation = 1.0 / (spotLight.constant + spotLight.linear * _distance + spotLight.quadratic * (_distance * _distance));    
+    // spotlight intensity
+    float theta = dot(lightDir, normalize(-spotLight.direction)); 
+    float epsilon = spotLight.cutOff - spotLight.outerCutOff;
+    float intensity = clamp((theta - spotLight.outerCutOff) / epsilon, 0.0, 1.0);
+    // combine
+    ambient *= attenuation * intensity;
+    diffuse *= attenuation * intensity;
+    specular *= attenuation * intensity;
+    return (ambient + diffuse + specular) * spotLight.color;
 }
