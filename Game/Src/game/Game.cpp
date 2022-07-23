@@ -17,7 +17,7 @@ Game::Game()
 	shape = Shape(ShapeType::Square);
 	
 	model1 = new Model();
-	model1->LoadModel("assets/models/backpack/backpack.obj", "assets/models/backpack/");
+	//model1->LoadModel("assets/models/backpack/backpack.obj", "assets/models/backpack/");
 }
 
 void Game::Play()
@@ -51,8 +51,8 @@ void Game::Start()
 	spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
 
 
-	model1->SetPosition(0,0,0);
-	model1->Scale(1,1,1);
+	//model1->SetPosition(0,0,0);
+	//model1->Scale(1,1,1);
 	
 }
 float a = 0.0f;
@@ -279,5 +279,5 @@ void Game::MaterialDraw()
 	//mat1.Draw();
 	//lightCUbe.Draw();
 	//spotlightCUbe.Draw();
-	model1->DrawModel();
+	//model1->DrawModel();
 }

@@ -150,16 +150,7 @@
     <ClCompile Include="Src\dataManager\DataManager.cpp">
       <Filter>Src\dataManager</Filter>
     </ClCompile>
-    <ClCompile Include="Src\model\Mesh.cpp">
-      <Filter>Src\model</Filter>
-    </ClCompile>
     <ClCompile Include="Src\model\Model.cpp">
-      <Filter>Src\model</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\model\ModelTexture.cpp">
-      <Filter>Src\model</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\model\ModelImporter.cpp">
       <Filter>Src\model</Filter>
     </ClCompile>
   </ItemGroup>
@@ -251,16 +242,7 @@
     <ClInclude Include="Src\dataManager\DataManager.h">
       <Filter>Src\dataManager</Filter>
     </ClInclude>
-    <ClInclude Include="Src\model\Mesh.h">
-      <Filter>Src\model</Filter>
-    </ClInclude>
     <ClInclude Include="Src\model\Model.h">
-      <Filter>Src\model</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\model\ModelTexture.h">
-      <Filter>Src\model</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\model\ModelImporter.h">
       <Filter>Src\model</Filter>
     </ClInclude>
   </ItemGroup>

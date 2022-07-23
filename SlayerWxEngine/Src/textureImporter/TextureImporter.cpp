@@ -48,13 +48,3 @@ void TextureImporter::BindTexture2(unsigned int data)
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, data);
 }
-
-unsigned char* TextureImporter::StbiLoad(const char* filename,int* x,int* y,int* comp,int req_comp)
-{
-	return stbi_load(filename,x,y,comp,req_comp);
-}
-
-void TextureImporter::StbiImageFree(unsigned char* data)
-{
-	stbi_image_free(data);
-}

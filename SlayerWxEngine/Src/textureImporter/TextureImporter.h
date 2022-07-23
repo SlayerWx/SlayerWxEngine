@@ -7,6 +7,7 @@ struct TextureData
 	int height;
 	int nrChannels;
 	unsigned int texture;
+	char* path;
 };
 
 class TextureImporter {
