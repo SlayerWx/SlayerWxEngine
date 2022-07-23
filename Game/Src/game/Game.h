@@ -16,6 +16,7 @@ private:
 	Cube mat1;
 	Cube lightCUbe;
 	Cube spotlightCUbe;
+	Model* model1;
 	void Start();
 	void Update();
 	bool Input(int keycode, float &variable, float modif);

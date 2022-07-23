@@ -7,6 +7,7 @@
 TextureData TextureImporter::ImportTexture(const char* filePath)
 {
 	TextureData textureData;
+	textureData.path = (char*)filePath;
 	stbi_set_flip_vertically_on_load(1);
 	glGenTextures(1, &textureData.texture);
 	glBindTexture(GL_TEXTURE_2D, textureData.texture);
@@ -18,7 +19,8 @@ TextureData TextureImporter::ImportTexture(const char* filePath)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	textureData.pixelData = stbi_load(filePath, &textureData.width, &textureData.height, &textureData.nrChannels, STBI_rgb_alpha);
-	if (textureData.pixelData) {
+	if (textureData.pixelData) 
+	{
 		if(textureData.nrChannels != 4)
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, textureData.width, textureData.height, 0, GL_RGB, GL_UNSIGNED_BYTE, textureData.pixelData);
 		else
@@ -45,4 +47,14 @@ void TextureImporter::BindTexture2(unsigned int data)
 {
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, data);
+}
+
+unsigned char* TextureImporter::StbiLoad(const char* filename,int* x,int* y,int* comp,int req_comp)
+{
+	return stbi_load(filename,x,y,comp,req_comp);
+}
+
+void TextureImporter::StbiImageFree(unsigned char* data)
+{
+	stbi_image_free(data);
 }

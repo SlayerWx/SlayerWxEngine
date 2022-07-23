@@ -1,5 +1,5 @@
-#ifndef MATERIAL2D_H
-#define MATERIAL2D_H
+#ifndef CUBE_H
+#define CUBE_H
 #include "entity2D/Entity2D.h"
 #include "textureImporter/TextureImporter.h"
 #include "gui/MyGui.h"

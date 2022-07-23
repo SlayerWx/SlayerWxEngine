@@ -76,6 +76,9 @@
     <Filter Include="Src\dataManager">
       <UniqueIdentifier>{3c3d2492-b648-4eaa-a6e2-fc0e12dab75e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\model">
+      <UniqueIdentifier>{3034f202-1d29-43d9-b19b-bc9dd525b47c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\baseGame\BaseGame.cpp">
@@ -146,6 +149,18 @@
     </ClCompile>
     <ClCompile Include="Src\dataManager\DataManager.cpp">
       <Filter>Src\dataManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\model\Mesh.cpp">
+      <Filter>Src\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\model\Model.cpp">
+      <Filter>Src\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\model\ModelTexture.cpp">
+      <Filter>Src\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\model\ModelImporter.cpp">
+      <Filter>Src\model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +250,18 @@
     </ClInclude>
     <ClInclude Include="Src\dataManager\DataManager.h">
       <Filter>Src\dataManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\model\Mesh.h">
+      <Filter>Src\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\model\Model.h">
+      <Filter>Src\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\model\ModelTexture.h">
+      <Filter>Src\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\model\ModelImporter.h">
+      <Filter>Src\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

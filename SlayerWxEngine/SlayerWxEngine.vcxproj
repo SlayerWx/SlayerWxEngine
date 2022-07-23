@@ -36,6 +36,10 @@
     <ClCompile Include="Src\gui\MyGui.cpp" />
     <ClCompile Include="Src\input\Input.cpp" />
     <ClCompile Include="Src\light\Light.cpp" />
+    <ClCompile Include="Src\model\Mesh.cpp" />
+    <ClCompile Include="Src\model\Model.cpp" />
+    <ClCompile Include="Src\model\ModelImporter.cpp" />
+    <ClCompile Include="Src\model\ModelTexture.cpp" />
     <ClCompile Include="Src\renderer\renderer.cpp" />
     <ClCompile Include="Src\shader\Shader.cpp" />
     <ClCompile Include="Src\shape\Shape.cpp" />
@@ -66,6 +70,10 @@
     <ClInclude Include="Src\input\Input.h" />
     <ClInclude Include="Src\input\keycode\Keycode.h" />
     <ClInclude Include="Src\light\Light.h" />
+    <ClInclude Include="Src\model\Mesh.h" />
+    <ClInclude Include="Src\model\Model.h" />
+    <ClInclude Include="Src\model\ModelImporter.h" />
+    <ClInclude Include="Src\model\ModelTexture.h" />
     <ClInclude Include="Src\renderer\renderer.h" />
     <ClInclude Include="Src\shader\Shader.h" />
     <ClInclude Include="Src\shape\Shape.h" />
@@ -155,15 +163,15 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_WINDLL;GraficosEngine_Exports;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Lib\glfw\include\GLFW;$(ProjectDir)Lib\glew\include\GL;$(ProjectDir)Src;$(ProjectDir)Lib\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Lib\glfw\include\GLFW;$(ProjectDir)Lib\glew\include\GL;$(ProjectDir)Src;$(ProjectDir)Lib\glm;$(ProjectDir)Lib\assimp\lib</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)Lib\glfw\lib-vc2019;$(ProjectDir)Lib\glew\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)Lib\glfw\lib-vc2019;$(ProjectDir)Lib\glew\lib;$(ProjectDir)Lib\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;assimp-vc140-mt.lib;User32.lib;Gdi32.lib;Shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>"$(ProjectDir)postCompile.bat" "$(ProjectDir)\bin\Debug\Win32" "$(SolutionDir)Game"</Command>
