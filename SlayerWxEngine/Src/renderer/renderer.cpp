@@ -342,7 +342,6 @@ void Renderer::DrawMesh(unsigned int& vao, unsigned int indexAmount, glm::mat4 m
 	for (unsigned int i = 0; i < textures.size(); i++) {
 		std::string name = textures[i].txType;
 		if (name == "texture_diffuse") {
-			TextureImporter::BindTexture(textures[i].texture);
 			TextureImporter::BindTexture1(textures[i].texture);
 			glUniform1i(glGetUniformLocation(materialShader->GetProgram(), "material.diffuse"), 1);
 		}
@@ -353,15 +352,16 @@ void Renderer::DrawMesh(unsigned int& vao, unsigned int indexAmount, glm::mat4 m
 		}
 	}
 
-	
-	glUniformMatrix4fv(modelLoc, 1, GL_FALSE,glm::value_ptr(model));
+	UpdateModelUniformShaders(model);
+	UpdateProjectUniformShaders(cam->projection);
+	UpdateViewUniformShaders(cam->view);
 	
 	glUniform4fv(glGetUniformLocation(materialShader->GetProgram(), "material.color"), 1, &color[0]);
 	glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "material.ambient"), 1, &ambient[0]);
 	glUniform1f(glGetUniformLocation(materialShader->GetProgram(), "material.shininess"), shininess);
 	
 	glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "viewPos"), 1, &cam->cameraPos[0]);
-	
+
 	glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, indexAmount, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);

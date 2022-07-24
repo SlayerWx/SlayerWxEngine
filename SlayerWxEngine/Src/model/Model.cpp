@@ -2,7 +2,7 @@
 Model::Model(std::string const& path, bool gamma) : Entity("Model"), gammaCorrection(gamma) {
 
     color = glm::vec4(1.0, 1.0, 1.0, 1.0);
-    ambient = glm::vec3(1.0, 1.0, 1.0);
+    ambient = glm::vec3(0.5, 0.5, 0.5);
     shininess = 1;
     LoadModel(path);
 }
@@ -31,13 +31,8 @@ void Model::ProcessNode(aiNode* node, const aiScene* scene) {
         meshes.push_back(ProcessMesh(mesh, scene));
     }
     for (unsigned int i = 0; i < node->mNumChildren; i++) {
-        a();
         ProcessNode(node->mChildren[i], scene);
     }
-}
-void Model::a()
-{
-    //a;
 }
 
 Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene) {

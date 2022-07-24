@@ -227,23 +227,47 @@ void Game::ShapeUpdate()
 }
 void Game::SpriteUpdate()
 {
-	//if (GetKey(KEYCODE_1))
-	//{
-	//	point1->position = glm::vec3(point1->position.x + 10.0f * DeltaTime(), point1->position.y, point1->position.z);
-	//}
-	//if (GetKey(KEYCODE_2))
-	//{
-	//	point1->position = glm::vec3(point1->position.x -10.0f * DeltaTime(), point1->position.y, point1->position.z);
-	//}
-	//if (GetKey(KEYCODE_3))
-	//{
-	//	point1->position = glm::vec3(point1->position.x, point1->position.y, point1->position.z + 10.0f * DeltaTime());
-	//}
-	//if (GetKey(KEYCODE_4))
-	//{
-	//	point1->position = glm::vec3(point1->position.x, point1->position.y, point1->position.z -10.0f * DeltaTime());
-	//
-	//}
+	if (GetKey(KEYCODE_1))
+	{
+		point1->position = glm::vec3(point1->position.x + 10.0f * DeltaTime(), point1->position.y, point1->position.z);
+	}
+	if (GetKey(KEYCODE_2))
+	{
+		point1->position = glm::vec3(point1->position.x -10.0f * DeltaTime(), point1->position.y, point1->position.z);
+	}
+	if (GetKey(KEYCODE_3))
+	{
+		point1->position = glm::vec3(point1->position.x, point1->position.y, point1->position.z + 10.0f * DeltaTime());
+	}
+	if (GetKey(KEYCODE_4))
+	{
+		point1->position = glm::vec3(point1->position.x, point1->position.y, point1->position.z -10.0f * DeltaTime());
+	
+	}
+
+	if (GetKey(KEYCODE_5))
+	{
+		model1->SetPosition(model1->position.x + 10.0f * DeltaTime(), model1->position.y, model1->position.z);
+	}
+	if (GetKey(KEYCODE_6))
+	{
+		model1->SetPosition(model1->position.x - 10.0f * DeltaTime(), model1->position.y, model1->position.z);
+	}
+	if (GetKey(KEYCODE_7))
+	{
+		model1->SetPosition(model1->position.x, model1->position.y, model1->position.z + 10.0f * DeltaTime());
+	}
+	if (GetKey(KEYCODE_8))
+	{
+		model1->SetPosition(model1->position.x, model1->position.y, model1->position.z - 10.0f * DeltaTime());
+
+	}
+
+	if (GetKey(KEYCODE_9))
+	{
+		model1->Scale(model1->localScale.x+0.1f, model1->localScale.y, model1->localScale.z);
+
+	}
 	point1->SetPointLight(point1);
 	pot1->SetSpot(pot1);
 	spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
