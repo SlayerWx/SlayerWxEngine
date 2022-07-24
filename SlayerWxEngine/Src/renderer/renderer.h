@@ -1,13 +1,28 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 #include "export/export.h"
+#include "textureImporter/TextureImporter.h"
 #include "glm/glm.hpp"
 #include"glm/gtc/type_ptr.hpp"
 #include "shader/Shader.h"
 #include "camera/Camera.h"
 #include "light/Light.h"
 #include <iostream>   
-#include <string>   
+#include <string>
+#include <vector>
+
+#define MAX_BONE_INFLUENCE 4
+
+struct SlayerWxEngine_API Vertex {
+	glm::vec3 position;
+	glm::vec3 normal;
+	glm::vec2 texCoord;
+	glm::vec3 tangent;
+	glm::vec3 bitangent;
+
+	int m_BoneIDs[MAX_BONE_INFLUENCE];
+	float m_Weights[MAX_BONE_INFLUENCE];
+};
 class SlayerWxEngine_API Renderer
 {
 private:
@@ -46,6 +61,11 @@ public:
 	const char* CastStringToChar(std::string str, std::string str2);
 
 	void SetMaterial(Shader* shader, glm::vec4 &color, glm::vec3 &ambient,bool diffuse, bool specular, float &shininess);
+
+	void SetupMesh(unsigned int& vao, unsigned int& vbo, unsigned int& ebo, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices);
+
+	void DrawMesh(unsigned int& vao, unsigned int indexAmount, glm::mat4 model, std::vector<TextureData> textures, glm::vec4& color, glm::vec3& ambient, float& shininess);
+
 };
 // settings
 //const unsigned int SCR_WIDTH = 800;

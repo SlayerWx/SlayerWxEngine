@@ -16,8 +16,6 @@ Game::Game()
 	squareAuto = Shape(ShapeType::Square);
 	shape = Shape(ShapeType::Square);
 	
-	model1 = new Model();
-	//model1->LoadModel("assets/models/backpack/backpack.obj", "assets/models/backpack/");
 }
 
 void Game::Play()
@@ -50,9 +48,10 @@ void Game::Start()
 	lightCUbe.SetPosition(point1->position.x, point1->position.y, point1->position.z);
 	spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
 
-
-	//model1->SetPosition(0,0,0);
-	//model1->Scale(1,1,1);
+	model1 = new Model("assets/models/backpack/backpack.obj", false);
+	
+	model1->SetPosition(0,0,0);
+	model1->Scale(1,1,1);
 	
 }
 float a = 0.0f;
@@ -160,55 +159,55 @@ void Game::ShapeStart()
 }
 void Game::SpriteStart()
 {
-	//itsfineSprite = Sprite("assets/This_Is_Fine.png");
-	//dog = Sprite("assets/logo.png");
-	//ncat = Sprite("assets/logoCat.png");
-	//link = Sprite("assets/link.png");
-	//dog.canCollision = true;
-	//link.canCollision = true;
-	//link.strength = 1;
-	//rightAnim = new Animation();
-	//rightAnim->AddFrame(0, 0, 96, 104, 961, 831, 0.001, 10);
-	//upAnim = new Animation();
-	//upAnim->AddFrame(0, 103, 96, 104, 961, 831, 0.001, 10);
-	//leftAnim = new Animation();
-	//leftAnim->AddFrame(2, 208, 96, 102, 961, 831, 0.001, 10);
-	//downAnim = new Animation();
-	//downAnim->AddFrame(2, 312, 96, 102, 961, 831, 0.001, 10);
-	//idleRightAnim = new Animation();
-	//idleRightAnim->AddFrame(2, 415, 96, 102, 961, 831, 0.007, 3);
-	//idleUpAnim = new Animation();
-	//idleUpAnim->AddFrame(2, 517, 96, 102, 961, 831, 0.007, 1);
-	//idleLeftAnim = new Animation();
-	//idleLeftAnim->AddFrame(2, 620, 96, 102, 961, 831, 0.007, 3);
-	//idleDownAnim = new Animation();
-	//idleDownAnim->AddFrame(2, 723, 96, 102, 961, 831, 0.007, 3);
-	//link.SetAnimation(idleDownAnim);
-	//
-	//itsfineSprite.SetPosition(0.0f, 0.0f, 2.0f);
-	//itsfineSprite.Scale(1.0f, 1.0f, 1.0f);
-	//dog.SetPosition(-3.5f, 0.0f, -1.0f);
-	//dog.Scale(1.0f, 1.0f, 1.0f);
-	//ncat.SetPosition(-2.5f, 0.0f, 0.0f);
-	//ncat.Scale(1.0f, 1.0f, 1.0f);
-	//link.SetPosition(4.0f, 0.0f, -2.0f);
-	//link.Scale(1.0f, 1.0f, 1.0f);
+	itsfineSprite = Sprite("assets/This_Is_Fine.png");
+	dog = Sprite("assets/logo.png");
+	ncat = Sprite("assets/logoCat.png");
+	link = Sprite("assets/link.png");
+	dog.canCollision = true;
+	link.canCollision = true;
+	link.strength = 1;
+	rightAnim = new Animation();
+	rightAnim->AddFrame(0, 0, 96, 104, 961, 831, 0.001, 10);
+	upAnim = new Animation();
+	upAnim->AddFrame(0, 103, 96, 104, 961, 831, 0.001, 10);
+	leftAnim = new Animation();
+	leftAnim->AddFrame(2, 208, 96, 102, 961, 831, 0.001, 10);
+	downAnim = new Animation();
+	downAnim->AddFrame(2, 312, 96, 102, 961, 831, 0.001, 10);
+	idleRightAnim = new Animation();
+	idleRightAnim->AddFrame(2, 415, 96, 102, 961, 831, 0.007, 3);
+	idleUpAnim = new Animation();
+	idleUpAnim->AddFrame(2, 517, 96, 102, 961, 831, 0.007, 1);
+	idleLeftAnim = new Animation();
+	idleLeftAnim->AddFrame(2, 620, 96, 102, 961, 831, 0.007, 3);
+	idleDownAnim = new Animation();
+	idleDownAnim->AddFrame(2, 723, 96, 102, 961, 831, 0.007, 3);
+	link.SetAnimation(idleDownAnim);
+	
+	itsfineSprite.SetPosition(0.0f, 0.0f, 2.0f);
+	itsfineSprite.Scale(1.0f, 1.0f, 1.0f);
+	dog.SetPosition(-3.5f, 0.0f, -1.0f);
+	dog.Scale(1.0f, 1.0f, 1.0f);
+	ncat.SetPosition(-2.5f, 0.0f, 0.0f);
+	ncat.Scale(1.0f, 1.0f, 1.0f);
+	link.SetPosition(4.0f, 0.0f, -2.0f);
+	link.Scale(1.0f, 1.0f, 1.0f);
 
 }
 void Game::MaterialStart()
 {
-	//mat1 = Cube("cube", "assets/container.png", "assets/container.png", "assets/container_specular.png");
-	//mat1.SetPosition(3.0f, 1.0f, 2.0f);
-	//mat1.Scale(1.0f, 1.0f, 1.0f);
-	//
-	//
-	//lightCUbe = Cube("lightCube", "assets/rick.png");
-	//lightCUbe.SetPosition(3.0f, 1.0f, 2.0f);
-	//lightCUbe.Scale(0.3f, 0.3f, 0.3f);
-	//
-	//spotlightCUbe = Cube("lightCube", "assets/bob.png");
-	//spotlightCUbe.SetPosition(3.0f, 1.0f, 2.0f);
-	//spotlightCUbe.Scale(0.3f, 0.3f, 0.3f);
+	mat1 = Cube("cube", "assets/container.png", "assets/container.png", "assets/container_specular.png");
+	mat1.SetPosition(3.0f, 1.0f, 2.0f);
+	mat1.Scale(1.0f, 1.0f, 1.0f);
+	
+	
+	lightCUbe = Cube("lightCube", "assets/rick.png");
+	lightCUbe.SetPosition(3.0f, 1.0f, 2.0f);
+	lightCUbe.Scale(0.3f, 0.3f, 0.3f);
+	
+	spotlightCUbe = Cube("lightCube", "assets/bob.png");
+	spotlightCUbe.SetPosition(3.0f, 1.0f, 2.0f);
+	spotlightCUbe.Scale(0.3f, 0.3f, 0.3f);
 }
 void Game::ShapeUpdate()
 {
@@ -245,9 +244,10 @@ void Game::SpriteUpdate()
 	//	point1->position = glm::vec3(point1->position.x, point1->position.y, point1->position.z -10.0f * DeltaTime());
 	//
 	//}
-	//point1->SetPointLight(point1);
-	//pot1->SetSpot(pot1);
-	//spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
+	point1->SetPointLight(point1);
+	pot1->SetSpot(pot1);
+	spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
+	link.Update();
 	//if (GetKey(KEYCODE_5)) cameraState = CameraType::free;
 	//if (GetKey(KEYCODE_6)) cameraState = CameraType::FirstPerson;
 	//if (GetKey(KEYCODE_7)) cameraState = CameraType::ThridPerson;
@@ -256,15 +256,15 @@ void Game::SpriteUpdate()
 void Game::MaterialUpdate()
 {
 
-	//lightCUbe.SetPosition(point1->position.x, point1->position.y, point1->position.z);
+	lightCUbe.SetPosition(point1->position.x, point1->position.y, point1->position.z);
 }
 void Game::SpriteDraw()
 {
 	
-	//itsfineSprite.Draw();
-	//dog.Draw();
-	//ncat.Draw();
-	//link.Draw();
+	itsfineSprite.Draw();
+	dog.Draw();
+	ncat.Draw();
+	link.Draw();
 
 }
 void Game::ShapeDraw()
@@ -276,8 +276,8 @@ void Game::ShapeDraw()
 }
 void Game::MaterialDraw()
 {
-	//mat1.Draw();
-	//lightCUbe.Draw();
-	//spotlightCUbe.Draw();
-	//model1->DrawModel();
+	mat1.Draw();
+	lightCUbe.Draw();
+	spotlightCUbe.Draw();
+	model1->Draw();
 }

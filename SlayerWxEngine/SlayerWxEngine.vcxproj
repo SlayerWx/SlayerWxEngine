@@ -36,6 +36,7 @@
     <ClCompile Include="Src\gui\MyGui.cpp" />
     <ClCompile Include="Src\input\Input.cpp" />
     <ClCompile Include="Src\light\Light.cpp" />
+    <ClCompile Include="Src\model\Mesh.cpp" />
     <ClCompile Include="Src\model\Model.cpp" />
     <ClCompile Include="Src\renderer\renderer.cpp" />
     <ClCompile Include="Src\shader\Shader.cpp" />
@@ -67,6 +68,7 @@
     <ClInclude Include="Src\input\Input.h" />
     <ClInclude Include="Src\input\keycode\Keycode.h" />
     <ClInclude Include="Src\light\Light.h" />
+    <ClInclude Include="Src\model\Mesh.h" />
     <ClInclude Include="Src\model\Model.h" />
     <ClInclude Include="Src\renderer\renderer.h" />
     <ClInclude Include="Src\shader\Shader.h" />

@@ -35,7 +35,7 @@ void Renderer::CreateShaders()
 
 void Renderer::Draw(float* vertex,int vertexLength, unsigned int* index,int indexLength, glm::mat4 modelMatrix)
 {
-
+	BindBuffers();
 	DefVertexAttribute();
 	CallUniformShaders(pixelShader);
 	pixelShader->ActiveProgram();
@@ -48,6 +48,7 @@ void Renderer::Draw(float* vertex,int vertexLength, unsigned int* index,int inde
 }
 void Renderer::SpriteDraw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix,bool alpha)
 {
+	BindBuffers();
 	DefVertexSpriteAttribute();
 	CallUniformShaders(textureShader);
 	textureShader->ActiveProgram();
@@ -71,6 +72,7 @@ void Renderer::SpriteDraw(float* vertex, int vertexLength, unsigned int* index, 
 void Renderer::MaterialDraw(float* vertex, int vertexLength, unsigned int* index, int indexLength, glm::mat4 modelMatrix, bool alpha,
 	glm::vec4 &color,glm::vec3 &ambient,bool diffuse,bool specular,float &shininess)
 {
+	BindBuffers();
 	DefVertexMaterialAttribute();
 	CallUniformShaders(materialShader);
 	materialShader->ActiveProgram();
@@ -207,6 +209,7 @@ void Renderer::DrawMaterialLight() //to MaterialShader
 		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "dirLight.specular"), 1, &DirectionalLightning::actualDirectionalLight.specular[0]);
 		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "dirLight.color"), 1, &DirectionalLightning::actualDirectionalLight.color[0]);
 		glUniform1i(glGetUniformLocation(materialShader->GetProgram(), "dirLight.enable"), 1);
+		
 	}
 	//int aux = 0;
 	//for(PointLight* point : pointLights)
@@ -284,4 +287,82 @@ void Renderer::SetMaterial(Shader* shader, glm::vec4 &color, glm::vec3 &ambient,
 
 	glUniform1f(glGetUniformLocation(shader->GetProgram(), "material.shininess"), shininess);
 
+}
+void Renderer::SetupMesh(unsigned int& vao, unsigned int& vbo, unsigned int& ebo, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices
+) {
+	glGenVertexArrays(1, &vao);
+	glGenBuffers(1, &vbo);
+	glGenBuffers(1, &ebo);
+
+	glBindVertexArray(vao);
+	// load data into vertex buffers
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	// A great thing about structs is that their memory layout is sequential for all its items.
+	// The effect is that we can simply pass a pointer to the struct and it translates perfectly to a glm::vec3/2 array which
+	// again translates to 3/2 floats which translates to a byte array.
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
+
+	// set the vertex attribute pointers
+	// vertex Positions
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
+	// vertex normals
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
+	// vertex texture coords
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoord));
+	// vertex tangent
+	glEnableVertexAttribArray(3);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, tangent));
+	// vertex bitangent
+	glEnableVertexAttribArray(4);
+	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, bitangent));
+	// ids
+	glEnableVertexAttribArray(5);
+	glVertexAttribIPointer(5, 4, GL_INT, sizeof(Vertex), (void*)offsetof(Vertex, m_BoneIDs));
+
+	// weights
+	glEnableVertexAttribArray(6);
+	glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, m_Weights));
+	glBindVertexArray(0);
+}
+
+void Renderer::DrawMesh(unsigned int& vao, unsigned int indexAmount, glm::mat4 model, std::vector<TextureData> textures,
+	glm::vec4 &color, glm::vec3 &ambient, float &shininess) {
+	
+	DrawMaterialLight();
+	CallUniformShaders(materialShader);
+	materialShader->ActiveProgram();
+	DrawMaterialLight();
+	
+	for (unsigned int i = 0; i < textures.size(); i++) {
+		std::string name = textures[i].txType;
+		if (name == "texture_diffuse") {
+			TextureImporter::BindTexture(textures[i].texture);
+			TextureImporter::BindTexture1(textures[i].texture);
+			glUniform1i(glGetUniformLocation(materialShader->GetProgram(), "material.diffuse"), 1);
+		}
+		else if (name == "texture_specular") {
+			glActiveTexture(GL_TEXTURE2);
+			TextureImporter::BindTexture2(textures[i].texture);
+			glUniform1i(glGetUniformLocation(materialShader->GetProgram(), "material.specular"), 2);
+		}
+	}
+
+	
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE,glm::value_ptr(model));
+	
+	glUniform4fv(glGetUniformLocation(materialShader->GetProgram(), "material.color"), 1, &color[0]);
+	glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "material.ambient"), 1, &ambient[0]);
+	glUniform1f(glGetUniformLocation(materialShader->GetProgram(), "material.shininess"), shininess);
+	
+	glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "viewPos"), 1, &cam->cameraPos[0]);
+	
+	glBindVertexArray(vao);
+	glDrawElements(GL_TRIANGLES, indexAmount, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
 }
