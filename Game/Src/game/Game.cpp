@@ -48,10 +48,6 @@ void Game::Start()
 	lightCUbe.SetPosition(point1->position.x, point1->position.y, point1->position.z);
 	spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
 
-	model1 = new Model("assets/models/backpack/backpack.obj", false);
-	
-	model1->SetPosition(0,0,0);
-	model1->Scale(1,1,1);
 	
 }
 float a = 0.0f;
@@ -208,6 +204,12 @@ void Game::MaterialStart()
 	spotlightCUbe = Cube("lightCube", "assets/bob.png");
 	spotlightCUbe.SetPosition(3.0f, 1.0f, 2.0f);
 	spotlightCUbe.Scale(0.3f, 0.3f, 0.3f);
+
+	model1 = new Model(false);
+	ModelLoader::LoadModel("assets/models/backpack/backpack.obj", model1->structure);
+
+	model1->SetPosition(0, 0, 0);
+	model1->Scale(1, 1, 1);
 }
 void Game::ShapeUpdate()
 {
