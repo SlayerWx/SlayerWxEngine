@@ -31,7 +31,7 @@ State linkState = Sdown;
 void Game::Start()
 {
 	
-	SpriteStart();
+	//SpriteStart();
 	ShapeStart();
 	MaterialStart();
 	myDirLight.ambient = glm::vec3(0.1, 0.1, 0.1);
@@ -81,7 +81,7 @@ void Game::Update()
 	Input(KEYCODE_U, scaleZ, -valueModif* 10.0f * DeltaTime());
 	Input(KEYCODE_O, scaleZ, +valueModif* 10.0f * DeltaTime());
 
-	SpriteUpdate();
+	//SpriteUpdate();
 
 
 	if (GetKey(KEYCODE_W))
@@ -122,7 +122,7 @@ void Game::Update()
 
 	}
 
-	SpriteDraw();
+	//SpriteDraw();
 	ShapeDraw();
 	MaterialDraw();
 }
@@ -229,13 +229,21 @@ void Game::ShapeUpdate()
 }
 void Game::SpriteUpdate()
 {
+	link.Update();
+	//if (GetKey(KEYCODE_5)) cameraState = CameraType::free;
+	//if (GetKey(KEYCODE_6)) cameraState = CameraType::FirstPerson;
+	//if (GetKey(KEYCODE_7)) cameraState = CameraType::ThridPerson;
+	//	CameraFollowObj(cameraState, link.GetPosition(), 5);
+}
+void Game::MaterialUpdate()
+{
 	if (GetKey(KEYCODE_1))
 	{
 		point1->position = glm::vec3(point1->position.x + 10.0f * DeltaTime(), point1->position.y, point1->position.z);
 	}
 	if (GetKey(KEYCODE_2))
 	{
-		point1->position = glm::vec3(point1->position.x -10.0f * DeltaTime(), point1->position.y, point1->position.z);
+		point1->position = glm::vec3(point1->position.x - 10.0f * DeltaTime(), point1->position.y, point1->position.z);
 	}
 	if (GetKey(KEYCODE_3))
 	{
@@ -243,8 +251,8 @@ void Game::SpriteUpdate()
 	}
 	if (GetKey(KEYCODE_4))
 	{
-		point1->position = glm::vec3(point1->position.x, point1->position.y, point1->position.z -10.0f * DeltaTime());
-	
+		point1->position = glm::vec3(point1->position.x, point1->position.y, point1->position.z - 10.0f * DeltaTime());
+
 	}
 
 	if (GetKey(KEYCODE_5))
@@ -267,21 +275,12 @@ void Game::SpriteUpdate()
 
 	if (GetKey(KEYCODE_9))
 	{
-		model1->Scale(model1->localScale.x+0.1f, model1->localScale.y, model1->localScale.z);
+		model1->Scale(model1->localScale.x + 0.1f, model1->localScale.y, model1->localScale.z);
 
 	}
 	point1->SetPointLight(point1);
 	pot1->SetSpot(pot1);
 	spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
-	link.Update();
-	//if (GetKey(KEYCODE_5)) cameraState = CameraType::free;
-	//if (GetKey(KEYCODE_6)) cameraState = CameraType::FirstPerson;
-	//if (GetKey(KEYCODE_7)) cameraState = CameraType::ThridPerson;
-	//	CameraFollowObj(cameraState, link.GetPosition(), 5);
-}
-void Game::MaterialUpdate()
-{
-
 	lightCUbe.SetPosition(point1->position.x, point1->position.y, point1->position.z);
 }
 void Game::SpriteDraw()
