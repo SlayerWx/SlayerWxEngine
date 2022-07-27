@@ -126,6 +126,11 @@ std::vector<TextureData> ModelLoader::LoadMaterialTextures(aiMaterial* mat, aiTe
         {
             TextureData texture;
             texture = TextureImporter::ImportFromFile(str.C_Str(), _structure.directory);
+            if (texture.path == "")
+            {
+                _structure.directory = "../SlayerWxEngine/assets/texture";
+                texture = TextureImporter::ImportFromFile("blank.jpg", _structure.directory);
+            }
             texture.txType = typeName;
             textures.push_back(texture);
             _structure.textures_loaded.push_back(texture);

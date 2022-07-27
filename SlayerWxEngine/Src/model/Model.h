@@ -10,14 +10,9 @@
 class SlayerWxEngine_API Model : public Entity {
 public:
 	ModelStruct structure;
-	bool gammaCorrection;
-
-	Model(bool gamma = false);
+	Model();
 
 	void Draw();
-
-	glm::vec4 color;
-	glm::vec3 ambient;
 	float shininess;
 	
 

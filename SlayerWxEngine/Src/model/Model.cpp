@@ -1,9 +1,6 @@
 #include "Model.h"
-Model::Model(bool gamma) : Entity("Model"), gammaCorrection(gamma) {
-
-    color = glm::vec4(1.0, 1.0, 1.0, 1.0);
-    ambient = glm::vec3(0.5, 0.5, 0.5);
-    shininess = 1;
+Model::Model() : Entity("Model") {
+    shininess = 32;
 
 }
 

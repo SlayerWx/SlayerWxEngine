@@ -14,7 +14,7 @@ Cube::Cube(std::string name, const char* filePath) : Entity(name)
 
 	material.color = glm::vec4(1.0, 1.0, 1.0, 1.0);
 	material.ambient = glm::vec3(1.0, 1.0, 1.0);
-	material.shininess = 1;
+	material.shininess = 32;
 }
 Cube::Cube(std::string name,const char* filePath, const char* diffuse) : Entity(name)
 {
@@ -25,7 +25,7 @@ Cube::Cube(std::string name,const char* filePath, const char* diffuse) : Entity(
 
 	material.color = glm::vec4(1.0,1.0,1.0,1.0);
 	material.ambient = glm::vec3(1.0,1.0,1.0);
-	material.shininess = 1;
+	material.shininess = 32;
 }
 Cube::Cube(std::string name, const char* filePath, const char* diffuse, const char* specular) : Entity(name)
 {

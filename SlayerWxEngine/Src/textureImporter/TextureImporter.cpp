@@ -71,6 +71,7 @@ TextureData TextureImporter::ImportFromFile(const char* path, const std::string&
 	{
 		std::cout << "Texture failed to load at path: " << path << std::endl;
 		stbi_image_free(textureData.pixelData);
+		textureData.path = "";
 	}
 
 	return textureData;
