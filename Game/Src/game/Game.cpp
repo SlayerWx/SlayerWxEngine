@@ -47,9 +47,12 @@ void Game::Start()
 	//		glm::vec3(1, 1, 1));
 
 	pot1 = new SpotLight(glm::vec3(3,1,0),glm::vec3(0,0,1),0.9,0.9,0.9,1,0.9,glm::vec3(0,1,0),glm::vec3(0.1,0.1,0.1),glm::vec3(0.5,0.5,0.5),glm::vec3(0.7,0.7,0.7));
+	
+	pot2 = new SpotLight(glm::vec3(1, 1, 2), glm::vec3(1, 0, 0), 0.9, 0.9, 0.9, 1, 0.9, glm::vec3(0, 1, 0), glm::vec3(0.1, 0.1, 0.1), glm::vec3(0.5, 0.5, 0.5), glm::vec3(0.7, 0.7, 0.7));
 
 	lightCUbe.SetPosition(point1->position.x, point1->position.y, point1->position.z);
 	spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
+	spotlightCUbe2.SetPosition(pot2->position.x, pot2->position.y, pot2->position.z);
 
 	
 }
@@ -88,19 +91,19 @@ void Game::Update()
 
 
 	if (GetKey(KEYCODE_W))
-		CameraMove(CameraDirection::front, 4000.0f * DeltaTime());
+		CameraMove(CameraDirection::front, 2000.0f * DeltaTime());
 	if (GetKey(KEYCODE_S))
-		CameraMove(CameraDirection::back, 4000.0f * DeltaTime());
+		CameraMove(CameraDirection::back, 2000.0f * DeltaTime());
 
 	if (GetKey(KEYCODE_A))
-		CameraMove(CameraDirection::left, 4000.0f * DeltaTime());
+		CameraMove(CameraDirection::left, 2000.0f * DeltaTime());
 	if (GetKey(KEYCODE_D))
-		CameraMove(CameraDirection::right, 4000.0f * DeltaTime());
+		CameraMove(CameraDirection::right, 2000.0f * DeltaTime());
 
 	if (GetKey(KEYCODE_Q))
-		CameraMove(CameraDirection::up, 4000.0f * DeltaTime());
+		CameraMove(CameraDirection::up, 2000.0f * DeltaTime());
 	if (GetKey(KEYCODE_E))
-		CameraMove(CameraDirection::down, 4000.0f * DeltaTime());
+		CameraMove(CameraDirection::down, 2000.0f * DeltaTime());
 
 
 	if (GetKey(KEYCODE_KP_6))
@@ -153,6 +156,7 @@ void Game::Delete()
 	if (point1) delete point1;
 	if (point2) delete point2;
 	if (pot1) delete pot1;
+	if (pot2) delete pot2;
 }
 void Game::ShapeStart()
 {
@@ -206,10 +210,14 @@ void Game::MaterialStart()
 	lightCUbe = Cube("lightCube", "assets/rick.png");
 	lightCUbe.SetPosition(3.0f, 1.0f, 2.0f);
 	lightCUbe.Scale(0.3f, 0.3f, 0.3f);
-	
+
 	spotlightCUbe = Cube("lightCube", "assets/bob.png");
 	spotlightCUbe.SetPosition(3.0f, 1.0f, 2.0f);
 	spotlightCUbe.Scale(0.3f, 0.3f, 0.3f);
+
+	spotlightCUbe2 = Cube("lightCube", "assets/bob.png");
+	spotlightCUbe2.SetPosition(3.0f, 1.0f, 2.0f);
+	spotlightCUbe2.Scale(0.3f, 0.3f, 0.3f);
 
 	model1 = new Model();
 	ModelLoader::LoadModel("assets/models/backpack/backpack.obj", model1->structure);
@@ -284,8 +292,8 @@ void Game::MaterialUpdate()
 		model1->Scale(model1->localScale.x + 0.1f, model1->localScale.y, model1->localScale.z);
 
 	}
-	pot1->SetSpot(pot1);
 	spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
+	spotlightCUbe2.SetPosition(pot2->position.x, pot2->position.y, pot2->position.z);
 	lightCUbe.SetPosition(point1->position.x, point1->position.y, point1->position.z);
 }
 void Game::SpriteDraw()
@@ -309,5 +317,6 @@ void Game::MaterialDraw()
 	mat1.Draw();
 	lightCUbe.Draw();
 	spotlightCUbe.Draw();
+	spotlightCUbe2.Draw();
 	model1->Draw();
 }

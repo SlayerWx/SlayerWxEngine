@@ -22,7 +22,7 @@ public:
 
     void SetADS(glm::vec3 _ambient, glm::vec3 _diffuse, glm::vec3 _specular);
 };
-
+/////////////////////////////////////////////////////////////POINTLIGHT
 class SlayerWxEngine_API PointLight : public Light
 {
 public:
@@ -32,8 +32,7 @@ public:
     ~PointLight();
 };
 extern std::list<PointLight*>  pointLights;
-extern PointLight* Epoint0;
-
+////////////////////////////////////////////////////////////// SPOTLIGHT
 class SlayerWxEngine_API SpotLight : public Light
 {
 public:
@@ -50,11 +49,10 @@ public:
     ~SpotLight();
     void SetPosition(glm::vec3 pos);
     void SetDirection(glm::vec3 dir);
-    void SetSpot(SpotLight * s);
 };
 extern std::list<SpotLight*>  spotLights;
-extern SpotLight* spot0;
 
+/////////////////////////////////////////////////////////////DIRECTIONAL LIGHT
 struct SlayerWxEngine_API DirectionalLight
 {
     glm::vec3 direction = glm::vec3(0, 0, 0);

@@ -7,6 +7,7 @@ private:
 	PointLight* point1;
 	PointLight* point2;
 	SpotLight* pot1;
+	SpotLight* pot2;
 	Shape triangleAuto;
 	Shape squareAuto;
 	Shape shape;
@@ -17,6 +18,7 @@ private:
 	Cube mat1;
 	Cube lightCUbe;
 	Cube spotlightCUbe;
+	Cube spotlightCUbe2;
 	Model* model1;
 	void Start();
 	void Update();

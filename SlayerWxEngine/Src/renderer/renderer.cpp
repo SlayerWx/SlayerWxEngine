@@ -195,23 +195,7 @@ void Renderer::DrawMaterialLight() //to MaterialShader
 	glUniform1i(glGetUniformLocation(materialShader->GetProgram(), "dirLight.enable"), 1);
 		
 	
-	//int aux = 0;
-	//for(PointLight* point : pointLights)
-	//{
-	//	std::cout << CastStringToChar("light[" + std::to_string(aux), "].position") << std::endl;
-	//	if (point->enable == 1)
-	//	{
-	//		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("light[" + std::to_string(aux), "].position")), 1, &point->position[0]);
-	//		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("light["+ std::to_string(aux), "].ambient")), 1, &point->ambient[0]);
-	//		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("light["+ std::to_string(aux), "].diffuse")), 1, &point->diffuse[0]);
-	//		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("light["+ std::to_string(aux), "].specular")), 1, &point->specular[0]);
-	//		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("light["+ std::to_string(aux), "].color")), 1, &point->color[0]);
-	//		glUniform1i(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("light["+ std::to_string(aux), "].enable")), 1);
-	//	}
-	//	aux++;
-	//}
-	//aux = 0;
-
+	
 	if (pointLights.size() > 0)
 	{
 		std::string aux;
@@ -224,27 +208,34 @@ void Renderer::DrawMaterialLight() //to MaterialShader
 			glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), (aux + "].diffuse").c_str()), 1, &point->diffuse[0]);
 			glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), (aux + "].specular").c_str()), 1, &point->specular[0]);
 			glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), (aux + "].color").c_str()), 1, &point->color[0]);
-			glUniform1i(glGetUniformLocation(materialShader->GetProgram(), (aux + "].enable").c_str()), 1);
+			glUniform1i(glGetUniformLocation(materialShader->GetProgram(), (aux + "].enable").c_str()), point->enable);
 			i++;
 		}
 	}
 
-	if (spot0 != nullptr)
+	if (spotLights.size() > 0)
 	{
-		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "spotLight[0].position"), 1, &spot0->position[0]);
-		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "spotLight[0].direction"), 1, &spot0->direction[0]);
-		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "spotLight[0].ambient"), 1, &spot0->ambient[0]);
-		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "spotLight[0].diffuse"), 1, &spot0->diffuse[0]);
-		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "spotLight[0].specular"), 1, &spot0->specular[0]);
-		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "spotLight[0].color"), 1, &spot0->color[0]);
-	
-		glUniform1f(glGetUniformLocation(materialShader->GetProgram(), "spotLight[0].cutOff"), spot0->cutOff);
-		glUniform1f(glGetUniformLocation(materialShader->GetProgram(), "spotLight[0].outerCutOff"), spot0->outerCutOff);
-		glUniform1f(glGetUniformLocation(materialShader->GetProgram(), "spotLight[0].constant"), spot0->constant);
-		glUniform1f(glGetUniformLocation(materialShader->GetProgram(), "spotLight[0].linear"), spot0->linear);
-		glUniform1f(glGetUniformLocation(materialShader->GetProgram(), "spotLight[0].quadratic"), spot0->quadratic);
-																			  
-		glUniform1i(glGetUniformLocation(materialShader->GetProgram(), "spotLight[0].enable"), 1);
+		std::string aux;
+		int i = 0;
+		for (SpotLight* spot : spotLights)
+		{
+			aux = "spotLight[" + std::to_string(i);
+			glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), (aux + "].position").c_str()), 1, &spot->position[0]);
+			glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), (aux + "].direction").c_str()), 1, &spot->direction[0]);
+			glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), (aux + "].ambient").c_str()), 1, &spot->ambient[0]);
+			glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), (aux + "].diffuse").c_str()), 1, &spot->diffuse[0]);
+			glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), (aux + "].specular").c_str()), 1, &spot->specular[0]);
+			glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), (aux + "].color").c_str()), 1, &spot->color[0]);
+
+			glUniform1f(glGetUniformLocation(materialShader->GetProgram(), (aux + "].cutOff").c_str()), spot->cutOff);
+			glUniform1f(glGetUniformLocation(materialShader->GetProgram(), (aux + "].outerCutOff").c_str()), spot->outerCutOff);
+			glUniform1f(glGetUniformLocation(materialShader->GetProgram(), (aux + "].constant").c_str()), spot->constant);
+			glUniform1f(glGetUniformLocation(materialShader->GetProgram(), (aux + "].linear").c_str()), spot->linear);
+			glUniform1f(glGetUniformLocation(materialShader->GetProgram(), (aux + "].quadratic").c_str()), spot->quadratic);
+
+			glUniform1i(glGetUniformLocation(materialShader->GetProgram(), (aux + "].enable").c_str()), spot->enable);
+			i++;
+		}
 	}
 }
 void Renderer::SetMaterial(Shader* shader, glm::vec4 &color, glm::vec3 &ambient, bool diffuse, bool specular, float &shininess)

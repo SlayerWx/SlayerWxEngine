@@ -2,8 +2,7 @@
 std::list<PointLight*>  pointLights;
 std::list<SpotLight*>  spotLights;
 DirectionalLight DirectionalLightning::actualDirectionalLight = DirectionalLight();
-SpotLight* spot0;
-PointLight* Epoint0;
+
 Light::Light(glm::vec3 colour, glm::vec3 _ambient, glm::vec3 _diffuse, glm::vec3 _specular)
 {
 	enable = 1;
@@ -76,10 +75,6 @@ void SpotLight::SetDirection(glm::vec3 dir)
 	direction = dir;
 }
 
-void SpotLight::SetSpot(SpotLight* s)
-{
-	spot0 = s;
-}
 
 DirectionalLightning::DirectionalLightning()
 {

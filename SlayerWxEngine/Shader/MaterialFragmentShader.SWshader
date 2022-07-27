@@ -69,7 +69,7 @@ void main()
     result = CalDirLight(norm,viewDir);
 
     for(int i = 0; i < POINTLIGHT_LENGHT; i++)
-    if(light[i].enable == 1)result += CalPointLight(light[i], norm, viewDir); 
+    if(light[i].enable != 0)result += CalPointLight(light[i], norm, viewDir); 
         
     for(int t = 0; t < SPOTLIGHT_LENGHT; t++)
     if(spotLight[t].enable != 0 ) result += CalSpotLight(spotLight[t], norm, viewDir);  
