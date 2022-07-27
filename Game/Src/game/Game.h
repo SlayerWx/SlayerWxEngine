@@ -5,6 +5,7 @@ class Game : public BaseGame
 private:
 	DirectionalLight myDirLight;
 	PointLight* point1;
+	PointLight* point2;
 	SpotLight* pot1;
 	Shape triangleAuto;
 	Shape squareAuto;

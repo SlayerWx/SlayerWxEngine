@@ -43,8 +43,11 @@ void Game::Start()
 	DirectionalLightning::SetNewActualLight(myDirLight);
 	point1 = new PointLight(glm::vec3(-1, 2, 5), glm::vec3(1, 1, 1), glm::vec3(0.1, 0.1, 0.1), glm::vec3(0.5, 0.5, 0.5),
 		glm::vec3(1, 1, 1));
+	//point2 = new PointLight(glm::vec3(-1, 2, 5), glm::vec3(1, 1, 1), glm::vec3(0.1, 0.1, 0.1), glm::vec3(0.5, 0.5, 0.5),
+	//		glm::vec3(1, 1, 1));
+
 	pot1 = new SpotLight(glm::vec3(3,1,0),glm::vec3(0,0,1),0.9,0.9,0.9,1,0.9,glm::vec3(0,1,0),glm::vec3(0.1,0.1,0.1),glm::vec3(0.5,0.5,0.5),glm::vec3(0.7,0.7,0.7));
-	point1->SetPointLight(point1);
+
 	lightCUbe.SetPosition(point1->position.x, point1->position.y, point1->position.z);
 	spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
 
@@ -147,6 +150,9 @@ void Game::Delete()
 	if(idleLeftAnim) delete idleLeftAnim;
 	if(idleDownAnim) delete idleDownAnim;
 	if (model1) delete model1;
+	if (point1) delete point1;
+	if (point2) delete point2;
+	if (pot1) delete pot1;
 }
 void Game::ShapeStart()
 {
@@ -205,7 +211,7 @@ void Game::MaterialStart()
 	spotlightCUbe.SetPosition(3.0f, 1.0f, 2.0f);
 	spotlightCUbe.Scale(0.3f, 0.3f, 0.3f);
 
-	model1 = new Model(false);
+	model1 = new Model();
 	ModelLoader::LoadModel("assets/models/backpack/backpack.obj", model1->structure);
 
 	model1->SetPosition(0, 0, 0);
@@ -278,7 +284,6 @@ void Game::MaterialUpdate()
 		model1->Scale(model1->localScale.x + 0.1f, model1->localScale.y, model1->localScale.z);
 
 	}
-	point1->SetPointLight(point1);
 	pot1->SetSpot(pot1);
 	spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
 	lightCUbe.SetPosition(point1->position.x, point1->position.y, point1->position.z);

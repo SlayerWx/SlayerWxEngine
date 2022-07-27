@@ -1,7 +1,7 @@
 #include "Light.h"
 std::list<PointLight*>  pointLights;
 std::list<SpotLight*>  spotLights;
-DirectionalLight DirectionalLightning::actualDirectionalLight;
+DirectionalLight DirectionalLightning::actualDirectionalLight = DirectionalLight();
 SpotLight* spot0;
 PointLight* Epoint0;
 Light::Light(glm::vec3 colour, glm::vec3 _ambient, glm::vec3 _diffuse, glm::vec3 _specular)
@@ -42,11 +42,6 @@ void PointLight::SetPosition(glm::vec3 pos)
 PointLight::~PointLight()
 {
 	pointLights.remove(this);
-}
-
-void PointLight::SetPointLight(PointLight* p)
-{
-	Epoint0 = p;
 }
 
 SpotLight::SpotLight(glm::vec3 pos, glm::vec3 dir,float _cutOff,float _outerCutOff, float _constant,float _linear,float _quadratic,

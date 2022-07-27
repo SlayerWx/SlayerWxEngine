@@ -30,7 +30,6 @@ public:
     PointLight(glm::vec3 pos, glm::vec3 colour, glm::vec3 _ambient, glm::vec3 _diffuse, glm::vec3 _specular);
     void SetPosition(glm::vec3 pos);
     ~PointLight();
-    void SetPointLight(PointLight* p);
 };
 extern std::list<PointLight*>  pointLights;
 extern PointLight* Epoint0;

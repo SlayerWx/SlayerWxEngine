@@ -58,13 +58,13 @@ public:
 	Camera* cam;
 	Camera* GetCamera();
 	void DrawMaterialLight();
-	const char* CastStringToChar(std::string str, std::string str2);
 
 	void SetMaterial(Shader* shader, glm::vec4 &color, glm::vec3 &ambient,bool diffuse, bool specular, float &shininess);
 
 	void SetupMesh(unsigned int& vao, unsigned int& vbo, unsigned int& ebo, std::vector<Vertex>& vertices, std::vector<unsigned int>& indices);
 
-	void DrawMesh(unsigned int& vao, unsigned int indexAmount, glm::mat4 model, std::vector<TextureData> textures, glm::vec4& color, glm::vec3& ambient, float& shininess);
+	void DrawMesh(unsigned int& vao, unsigned int indexAmount, glm::mat4 model, std::vector<TextureData> textures, float& shininess);
+
 
 };
 // settings

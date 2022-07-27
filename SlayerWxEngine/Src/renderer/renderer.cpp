@@ -182,35 +182,19 @@ Camera* Renderer::GetCamera()
 	return cam;
 }
 
-#include <stdlib.h>
-const char* Renderer::CastStringToChar(std::string str,std::string str2)
-{
-
-	std::string auxS = str+str2;
-	char* ccx = new char[auxS.length()-1];
-	char* a = new char(*(auxS.c_str()));
-	//std::copy(auxS.begin(),auxS.end(),ccx); 
-#pragma warning(disable : 4996)
-	//strcpy(a,auxS.c_str());
-		return (const char*)a;
-}
 
 void Renderer::DrawMaterialLight() //to MaterialShader
 {
-
 	glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "viewPos"), 1, &cam->cameraPos[0]);
 	
-	
-	if (DirectionalLightning::actualDirectionalLight.enable == 1)
-	{
-		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "dirLight.direction"), 1, &DirectionalLightning::actualDirectionalLight.direction[0]);
-		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "dirLight.ambient"), 1, &DirectionalLightning::actualDirectionalLight.ambient[0]);
-		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "dirLight.diffuse"), 1, &DirectionalLightning::actualDirectionalLight.diffuse[0]);
-		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "dirLight.specular"), 1, &DirectionalLightning::actualDirectionalLight.specular[0]);
-		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "dirLight.color"), 1, &DirectionalLightning::actualDirectionalLight.color[0]);
-		glUniform1i(glGetUniformLocation(materialShader->GetProgram(), "dirLight.enable"), 1);
+	glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "dirLight.direction"), 1, &DirectionalLightning::actualDirectionalLight.direction[0]);
+	glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "dirLight.ambient"), 1, &DirectionalLightning::actualDirectionalLight.ambient[0]);
+	glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "dirLight.diffuse"), 1, &DirectionalLightning::actualDirectionalLight.diffuse[0]);
+	glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "dirLight.specular"), 1, &DirectionalLightning::actualDirectionalLight.specular[0]);
+	glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "dirLight.color"), 1, &DirectionalLightning::actualDirectionalLight.color[0]);
+	glUniform1i(glGetUniformLocation(materialShader->GetProgram(), "dirLight.enable"), 1);
 		
-	}
+	
 	//int aux = 0;
 	//for(PointLight* point : pointLights)
 	//{
@@ -227,37 +211,25 @@ void Renderer::DrawMaterialLight() //to MaterialShader
 	//	aux++;
 	//}
 	//aux = 0;
-	if (Epoint0->enable == 1)
+
+	if (pointLights.size() > 0)
 	{
-		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "light[0].position"), 1, &Epoint0->position[0]);
-		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "light[0].ambient"), 1, &Epoint0->ambient[0]);
-		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "light[0].diffuse"), 1, &Epoint0->diffuse[0]);
-		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "light[0].specular"), 1, &Epoint0->specular[0]);
-		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "light[0].color"), 1, &Epoint0->color[0]);
-		glUniform1i(glGetUniformLocation(materialShader->GetProgram(), "light[0].enable"), 1);
+		std::string aux;
+		int i = 0;
+		for (PointLight*  point : pointLights)
+		{
+			aux = "light[" + std::to_string(i);
+			glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), (aux + "].position").c_str()), 1, &point->position[0]);
+			glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), (aux + "].ambient").c_str()), 1, &point->ambient[0]);
+			glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), (aux + "].diffuse").c_str()), 1, &point->diffuse[0]);
+			glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), (aux + "].specular").c_str()), 1, &point->specular[0]);
+			glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), (aux + "].color").c_str()), 1, &point->color[0]);
+			glUniform1i(glGetUniformLocation(materialShader->GetProgram(), (aux + "].enable").c_str()), 1);
+			i++;
+		}
 	}
-	//for (SpotLight* spot : spotLights)
-	//{
-	//	if (spot->enable == 1)
-	//	{
-	//		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("spotLight[" + aux,"].position")), 1, &spot->position[0]);
-	//		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("spotLight[" + aux,"].direction")), 1, &spot->direction[0]);
-	//		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("spotLight[" + aux, "].ambient")), 1, &spot->ambient[0]);
-	//		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("spotLight[" + aux, "].diffuse")), 1, &spot->diffuse[0]);
-	//		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("spotLight[" + aux, "].specular")), 1, &spot->specular[0]);
-	//		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("spotLight[" + aux, "].color")), 1, &spot->color[0]);
-	//
-	//		glUniform1f(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("spotLight[" + aux, "].cutOff")),spot->cutOff);
-	//		glUniform1f(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("spotLight[" + aux, "].outerCutOff")),spot->outerCutOff);
-	//		glUniform1f(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("spotLight[" + aux, "].constant")), spot->constant);
-	//		glUniform1f(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("spotLight[" + aux, "].linear")), spot->linear);
-	//		glUniform1f(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("spotLight[" + aux, "].quadratic")), spot->quadratic);
-	//
-	//		glUniform1i(glGetUniformLocation(materialShader->GetProgram(), CastStringToChar("spotLight[" + aux, "].enable")), 1);
-	//	}
-	//	aux++;
-	//}
-	if (Epoint0->enable == 1)
+
+	if (spot0 != nullptr)
 	{
 		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "spotLight[0].position"), 1, &spot0->position[0]);
 		glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "spotLight[0].direction"), 1, &spot0->direction[0]);
@@ -331,8 +303,7 @@ void Renderer::SetupMesh(unsigned int& vao, unsigned int& vbo, unsigned int& ebo
 	glBindVertexArray(0);
 }
 
-void Renderer::DrawMesh(unsigned int& vao, unsigned int indexAmount, glm::mat4 model, std::vector<TextureData> textures,
-	glm::vec4 &color, glm::vec3 &ambient, float &shininess) {
+void Renderer::DrawMesh(unsigned int& vao, unsigned int indexAmount, glm::mat4 model, std::vector<TextureData> textures, float &shininess) {
 	
 	DrawMaterialLight();
 	CallUniformShaders(materialShader);
@@ -356,8 +327,6 @@ void Renderer::DrawMesh(unsigned int& vao, unsigned int indexAmount, glm::mat4 m
 	UpdateProjectUniformShaders(cam->projection);
 	UpdateViewUniformShaders(cam->view);
 	
-	glUniform4fv(glGetUniformLocation(materialShader->GetProgram(), "material.color"), 1, &color[0]);
-	glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "material.ambient"), 1, &ambient[0]);
 	glUniform1f(glGetUniformLocation(materialShader->GetProgram(), "material.shininess"), shininess);
 	
 	glUniform3fv(glGetUniformLocation(materialShader->GetProgram(), "viewPos"), 1, &cam->cameraPos[0]);

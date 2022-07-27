@@ -6,7 +6,7 @@ Model::Model() : Entity("Model") {
 
 void Model::Draw() {
     for (unsigned int i = 0; i < structure.meshes.size(); i++) {
-        structure.meshes[i].Draw(model,color,ambient,shininess);
+        structure.meshes[i].Draw(model,shininess);
     }
 }
 

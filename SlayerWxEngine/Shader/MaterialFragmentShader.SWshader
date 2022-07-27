@@ -66,10 +66,10 @@ void main()
     vec3 norm = normalize(outNormal);
     vec3 viewDir = normalize(viewPos - fragPos);
     vec4 result = vec4(1,1,1,1);
-    if(dirLight.enable == 1) result = CalDirLight(norm,viewDir);
-    
+    result = CalDirLight(norm,viewDir);
+
     for(int i = 0; i < POINTLIGHT_LENGHT; i++)
-        if(light[i].enable == 1)result += CalPointLight(light[i], norm, viewDir);  
+    if(light[i].enable == 1)result += CalPointLight(light[i], norm, viewDir); 
         
     for(int t = 0; t < SPOTLIGHT_LENGHT; t++)
     if(spotLight[t].enable != 0 ) result += CalSpotLight(spotLight[t], norm, viewDir);  
