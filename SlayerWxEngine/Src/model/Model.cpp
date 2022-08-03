@@ -1,6 +1,8 @@
 #include "Model.h"
+#include "ModelLoader.h"
 Model::Model() : Entity("Model") {
     shininess = 32;
+    ModelLoader::LoadModel("assets/models/backpack/backpack.obj", structure);
 
 }
 

@@ -220,7 +220,6 @@ void Game::MaterialStart()
 	spotlightCUbe2.Scale(0.3f, 0.3f, 0.3f);
 
 	model1 = new Model();
-	ModelLoader::LoadModel("assets/models/backpack/backpack.obj", model1->structure);
 
 	model1->SetPosition(0, 0, 0);
 	model1->Scale(1, 1, 1);
