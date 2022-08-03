@@ -291,6 +291,16 @@ void Game::MaterialUpdate()
 		model1->Scale(model1->localScale.x + 0.1f, model1->localScale.y, model1->localScale.z);
 
 	}
+	if (GetKey(KEYCODE_ENTER))
+	{
+		point1->enable = 1;
+		point1->color = glm::vec4(1.0,0.0,0.0,0.0);
+	}
+	if (GetKey(KEYCODE_BACKSPACE))
+	{
+		point1->enable = 0;
+	
+	}
 	spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
 	spotlightCUbe2.SetPosition(pot2->position.x, pot2->position.y, pot2->position.z);
 	lightCUbe.SetPosition(point1->position.x, point1->position.y, point1->position.z);

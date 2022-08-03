@@ -1,6 +1,7 @@
 #ifndef KEYCODE_HH
 #define KEYCODE_HH
 
+
 #define KEYCODE_SPACE              32
 #define KEYCODE_APOSTROPHE         39  /* ' */
 #define KEYCODE_COMMA              44  /* , */
