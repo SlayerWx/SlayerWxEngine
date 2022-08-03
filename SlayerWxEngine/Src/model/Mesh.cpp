@@ -8,6 +8,9 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std:
 
 	renderer->SetupMesh(vao, vbo, ebo, vertices, indices);
 }
+
+
 void Mesh::Draw(glm::mat4 parentModel,float &shininess) {
-	renderer->DrawMesh(vao, indices.size(), parentModel, textures, shininess);
+	renderer->DrawMesh(vao, indices.size(), parentModel, textures, shininess); // escalado por model
+	//renderer->DrawMesh(vao, indices.size(), model, textures, shininess); //escalado por mesh
 }

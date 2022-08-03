@@ -15,6 +15,7 @@ class SlayerWxEngine_API Mesh : public Entity {
 public:
 	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<TextureData> textures);
 
+
 	void Draw(glm::mat4 parentModel, float &shinies);
 
 	std::vector<Vertex> vertices;

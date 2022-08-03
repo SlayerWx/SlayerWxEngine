@@ -13,6 +13,7 @@ public:
 	Model();
 
 	void Draw();
+	void ScaleForParts(float scaleInX, float scaleInY, float scaleinZ);
 	float shininess;
 	
 

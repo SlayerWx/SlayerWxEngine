@@ -12,4 +12,16 @@ void Model::Draw() {
     }
 }
 
+void Model::ScaleForParts(float scaleInX,float scaleInY,float scaleInZ)
+{
+    for (int i = 0; i < structure.meshes.size(); i++)
+    {
+        if (scaleInX < 0) scaleInX = 0.1;
+        if (scaleInY < 0) scaleInY = 0.1;
+        if (scaleInZ < 0) scaleInZ = 0.1;
+        structure.meshes[i].Scale(scaleInX, scaleInY, scaleInZ);
+
+    }
+}
+
 

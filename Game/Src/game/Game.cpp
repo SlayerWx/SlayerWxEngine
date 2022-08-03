@@ -289,7 +289,7 @@ void Game::MaterialUpdate()
 	if (GetKey(KEYCODE_9))
 	{
 		model1->Scale(model1->localScale.x + 0.1f, model1->localScale.y, model1->localScale.z);
-
+		//model1->ScaleForParts(5, 5, 5);
 	}
 	if (GetKey(KEYCODE_ENTER))
 	{
