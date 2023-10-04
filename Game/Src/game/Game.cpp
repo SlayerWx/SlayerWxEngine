@@ -72,20 +72,20 @@ float cameraSpeedRotateY = 200.07f;
 void Game::Update()
 {
 
-	Input(KEYCODE_F, x, -valueModif * DeltaTime());
-	Input(KEYCODE_H, x, +valueModif * DeltaTime());
-
-	Input(KEYCODE_G, y, -valueModif * DeltaTime());
-	Input(KEYCODE_T, y, +valueModif * DeltaTime());
-
-	Input(KEYCODE_K, scaleY, -valueModif* 10.0f * DeltaTime());
-	Input(KEYCODE_I, scaleY, +valueModif* 10.0f * DeltaTime());
-
-	Input(KEYCODE_J, scaleX, -valueModif* 10.0f * DeltaTime());
-	Input(KEYCODE_L, scaleX, +valueModif* 10.0f * DeltaTime());
-
-	Input(KEYCODE_U, scaleZ, -valueModif* 10.0f * DeltaTime());
-	Input(KEYCODE_O, scaleZ, +valueModif* 10.0f * DeltaTime());
+	//Input(KEYCODE_F, x, -valueModif * DeltaTime());
+	//Input(KEYCODE_H, x, +valueModif * DeltaTime());
+	//
+	//Input(KEYCODE_G, y, -valueModif * DeltaTime());
+	//Input(KEYCODE_T, y, +valueModif * DeltaTime());
+	//
+	//Input(KEYCODE_K, scaleY, -valueModif* 10.0f * DeltaTime());
+	//Input(KEYCODE_I, scaleY, +valueModif* 10.0f * DeltaTime());
+	//
+	//Input(KEYCODE_J, scaleX, -valueModif* 10.0f * DeltaTime());
+	//Input(KEYCODE_L, scaleX, +valueModif* 10.0f * DeltaTime());
+	//
+	//Input(KEYCODE_U, scaleZ, -valueModif* 10.0f * DeltaTime());
+	//Input(KEYCODE_O, scaleZ, +valueModif* 10.0f * DeltaTime());
 
 	//SpriteUpdate();
 
@@ -118,18 +118,18 @@ void Game::Update()
 
 	ShapeUpdate();
 	MaterialUpdate();
-	if (GetKey(KEYCODE_SPACE))
-	{		
-		SetCameraProjection(CameraProjection::ortho);
-	}
-	else
-	{
-		SetCameraProjection(CameraProjection::perspective);
-
-	}
+	//if (GetKey(KEYCODE_SPACE))
+	//{		
+	//	SetCameraProjection(CameraProjection::ortho);
+	//}
+	//else
+	//{
+	//	SetCameraProjection(CameraProjection::perspective);
+	//
+	//}
 
 	//SpriteDraw();
-	ShapeDraw();
+	//ShapeDraw();
 	MaterialDraw();
 }
 bool Game::Input(int keycode,float &variable,float modif)
@@ -203,7 +203,7 @@ void Game::SpriteStart()
 void Game::MaterialStart()
 {
 	mat1 = Cube("cube", "assets/container.png", "assets/container.png", "assets/container_specular.png");
-	mat1.SetPosition(3.0f, 1.0f, 2.0f);
+	mat1.SetPosition(3.0f, 900.0f, 2.0f);
 	mat1.Scale(1.0f, 1.0f, 1.0f);
 	
 	
@@ -219,10 +219,20 @@ void Game::MaterialStart()
 	spotlightCUbe2.SetPosition(3.0f, 1.0f, 2.0f);
 	spotlightCUbe2.Scale(0.3f, 0.3f, 0.3f);
 
+	bspPlaneLeft = BSPPlane("bspPlaneLeft", "assets/red.png",glm::vec3(1,0,0));
+	bspPlaneLeft.SetPosition(-10.0f, 1.0f, 2.0f);
+	bspPlaneLeft.Scale(0.3f, 15.3f, 60.3f);
+	//bspPlaneFront = BSPPlane("bspPlaneFront", "assets/red.png", glm::vec3(0, 0, 1));
+	//bspPlaneFront.SetPosition(3.0f, 1.0f, -10.0f);
+	//bspPlaneFront.Scale(60.3f, 15.3f, 0.3f);
+	//bspPlaneRight = BSPPlane("bspPlaneRight", "assets/red.png", glm::vec3(1, 0, 0));
+	//bspPlaneRight.SetPosition(10.0f, 1.0f, 2.0f);
+	//bspPlaneRight.Scale(0.3f, 15.3f, 60.3f);
+
 	model1 = new Model();
 	ModelLoader::LoadModel("assets/models/backpack/backpack.obj", model1->structure);
 
-	model1->SetPosition(0, 0, 0);
+	model1->SetPosition(0.1f, 0.1f, 0.1f);
 	model1->Scale(1, 1, 1);
 }
 void Game::ShapeUpdate()
@@ -269,19 +279,19 @@ void Game::MaterialUpdate()
 
 	}
 
-	if (GetKey(KEYCODE_5))
+	if (GetKey(KEYCODE_H))
 	{
 		model1->SetPosition(model1->position.x + 10.0f * DeltaTime(), model1->position.y, model1->position.z);
 	}
-	if (GetKey(KEYCODE_6))
+	if (GetKey(KEYCODE_F))
 	{
 		model1->SetPosition(model1->position.x - 10.0f * DeltaTime(), model1->position.y, model1->position.z);
 	}
-	if (GetKey(KEYCODE_7))
+	if (GetKey(KEYCODE_G))
 	{
 		model1->SetPosition(model1->position.x, model1->position.y, model1->position.z + 10.0f * DeltaTime());
 	}
-	if (GetKey(KEYCODE_8))
+	if (GetKey(KEYCODE_T))
 	{
 		model1->SetPosition(model1->position.x, model1->position.y, model1->position.z - 10.0f * DeltaTime());
 
@@ -315,8 +325,15 @@ void Game::ShapeDraw()
 void Game::MaterialDraw()
 {
 	mat1.Draw();
-	lightCUbe.Draw();
-	spotlightCUbe.Draw();
-	spotlightCUbe2.Draw();
-	model1->Draw();
+	//lightCUbe.Draw();
+	//spotlightCUbe.Draw();
+	//spotlightCUbe2.Draw();
+	if (bspPlaneLeft.FrontPlane(model1->GetPosition()))
+	{
+		model1->Draw(); 
+	}
+	bspPlaneLeft.Draw();
+	//bspPlaneFront.Draw();
+	//bspPlaneRight.Draw();
+
 }

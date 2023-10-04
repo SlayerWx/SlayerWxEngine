@@ -14,20 +14,20 @@ void ModelLoader::LoadModel(std::string const& path, ModelStruct &structure) {
     }
     _structure.directory = path.substr(0, path.find_last_of('/'));
 
-    ProcessNode(scene->mRootNode, scene,_structure);
+    ProcessNode(scene->mRootNode, scene,_structure,true);
 
     structure = _structure;
 
 }
 
 
-void ModelLoader::ProcessNode(aiNode* node, const aiScene* scene,ModelStruct &_structure) {
+void ModelLoader::ProcessNode(aiNode* node, const aiScene* scene,ModelStruct &_structure, bool isRoot) {
     for (unsigned int i = 0; i < node->mNumMeshes; i++) {
         aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
         _structure.meshes.push_back(ProcessMesh(mesh, scene,_structure));
     }
     for (unsigned int i = 0; i < node->mNumChildren; i++) {
-        ProcessNode(node->mChildren[i], scene, _structure);
+        ProcessNode(node->mChildren[i], scene, _structure,false);
     }
 }
 

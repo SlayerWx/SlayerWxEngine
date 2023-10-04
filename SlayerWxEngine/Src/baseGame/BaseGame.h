@@ -5,6 +5,7 @@
 #include "shape/Shape.h"
 #include "sprite/Sprite.h"
 #include "cube/Cube.h"
+#include "bsp/bspPlane.h"
 #include "input/Input.h"
 #include "export/export.h"
 #include "gui/MyGui.h"

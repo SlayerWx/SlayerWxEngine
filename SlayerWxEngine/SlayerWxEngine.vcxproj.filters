@@ -79,6 +79,9 @@
     <Filter Include="Src\model">
       <UniqueIdentifier>{3034f202-1d29-43d9-b19b-bc9dd525b47c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\bsp">
+      <UniqueIdentifier>{cced9351-9f10-4b81-973e-18309b7fca2f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\baseGame\BaseGame.cpp">
@@ -158,6 +161,9 @@
     </ClCompile>
     <ClCompile Include="Src\model\ModelLoader.cpp">
       <Filter>Src\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\bsp\BspPlane.cpp">
+      <Filter>Src\bsp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +265,9 @@
     </ClInclude>
     <ClInclude Include="Src\model\ModelStruct.h">
       <Filter>Src\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\bsp\BspPlane.h">
+      <Filter>Src\bsp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -19,6 +19,9 @@ private:
 	Cube lightCUbe;
 	Cube spotlightCUbe;
 	Cube spotlightCUbe2;
+	BSPPlane bspPlaneFront;
+	BSPPlane bspPlaneRight;
+	BSPPlane bspPlaneLeft;
 	Model* model1;
 	void Start();
 	void Update();

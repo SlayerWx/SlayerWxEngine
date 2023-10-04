@@ -14,7 +14,7 @@ public:
 private:
 	ModelLoader();
 
-	static void ProcessNode(aiNode* node, const aiScene* scene, ModelStruct& structure);
+	static void ProcessNode(aiNode* node, const aiScene* scene, ModelStruct& structure, bool isRoot);
 
 	static Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene, ModelStruct& structure);
 

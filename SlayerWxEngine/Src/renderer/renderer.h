@@ -65,6 +65,9 @@ public:
 
 	void DrawMesh(unsigned int& vao, unsigned int indexAmount, glm::mat4 model, std::vector<TextureData> textures, float& shininess);
 
+	void DrawBoundingBox(const glm::vec3 bboxMin, const glm::vec3 bboxMax);
+
+
 
 };
 // settings
