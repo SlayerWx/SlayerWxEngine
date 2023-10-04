@@ -9,7 +9,7 @@
 #include "input/Input.h"
 #include "export/export.h"
 #include "gui/MyGui.h"
-#include "model/ModelLoader.h"
+//#include "model/ModelLoader.h"
 #include "model/Model.h"
 struct GLFWmonitor;
 struct GLFWwindow;

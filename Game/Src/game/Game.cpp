@@ -230,7 +230,6 @@ void Game::MaterialStart()
 	//bspPlaneRight.Scale(0.3f, 15.3f, 60.3f);
 
 	model1 = new Model();
-	ModelLoader::LoadModel("assets/models/backpack/backpack.obj", model1->structure);
 
 	model1->SetPosition(0.1f, 0.1f, 0.1f);
 	model1->Scale(1, 1, 1);
@@ -300,7 +299,17 @@ void Game::MaterialUpdate()
 	if (GetKey(KEYCODE_9))
 	{
 		model1->Scale(model1->localScale.x + 0.1f, model1->localScale.y, model1->localScale.z);
-
+		//model1->ScaleForParts(5, 5, 5);
+	}
+	if (GetKey(KEYCODE_ENTER))
+	{
+		point1->enable = 1;
+		point1->color = glm::vec4(1.0,0.0,0.0,0.0);
+	}
+	if (GetKey(KEYCODE_BACKSPACE))
+	{
+		point1->enable = 0;
+	
 	}
 	spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
 	spotlightCUbe2.SetPosition(pot2->position.x, pot2->position.y, pot2->position.z);
