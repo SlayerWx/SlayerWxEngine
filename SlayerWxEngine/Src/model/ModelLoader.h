@@ -14,13 +14,13 @@ public:
 private:
 	ModelLoader();
 
-	static void ProcessNode(aiNode* node, const aiScene* scene, ModelStruct& structure, bool isRoot);
+	static Mesh* ProcessNode(aiNode* node, const aiScene* scene, ModelStruct& structure, bool isRoot);
 
-	static Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene, ModelStruct& structure);
+	static Mesh* ProcessMesh(aiMesh* mesh, const aiScene* scene, ModelStruct& structure);
 
 	static std::vector<TextureData> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName, ModelStruct& structure);
 
-
+	static std::vector<Mesh*> parents;
 };
 
 #endif

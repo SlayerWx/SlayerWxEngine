@@ -66,12 +66,9 @@ public:
 	void DrawMesh(unsigned int& vao, unsigned int indexAmount, glm::mat4 model, std::vector<TextureData> textures, float& shininess);
 
 	void DrawBoundingBox(const glm::vec3 bboxMin, const glm::vec3 bboxMax);
-
-
-
+	bool ShowBSP = true;
 };
 // settings
 //const unsigned int SCR_WIDTH = 800;
 //const unsigned int SCR_HEIGHT = 600;
-
 #endif

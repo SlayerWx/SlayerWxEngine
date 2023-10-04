@@ -13,24 +13,35 @@ struct BoundingBox {
 	glm::vec3 min;
 	glm::vec3 max;
 };
+struct aiNode;
 class SlayerWxEngine_API Mesh : public Entity {
 public:
+	Mesh();
 	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<TextureData> textures);
 
+	void Test();
 	
 	void Draw(glm::mat4 parentModel, float &shinies);
-
-
+	void SetNode(aiNode* _myself);
+	aiNode* GetNode();
+	void SetParent(Mesh* _parent);
+	Mesh* GetParent();
+	void AddMeshSon(Mesh* newChildren);
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 	std::vector<TextureData> textures;
-
+	std::vector<Mesh*> children;
+	aiNode* myself;
+	Mesh* parent;
 	BoundingBox CalculateBoundingBox();
+	bool canDraw = true;
+	bool imParent;
+
+
 	unsigned int vao;
 
 private:
 	unsigned int ebo, vbo;
-
 };
 
 #endif // !MESH_H

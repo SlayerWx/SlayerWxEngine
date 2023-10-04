@@ -118,15 +118,18 @@ void Game::Update()
 
 	ShapeUpdate();
 	MaterialUpdate();
-	//if (GetKey(KEYCODE_SPACE))
-	//{		
-	//	SetCameraProjection(CameraProjection::ortho);
-	//}
-	//else
-	//{
-	//	SetCameraProjection(CameraProjection::perspective);
-	//
-	//}
+	if (GetKey(KEYCODE_SPACE))
+	{		
+		//SetCameraProjection(CameraProjection::ortho);
+		SetShowBSP(true);
+		
+	}
+	else
+	{
+		//SetCameraProjection(CameraProjection::perspective);
+		SetShowBSP(false);
+	
+	}
 
 	//SpriteDraw();
 	//ShapeDraw();
@@ -230,7 +233,7 @@ void Game::MaterialStart()
 	//bspPlaneRight.Scale(0.3f, 15.3f, 60.3f);
 
 	model1 = new Model();
-
+	ModelLoader::LoadModel("assets/models/test/bodyna.fbx", model1->structure);
 	model1->SetPosition(0.1f, 0.1f, 0.1f);
 	model1->Scale(1, 1, 1);
 }
@@ -337,9 +340,9 @@ void Game::MaterialDraw()
 	//lightCUbe.Draw();
 	//spotlightCUbe.Draw();
 	//spotlightCUbe2.Draw();
+	model1->Draw();
 	if (bspPlaneLeft.FrontPlane(model1->GetPosition()))
 	{
-		model1->Draw(); 
 	}
 	bspPlaneLeft.Draw();
 	//bspPlaneFront.Draw();

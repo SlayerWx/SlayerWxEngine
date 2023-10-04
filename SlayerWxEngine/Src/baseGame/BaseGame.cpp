@@ -120,6 +120,10 @@ void BaseGame::CameraFollowObj(CameraType type, glm::vec3 objPosReference, float
 {
 	renderer->GetCamera()->CameraFollowObj(type, objPosReference,distanceFromReferene);
 }
+void BaseGame::SetShowBSP(bool isActive)
+{
+	Renderer::myRef->ShowBSP = isActive;
+}
 void BaseGame::EngineEnd()
 {
 	Delete();

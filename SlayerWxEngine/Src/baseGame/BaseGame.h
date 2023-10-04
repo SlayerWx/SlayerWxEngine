@@ -5,11 +5,12 @@
 #include "shape/Shape.h"
 #include "sprite/Sprite.h"
 #include "cube/Cube.h"
-#include "bsp/bspPlane.h"
+#include "bsp/BSP.h"
+//#include "bsp/BspPlane.h"
 #include "input/Input.h"
 #include "export/export.h"
 #include "gui/MyGui.h"
-//#include "model/ModelLoader.h"
+#include "model/ModelLoader.h"
 #include "model/Model.h"
 struct GLFWmonitor;
 struct GLFWwindow;
@@ -42,5 +43,6 @@ public:
 	void SetCameraProjection(CameraProjection selection);
 	CameraProjection GetCameraProjection();
 	void CameraFollowObj(CameraType type, glm::vec3 objPosReference, float distanceFromReferene);
+	void SetShowBSP(bool isActive);
 };
 #endif

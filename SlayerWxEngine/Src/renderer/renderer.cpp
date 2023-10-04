@@ -328,31 +328,35 @@ void Renderer::DrawMesh(unsigned int& vao, unsigned int indexAmount, glm::mat4 m
 }
 
 void Renderer::DrawBoundingBox(const glm::vec3 bboxMin, const glm::vec3 bboxMax) {
-	std::vector<glm::vec3> vertices = {
-		glm::vec3(bboxMin.x, bboxMin.y, bboxMin.z),
-		glm::vec3(bboxMax.x, bboxMin.y, bboxMin.z),
-		glm::vec3(bboxMax.x, bboxMax.y, bboxMin.z),
-		glm::vec3(bboxMin.x, bboxMax.y, bboxMin.z),
-		glm::vec3(bboxMin.x, bboxMin.y, bboxMax.z),
-		glm::vec3(bboxMax.x, bboxMin.y, bboxMax.z),
-		glm::vec3(bboxMax.x, bboxMax.y, bboxMax.z),
-		glm::vec3(bboxMin.x, bboxMax.y, bboxMax.z)
-	};
-	std::vector<unsigned int> indices = {
-		0, 1, 1, 2, 2, 3, 3, 0,  // front
-		4, 5, 5, 6, 6, 7, 7, 4,  // back
-		0, 4, 1, 5, 2, 6, 3, 7   
-	};
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-	glBegin(GL_LINES);
-	for (size_t i = 0; i < indices.size(); i += 2) {
-		unsigned int index1 = indices[i];
-		unsigned int index2 = indices[i + 1];
-		glVertex3f(vertices[index1].x, vertices[index1].y, vertices[index1].z);
-		glVertex3f(vertices[index2].x, vertices[index2].y, vertices[index2].z);
+	if (ShowBSP)
+	{
+		std::vector<glm::vec3> vertices = {
+			glm::vec3(bboxMin.x, bboxMin.y, bboxMin.z),
+			glm::vec3(bboxMax.x, bboxMin.y, bboxMin.z),
+			glm::vec3(bboxMax.x, bboxMax.y, bboxMin.z),
+			glm::vec3(bboxMin.x, bboxMax.y, bboxMin.z),
+			glm::vec3(bboxMin.x, bboxMin.y, bboxMax.z),
+			glm::vec3(bboxMax.x, bboxMin.y, bboxMax.z),
+			glm::vec3(bboxMax.x, bboxMax.y, bboxMax.z),
+			glm::vec3(bboxMin.x, bboxMax.y, bboxMax.z)
+		};
+		std::vector<unsigned int> indices = {
+			0, 1, 1, 2, 2, 3, 3, 0,  // front
+			4, 5, 5, 6, 6, 7, 7, 4,  // back
+			0, 4, 1, 5, 2, 6, 3, 7
+		};
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+		glBegin(GL_LINES);
+		for (size_t i = 0; i < indices.size(); i += 2) {
+			unsigned int index1 = indices[i];
+			unsigned int index2 = indices[i + 1];
+			glVertex3f(vertices[index1].x, vertices[index1].y, vertices[index1].z);
+			glVertex3f(vertices[index2].x, vertices[index2].y, vertices[index2].z);
+		}
+		glEnd();
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
-	glEnd();
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }

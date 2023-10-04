@@ -165,6 +165,9 @@
     <ClCompile Include="Src\bsp\BspPlane.cpp">
       <Filter>Src\bsp</Filter>
     </ClCompile>
+    <ClCompile Include="Src\bsp\BSP.cpp">
+      <Filter>Src\bsp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\baseGame\BaseGame.h">
@@ -267,6 +270,9 @@
       <Filter>Src\model</Filter>
     </ClInclude>
     <ClInclude Include="Src\bsp\BspPlane.h">
+      <Filter>Src\bsp</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\bsp\BSP.h">
       <Filter>Src\bsp</Filter>
     </ClInclude>
   </ItemGroup>

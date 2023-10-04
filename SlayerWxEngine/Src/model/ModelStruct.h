@@ -7,8 +7,8 @@
 struct ModelStruct
 {
 	std::vector<TextureData> textures_loaded;
-	std::vector<Mesh> meshes;
+	std::vector<Mesh*> meshes;
 	std::string directory;
-	bool isRoot;
+	Mesh* parentMesh;
 };
 #endif
