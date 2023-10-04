@@ -13,9 +13,10 @@ public:
 	Model();
 
 	void Draw();
+	void SetMeshPosition(float x, float y, float z, int index);
+	void SetMeshScale(float x, float y, float z, int index);
 	void ScaleForParts(float scaleInX, float scaleInY, float scaleinZ);
 	float shininess;
-	
 
 private:
 };

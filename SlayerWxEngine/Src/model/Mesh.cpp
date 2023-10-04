@@ -2,7 +2,6 @@
 
 Mesh::Mesh() : Entity("Entity")
 {
-
     //vertices.clear();
     //indices.clear();
     //textures.clear();
@@ -21,28 +20,23 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std:
 	renderer->SetupMesh(vao, vbo, ebo, vertices, indices);
 }
 
-
-
-void Mesh::Test()
-{
-    //std::cout << children.size() << std::endl;
-    for (unsigned int i = 0; i < children.size(); i++)
-    {
-        canDraw = false;
-        children[i]->Test();
-    }
-}
-
-
-void Mesh::Draw(glm::mat4 parentModel,float &shininess) 
+void Mesh::Draw(float &shininess) 
 {
     BoundingBox aux;
+
     if (canDraw)
     {
+
+
         aux = CalculateBoundingBox();
 
         renderer->DrawBoundingBox(glm::vec3(aux.min.x, aux.min.y, aux.min.z), glm::vec3(aux.max.x, aux.max.y, aux.max.z));
-        renderer->DrawMesh(vao, indices.size(), parentModel, textures, shininess);
+        renderer->DrawMesh(vao, indices.size(), model, textures, shininess);
+        for (size_t i = 0; i < children.size(); i++)
+        {
+            children[i]->Draw(shininess);
+        }
+
     }
 }
 
@@ -95,4 +89,57 @@ BoundingBox Mesh::CalculateBoundingBox()
     }
 
     return bbox;
+}
+
+void Mesh::SetPosition(float x, float y, float z) {
+    localPosition = { x, y, z };
+
+    if (parent)
+        position = parent->position + localPosition;
+    else
+        position = localPosition;
+
+    translate = glm::translate(glm::mat4(1.0f), position);
+
+    for (int i = 0; i < children.size(); i++)
+        children[i]->UpdateSonPos();
+
+    UpdateModel();
+}
+
+void Mesh::Scale(float x, float y, float z) {
+    meshLocalScale = { x, y, z };
+
+    if (parent)
+        localScale = parent->localScale * meshLocalScale;
+    else
+        localScale = meshLocalScale;
+
+    scale = glm::scale(glm::mat4(1.0f), localScale);
+
+    for (int i = 0; i < children.size(); i++)
+        children[i]->UpdateSonScale();
+
+    UpdateModel();
+}
+void Mesh::UpdateSonPos() {
+
+    position = parent->position + localPosition;
+
+    translate = glm::translate(glm::mat4(1.0f), position);
+
+    for (int i = 0; i < children.size(); i++)
+        children[i]->UpdateSonPos();
+
+    UpdateModel();
+}
+
+void Mesh::UpdateSonScale() {
+    localScale = parent->localScale * meshLocalScale;
+    scale = glm::scale(glm::mat4(1.0f), localScale);
+
+    for (int i = 0; i < children.size(); i++)
+        children[i]->UpdateSonScale();
+
+    UpdateModel();
 }

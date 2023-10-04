@@ -69,6 +69,7 @@ float cameraY = 0.1f;
 float cameraZ = 0.1f;
 float cameraSpeedRotateX = 200.07f;
 float cameraSpeedRotateY = 200.07f;
+float auxYTestPatata = 1.0f;
 void Game::Update()
 {
 
@@ -236,6 +237,37 @@ void Game::MaterialStart()
 	ModelLoader::LoadModel("assets/models/test/bodyna.fbx", model1->structure);
 	model1->SetPosition(0.1f, 0.1f, 0.1f);
 	model1->Scale(1, 1, 1);
+	
+	model1->SetMeshPosition(0, 2.5, 0, 1);
+	model1->SetMeshPosition(0, -0.2, 0, 2);
+	model1->SetMeshScale(0.5, 1.33, 0.5, 2);
+	  
+	model1->SetMeshPosition(0, -2.225, 0, 3);
+	model1->SetMeshScale(1.5, 0.75, 1.5, 3);
+	  
+	model1->SetMeshPosition(2.05, -0.2, 0, 4);
+	model1->SetMeshScale(0.33, 1, 0.33, 4);
+	  
+	model1->SetMeshPosition(0, -2.15, -0.05, 5);
+	model1->SetMeshScale(0.9, 0.6, 3, 5);
+	  
+	model1->SetMeshPosition(-0.05, -2.2, 0, 6);
+	model1->SetMeshScale(0.33, 1, 0.33, 6);
+	  
+	model1->SetMeshPosition(0, -2.15, -0.05, 7);
+	model1->SetMeshScale(0.9, 0.6, 3, 7);
+	  
+	model1->SetMeshPosition(2.15, 0, 0, 8);
+	model1->SetMeshScale(3, 0.33, 0.5, 8);
+	  
+	model1->SetMeshPosition(2.2, 0.0, 0, 9);
+	model1->SetMeshScale(0.33, 2, 2, 9);
+	  
+	model1->SetMeshPosition(-2.15, 0, 0, 10);
+	model1->SetMeshScale(3, 0.33, 0.5, 10);
+	
+	model1->SetMeshPosition(-2.2, 0, 0, 11);
+	model1->SetMeshScale(0.33, 2, 2, 11);
 }
 void Game::ShapeUpdate()
 {
@@ -317,6 +349,9 @@ void Game::MaterialUpdate()
 	spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
 	spotlightCUbe2.SetPosition(pot2->position.x, pot2->position.y, pot2->position.z);
 	lightCUbe.SetPosition(point1->position.x, point1->position.y, point1->position.z);
+
+	//model1->SetMeshPosition(0.1f, auxYTestPatata, 0.1f, 6);
+	//auxYTestPatata += 0.2f * DeltaTime();
 }
 void Game::SpriteDraw()
 {

@@ -19,9 +19,8 @@ public:
 	Mesh();
 	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<TextureData> textures);
 
-	void Test();
 	
-	void Draw(glm::mat4 parentModel, float &shinies);
+	void Draw(float &shinies);
 	void SetNode(aiNode* _myself);
 	aiNode* GetNode();
 	void SetParent(Mesh* _parent);
@@ -36,7 +35,10 @@ public:
 	BoundingBox CalculateBoundingBox();
 	bool canDraw = true;
 	bool imParent;
-
+	virtual void SetPosition(float x, float y, float z) override;
+	virtual void Scale(float x, float y, float z) override;
+	void UpdateSonPos();
+	void UpdateSonScale();
 
 	unsigned int vao;
 

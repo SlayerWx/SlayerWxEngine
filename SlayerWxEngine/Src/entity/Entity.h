@@ -28,8 +28,8 @@ public:
 	float weight = 0;
 	float strength = 0;
 
-	void SetPosition(float x, float y, float z);
-	void Scale(float x, float y, float z);
+	virtual void SetPosition(float x, float y, float z);
+	virtual void Scale(float x, float y, float z); 
 	void Rotate(float x, float y, float z);
 	void Translate(float x, float y, float z);
 	float GetPositionX();
@@ -42,7 +42,10 @@ public:
 	glm::vec3 position;
 	glm::vec3 rotation;
 	glm::vec3 localScale;
+	glm::vec3 meshLocalScale;
 	glm::vec3 lastPosition;
+	glm::vec3 localPosition;
+	glm::vec3 localRotation;
 };
 
 #endif

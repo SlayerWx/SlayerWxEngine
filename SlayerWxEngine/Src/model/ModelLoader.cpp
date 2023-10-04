@@ -1,7 +1,7 @@
 #include "ModelLoader.h"
-
 std::vector<Mesh*> ModelLoader::parents;
-void ModelLoader::LoadModel(std::string const& path, ModelStruct &structure) {
+void ModelLoader::LoadModel(std::string const& path, ModelStruct &structure)
+{
 
     //textures_loaded.clear();
     //meshes.clear();
@@ -9,29 +9,36 @@ void ModelLoader::LoadModel(std::string const& path, ModelStruct &structure) {
     ModelStruct _structure;
     Assimp::Importer importer;
     const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
-    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
+    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) 
+    {
         std::cout << "Error::Assimp" << importer.GetErrorString() << std::endl;
         return;
     }
     _structure.directory = path.substr(0, path.find_last_of('/'));
 
-
-    //if (_meshParentBase->GetNode()->mNumChildren > 0) {
-    //    _meshParentBase->SetIsParent(true);
-    //    _meshesParent.push_back(_meshParentBase);
-    //}
     Mesh* aux = ProcessNode(scene->mRootNode, scene,_structure,true);
 
-    std::cout << aux->children.size() << std::endl;
     structure = _structure;
     structure.parentMesh = aux;
-    parents;
 }
 
 
-Mesh* ModelLoader::ProcessNode(aiNode* node, const aiScene* scene,ModelStruct &_structure, bool isRoot) {
-    Mesh* aux = new Mesh();
-    //for (unsigned int i = 0; i < node->mNumMeshes; i++) {
+Mesh* ModelLoader::ProcessNode(aiNode* node, const aiScene* scene,ModelStruct &_structure, bool isRoot) 
+{
+    //aiMesh* auxM = scene->mMeshes[node->mMeshes[0]];
+   // Mesh* aux = new Mesh(); //ProcessMesh(auxM, scene, _structure);
+    //if ( isRoot)
+    //{
+    //    aux->SetNode(node);
+    //
+    //    if (aux->GetNode()->mNumChildren > 0)
+    //    {
+    //        aux->imParent = true;
+    //        parents.push_back(aux);
+    //    }
+    //}
+    //for (unsigned int i = 0; i < node->mNumMeshes; i++) 
+    // {
     //    //aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
     //    //Mesh processedMesh = ProcessMesh(mesh, scene, _structure);
     //    //aux.children.push_back(processedMesh);
@@ -52,36 +59,41 @@ Mesh* ModelLoader::ProcessNode(aiNode* node, const aiScene* scene,ModelStruct &_
     //    aux->children.push_back(childMesh);
     //    parents.push_back(aux);
     //}
-
-    for (size_t i = 0; i < node->mNumMeshes; i++) {
+    Mesh* m;
+    for (size_t i = 0; i < node->mNumMeshes; i++)
+    {
         aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-        Mesh* m = ProcessMesh(mesh, scene, _structure);
+        m = ProcessMesh(mesh, scene, _structure);
         m->SetNode(node);
 
         for (int i = 0; i < parents.size(); i++)
-            if (m->GetNode()->mParent == parents[i]->GetNode()) {
+            if (m->GetNode()->mParent == parents[i]->GetNode())
+            {
                 m->SetParent(parents[i]);
                 parents[i]->AddMeshSon(m);
                 break;
             }
 
         if (node->mNumChildren > 0)
-            if (!m->imParent) {
+            if (!m->imParent) 
+            {
                 m->imParent = true;
                 parents.push_back(m);
             }
     }
-
-    for (size_t i = 0; i < node->mNumChildren; i++) {
+    _structure.meshes.push_back(m);
+    for (size_t i = 0; i < node->mNumChildren; i++)
+    {
         ProcessNode(node->mChildren[i], scene, _structure, false);
     }
-
-        return aux;
+   
+        return m;
 }
 
 
 
-Mesh* ModelLoader::ProcessMesh(aiMesh* mesh, const aiScene* scene, ModelStruct &_structure) {
+Mesh* ModelLoader::ProcessMesh(aiMesh* mesh, const aiScene* scene, ModelStruct &_structure) 
+{
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
     std::vector<TextureData> textures;
@@ -154,7 +166,8 @@ Mesh* ModelLoader::ProcessMesh(aiMesh* mesh, const aiScene* scene, ModelStruct &
     return new Mesh(vertices, indices, textures);
 }
 
-std::vector<TextureData> ModelLoader::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName,ModelStruct &_structure) {
+std::vector<TextureData> ModelLoader::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName,ModelStruct &_structure) 
+{
     std::vector<TextureData> textures;
     for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
     {
