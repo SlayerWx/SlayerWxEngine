@@ -130,3 +130,8 @@ void BaseGame::EngineEnd()
 
 	glfwTerminate();
 }
+
+glm::vec3 BaseGame::GetCameraPosition()
+{
+	return Renderer::myRef->GetCamera()->cameraPos;
+}

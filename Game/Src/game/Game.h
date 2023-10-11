@@ -19,10 +19,15 @@ private:
 	Cube lightCUbe;
 	Cube spotlightCUbe;
 	Cube spotlightCUbe2;
-	BSPPlane bspPlaneFront;
-	BSPPlane bspPlaneRight;
-	BSPPlane bspPlaneLeft;
+	std::vector<BSPPlane*> bspPlane;
+	BSP* bsp;
 	Model* model1;
+	Model* model2;
+	Model* model3;
+	Model* model4;
+	Model* model5;
+	Model* model6;
+	Model* model7;
 	void Start();
 	void Update();
 	bool Input(int keycode, float &variable, float modif);

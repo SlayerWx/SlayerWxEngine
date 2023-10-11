@@ -44,5 +44,6 @@ public:
 	CameraProjection GetCameraProjection();
 	void CameraFollowObj(CameraType type, glm::vec3 objPosReference, float distanceFromReferene);
 	void SetShowBSP(bool isActive);
+	glm::vec3 GetCameraPosition();
 };
 #endif

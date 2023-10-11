@@ -7,11 +7,11 @@ Model::Model() : Entity("Model")
 
 void Model::Draw()
 {
-    structure.meshes[1]->Draw(shininess);
-    //for (unsigned int i = 0; i < structure.meshes.size(); i++)
-    //{
-    //    structure.meshes[i]->Draw(model,shininess);
-    //}
+    //structure.meshes[1]->Draw(model,shininess);
+    for (unsigned int i = 1; i < structure.meshes.size(); i++)
+    {
+        structure.meshes[i]->Draw(shininess);
+    }
 }
 
 void Model::SetMeshPosition(float x, float y, float z, int index)

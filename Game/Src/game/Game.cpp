@@ -30,7 +30,7 @@ enum State
 State linkState = Sdown;
 void Game::Start()
 {
-	
+
 	//SpriteStart();
 	ShapeStart();
 	MaterialStart();
@@ -54,7 +54,6 @@ void Game::Start()
 	spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
 	spotlightCUbe2.SetPosition(pot2->position.x, pot2->position.y, pot2->position.z);
 
-	
 }
 float a = 0.0f;
 bool right = true;
@@ -223,21 +222,19 @@ void Game::MaterialStart()
 	spotlightCUbe2.SetPosition(3.0f, 1.0f, 2.0f);
 	spotlightCUbe2.Scale(0.3f, 0.3f, 0.3f);
 
-	bspPlaneLeft = BSPPlane("bspPlaneLeft", "assets/red.png",glm::vec3(1,0,0));
-	bspPlaneLeft.SetPosition(-10.0f, 1.0f, 2.0f);
-	bspPlaneLeft.Scale(0.3f, 15.3f, 60.3f);
-	//bspPlaneFront = BSPPlane("bspPlaneFront", "assets/red.png", glm::vec3(0, 0, 1));
-	//bspPlaneFront.SetPosition(3.0f, 1.0f, -10.0f);
-	//bspPlaneFront.Scale(60.3f, 15.3f, 0.3f);
-	//bspPlaneRight = BSPPlane("bspPlaneRight", "assets/red.png", glm::vec3(1, 0, 0));
-	//bspPlaneRight.SetPosition(10.0f, 1.0f, 2.0f);
-	//bspPlaneRight.Scale(0.3f, 15.3f, 60.3f);
+	bspPlane.push_back(new BSPPlane("bspPlaneLeft", "assets/red.png",glm::vec3(1,0,0)));
+	bspPlane[0]->SetPosition(-10.0f, 1.0f, 2.0f);
+	bspPlane[0]->Scale(0.3f, 15.3f, 60.3f);
+	bspPlane.push_back(new BSPPlane("bspPlaneFront", "assets/red.png", glm::vec3(0, 0, 1)));
+	bspPlane[1]->SetPosition(3.0f, 1.0f, -10.0f);
+	bspPlane[1]->Scale(60.3f, 15.3f, 0.3f);
+	bspPlane.push_back(new BSPPlane("bspPlaneRight", "assets/red.png", glm::vec3(1, 0, 0)));
+	bspPlane[2]->SetPosition(10.0f, 1.0f, 2.0f);
+	bspPlane[2]->Scale(0.3f, 15.3f, 60.3f);
 
 	model1 = new Model();
 	ModelLoader::LoadModel("assets/models/test/bodyna.fbx", model1->structure);
-	model1->SetPosition(0.1f, 0.1f, 0.1f);
-	model1->Scale(1, 1, 1);
-	
+
 	model1->SetMeshPosition(0, 2.5, 0, 1);
 	model1->SetMeshPosition(0, -0.2, 0, 2);
 	model1->SetMeshScale(0.5, 1.33, 0.5, 2);
@@ -268,6 +265,52 @@ void Game::MaterialStart()
 	
 	model1->SetMeshPosition(-2.2, 0, 0, 11);
 	model1->SetMeshScale(0.33, 2, 2, 11);
+
+	model2 = new Model();
+	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model2->structure);
+	model2->SetMeshPosition(-20.1f, -3.1f, 0.1f,1);
+	model2->SetMeshScale(2, 1, 2,1);
+
+	model3 = new Model();
+	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model3->structure);
+	model3->SetMeshPosition(20.1f, -3.1f, 0.1f, 1);
+	model3->SetMeshScale(2, 2, 2, 1);
+
+	model4 = new Model();
+	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model4->structure);
+	model4->SetMeshPosition(-20.1f, -3.1f, -20.1f, 1);
+	model4->SetMeshScale(2, 2, 2, 1);
+
+	model5 = new Model();
+	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model5->structure);
+	model5->SetMeshPosition(20.1f, -3.1f, -20.1f, 1);
+	model5->SetMeshScale(2, 2, 2, 1);
+
+	model6 = new Model();
+	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model6->structure);
+	model6->SetMeshPosition(0.1f, -3.1f, 0.1f, 1);
+	model6->SetMeshScale(2, 2, 2, 1);
+
+	model7 = new Model();
+	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model7->structure);
+	model7->SetMeshPosition(0.1f, -3.1f, -20.1f, 1);
+	model7->SetMeshScale(2, 2, 2, 1);
+
+
+	bsp = new BSP();
+
+	bsp->AddModel(model1);
+	bsp->AddModel(model2);
+	bsp->AddModel(model3);
+	bsp->AddModel(model4);
+	bsp->AddModel(model5);
+	bsp->AddModel(model6);
+	bsp->AddModel(model7);
+
+
+	bsp->AddPlane(bspPlane[0]);
+	bsp->AddPlane(bspPlane[1]);
+	bsp->AddPlane(bspPlane[2]);
 }
 void Game::ShapeUpdate()
 {
@@ -293,6 +336,7 @@ void Game::SpriteUpdate()
 	//if (GetKey(KEYCODE_7)) cameraState = CameraType::ThridPerson;
 	//	CameraFollowObj(cameraState, link.GetPosition(), 5);
 }
+float xMesh = 0.01f, yMesh = 2.51f, zMesh = 0.01f;
 void Game::MaterialUpdate()
 {
 	if (GetKey(KEYCODE_1))
@@ -315,19 +359,23 @@ void Game::MaterialUpdate()
 
 	if (GetKey(KEYCODE_H))
 	{
-		model1->SetPosition(model1->position.x + 10.0f * DeltaTime(), model1->position.y, model1->position.z);
+		xMesh += 5.0f * DeltaTime();
+		model1->SetMeshPosition(xMesh, yMesh, zMesh,1);
 	}
 	if (GetKey(KEYCODE_F))
 	{
-		model1->SetPosition(model1->position.x - 10.0f * DeltaTime(), model1->position.y, model1->position.z);
+		xMesh -= 5.0f * DeltaTime();
+		model1->SetMeshPosition(xMesh, yMesh, zMesh,1);
 	}
 	if (GetKey(KEYCODE_G))
 	{
-		model1->SetPosition(model1->position.x, model1->position.y, model1->position.z + 10.0f * DeltaTime());
+		zMesh += 5.0f * DeltaTime();
+		model1->SetMeshPosition(xMesh, yMesh, zMesh,1);
 	}
 	if (GetKey(KEYCODE_T))
 	{
-		model1->SetPosition(model1->position.x, model1->position.y, model1->position.z - 10.0f * DeltaTime());
+		zMesh -= 5.0f * DeltaTime();
+		model1->SetMeshPosition(xMesh, yMesh, zMesh,1);
 
 	}
 
@@ -371,16 +419,25 @@ void Game::ShapeDraw()
 }
 void Game::MaterialDraw()
 {
+
+	bsp->CalculateBSP();
 	mat1.Draw();
 	//lightCUbe.Draw();
 	//spotlightCUbe.Draw();
 	//spotlightCUbe2.Draw();
 	model1->Draw();
-	if (bspPlaneLeft.FrontPlane(model1->GetPosition()))
+	model2->Draw();
+	model3->Draw();
+	model4->Draw();
+	model5->Draw();
+	model6->Draw();
+	model7->Draw();
+	if (GetKey(KEYCODE_SPACE))
 	{
+		for (unsigned int i = 0; i < bspPlane.size(); i++)
+		{
+			bspPlane[i]->Draw();
+		}
 	}
-	bspPlaneLeft.Draw();
-	//bspPlaneFront.Draw();
-	//bspPlaneRight.Draw();
 
 }

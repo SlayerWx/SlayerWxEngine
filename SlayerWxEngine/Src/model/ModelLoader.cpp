@@ -2,7 +2,7 @@
 std::vector<Mesh*> ModelLoader::parents;
 void ModelLoader::LoadModel(std::string const& path, ModelStruct &structure)
 {
-
+    parents.clear();
     //textures_loaded.clear();
     //meshes.clear();
     //directory = "";

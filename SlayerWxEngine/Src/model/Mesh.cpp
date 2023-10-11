@@ -20,7 +20,7 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std:
 	renderer->SetupMesh(vao, vbo, ebo, vertices, indices);
 }
 
-void Mesh::Draw(float &shininess) 
+void Mesh::Draw( float &shininess) 
 {
     BoundingBox aux;
 
@@ -32,12 +32,13 @@ void Mesh::Draw(float &shininess)
 
         renderer->DrawBoundingBox(glm::vec3(aux.min.x, aux.min.y, aux.min.z), glm::vec3(aux.max.x, aux.max.y, aux.max.z));
         renderer->DrawMesh(vao, indices.size(), model, textures, shininess);
+    }
         for (size_t i = 0; i < children.size(); i++)
         {
             children[i]->Draw(shininess);
         }
 
-    }
+    
 }
 
 void Mesh::SetNode(aiNode* _myself)
