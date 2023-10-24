@@ -9,6 +9,7 @@
 
 #include <string>
 #include <vector>
+#include <array>
 struct BoundingBox {
 	glm::vec3 min;
 	glm::vec3 max;
@@ -39,6 +40,10 @@ public:
 	virtual void Scale(float x, float y, float z) override;
 	void UpdateSonPos();
 	void UpdateSonScale();
+
+	BoundingBox myBoundingBox;
+	std::array<glm::vec3, 8> verticesBoundingBox;
+	std::array<glm::vec3, 8> CalculateVerticesBoundingBox(BoundingBox bbox);
 
 	unsigned int vao;
 

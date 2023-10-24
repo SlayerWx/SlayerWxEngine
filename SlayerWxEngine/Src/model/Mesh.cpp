@@ -18,19 +18,22 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std:
     canDraw = true;
     imParent = false;
 	renderer->SetupMesh(vao, vbo, ebo, vertices, indices);
+    myBoundingBox = CalculateBoundingBox();
+    verticesBoundingBox = CalculateVerticesBoundingBox(myBoundingBox);
 }
 
 void Mesh::Draw( float &shininess) 
 {
-    BoundingBox aux;
+    myBoundingBox = CalculateBoundingBox();
+    verticesBoundingBox = CalculateVerticesBoundingBox(myBoundingBox);
 
     if (canDraw)
     {
 
 
-        aux = CalculateBoundingBox();
 
-        renderer->DrawBoundingBox(glm::vec3(aux.min.x, aux.min.y, aux.min.z), glm::vec3(aux.max.x, aux.max.y, aux.max.z));
+        renderer->DrawBoundingBox(glm::vec3(myBoundingBox.min.x, myBoundingBox.min.y, myBoundingBox.min.z),
+                                  glm::vec3(myBoundingBox.max.x, myBoundingBox.max.y, myBoundingBox.max.z));
         renderer->DrawMesh(vao, indices.size(), model, textures, shininess);
     }
         for (size_t i = 0; i < children.size(); i++)
@@ -143,4 +146,22 @@ void Mesh::UpdateSonScale() {
         children[i]->UpdateSonScale();
 
     UpdateModel();
+}
+
+std::array<glm::vec3, 8> Mesh::CalculateVerticesBoundingBox(BoundingBox bbox)
+{
+
+    std::array<glm::vec3, 8> boundingBoxVertices = { {
+        {bbox.min.x, bbox.min.y, bbox.min.z}, // Vértice 0
+        {bbox.max.x, bbox.min.y, bbox.min.z}, // Vértice 1
+        {bbox.max.x, bbox.max.y, bbox.min.z}, // Vértice 2
+        {bbox.min.x, bbox.max.y, bbox.min.z}, // Vértice 3
+        {bbox.min.x, bbox.min.y, bbox.max.z}, // Vértice 4
+        {bbox.max.x, bbox.min.y, bbox.max.z}, // Vértice 5
+        {bbox.max.x, bbox.max.y, bbox.max.z}, // Vértice 6
+        {bbox.min.x, bbox.max.y, bbox.max.z}  // Vértice 7
+    } };
+
+
+    return boundingBoxVertices;
 }

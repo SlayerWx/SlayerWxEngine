@@ -40,19 +40,35 @@ void BSP::CalculateBSPMesh(Mesh* mesh, glm::vec3 cameraPos)
 	{
 		CalculateBSPMesh(mesh->children[i], cameraPos);
 	}
+	//for (int i = 0; i < planes.size(); i++)
+	//{
+	//	if (planes[i]->FrontPlane(mesh->position) == planes[i]->FrontPlane(cameraPos))
+	//	{
+	//		mesh->canDraw = true;
+	//	}
+	//	else
+	//	{
+	//		mesh->canDraw = false;
+	//		break;
+	//	}
+	//}
+	mesh->canDraw = true;
 	for (int i = 0; i < planes.size(); i++)
 	{
-		if (planes[i]->FrontPlane(mesh->position) == planes[i]->FrontPlane(cameraPos))
-		{
-			mesh->canDraw = true;
-		}
-		else
-		{
-			mesh->canDraw = false;
-			break;
+		bool cameraIsFront = planes[i]->FrontPlane(cameraPos);
+
+		int verticesInFrontCount = 0;
+
+		for (const glm::vec3& aux : mesh->verticesBoundingBox) {
+			if (planes[i]->FrontPlane(mesh->GetPosition() + aux) != cameraIsFront) {
+				verticesInFrontCount++;
+				if (verticesInFrontCount >= 8) {
+					mesh->canDraw = false;
+					break;
+				}
+			}
 		}
 	}
-
 
 
 }

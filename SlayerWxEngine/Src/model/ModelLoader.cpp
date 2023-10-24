@@ -25,40 +25,6 @@ void ModelLoader::LoadModel(std::string const& path, ModelStruct &structure)
 
 Mesh* ModelLoader::ProcessNode(aiNode* node, const aiScene* scene,ModelStruct &_structure, bool isRoot) 
 {
-    //aiMesh* auxM = scene->mMeshes[node->mMeshes[0]];
-   // Mesh* aux = new Mesh(); //ProcessMesh(auxM, scene, _structure);
-    //if ( isRoot)
-    //{
-    //    aux->SetNode(node);
-    //
-    //    if (aux->GetNode()->mNumChildren > 0)
-    //    {
-    //        aux->imParent = true;
-    //        parents.push_back(aux);
-    //    }
-    //}
-    //for (unsigned int i = 0; i < node->mNumMeshes; i++) 
-    // {
-    //    //aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-    //    //Mesh processedMesh = ProcessMesh(mesh, scene, _structure);
-    //    //aux.children.push_back(processedMesh);
-    //    aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-    //    Mesh* processedMesh = ProcessMesh(mesh, scene, _structure);
-    //    //if (isRoot && i == 0)
-    //    //{
-    //    //    aux = processedMesh;
-    //    //}
-    //    //else
-    //        aux->children.push_back(processedMesh);
-    //
-    //    _structure.meshes.push_back(processedMesh);
-    //}
-    //for (unsigned int i = 0; i < node->mNumChildren; i++) {
-    //    //aux.children.push_back(ProcessNode(node->mChildren[i], scene, _structure, false));
-    //    Mesh* childMesh = ProcessNode(node->mChildren[i], scene, _structure, false);
-    //    aux->children.push_back(childMesh);
-    //    parents.push_back(aux);
-    //}
     Mesh* m;
     for (size_t i = 0; i < node->mNumMeshes; i++)
     {
