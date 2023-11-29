@@ -10,7 +10,7 @@
 #include <iostream>   
 #include <string>
 #include <vector>
-
+#include <array>
 #define MAX_BONE_INFLUENCE 4
 
 struct SlayerWxEngine_API Vertex {
@@ -23,6 +23,8 @@ struct SlayerWxEngine_API Vertex {
 	int m_BoneIDs[MAX_BONE_INFLUENCE];
 	float m_Weights[MAX_BONE_INFLUENCE];
 };
+
+
 class SlayerWxEngine_API Renderer
 {
 private:
@@ -65,7 +67,12 @@ public:
 
 	void DrawMesh(unsigned int& vao, unsigned int indexAmount, glm::mat4 model, std::vector<TextureData> textures, float& shininess);
 
-	void DrawBoundingBox(const glm::vec3 bboxMin, const glm::vec3 bboxMax);
+
+	void draw_bbox(std::vector<Vertex> _vertices, glm::mat4 model, glm::mat4 m, std::array<glm::vec3, 8> verticesBoundingBox);
+
+	//void draw_bbox(std::vector<Vertex> _vertices, glm::mat4 model, glm::mat4 m);
+
+
 	bool ShowBSP = true;
 };
 // settings

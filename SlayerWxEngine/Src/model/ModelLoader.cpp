@@ -1,6 +1,7 @@
 #include "ModelLoader.h"
 std::vector<Mesh*> ModelLoader::parents;
-void ModelLoader::LoadModel(std::string const& path, ModelStruct &structure)
+std::vector<Mesh*> ModelLoader::planeBSP;
+void ModelLoader::LoadModel(std::string const& path, ModelStruct& structure)
 {
     parents.clear();
     //textures_loaded.clear();
@@ -9,29 +10,91 @@ void ModelLoader::LoadModel(std::string const& path, ModelStruct &structure)
     ModelStruct _structure;
     Assimp::Importer importer;
     const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
-    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) 
+    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
     {
         std::cout << "Error::Assimp" << importer.GetErrorString() << std::endl;
         return;
     }
     _structure.directory = path.substr(0, path.find_last_of('/'));
-
-    Mesh* aux = ProcessNode(scene->mRootNode, scene,_structure,true);
-
+    std::string aux = path.substr(0, path.find_last_of('/'));
+    std::cout << _structure.directory << std::endl;
+    if (aux == "Plane.fbx")
+    {
+        ProcessRootPlane(scene->mRootNode, scene, _structure);
+    }
+    else
+    {
+        ProcessRootNode(scene->mRootNode, scene, _structure);
+    }
+    //parents[0]->isRoot = true;
     structure = _structure;
-    structure.parentMesh = aux;
+}
+
+void ModelLoader::ProcessRootPlane(aiNode* root, const aiScene* scene, ModelStruct& _structure)
+{
+    Mesh* rootMesh = ProcessMeshForRoot(root, scene, _structure);
+    if (rootMesh) {
+        _structure.meshes.insert(_structure.meshes.begin(), rootMesh);
+    }
+    _structure.parentMesh = rootMesh;
+    planeBSP.push_back(rootMesh);
+    for (size_t i = 0; i < root->mNumChildren; i++) {
+        Mesh* newchildren = ProcessNode(root->mChildren[i], scene, _structure, false);
+        newchildren->parent = rootMesh;
+        if(rootMesh && newchildren) rootMesh->children.push_back(newchildren); 
+        planeBSP.push_back(newchildren);
+    }
 }
 
 
-Mesh* ModelLoader::ProcessNode(aiNode* node, const aiScene* scene,ModelStruct &_structure, bool isRoot) 
+void ModelLoader::ProcessRootNode(aiNode* root, const aiScene* scene, ModelStruct& _structure) 
+{
+    // Procesar el mesh del root (puede ser nulo si no tiene meshes)
+    Mesh* rootMesh = ProcessMeshForRoot(root, scene, _structure);
+    if (rootMesh) {
+        _structure.meshes.insert(_structure.meshes.begin(), rootMesh);
+    }
+    _structure.parentMesh = rootMesh;
+    // Llamar a la función recursiva para procesar nodos hijos
+    for (size_t i = 0; i < root->mNumChildren; i++) {
+        Mesh* newchildren = ProcessNode(root->mChildren[i], scene, _structure, false);
+        newchildren->parent = rootMesh;
+        rootMesh->children.push_back(newchildren);
+    }
+}
+
+Mesh* ModelLoader::ProcessMeshForRoot(aiNode* root, const aiScene* scene, ModelStruct& _structure) {
+    Mesh* rootMesh = nullptr;
+
+    std::vector<Vertex> vertices;
+    std::vector<unsigned int> indices;
+    std::vector<TextureData> textures;
+
+    Vertex vertex;
+    vertex.position = glm::vec3(0.0f, 0.0f, 0.0f);
+    vertices.push_back(vertex);
+    indices.push_back(0);
+
+
+    rootMesh = new Mesh(vertices, indices, textures);
+
+    rootMesh->isRoot = true;
+
+    parents.push_back(rootMesh);
+
+    return rootMesh;
+}
+
+
+Mesh* ModelLoader::ProcessNode(aiNode* node, const aiScene* scene, ModelStruct& _structure, bool isRoot)
 {
     Mesh* m;
     for (size_t i = 0; i < node->mNumMeshes; i++)
     {
         aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-        m = ProcessMesh(mesh, scene, _structure);
+        m = ProcessMesh(mesh, scene, _structure, isRoot);
         m->SetNode(node);
-
+        
         for (int i = 0; i < parents.size(); i++)
             if (m->GetNode()->mParent == parents[i]->GetNode())
             {
@@ -39,9 +102,9 @@ Mesh* ModelLoader::ProcessNode(aiNode* node, const aiScene* scene,ModelStruct &_
                 parents[i]->AddMeshSon(m);
                 break;
             }
-
+        m->isRoot = isRoot;
         if (node->mNumChildren > 0)
-            if (!m->imParent) 
+            if (!m->imParent)
             {
                 m->imParent = true;
                 parents.push_back(m);
@@ -52,13 +115,10 @@ Mesh* ModelLoader::ProcessNode(aiNode* node, const aiScene* scene,ModelStruct &_
     {
         ProcessNode(node->mChildren[i], scene, _structure, false);
     }
-   
-        return m;
+    return m;
 }
 
-
-
-Mesh* ModelLoader::ProcessMesh(aiMesh* mesh, const aiScene* scene, ModelStruct &_structure) 
+Mesh* ModelLoader::ProcessMesh(aiMesh* mesh, const aiScene* scene, ModelStruct &_structure,bool isRoot) 
 {
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;

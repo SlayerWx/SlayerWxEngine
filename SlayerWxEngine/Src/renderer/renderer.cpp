@@ -327,36 +327,58 @@ void Renderer::DrawMesh(unsigned int& vao, unsigned int indexAmount, glm::mat4 m
 	glBindVertexArray(0);
 }
 
-void Renderer::DrawBoundingBox(const glm::vec3 bboxMin, const glm::vec3 bboxMax) {
+void Renderer::draw_bbox(std::vector<Vertex> _vertices, glm::mat4 model,glm::mat4 m, std::array<glm::vec3, 8> verticesBoundingBox) {
+	if (_vertices.size() == 0 || !ShowBSP)
+		return;
+	
+	// Cube 1x1x1, centered on origin
+	GLfloat vertices[] = {
+	  -0.5, -0.5, -0.5, 1.0,
+	   0.5, -0.5, -0.5, 1.0,
+	   0.5,  0.5, -0.5, 1.0,
+	  -0.5,  0.5, -0.5, 1.0,
+	  -0.5, -0.5,  0.5, 1.0,
+	   0.5, -0.5,  0.5, 1.0,
+	   0.5,  0.5,  0.5, 1.0,
+	  -0.5,  0.5,  0.5, 1.0,
+	};
+	GLuint vbo_vertices;
+	glGenBuffers(1, &vbo_vertices);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo_vertices);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	
+	GLushort elements[] = {
+	  0, 1, 2, 3,
+	  4, 5, 6, 7,
+	  0, 4, 1, 5, 2, 6, 3, 7
+	};
+	GLuint ibo_elements;
+	glGenBuffers(1, &ibo_elements);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo_elements);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(m));
+	
+	glBindBuffer(GL_ARRAY_BUFFER, vbo_vertices);
+	int attribute_v_coord = 0;
+	glEnableVertexAttribArray(attribute_v_coord);
+	glVertexAttribPointer(attribute_v_coord, 4, GL_FLOAT, GL_FALSE, 0, 0 );
+	
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo_elements);
+	glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_SHORT, (GLvoid*)(4 * sizeof(GLushort)));
+	glDrawElements(GL_LINES, 8, GL_UNSIGNED_SHORT, (GLvoid*)(8 * sizeof(GLushort)));
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	
+	glDisableVertexAttribArray(attribute_v_coord);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	
+	
+	
+	glDeleteBuffers(1, &vbo_vertices);
+	glDeleteBuffers(1, &ibo_elements);
 
-	if (ShowBSP)
-	{
-		std::vector<glm::vec3> vertices = {
-			glm::vec3(bboxMin.x, bboxMin.y, bboxMin.z),
-			glm::vec3(bboxMax.x, bboxMin.y, bboxMin.z),
-			glm::vec3(bboxMax.x, bboxMax.y, bboxMin.z),
-			glm::vec3(bboxMin.x, bboxMax.y, bboxMin.z),
-			glm::vec3(bboxMin.x, bboxMin.y, bboxMax.z),
-			glm::vec3(bboxMax.x, bboxMin.y, bboxMax.z),
-			glm::vec3(bboxMax.x, bboxMax.y, bboxMax.z),
-			glm::vec3(bboxMin.x, bboxMax.y, bboxMax.z)
-		};
-		std::vector<unsigned int> indices = {
-			0, 1, 1, 2, 2, 3, 3, 0,  // front
-			4, 5, 5, 6, 6, 7, 7, 4,  // back
-			0, 4, 1, 5, 2, 6, 3, 7
-		};
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-		glBegin(GL_LINES);
-		for (size_t i = 0; i < indices.size(); i += 2) {
-			unsigned int index1 = indices[i];
-			unsigned int index2 = indices[i + 1];
-			glVertex3f(vertices[index1].x, vertices[index1].y, vertices[index1].z);
-			glVertex3f(vertices[index2].x, vertices[index2].y, vertices[index2].z);
-		}
-		glEnd();
-
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	}
 }

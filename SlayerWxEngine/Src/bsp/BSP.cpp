@@ -59,8 +59,9 @@ void BSP::CalculateBSPMesh(Mesh* mesh, glm::vec3 cameraPos)
 
 		int verticesInFrontCount = 0;
 
-		for (const glm::vec3& aux : mesh->verticesBoundingBox) {
-			if (planes[i]->FrontPlane(mesh->GetPosition() + aux) != cameraIsFront) {
+		for (const glm::vec3 aux : mesh->verticesBoundingBox) {
+
+			if (planes[i]->FrontPlane( mesh->GetPosition() + (aux * mesh->localScale)) != cameraIsFront) {
 				verticesInFrontCount++;
 				if (verticesInFrontCount >= 8) {
 					mesh->canDraw = false;

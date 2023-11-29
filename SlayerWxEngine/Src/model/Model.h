@@ -17,7 +17,7 @@ public:
 	void SetMeshScale(float x, float y, float z, int index);
 	void ScaleForParts(float scaleInX, float scaleInY, float scaleinZ);
 	float shininess;
-
+	void InfoAboutCol(float ix, float ax, float iy, float ay, float iz, float az, int index);
 private:
 };
 

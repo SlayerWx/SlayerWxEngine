@@ -21,7 +21,10 @@ public:
 	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<TextureData> textures);
 
 	
-	void Draw(float &shinies);
+	void Draw(float &shinies,int _a);
+	BoundingBox CalculateBoundingBox(const glm::mat4& parentModelMatrix);
+	std::vector<Vertex> AcumulativeVertex(glm::mat4 parentModel,glm::vec3 parentPosition);
+	//std::vector<Vertex> AcumulativeVertex();
 	void SetNode(aiNode* _myself);
 	aiNode* GetNode();
 	void SetParent(Mesh* _parent);
@@ -33,20 +36,21 @@ public:
 	std::vector<Mesh*> children;
 	aiNode* myself;
 	Mesh* parent;
-	BoundingBox CalculateBoundingBox();
+	glm::mat4 CalculeModelBoundingBox(BoundingBox bbox);
+	std::vector<glm::vec3> GetTransformedVertices() const;
+	glm::vec3 RotatePointAroundPivot(const glm::vec3& point, const glm::vec3& rotation, const glm::vec3& pivot);
 	bool canDraw = true;
 	bool imParent;
 	virtual void SetPosition(float x, float y, float z) override;
 	virtual void Scale(float x, float y, float z) override;
 	void UpdateSonPos();
 	void UpdateSonScale();
-
 	BoundingBox myBoundingBox;
 	std::array<glm::vec3, 8> verticesBoundingBox;
-	std::array<glm::vec3, 8> CalculateVerticesBoundingBox(BoundingBox bbox);
-
+	BoundingBox correction;
+	void InfoAboutCol(float ix, float ax, float iy, float ay, float iz, float az);
 	unsigned int vao;
-
+	bool isRoot;
 private:
 	unsigned int ebo, vbo;
 };
