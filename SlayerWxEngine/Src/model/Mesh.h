@@ -22,7 +22,8 @@ public:
 
 	
 	void Draw(float &shinies,int _a);
-	BoundingBox CalculateBoundingBox(const glm::mat4& parentModelMatrix);
+	//BoundingBox CalculateBoundingBox(const glm::mat4& parentModelMatrix);
+	BoundingBox CalculateBoundingBox(const glm::mat4& parentModelMatrix, int _a);
 	std::vector<Vertex> AcumulativeVertex(glm::mat4 parentModel,glm::vec3 parentPosition);
 	//std::vector<Vertex> AcumulativeVertex();
 	void SetNode(aiNode* _myself);
@@ -45,9 +46,9 @@ public:
 	virtual void Scale(float x, float y, float z) override;
 	void UpdateSonPos();
 	void UpdateSonScale();
-	BoundingBox myBoundingBox;
+	BoundingBox vertiicesBoundingBox;
 	std::array<glm::vec3, 8> verticesBoundingBox;
-	BoundingBox correction;
+	BoundingBox acurrate;
 	void InfoAboutCol(float ix, float ax, float iy, float ay, float iz, float az);
 	unsigned int vao;
 	bool isRoot;

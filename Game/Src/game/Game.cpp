@@ -165,6 +165,8 @@ void Game::ShapeStart()
 {
 	triangleAuto.SetPosition(0.0f, 0.0f, 0.0f);
 	shape.SetPosition(-5.0f,0.0f,0.0f);
+
+	std::cout << "assets/models/PlanesWorld/" << std::endl;
 }
 void Game::SpriteStart()
 {
@@ -282,44 +284,44 @@ void Game::MaterialStart()
 
 	model2 = new Model();
 	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model2->structure);
-	model2->SetMeshPosition(-20.1f, -3.1f, 0.1f,1);
+	model2->SetMeshPosition(-20.1f, -3.1f, 0.1f,0);
 	model2->SetMeshScale(2, 1, 2,1);
-	//
-	//model3 = new Model();
-	//ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model3->structure);
-	//model3->SetMeshPosition(20.1f, -3.1f, 0.1f, 1);
-	//model3->SetMeshScale(2, 2, 2, 1);
-	//
-	//model4 = new Model();
-	//ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model4->structure);
-	//model4->SetMeshPosition(-20.1f, -3.1f, -20.1f, 1);
-	//model4->SetMeshScale(2, 2, 2, 1);
-	//
-	//model5 = new Model();
-	//ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model5->structure);
-	//model5->SetMeshPosition(20.1f, -3.1f, -20.1f, 1);
-	//model5->SetMeshScale(2, 2, 2, 1);
-	//
-	//model6 = new Model();
-	//ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model6->structure);
-	//model6->SetMeshPosition(0.1f, -3.1f, 0.1f, 1);
-	//model6->SetMeshScale(2, 2, 2, 1);
-	//
-	//model7 = new Model();
-	//ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model7->structure);
-	//model7->SetMeshPosition(0.1f, -3.1f, -20.1f, 1);
-	//model7->SetMeshScale(2, 2, 2, 1);
-	//
+	
+	model3 = new Model();
+	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model3->structure);
+	model3->SetMeshPosition(20.1f, -3.1f, 0.1f, 0);
+	model3->SetMeshScale(2, 2, 2, 1);
+	
+	model4 = new Model();
+	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model4->structure);
+	model4->SetMeshPosition(-20.1f, -3.1f, -20.1f, 0);
+	model4->SetMeshScale(2, 2, 2, 1);
+	
+	model5 = new Model();
+	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model5->structure);
+	model5->SetMeshPosition(20.1f, -3.1f, -20.1f, 0);
+	model5->SetMeshScale(2, 2, 2, 1);
+	
+	model6 = new Model();
+	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model6->structure);
+	model6->SetMeshPosition(0.1f, -3.1f, 0.1f, 0);
+	model6->SetMeshScale(2, 2, 2, 1);
+	
+	model7 = new Model();
+	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model7->structure);
+	model7->SetMeshPosition(0.1f, -3.1f, -20.1f, 0);
+	model7->SetMeshScale(2, 2, 2, 1);
+	
 
 	bsp = new BSP();
 
 	bsp->AddModel(model1);
-	//bsp->AddModel(model2);
-	//bsp->AddModel(model3);
-	//bsp->AddModel(model4);
-	//bsp->AddModel(model5);
-	//bsp->AddModel(model6);
-	//bsp->AddModel(model7);
+	bsp->AddModel(model2);
+	bsp->AddModel(model3);
+	bsp->AddModel(model4);
+	bsp->AddModel(model5);
+	bsp->AddModel(model6);
+	bsp->AddModel(model7);
 
 
 	bsp->AddPlane(bspPlane[0]);
@@ -440,12 +442,12 @@ void Game::MaterialDraw()
 	//spotlightCUbe.Draw();
 	//spotlightCUbe2.Draw();
 	model1->Draw();
-	//model2->Draw();
-	//model3->Draw();
-	//model4->Draw();
-	//model5->Draw();
-	//model6->Draw();
-	//model7->Draw();
+	model2->Draw();
+	model3->Draw();
+	model4->Draw();
+	model5->Draw();
+	model6->Draw();
+	model7->Draw();
 	if (GetKey(KEYCODE_SPACE))
 	{
 		for (unsigned int i = 0; i < bspPlane.size(); i++)

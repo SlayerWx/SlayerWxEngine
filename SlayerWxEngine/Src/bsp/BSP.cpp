@@ -29,7 +29,7 @@ void BSP::CalculateBSP()
 	glm::vec3 pos = Renderer::myRef->GetCamera()->cameraPos;
 	for (int i = 0; i < models.size(); i++)
 	{
-		CalculateBSPMesh(models[i]->structure.meshes[1], pos);
+		CalculateBSPMesh(models[i]->structure.meshes[0], pos);
 	}
 }
 

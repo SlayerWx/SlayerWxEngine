@@ -6,7 +6,6 @@
 #include "sprite/Sprite.h"
 #include "cube/Cube.h"
 #include "bsp/BSP.h"
-//#include "bsp/BspPlane.h"
 #include "input/Input.h"
 #include "export/export.h"
 #include "gui/MyGui.h"
@@ -44,6 +43,8 @@ public:
 	CameraProjection GetCameraProjection();
 	void CameraFollowObj(CameraType type, glm::vec3 objPosReference, float distanceFromReferene);
 	void SetShowBSP(bool isActive);
+	void LoadBSPplanes();
+	ModelStruct _structure;
 	glm::vec3 GetCameraPosition();
 };
 #endif

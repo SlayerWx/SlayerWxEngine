@@ -359,7 +359,7 @@ void Renderer::draw_bbox(std::vector<Vertex> _vertices, glm::mat4 model,glm::mat
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	
-	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(m));
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 	
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_vertices);
 	int attribute_v_coord = 0;

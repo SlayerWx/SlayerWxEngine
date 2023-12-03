@@ -124,6 +124,10 @@ void BaseGame::SetShowBSP(bool isActive)
 {
 	Renderer::myRef->ShowBSP = isActive;
 }
+void BaseGame::LoadBSPplanes()
+{
+	ModelLoader::LoadModel("assets/models/WorldPlane/planes.fbx", _structure);
+}
 void BaseGame::EngineEnd()
 {
 	Delete();
