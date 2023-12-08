@@ -19,8 +19,6 @@ private:
 	Cube lightCUbe;
 	Cube spotlightCUbe;
 	Cube spotlightCUbe2;
-	std::vector<BSPPlane*> bspPlane;
-	BSP* bsp;
 	Model* model1;
 	Model* model2;
 	Model* model3;

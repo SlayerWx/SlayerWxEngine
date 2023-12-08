@@ -296,6 +296,8 @@ void Renderer::SetupMesh(unsigned int& vao, unsigned int& vbo, unsigned int& ebo
 
 void Renderer::DrawMesh(unsigned int& vao, unsigned int indexAmount, glm::mat4 model, std::vector<TextureData> textures, float &shininess) {
 	
+
+	TextureImporter::BindClean();
 	DrawMaterialLight();
 	CallUniformShaders(materialShader);
 	materialShader->ActiveProgram();
@@ -327,10 +329,10 @@ void Renderer::DrawMesh(unsigned int& vao, unsigned int indexAmount, glm::mat4 m
 	glBindVertexArray(0);
 }
 
-void Renderer::draw_bbox(std::vector<Vertex> _vertices, glm::mat4 model,glm::mat4 m, std::array<glm::vec3, 8> verticesBoundingBox) {
-	if (_vertices.size() == 0 || !ShowBSP)
+void Renderer::draw_bbox(glm::mat4 model) {
+	if (!ShowBSP)
 		return;
-	
+
 	// Cube 1x1x1, centered on origin
 	GLfloat vertices[] = {
 	  -0.5, -0.5, -0.5, 1.0,

@@ -120,3 +120,8 @@ glm::vec3 Entity::GetPosition()
 {
 	return position;
 }
+
+glm::mat4 Entity::GetModel()
+{
+	return model;
+}

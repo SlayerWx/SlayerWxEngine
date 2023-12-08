@@ -40,8 +40,4 @@ void Model::SetMeshScale(float x, float y, float z, int index)
     }
     structure.meshes[index]->Scale(x, y, z);
 }
-void Model::InfoAboutCol(float ix, float ax, float iy, float ay, float iz, float az, int index)
-{
-    structure.meshes[index]->InfoAboutCol(ix,ax,iy,ay,iz,az);
-}
 

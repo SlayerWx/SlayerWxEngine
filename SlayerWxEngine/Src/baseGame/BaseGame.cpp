@@ -48,8 +48,8 @@ void BaseGame::RendererInit()
 	
 	renderer->CreateShaders();
 	renderer->DefVertexAttribute();
-	//renderer->DefVertexSpriteAttribute();
-	//renderer->CallUniformShaders();
+
+	LoadBSPplanes();
 }
 bool BaseGame::Running()
 {
@@ -81,6 +81,7 @@ void BaseGame::UpdateEngine()
 	{
 		UpdateBegin();
 		Update();
+		BSP::CalculateBSP();
 		UpdateEnd();
 	}
 	EngineEnd();
@@ -126,7 +127,10 @@ void BaseGame::SetShowBSP(bool isActive)
 }
 void BaseGame::LoadBSPplanes()
 {
-	ModelLoader::LoadModel("assets/models/WorldPlane/planes.fbx", _structure);
+	ModelLoader::LoadModel("../SlayerWxEngine/assets/Planes.fbx", _structure); 
+	// esto no va, tenes que cargar 1 sola escena
+	//mete todos los modelos en una misma escena de blender
+	
 }
 void BaseGame::EngineEnd()
 {

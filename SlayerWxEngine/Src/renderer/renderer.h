@@ -68,9 +68,8 @@ public:
 	void DrawMesh(unsigned int& vao, unsigned int indexAmount, glm::mat4 model, std::vector<TextureData> textures, float& shininess);
 
 
-	void draw_bbox(std::vector<Vertex> _vertices, glm::mat4 model, glm::mat4 m, std::array<glm::vec3, 8> verticesBoundingBox);
+	void draw_bbox(glm::mat4 model);
 
-	//void draw_bbox(std::vector<Vertex> _vertices, glm::mat4 model, glm::mat4 m);
 
 
 	bool ShowBSP = true;

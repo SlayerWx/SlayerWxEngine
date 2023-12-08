@@ -16,15 +16,16 @@ void ModelLoader::LoadModel(std::string const& path, ModelStruct& structure)
         return;
     }
     _structure.directory = path.substr(0, path.find_last_of('/'));
-    std::string aux = path.substr(0, path.find_last_of('/'));
+    std::string aux = path.substr(path.find_last_of('/') + 1);
     std::cout << _structure.directory << std::endl;
-    if (aux == "Plane.fbx")
+    if (aux == "Planes.fbx")
     {
         ProcessRootPlane(scene->mRootNode, scene, _structure);
+
     }
     else
     {
-        ProcessRootNode(scene->mRootNode, scene, _structure);
+      ProcessRootNode(scene->mRootNode, scene, _structure);
     }
     //parents[0]->isRoot = true;
     structure = _structure;
@@ -37,12 +38,12 @@ void ModelLoader::ProcessRootPlane(aiNode* root, const aiScene* scene, ModelStru
         _structure.meshes.insert(_structure.meshes.begin(), rootMesh);
     }
     _structure.parentMesh = rootMesh;
-    planeBSP.push_back(rootMesh);
     for (size_t i = 0; i < root->mNumChildren; i++) {
         Mesh* newchildren = ProcessNode(root->mChildren[i], scene, _structure, false);
         newchildren->parent = rootMesh;
-        if(rootMesh && newchildren) rootMesh->children.push_back(newchildren); 
+        if(rootMesh) rootMesh->children.push_back(newchildren); 
         planeBSP.push_back(newchildren);
+        BSP::AddPlane(newchildren);
     }
 }
 
@@ -59,7 +60,7 @@ void ModelLoader::ProcessRootNode(aiNode* root, const aiScene* scene, ModelStruc
     for (size_t i = 0; i < root->mNumChildren; i++) {
         Mesh* newchildren = ProcessNode(root->mChildren[i], scene, _structure, false);
         newchildren->parent = rootMesh;
-        rootMesh->children.push_back(newchildren);
+        if(rootMesh)rootMesh->children.push_back(newchildren);
     }
 }
 
@@ -76,8 +77,9 @@ Mesh* ModelLoader::ProcessMeshForRoot(aiNode* root, const aiScene* scene, ModelS
     indices.push_back(0);
 
 
-    rootMesh = new Mesh(vertices, indices, textures);
-
+    rootMesh = new Mesh(vertices, indices, textures,glm::vec3(0,0,0));
+    rootMesh->vertices.clear();
+    vertices.clear();
     rootMesh->isRoot = true;
 
     parents.push_back(rootMesh);
@@ -114,6 +116,7 @@ Mesh* ModelLoader::ProcessNode(aiNode* node, const aiScene* scene, ModelStruct& 
     for (size_t i = 0; i < node->mNumChildren; i++)
     {
         ProcessNode(node->mChildren[i], scene, _structure, false);
+        
     }
     return m;
 }
@@ -173,10 +176,10 @@ Mesh* ModelLoader::ProcessMesh(aiMesh* mesh, const aiScene* scene, ModelStruct &
         for (unsigned int j = 0; j < face.mNumIndices; j++)
             indices.push_back(face.mIndices[j]);
     }
-
+    
     // process materials
     aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-
+    
     std::vector<TextureData> diffuseMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse", _structure);
     textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 
@@ -189,7 +192,7 @@ Mesh* ModelLoader::ProcessMesh(aiMesh* mesh, const aiScene* scene, ModelStruct &
     std::vector<TextureData> heightMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height", _structure);
     textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 
-    return new Mesh(vertices, indices, textures);
+    return new Mesh(vertices, indices, textures,glm::vec3(mesh->mNormals[0].x, mesh->mNormals[0].y, mesh->mNormals[0].z));
 }
 
 std::vector<TextureData> ModelLoader::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName,ModelStruct &_structure) 

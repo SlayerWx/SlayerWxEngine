@@ -9,7 +9,7 @@ Mesh::Mesh() : Entity("Entity")
     imParent = false;
 }
 
-Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<TextureData> textures) : Entity("Entity")
+Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<TextureData> textures, glm::vec3 firstNormal) : Entity("Entity")
 {
     this->vertices = vertices;
     this->indices = indices;
@@ -17,34 +17,42 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std:
     canDraw = true;
     imParent = false;
     a = 0;
+    myFirstNormal = firstNormal;
     renderer->SetupMesh(vao, vbo, ebo, vertices, indices);
 }
 
 void Mesh::Draw(float& shininess, int _a)
 {
+    glm::mat4 aux;
+    if (parent != NULL)
+    {
+        aux = parent->model;
+    }
+    else
+    {
+        aux = model;
+    }
+    BoundingBox bbox = CalculateBoundingBox();
     if (canDraw)
     {
-        glm::mat4 aux;
-        if (parent != NULL)
-        {
-            aux = parent->model;
-        }
-        else
-        {
-            aux = model;
-        }
-        renderer->draw_bbox(vertices, CalculeModelBoundingBox(CalculateBoundingBox(aux,_a)), CalculeModelBoundingBox(acurrate), verticesBoundingBox);
-
+        renderer->draw_bbox(CalculeModelBoundingBox(bbox));
+        
         renderer->DrawMesh(vao, indices.size(), model, textures, shininess);
 
     }
 }
 
-BoundingBox Mesh::CalculateBoundingBox(const glm::mat4& parentModelMatrix,int _a)
+BoundingBox Mesh::CalculateBoundingBox()
 {
     BoundingBox bbox;
-    
-    std::vector<Vertex> allVertices = AcumulativeVertex(model, position);
+
+    if (vertices.empty())
+    {
+        bbox.min = { 0.0f, 0.0f, 0.0f };
+        bbox.max = { 0.0f, 0.0f, 0.0f };
+        return bbox;
+    }
+
     bbox.min = bbox.max = glm::vec3(model * glm::vec4(vertices[0].position, 1.0f));
     for (int i = 0; i < vertices.size(); i++)
     {
@@ -59,7 +67,7 @@ BoundingBox Mesh::CalculateBoundingBox(const glm::mat4& parentModelMatrix,int _a
     }
     for (const auto& child : children)
     {
-        BoundingBox childBox = child->CalculateBoundingBox(model, 9);
+        BoundingBox childBox = child->CalculateBoundingBox();
 
         if (childBox.min.x < bbox.min.x) bbox.min.x = childBox.min.x;
         if (childBox.max.x > bbox.max.x) bbox.max.x = childBox.max.x;
@@ -68,62 +76,18 @@ BoundingBox Mesh::CalculateBoundingBox(const glm::mat4& parentModelMatrix,int _a
         if (childBox.min.z < bbox.min.z) bbox.min.z = childBox.min.z;
         if (childBox.max.z > bbox.max.z) bbox.max.z = childBox.max.z;
     }
+
+    verticesBoundingBox[0] = {bbox.min.x, bbox.min.y, bbox.min.z};
+    verticesBoundingBox[1] = {bbox.max.x, bbox.min.y, bbox.min.z};
+    verticesBoundingBox[2] = {bbox.max.x, bbox.max.y, bbox.min.z};
+    verticesBoundingBox[3] = {bbox.min.x, bbox.max.y, bbox.min.z};
+    verticesBoundingBox[4] = {bbox.min.x, bbox.min.y, bbox.max.z};
+    verticesBoundingBox[5] = {bbox.max.x, bbox.min.y, bbox.max.z};
+    verticesBoundingBox[6] = {bbox.max.x, bbox.max.y, bbox.max.z};
+    verticesBoundingBox[7] = {bbox.min.x, bbox.max.y, bbox.max.z};
+
     
-    //vertiicesBoundingBox = bbox;
-
-    // Compensa las coordenadas para volver a las locales
-    //glm::vec4 localMin = glm::inverse(parentModelMatrix) * glm::vec4(bbox.min, 1.0f);
-    //glm::vec4 localMax = glm::inverse(parentModelMatrix) * glm::vec4(bbox.max, 1.0f);
-    //
-    //bbox.min = glm::vec3(localMin);
-    //bbox.max = glm::vec3(localMax);
-    // 
-    // 
-    // 
-    // 
-    //BoundingBox bbox;
-    //std::vector<Vertex> allVertices;
-    //for (const auto& ver : vertices)
-    //{
-    //    Vertex aux = ver;
-    //    allVertices.push_back(aux);
-    //}
-    //allVertices = AcumulativeVertex(model, position);
-    //
-    //bbox.min.x = bbox.max.x = allVertices[0].position.x;
-    //bbox.min.y = bbox.max.y = allVertices[0].position.y;
-    //bbox.min.z = bbox.max.z = allVertices[0].position.z;
-    //
-    //
-    //for (int i = 0; i < allVertices.size(); i++)
-    //{
-    //    if (allVertices[i].position.x < bbox.min.x) bbox.min.x = allVertices[i].position.x;
-    //    if (allVertices[i].position.x > bbox.min.x) bbox.max.x = allVertices[i].position.x;
-    //    if (allVertices[i].position.y < bbox.min.y) bbox.min.y = allVertices[i].position.y;
-    //    if (allVertices[i].position.y > bbox.max.y) bbox.max.y = allVertices[i].position.y;
-    //    if (allVertices[i].position.z < bbox.min.z) bbox.min.z = allVertices[i].position.z;
-    //    if (allVertices[i].position.z > bbox.max.z) bbox.max.z = allVertices[i].position.z;
-    //}
-
-    //std::cout << bbox.min.x << " " << bbox.max.x << " " << position.x << std::endl;
-
     return bbox;
-}
-std::vector<Vertex> Mesh::AcumulativeVertex(glm::mat4 parentModel, glm::vec3 parentPosition)
-{
-
-    std::vector<Vertex> allVertices;
-    for (const auto& child : children)
-    {
-        allVertices = child->AcumulativeVertex(model, localPosition);
-
-    }
-    for (const auto& ver : vertices)
-    {
-        allVertices.push_back(ver);
-    }
-
-    return allVertices;
 }
 
 glm::mat4 Mesh::CalculeModelBoundingBox(BoundingBox bbox)
@@ -134,20 +98,8 @@ glm::mat4 Mesh::CalculeModelBoundingBox(BoundingBox bbox)
 
     glm::mat4 m = model;
     m = glm::scale(glm::mat4(1.0f), glm::vec3(1, 1, 1));
-    return /*(model */ (transform);
-    //return glm::mat4();
+    return transform;
 }
-
-std::vector<glm::vec3> Mesh::GetTransformedVertices() const {
-    std::vector<glm::vec3> transformedVertices;
-    for (const auto& vertex : vertices) {
-        // Aplica la transformación local a cada vértice
-        glm::vec4 transformedVertex = model * glm::vec4(vertex.position, 1.0f);
-        transformedVertices.push_back(glm::vec3(transformedVertex));
-    }
-    return transformedVertices;
-}
-
 // Función para rotar un punto alrededor de un pivote en 3D
 glm::vec3 Mesh::RotatePointAroundPivot(const glm::vec3& point, const glm::vec3& rotation, const glm::vec3& pivot) {
     glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f))
@@ -236,23 +188,4 @@ void Mesh::UpdateSonScale() {
         children[i]->UpdateSonScale();
 
     UpdateModel();
-}
-
-void Mesh::InfoAboutCol(float ix, float ax, float iy, float ay, float iz, float az)
-{
-    acurrate.min.x = ix;
-    acurrate.min.y = iy;
-    acurrate.min.z = iz;
-
-    acurrate.max.x = ax;
-    acurrate.max.y = ay;
-    acurrate.max.z = az;
-    verticesBoundingBox[0] = glm::vec3(acurrate.min.x, acurrate.min.y, acurrate.min.z);
-    verticesBoundingBox[1] = glm::vec3(acurrate.max.x, acurrate.min.y, acurrate.min.z);
-    verticesBoundingBox[2] = glm::vec3(acurrate.max.x, acurrate.max.y, acurrate.min.z);
-    verticesBoundingBox[3] = glm::vec3(acurrate.min.x, acurrate.max.y, acurrate.min.z);
-    verticesBoundingBox[4] = glm::vec3(acurrate.min.x, acurrate.min.y, acurrate.max.z);
-    verticesBoundingBox[5] = glm::vec3(acurrate.max.x, acurrate.min.y, acurrate.max.z);
-    verticesBoundingBox[6] = glm::vec3(acurrate.max.x, acurrate.max.y, acurrate.max.z);
-    verticesBoundingBox[7] = glm::vec3(acurrate.min.x, acurrate.max.y, acurrate.max.z);
 }

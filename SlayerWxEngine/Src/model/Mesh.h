@@ -18,14 +18,11 @@ struct aiNode;
 class SlayerWxEngine_API Mesh : public Entity {
 public:
 	Mesh();
-	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<TextureData> textures);
+	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<TextureData> textures,glm::vec3 firstNormal);
 
 	
 	void Draw(float &shinies,int _a);
-	//BoundingBox CalculateBoundingBox(const glm::mat4& parentModelMatrix);
-	BoundingBox CalculateBoundingBox(const glm::mat4& parentModelMatrix, int _a);
-	std::vector<Vertex> AcumulativeVertex(glm::mat4 parentModel,glm::vec3 parentPosition);
-	//std::vector<Vertex> AcumulativeVertex();
+	BoundingBox CalculateBoundingBox();
 	void SetNode(aiNode* _myself);
 	aiNode* GetNode();
 	void SetParent(Mesh* _parent);
@@ -38,7 +35,6 @@ public:
 	aiNode* myself;
 	Mesh* parent;
 	glm::mat4 CalculeModelBoundingBox(BoundingBox bbox);
-	std::vector<glm::vec3> GetTransformedVertices() const;
 	glm::vec3 RotatePointAroundPivot(const glm::vec3& point, const glm::vec3& rotation, const glm::vec3& pivot);
 	bool canDraw = true;
 	bool imParent;
@@ -46,12 +42,10 @@ public:
 	virtual void Scale(float x, float y, float z) override;
 	void UpdateSonPos();
 	void UpdateSonScale();
-	BoundingBox vertiicesBoundingBox;
 	std::array<glm::vec3, 8> verticesBoundingBox;
-	BoundingBox acurrate;
-	void InfoAboutCol(float ix, float ax, float iy, float ay, float iz, float az);
 	unsigned int vao;
 	bool isRoot;
+	glm::vec3 myFirstNormal;
 private:
 	unsigned int ebo, vbo;
 };

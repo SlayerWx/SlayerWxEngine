@@ -165,8 +165,6 @@ void Game::ShapeStart()
 {
 	triangleAuto.SetPosition(0.0f, 0.0f, 0.0f);
 	shape.SetPosition(-5.0f,0.0f,0.0f);
-
-	std::cout << "assets/models/PlanesWorld/" << std::endl;
 }
 void Game::SpriteStart()
 {
@@ -207,23 +205,24 @@ void Game::SpriteStart()
 }
 void Game::MaterialStart()
 {
-	mat1 = Cube("cube", "assets/container.png", "assets/container.png", "assets/container_specular.png");
-	mat1.SetPosition(3.0f, 900.0f, 2.0f);
-	mat1.Scale(1.0f, 1.0f, 1.0f);
-	
-	
+
+
+	//mat1 = Cube("cube", "assets/container.png", "assets/container.png", "assets/container_specular.png");
+	//mat1.SetPosition(3.0f, 900.0f, 2.0f);
+	//mat1.Scale(1.0f, 1.0f, 1.0f);
+
 	lightCUbe = Cube("lightCube", "assets/rick.png");
 	lightCUbe.SetPosition(3.0f, 1.0f, 2.0f);
 	lightCUbe.Scale(0.3f, 0.3f, 0.3f);
-
+	
 	spotlightCUbe = Cube("lightCube", "assets/bob.png");
 	spotlightCUbe.SetPosition(3.0f, 1.0f, 2.0f);
 	spotlightCUbe.Scale(0.3f, 0.3f, 0.3f);
-
+	
 	spotlightCUbe2 = Cube("lightCube", "assets/bob.png");
 	spotlightCUbe2.SetPosition(3.0f, 1.0f, 2.0f);
 	spotlightCUbe2.Scale(0.3f, 0.3f, 0.3f);
-
+	
 	bspPlane.push_back(new BSPPlane("bspPlaneLeft", "assets/red.png",glm::vec3(1,0,0)));
 	bspPlane[0]->SetPosition(-10.0f, 1.0f, 2.0f);
 	bspPlane[0]->Scale(0.1f, 15.3f, 60.3f);
@@ -237,50 +236,42 @@ void Game::MaterialStart()
 	model1 = new Model();
 	ModelLoader::LoadModel("assets/models/test/bodyna.fbx", model1->structure);
 
-	model1->SetPosition(0, 2.5, 0);
-	model1->InfoAboutCol(-0, 0, -0, 0, -0, 0, 0);
-	model1->SetMeshPosition(0, 5.5, 0, 1);
-	model1->InfoAboutCol(-11, 11, -14.4, 1.6, -1, 1, 1);
 
+	model1->SetPosition(0, 2.5, 0);
+	model1->SetMeshPosition(0, 5.5, 0, 1);
+	
 	model1->SetMeshPosition(0, -0.2, 0, 2);
 	model1->SetMeshScale(0.5, 1.33, 0.5, 2);
-	model1->InfoAboutCol(-21.9, 21.9, -10.7, 1, -1.4, 1.4, 2);
 	
 	model1->SetMeshPosition(0, -5.225, 0, 3);
 	model1->SetMeshScale(1.5, 0.75, 1.5, 3);
-	model1->InfoAboutCol(-1, 7.1, -9, 1, -1, 1, 3);
 	
 	model1->SetMeshPosition(5.05, -0.2, 0, 4);
 	model1->SetMeshScale(0.33, 1, 0.33, 4);
-	model1->InfoAboutCol(-1, 1, -5.8, 1, -3.1, 3, 4);
 	
 	model1->SetMeshPosition(0, -5.15, -0.05, 5);
 	model1->SetMeshScale(0.9, 0.6, 3, 5);
-	model1->InfoAboutCol(-1, 1, -1, 1, -1, 1, 5);
 	
 	model1->SetMeshPosition(-0.05, -5.2, 0, 6);
 	model1->SetMeshScale(0.33, 1, 0.33, 6);
-	model1->InfoAboutCol(-1, 1, -3.8, 1, -3.5, 3.5, 6);
 	
 	model1->SetMeshPosition(0, -3.15, -0.05, 7);
 	model1->SetMeshScale(0.9, 0.6, 3, 7);
-	model1->InfoAboutCol(-1, 1, -1, 1, -1, 1, 7);
 	
 	model1->SetMeshPosition(5.15, 0, 0, 8);
 	model1->SetMeshScale(3, 0.33, 0.5, 8);
-	model1->InfoAboutCol(-1, 3.90, -2, 2, -2.1, 2.1, 8);
 	
 	model1->SetMeshPosition(5.2, 0.0, 0, 9);
 	model1->SetMeshScale(0.33, 2, 2, 9);
-	model1->InfoAboutCol(-1, 1, -1, 1, -1, 1, 9);
 	
 	model1->SetMeshPosition(-5.15, 0, 0, 10);
 	model1->SetMeshScale(3, 0.33, 0.5, 10);
-	model1->InfoAboutCol(-3.90, 1, -2, 2, -2.1, 2.1, 10);
 	
 	model1->SetMeshPosition(-5.2, 0, 0, 11);
 	model1->SetMeshScale(0.33, 2, 2, 11);
-	model1->InfoAboutCol(-1, 1, -1, 1, -1, 1, 11);
+	
+
+
 
 	model2 = new Model();
 	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model2->structure);
@@ -312,21 +303,16 @@ void Game::MaterialStart()
 	model7->SetMeshPosition(0.1f, -3.1f, -20.1f, 0);
 	model7->SetMeshScale(2, 2, 2, 1);
 	
-
-	bsp = new BSP();
-
-	bsp->AddModel(model1);
-	bsp->AddModel(model2);
-	bsp->AddModel(model3);
-	bsp->AddModel(model4);
-	bsp->AddModel(model5);
-	bsp->AddModel(model6);
-	bsp->AddModel(model7);
+	
+	BSP::AddModel(model1);
+	BSP::AddModel(model2);
+	BSP::AddModel(model3);
+	BSP::AddModel(model4);
+	BSP::AddModel(model5);
+	BSP::AddModel(model6);
+	BSP::AddModel(model7);
 
 
-	bsp->AddPlane(bspPlane[0]);
-	bsp->AddPlane(bspPlane[1]);
-	bsp->AddPlane(bspPlane[2]);
 }
 void Game::ShapeUpdate()
 {
@@ -436,7 +422,7 @@ void Game::ShapeDraw()
 void Game::MaterialDraw()
 {
 
-	bsp->CalculateBSP();
+	//bsp->CalculateBSP();
 	mat1.Draw();
 	//lightCUbe.Draw();
 	//spotlightCUbe.Draw();
@@ -450,10 +436,7 @@ void Game::MaterialDraw()
 	model7->Draw();
 	if (GetKey(KEYCODE_SPACE))
 	{
-		for (unsigned int i = 0; i < bspPlane.size(); i++)
-		{
-			bspPlane[i]->Draw();
-		}
+		BSP::DrawPlanes();
 	}
 
 }

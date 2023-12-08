@@ -3,7 +3,7 @@
 BSPPlane::BSPPlane() :Cube()
 {
 }
-BSPPlane::BSPPlane(std::string name, const char* path, glm::vec3 inNormal) : Cube(name,path)
+BSPPlane::BSPPlane(glm::vec3 inNormal) : Cube("plane","")
 {
 	normal = inNormal;
 	distance = -glm::dot(normal, GetPosition());

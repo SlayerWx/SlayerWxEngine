@@ -5,6 +5,7 @@
 #include "../Lib/assimp/include/assimp/Importer.hpp"
 #include "../Lib/assimp/include/assimp/scene.h"
 #include "../Lib/assimp/include/assimp/postprocess.h"
+#include "bsp/BSP.h"
 #include <map>
 class SlayerWxEngine_API ModelLoader
 {

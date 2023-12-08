@@ -46,6 +46,7 @@ public:
 	glm::vec3 lastPosition;
 	glm::vec3 localPosition;
 	glm::vec3 localRotation;
+	glm::mat4 GetModel();
 };
 
 #endif

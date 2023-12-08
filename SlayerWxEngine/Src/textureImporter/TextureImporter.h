@@ -22,6 +22,7 @@ public:
 	static void BindTexture(unsigned int data);
 	static void BindTexture1(unsigned int data);
 	static void BindTexture2(unsigned int data);
+	static void BindClean();
 };
 
 #endif

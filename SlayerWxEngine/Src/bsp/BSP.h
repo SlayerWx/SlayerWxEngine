@@ -6,16 +6,19 @@
 class SlayerWxEngine_API BSP
 {
 public:
+	static std::vector<Model*> models;
+	static std::vector<Mesh*> planes;
+	static void AddModel(Model* newModel);
+	static void AddPlane(Mesh* plane);
+	static void RemoveModel();
+	static void CalculateBSP();
+	static void CalculateBSPMesh(Mesh* mesh, glm::vec3 cameraPos);
+	static float GetDistanceToPoint(glm::vec3 positionPlane, glm::vec3 normalPlane,glm::vec3 point);
+	static bool FrontPlane(glm::vec3 positionPlane, glm::vec3 normalPlane,glm::vec3 point);
+	static void DrawPlanes();
+private:
 	BSP();
 	~BSP();
-	std::vector<Model*> models;
-	std::vector<BSPPlane*> planes;
-	void AddModel(Model* newModel);
-	void AddPlane(BSPPlane* plane);
-	void RemoveModel();
-	void CalculateBSP();
-	void CalculateBSPMesh(Mesh* mesh, glm::vec3 cameraPos);
-private:
 
 };
 
