@@ -222,16 +222,6 @@ void Game::MaterialStart()
 	spotlightCUbe2 = Cube("lightCube", "assets/bob.png");
 	spotlightCUbe2.SetPosition(3.0f, 1.0f, 2.0f);
 	spotlightCUbe2.Scale(0.3f, 0.3f, 0.3f);
-	
-	bspPlane.push_back(new BSPPlane("bspPlaneLeft", "assets/red.png",glm::vec3(1,0,0)));
-	bspPlane[0]->SetPosition(-10.0f, 1.0f, 2.0f);
-	bspPlane[0]->Scale(0.1f, 15.3f, 60.3f);
-	bspPlane.push_back(new BSPPlane("bspPlaneFront", "assets/red.png", glm::vec3(0, 0, 1)));
-	bspPlane[1]->SetPosition(3.0f, 1.0f, -10.0f);
-	bspPlane[1]->Scale(60.3f, 15.3f, 0.1f);
-	bspPlane.push_back(new BSPPlane("bspPlaneRight", "assets/red.png", glm::vec3(1, 0, 0)));
-	bspPlane[2]->SetPosition(10.0f, 1.0f, 2.0f);
-	bspPlane[2]->Scale(0.1f, 15.3f, 60.3f);
 
 	model1 = new Model();
 	ModelLoader::LoadModel("assets/models/test/bodyna.fbx", model1->structure);
