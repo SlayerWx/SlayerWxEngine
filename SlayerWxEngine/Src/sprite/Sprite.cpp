@@ -43,7 +43,7 @@ void Sprite::Update()
 
 	actualAnim->Update();
 	currentFrameIndex = actualAnim->currentFrame;
-	if (currentFrameIndex != previousFrameIndex)
+	if (currentFrameIndex != previousFrameIndex && currentFrameIndex < actualAnim->myFrames.size())
 	{
 		SetTextureCoordinate(actualAnim->myFrames[currentFrameIndex].coords[0].U,
 							 actualAnim->myFrames[currentFrameIndex].coords[0].V,
