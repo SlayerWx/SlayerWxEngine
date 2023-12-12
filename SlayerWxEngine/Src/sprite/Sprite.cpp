@@ -2,7 +2,8 @@
 #include <iostream>
 Sprite::Sprite() : Entity2D()
 {
-	//c++ xd
+	currentFrameIndex = 1;
+	previousFrameIndex = 99;
 }
 
 Sprite::Sprite(const char* filePath) : Entity2D()
@@ -77,4 +78,9 @@ void Sprite::SetTextureCoordinate(float u0, float v0, float u1, float v1, float 
 					  
 	vertexSprite[34] =  u2; //left
 	vertexSprite[35] =  v2; //up
+}
+
+void Sprite::SetDataTexture(TextureData newData)
+{
+	data = newData;
 }

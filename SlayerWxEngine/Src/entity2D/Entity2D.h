@@ -9,6 +9,8 @@ public:
 	Entity2D();
 	bool CheckCollisionAABB(Entity2D& vs);
 	bool canCollision = false;
+	float GetScaleX();
+	float GetScaleY();
 	
 };
 

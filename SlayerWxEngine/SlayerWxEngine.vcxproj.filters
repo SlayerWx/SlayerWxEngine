@@ -58,6 +58,9 @@
     <Filter Include="Src\AnimatorController\Animation">
       <UniqueIdentifier>{94c3d382-5eef-42a3-9ec8-cbd48cf4ee38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\tilemap">
+      <UniqueIdentifier>{68707908-e00a-4ce8-b56e-d56447803adf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\baseGame\BaseGame.cpp">
@@ -98,6 +101,15 @@
     </ClCompile>
     <ClCompile Include="Src\animatorController\Frame\Frame.cpp">
       <Filter>Src\AnimatorController\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\tilemap\Tile.cpp">
+      <Filter>Src\tilemap</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\tilemap\Tilemap.cpp">
+      <Filter>Src\tilemap</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\tilemap\tinyxml2.cpp">
+      <Filter>Src\tilemap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +160,15 @@
     </ClInclude>
     <ClInclude Include="Src\animatorController\Frame\Frame.h">
       <Filter>Src\AnimatorController\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\tilemap\Tile.h">
+      <Filter>Src\tilemap</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\tilemap\Tilemap.h">
+      <Filter>Src\tilemap</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\tilemap\tinyxml2.h">
+      <Filter>Src\tilemap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

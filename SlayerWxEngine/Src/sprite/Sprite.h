@@ -27,6 +27,7 @@ private:
 public:
     void SetTextureCoordinate(float u0, float v0, float u1, float v1,
         float u2, float v2, float u3, float v3);
+    void SetDataTexture(TextureData newData);
     Sprite();
     Sprite(const char* filePath);
     void SetAnimation(Animation* anim);

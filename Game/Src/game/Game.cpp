@@ -23,6 +23,7 @@ void Game::Start()
 	
 	SpriteStart();
 	//ShapeStart();
+
 	
 }
 float a = 0.0f;
@@ -168,6 +169,9 @@ void Game::SpriteStart()
 	link.SetPosition(4.0f, 0.0f, -2.0f);
 	link.Scale(1.0f, 1.0f, 1.0f);
 
+
+	mytilemap = new Tilemap("assets/pkmnTilemap.tmx", "assets/tilesheet.png");
+
 }
 void Game::ShapeUpdate()
 {
@@ -233,9 +237,12 @@ void Game::SpriteUpdate()
 void Game::SpriteDraw()
 {
 	
-	itsfineSprite.Draw();
-	dog.Draw();
-	ncat.Draw();
+	//itsfineSprite.Draw();
+	//dog.Draw();
+	//ncat.Draw();
+
+	mytilemap->Draw();
+
 	link.Draw();
 
 }

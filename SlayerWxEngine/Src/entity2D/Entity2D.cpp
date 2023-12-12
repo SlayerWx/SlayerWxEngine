@@ -39,3 +39,13 @@ bool Entity2D::CheckCollisionAABB(Entity2D& vs)
 	}
 	return false;
 }
+
+float Entity2D::GetScaleX()
+{
+	return localScale.x;
+}
+
+float Entity2D::GetScaleY()
+{
+	return localScale.y;
+}

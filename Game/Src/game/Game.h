@@ -1,5 +1,6 @@
 #include "baseGame/BaseGame.h"
 #include "AnimatorController/Animation/Animation.h"
+#include "tilemap/Tilemap.h"
 class Game : public BaseGame
 {
 private:
@@ -28,6 +29,8 @@ private:
 	void ShapeUpdate();
 	void SpriteDraw();
 	void ShapeDraw();
+
+	Tilemap* mytilemap;
 public:
 	Game();
 	void Play();

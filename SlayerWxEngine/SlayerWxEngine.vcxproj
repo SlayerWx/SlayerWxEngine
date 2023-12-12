@@ -31,6 +31,9 @@
     <ClCompile Include="Src\shape\Shape.cpp" />
     <ClCompile Include="Src\sprite\Sprite.cpp" />
     <ClCompile Include="Src\textureImporter\TextureImporter.cpp" />
+    <ClCompile Include="Src\tilemap\Tile.cpp" />
+    <ClCompile Include="Src\tilemap\Tilemap.cpp" />
+    <ClCompile Include="Src\tilemap\tinyxml2.cpp" />
     <ClCompile Include="Src\window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +52,9 @@
     <ClInclude Include="Src\sprite\Sprite.h" />
     <ClInclude Include="Src\textureImporter\stb_image\stb_image.h" />
     <ClInclude Include="Src\textureImporter\TextureImporter.h" />
+    <ClInclude Include="Src\tilemap\Tile.h" />
+    <ClInclude Include="Src\tilemap\Tilemap.h" />
+    <ClInclude Include="Src\tilemap\tinyxml2.h" />
     <ClInclude Include="Src\window\window.h" />
   </ItemGroup>
   <ItemGroup>
