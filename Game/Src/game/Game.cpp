@@ -43,8 +43,8 @@ void Game::Start()
 	DirectionalLightning::SetNewActualLight(myDirLight);
 	point1 = new PointLight(glm::vec3(-1, 2, 5), glm::vec3(1, 1, 1), glm::vec3(0.1, 0.1, 0.1), glm::vec3(0.5, 0.5, 0.5),
 		glm::vec3(1, 1, 1));
-	//point2 = new PointLight(glm::vec3(-1, 2, 5), glm::vec3(1, 1, 1), glm::vec3(0.1, 0.1, 0.1), glm::vec3(0.5, 0.5, 0.5),
-	//		glm::vec3(1, 1, 1));
+	point2 = new PointLight(glm::vec3(-1, 2, 5), glm::vec3(1, 1, 1), glm::vec3(0.1, 0.1, 0.1), glm::vec3(0.5, 0.5, 0.5),
+			glm::vec3(1, 1, 1));
 
 	pot1 = new SpotLight(glm::vec3(3,1,0),glm::vec3(0,0,1),0.9,0.9,0.9,1,0.9,glm::vec3(0,1,0),glm::vec3(0.1,0.1,0.1),glm::vec3(0.5,0.5,0.5),glm::vec3(0.7,0.7,0.7));
 	
@@ -121,13 +121,11 @@ void Game::Update()
 	if (GetKey(KEYCODE_SPACE))
 	{		
 		//SetCameraProjection(CameraProjection::ortho);
-		SetShowBSP(true);
 		
 	}
 	else
 	{
 		//SetCameraProjection(CameraProjection::perspective);
-		SetShowBSP(false);
 	
 	}
 
@@ -207,9 +205,9 @@ void Game::MaterialStart()
 {
 
 
-	//mat1 = Cube("cube", "assets/container.png", "assets/container.png", "assets/container_specular.png");
-	//mat1.SetPosition(3.0f, 900.0f, 2.0f);
-	//mat1.Scale(1.0f, 1.0f, 1.0f);
+	mat1 = Cube("cube", "assets/container.png", "assets/container.png", "assets/container_specular.png");
+	mat1.SetPosition(3.0f, 900.0f, 2.0f);
+	mat1.Scale(1.0f, 1.0f, 1.0f);
 
 	lightCUbe = Cube("lightCube", "assets/rick.png");
 	lightCUbe.SetPosition(3.0f, 1.0f, 2.0f);
@@ -228,7 +226,7 @@ void Game::MaterialStart()
 
 
 	model1->SetPosition(0, 2.5, 0);
-	model1->SetMeshPosition(0, 5.5, 0, 1);
+	model1->SetMeshPosition(0, 0.5, 0, 1);
 	
 	model1->SetMeshPosition(0, -0.2, 0, 2);
 	model1->SetMeshScale(0.5, 1.33, 0.5, 2);
@@ -263,46 +261,46 @@ void Game::MaterialStart()
 
 
 
-	model2 = new Model();
-	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model2->structure);
-	model2->SetMeshPosition(-20.1f, -3.1f, 0.1f,0);
-	model2->SetMeshScale(2, 1, 2,1);
+	//model2 = new Model();
+	//ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model2->structure);
+	//model2->SetMeshPosition(-20.1f, -3.1f, 0.1f,0);
+	//model2->SetMeshScale(2, 1, 2,1);
+	//
+	//model3 = new Model();
+	//ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model3->structure);
+	//model3->SetMeshPosition(20.1f, -3.1f, 0.1f, 0);
+	//model3->SetMeshScale(2, 2, 2, 1);
+	//
+	//model4 = new Model();
+	//ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model4->structure);
+	//model4->SetMeshPosition(-20.1f, -3.1f, -20.1f, 0);
+	//model4->SetMeshScale(2, 2, 2, 1);
+	//
+	//model5 = new Model();
+	//ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model5->structure);
+	//model5->SetMeshPosition(20.1f, -3.1f, -20.1f, 0);
+	//model5->SetMeshScale(2, 2, 2, 1);
+	//
+	//model6 = new Model();
+	//ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model6->structure);
+	//model6->SetMeshPosition(0.1f, -3.1f, 0.1f, 0);
+	//model6->SetMeshScale(2, 2, 2, 1);
+	//
+	//model7 = new Model();
+	//ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model7->structure);
+	//model7->SetMeshPosition(0.1f, -3.1f, -20.1f, 0);
+	//model7->SetMeshScale(2, 2, 2, 1);
 	
-	model3 = new Model();
-	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model3->structure);
-	model3->SetMeshPosition(20.1f, -3.1f, 0.1f, 0);
-	model3->SetMeshScale(2, 2, 2, 1);
 	
-	model4 = new Model();
-	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model4->structure);
-	model4->SetMeshPosition(-20.1f, -3.1f, -20.1f, 0);
-	model4->SetMeshScale(2, 2, 2, 1);
-	
-	model5 = new Model();
-	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model5->structure);
-	model5->SetMeshPosition(20.1f, -3.1f, -20.1f, 0);
-	model5->SetMeshScale(2, 2, 2, 1);
-	
-	model6 = new Model();
-	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model6->structure);
-	model6->SetMeshPosition(0.1f, -3.1f, 0.1f, 0);
-	model6->SetMeshScale(2, 2, 2, 1);
-	
-	model7 = new Model();
-	ModelLoader::LoadModel("assets/models/test2/bodyna2.fbx", model7->structure);
-	model7->SetMeshPosition(0.1f, -3.1f, -20.1f, 0);
-	model7->SetMeshScale(2, 2, 2, 1);
-	
-	
-	BSP::AddModel(model1);
-	BSP::AddModel(model2);
-	BSP::AddModel(model3);
-	BSP::AddModel(model4);
-	BSP::AddModel(model5);
-	BSP::AddModel(model6);
-	BSP::AddModel(model7);
+	//BSP::AddModel(model1);
+	//BSP::AddModel(model2);
+	//BSP::AddModel(model3);
+	//BSP::AddModel(model4);
+	//BSP::AddModel(model5);
+	//BSP::AddModel(model6);
+	//BSP::AddModel(model7);
 
-
+	SetShowBSP(false);
 }
 void Game::ShapeUpdate()
 {
@@ -323,12 +321,9 @@ void Game::ShapeUpdate()
 void Game::SpriteUpdate()
 {
 	link.Update();
-	//if (GetKey(KEYCODE_5)) cameraState = CameraType::free;
-	//if (GetKey(KEYCODE_6)) cameraState = CameraType::FirstPerson;
-	//if (GetKey(KEYCODE_7)) cameraState = CameraType::ThridPerson;
-	//	CameraFollowObj(cameraState, link.GetPosition(), 5);
 }
 float xMesh = 0.01f, yMesh = 0.01f, zMesh = 0.01f;
+float rotate = 0.01f;
 void Game::MaterialUpdate()
 {
 	if (GetKey(KEYCODE_1))
@@ -384,14 +379,28 @@ void Game::MaterialUpdate()
 	if (GetKey(KEYCODE_BACKSPACE))
 	{
 		point1->enable = 0;
-	
+
 	}
+	if (GetKey(KEYCODE_SPACE))
+	{
+		rotate += 0.01f;
+		model1->RotateModel(rotate,0,0,1);
+		//model1->MoveMeshPosition(5 * DeltaTime(), 0, 0, 4);
+	}
+
+	glm::vec3 aux = model1->GetMeshPosition(4);
+	//std::cout << aux.x << " " << aux.y << " " << aux.z << std::endl;
+
 	spotlightCUbe.SetPosition(pot1->position.x, pot1->position.y, pot1->position.z);
 	spotlightCUbe2.SetPosition(pot2->position.x, pot2->position.y, pot2->position.z);
 	lightCUbe.SetPosition(point1->position.x, point1->position.y, point1->position.z);
 
 	//model1->SetMeshPosition(0.1f, auxYTestPatata, 0.1f, 6);
 	//auxYTestPatata += 0.2f * DeltaTime();
+	if (GetKey(KEYCODE_5)) cameraState = CameraType::free;
+	if (GetKey(KEYCODE_6)) cameraState = CameraType::FirstPerson;
+	if (GetKey(KEYCODE_7)) cameraState = CameraType::ThridPerson;
+		CameraFollowObj(cameraState, model1->GetPosition(), 5);
 }
 void Game::SpriteDraw()
 {
@@ -411,22 +420,20 @@ void Game::ShapeDraw()
 }
 void Game::MaterialDraw()
 {
-
-	//bsp->CalculateBSP();
 	mat1.Draw();
-	//lightCUbe.Draw();
-	//spotlightCUbe.Draw();
-	//spotlightCUbe2.Draw();
+	lightCUbe.Draw();
+	spotlightCUbe.Draw();
+	spotlightCUbe2.Draw();
 	model1->Draw();
-	model2->Draw();
-	model3->Draw();
-	model4->Draw();
-	model5->Draw();
-	model6->Draw();
-	model7->Draw();
-	if (GetKey(KEYCODE_SPACE))
-	{
-		BSP::DrawPlanes();
-	}
+	//model2->Draw();
+	//model3->Draw();
+	//model4->Draw();
+	//model5->Draw();
+	//model6->Draw();
+	//model7->Draw();
+	//if (GetKey(KEYCODE_SPACE))
+	//{
+	//	BSP::DrawPlanes();
+	//}
 
 }

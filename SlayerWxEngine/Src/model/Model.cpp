@@ -27,6 +27,19 @@ void Model::SetMeshPosition(float x, float y, float z, int index)
 
     structure.meshes[index]->SetPosition(x, y, z);
 }
+void Model::MoveMeshPosition(float x, float y, float z, int index)
+{
+    if (index == 0)
+    {
+        position += glm::vec3( x, y, z );
+        translate = glm::translate(glm::mat4(1.0f), position);
+
+        UpdateModel();
+    }
+
+    structure.meshes[index]->MovePosition(x, y, z);
+}
+
 
 void Model::SetMeshScale(float x, float y, float z, int index)
 {
@@ -41,3 +54,14 @@ void Model::SetMeshScale(float x, float y, float z, int index)
     structure.meshes[index]->Scale(x, y, z);
 }
 
+void Model::RotateModel(float x, float y, float z, int index)
+{
+
+    structure.meshes[index]->UpdateSonRotation(structure.meshes[index]->position,{ x, y, z }, structure.meshes[index]->position,true);
+    UpdateModel();
+}
+
+glm::vec3 Model::GetMeshPosition(int index)
+{
+    return structure.meshes[index]->localPosition;
+}

@@ -14,7 +14,10 @@ public:
 
 	void Draw();
 	void SetMeshPosition(float x, float y, float z, int index);
+	void MoveMeshPosition(float x, float y, float z, int index);
 	void SetMeshScale(float x, float y, float z, int index);
+	void RotateModel(float x, float y, float z, int index);
+	glm::vec3 GetMeshPosition(int index);
 	float shininess;
 private:
 };

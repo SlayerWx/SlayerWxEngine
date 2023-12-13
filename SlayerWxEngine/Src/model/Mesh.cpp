@@ -107,8 +107,7 @@ glm::vec3 Mesh::RotatePointAroundPivot(const glm::vec3& point, const glm::vec3& 
         * glm::rotate(glm::mat4(1.0f), glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 
     glm::vec4 rotatedPoint = rotationMatrix * glm::vec4(point - pivot, 1.0f);
-
-    return glm::vec3(rotatedPoint) + pivot;
+   return glm::vec3(rotatedPoint) + pivot;
 }
 
 
@@ -139,6 +138,22 @@ void Mesh::AddMeshSon(Mesh* newChildren)
 
 void Mesh::SetPosition(float x, float y, float z) {
     localPosition = { x, y, z };
+
+    if (parent)
+        position = parent->position + localPosition;
+    else
+        position = localPosition;
+
+    translate = glm::translate(glm::mat4(1.0f), position);
+
+    for (int i = 0; i < children.size(); i++)
+        children[i]->UpdateSonPos();
+
+    UpdateModel();
+}
+
+void Mesh::MovePosition(float x, float y, float z) {
+    localPosition += glm::vec3(x, y, z );
 
     if (parent)
         position = parent->position + localPosition;
@@ -186,6 +201,45 @@ void Mesh::UpdateSonScale() {
 
     for (int i = 0; i < children.size(); i++)
         children[i]->UpdateSonScale();
-
+    
     UpdateModel();
+}
+
+void Mesh::UpdateSonRotation(const glm::vec3& point, const glm::vec3& rotation, const glm::vec3& pivot, bool isRootRotation) {
+
+    if(!isRootRotation)
+    {
+    // Punto a rotar (en relación con el punto de pivote del "padre")
+    glm::vec3 pointToRotate = position;
+
+    // Punto de pivote del "padre" (el punto alrededor del cual se realiza la rotación)
+    glm::vec3 parentPivot = pivot;
+
+    // Crear una matriz de transformación para la rotación alrededor del punto de pivote del "padre"
+    glm::mat4 rotationMatrix = glm::translate(glm::mat4(1.0f), parentPivot) *
+        glm::rotate(glm::mat4(1.0f), rotation.x, glm::vec3(1.0f, 0.0f, 0.0f)) *
+        glm::rotate(glm::mat4(1.0f), rotation.y, glm::vec3(0.0f, 1.0f, 0.0f)) *
+        glm::rotate(glm::mat4(1.0f), rotation.z, glm::vec3(0.0f, 0.0f, 1.0f)) *
+        glm::translate(glm::mat4(1.0f), -parentPivot);
+
+    // Aplicar la rotación al punto
+    glm::vec4 rotatedPoint = rotationMatrix * glm::vec4(pointToRotate, 1.0f);
+
+    // Extraer las coordenadas del resultado
+    glm::vec3 result(rotatedPoint);
+
+    // Actualizar la matriz de transformación completa
+    translate = glm::translate(glm::mat4(1.0f), result);
+}
+    Rotate(rotation.x,rotation.y,rotation.z);
+    // Llamar a UpdateModel() para reflejar los cambios en la representación gráfica
+    UpdateModel();
+
+    for (int i = 0; i < children.size(); i++)
+        children[i]->UpdateSonRotation(position,rotation,pivot,false);
+
+}
+
+glm::vec3 Mesh::GetForwardVector() {
+    return glm::vec3(model[2][0], model[2][1], model[2][2]);
 }

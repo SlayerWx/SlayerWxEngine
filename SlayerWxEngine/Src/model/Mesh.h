@@ -39,9 +39,14 @@ public:
 	bool canDraw = true;
 	bool imParent;
 	virtual void SetPosition(float x, float y, float z) override;
+	void MovePosition(float x, float y, float z);
 	virtual void Scale(float x, float y, float z) override;
 	void UpdateSonPos();
 	void UpdateSonScale();
+	void UpdateSonRotation(const glm::vec3& point, const glm::vec3& rotation, const glm::vec3& pivot, bool isRootRotation);
+	glm::vec3 GetForwardVector();
+	glm::vec3 GetTotalRotation();
+	void ExtractEulerAngles(const glm::mat4& matrix, float& yaw, float& pitch, float& roll);
 	std::array<glm::vec3, 8> verticesBoundingBox;
 	unsigned int vao;
 	bool isRoot;
