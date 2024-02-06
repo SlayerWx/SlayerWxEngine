@@ -170,7 +170,8 @@ void Game::SpriteStart()
 	link.Scale(1.0f, 1.0f, 1.0f);
 
 
-	mytilemap = new Tilemap("assets/pkmnTilemap.tmx", "assets/tilesheet.png");
+	mytilemap = new Tilemap(/*"assets/slayerwxgrid.tmx"*/);
+	mytilemap->importTileMap("assets/slayerwxgrid.tmx");
 
 }
 void Game::ShapeUpdate()
@@ -241,7 +242,7 @@ void Game::SpriteDraw()
 	//dog.Draw();
 	//ncat.Draw();
 
-	mytilemap->Draw();
+	mytilemap->draw();////////////////////////////////////////////////////////////////
 
 	link.Draw();
 
