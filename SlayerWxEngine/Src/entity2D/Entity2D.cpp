@@ -2,16 +2,17 @@
 
 Entity2D::Entity2D() : Entity()
 {
+	lastPosition = position;
 }
 #include <iostream>
 bool Entity2D::CheckCollisionAABB(Entity2D& vs)
 {
 	if (canCollision &&  vs.canCollision)
 	{
-		if (position.x < vs.position.x + vs.localScale[0] &&
-			position.x + localScale[0] > vs.position.x &&
-			position.y < vs.position.y + vs.localScale[1] &&
-			position.y + localScale[1] > vs.position.y)
+		if (position.x - (vs.localScale[0] / 2) < vs.position.x + (vs.localScale[0]/2) &&
+			position.x + (localScale[0] / 2 ) > vs.position.x - (localScale[0] / 2) &&
+			position.y - (vs.localScale[1] / 2) < vs.position.y + (vs.localScale[1]/2) &&
+			position.y + (localScale[1]/2) > vs.position.y - (localScale[1] / 2))
 		{
 			if (vs.weight < strength)
 			{
@@ -31,8 +32,8 @@ bool Entity2D::CheckCollisionAABB(Entity2D& vs)
 			}
 			else
 			{
-
-				position = lastPosition;
+				BackToLastPosition();
+				
 			}
 			return true;
 		}
@@ -48,4 +49,8 @@ float Entity2D::GetScaleX()
 float Entity2D::GetScaleY()
 {
 	return localScale.y;
+}
+void Entity2D::BackToLastPosition()
+{
+	position = lastPosition;
 }

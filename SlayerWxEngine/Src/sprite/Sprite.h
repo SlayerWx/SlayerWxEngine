@@ -34,5 +34,6 @@ public:
     Animation* GetAnimation();
     void Update();
     void Draw();
+    void SetColor(float r, float g, float b);
 };
 #endif

@@ -59,6 +59,7 @@ void Entity::RotateZ(float z)
 
 void Entity::SetPosition(float x, float y, float z)
 {
+	lastPosition = position;
 	position[0] = x;
 	position[1] = y;
 	position[2] = z;
@@ -69,6 +70,9 @@ void Entity::SetPosition(float x, float y, float z)
 
 void Entity::Scale(float x, float y, float z)
 {
+	if (x <= 0.00f) x = 0.01f;
+	if (y <= 0.00f) y = 0.01f;
+	if (z <= 0.00f) z = 0.01f;
 	localScale[0] = x;
 	localScale[1] = y;
 	localScale[2] = z;

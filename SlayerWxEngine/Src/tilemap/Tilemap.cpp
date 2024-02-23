@@ -49,21 +49,16 @@ void Tilemap::setTexture(const TextureData& rkTexture) {
 //================================================
 void Tilemap::draw() {
 
-	float mapWidth = -(_width * _tileWidth) / 2;
-	float mapHeight = (_height * _tileHeight) / 2;
-
 	for (int i = 0; i < _tileMapGrid.size(); i++) {
 		for (int y = 0; y < _height; y++) {
 			for (int x = 0; x < _width; x++) {
 				if (_tileMapGrid[i][y][x].getId() != NULL) {
-					_tileMapGrid[i][y][x].SetPosition(x, _height -y, i * 0.15f);
-
 					_tileMapGrid[i][y][x].Draw();
+					
 				}
 			}
 		}
 	}
-	return;
 }
 //================================================
 bool Tilemap::importTileMap(std::string filePath) {
@@ -104,13 +99,8 @@ bool Tilemap::importTileMap(std::string filePath) {
 
 			newTile.setId(_id);
 			newTile.SetDataTexture(_texture);
-			//newTile.Scale(_tileWidth, _tileHeight,0.1f);
-
-			//newTile.SetTextureCoordinate(tileX / _imageWidth, tileY / _imageHeight,
-			//	(tileX + _tileWidth) / _imageWidth, tileY / _imageHeight,
-			//	tileX / _imageWidth, (tileY + _tileHeight) / _imageHeight,
-			//	(tileX + _tileWidth) / _imageWidth, (tileY + _tileHeight) / _imageHeight);
-
+			//newTile.Scale((_tileWidth / _imageWidth) * tilemapScale, (_tileHeight / _imageHeight) * tilemapScale, 0.1f);
+			newTile.Scale(tilemapScale, tilemapScale, 0.1f);
 			int m = j;
 			int n = rows -i -1;
 			float tileXX = (_tileWidth / _imageWidth);
@@ -136,9 +126,15 @@ bool Tilemap::importTileMap(std::string filePath) {
 		tinyxml2::XMLElement* pProperty = pTile->FirstChildElement("properties")->FirstChildElement("property");
 		std::string propertyName = pProperty->Attribute("value");
 		if (propertyName == "false")
+		{
 			tiles[id].walkability(false);
+			tiles[id].canCollision = true;
+		}
 		else
+		{
 			tiles[id].walkability(true);
+			tiles[id].canCollision = false;
+		}
 
 		pTile = pTile->NextSiblingElement("tile");
 	}
@@ -196,64 +192,81 @@ bool Tilemap::importTileMap(std::string filePath) {
 		pLayer = pLayer->NextSiblingElement("layer");
 	}
 
+
+	for (int i = 0; i < _tileMapGrid.size(); i++) {
+		for (int y = 0; y < _height; y++) {
+			for (int x = 0; x < _width; x++) {
+				if (_tileMapGrid[i][y][x].getId() != NULL) {
+					_tileMapGrid[i][y][x].SetPosition(_tileMapGrid[i][y][x].GetScaleX() * x,
+						_tileMapGrid[i][y][x].GetScaleY() * (_height - y)
+						, i * 0.15f);
+
+				}
+			}
+		}
+	}
+
+
 	return true;
 }
 //================================================
 void Tilemap::checkCollision(Entity2D& object) {
 
-	//convertedPosX = object.posX() + (_width / 2) * _tileWidth;
-	//convertedPosY = object.posY() - (_height / 2) * _tileHeight;
-	//
-	//int left_tile = convertedPosX / _tileWidth;
-	//int right_tile = (convertedPosX + object.scaleX()) / _tileWidth;
-	//
-	//int top_tile = (convertedPosY / _tileHeight) * -1;
-	//int bottom_tile = ((convertedPosY - object.scaleY()) / _tileHeight) * -1; // Se resta porque el eje Y crece hacia arriba
-	//
-	//if (left_tile < 0)
+	glm::vec2 playerPosition;
+	playerPosition.x = object.GetPositionX(); // devuelve la posición del jugador en el mundo
+	playerPosition.y = object.GetPositionY();
+
+	// Convertir la posición relativa a coordenadas de celda
+	convertedPosX = playerPosition.x / _tileMapGrid[0][0][0].GetScaleX();
+	convertedPosY = _tileMapGrid[0][0][0].GetPositionY() / _tileMapGrid[0][0][0].GetScaleY() - playerPosition.y / _tileMapGrid[0][0][0].GetScaleY();
+
+	int left_tile = convertedPosX;// std::round(convertedPosX);
+	int right_tile = convertedPosX + (object.GetScaleX() / _tileMapGrid[0][0][0].GetScaleX());
+	
+	int top_tile = std::round(convertedPosY);
+	int bottom_tile = convertedPosY + (object.GetScaleY() / _tileMapGrid[0][0][0].GetScaleY());
+
+
+	//if (left_tile < 0.00f)
+	//{
 	//	left_tile = 0;
+	//	object.BackToLastPosition();
+	//}
 	//
 	//if (right_tile >= _width)
+	//{
 	//	right_tile = _width - 1;
 	//
-	//if (top_tile < 0)
-	//	top_tile = 0;
+	//	object.BackToLastPosition();
+	//}
+	//
+	//if (top_tile < 0.00f)
+	//{
+	//	top_tile = 0; 
+	//	object.BackToLastPosition();
+	//}
 	//
 	//if (bottom_tile >= _height)
+	//{
 	//	bottom_tile = _height - 1;
 	//
-	///*
-	//cout << "converted X: " << convertedPosX << endl;
-	//cout << "converted Y: " << convertedPosY << endl;
-	//
-	//cout << "left: " <<left_tile << endl;
-	//cout << "right: "<<right_tile << endl;
-	//cout << "top: " << top_tile << endl;
-	//cout << "bottom: "<<bottom_tile << endl;
-	//*/
-	//
-	//for (int i = left_tile; i <= right_tile; i++) {
-	//
-	//	for (int j = top_tile; j <= bottom_tile; j++) {
-	//
-	//		for (int k = 0; k < _tileMapGrid.size(); k++) {
-	//			//cout << "caminable " << "[" << k << "]" << "[" << j << "]" << "[" << i << "] : "<< _tileMapGrid[k][j][i].isWalkable() << endl; // true == 1  ; false == 0
-	//			//cout << true << endl;
-	//			if (!_tileMapGrid[k][j][i].isWalkable()) {
-	//
-	//				if (_tileMapGrid[k][j][i].checkCollision(object) == CollisionHorizontalRight ||
-	//					_tileMapGrid[k][j][i].checkCollision(object) == CollisionHorizontalLeft)
-	//					object.returnToPreviusPosH();
-	//
-	//				if (_tileMapGrid[k][j][i].checkCollision(object) == CollisionVerticalUp)
-	//					object.returnToPreviusPos(object.posX(), object.previusPosY() + 0.2);
-	//
-	//				else if (_tileMapGrid[k][j][i].checkCollision(object) == CollisionVerticalDown)
-	//					object.returnToPreviusPos(object.posX(), object.previusPosY() - 0.2);
-	//			}
-	//		}
-	//	}
+	//	object.BackToLastPosition();
 	//}
+	std::cout << left_tile << "  " << std::round(convertedPosX) << "   " << convertedPosX << std::endl;
+	for (int i = 0; i <= _width-1; i++) {
+	//for (int i = left_tile; i <= right_tile; i++) {
+	
+		for (int j = top_tile; j <= bottom_tile; j++) {
+	
+			for (int k = 0; k < _tileMapGrid.size(); k++) {
+				if (!_tileMapGrid[k][j][i].isWalkable()) {
+	
+					object.CheckCollisionAABB(_tileMapGrid[k][j][i]);
+				}
+				
+			}
+		}
+	}
 }
 
 
@@ -288,58 +301,6 @@ void Tilemap::checkCollision(Entity2D& object) {
 //}
 //
 //
-//
-
-
-
-
-
-
-
-
-
-
-
-//
-//void Tilemap::LoadMap(const char* tmxFilePath) {
-//    tinyxml2::XMLDocument doc;
-//    doc.LoadFile(tmxFilePath);
-//
-//    // Obtener información del mapa
-//    tinyxml2::XMLElement* mapElement = doc.FirstChildElement("map");
-//    mapElement->QueryIntAttribute("width", &width);
-//    mapElement->QueryIntAttribute("height", &height);
-//
-//    // Inicializar la matriz de tiles
-//    tileMap.resize(height, std::vector<Tile>(width));
-//
-//    // Iterar sobre las capas y cargar los tiles
-//    tinyxml2::XMLElement* layerElement = mapElement->FirstChildElement("layer");
-//    int layerIndex = 0;
-//
-//    while (layerElement) {
-//        tinyxml2::XMLElement* dataElement = layerElement->FirstChildElement("data");
-//
-//        if (dataElement) {
-//            const char* tileData = dataElement->GetText();
-//
-//            if (tileData) {
-//                // Procesar los datos y cargar en la matriz tileMap
-//                // (Necesitarás adaptar esta parte según el formato real de tus datos en el archivo TMX)
-//                // Ejemplo básico: Asignar el mismo tile para cada posición
-//                for (int y = 0; y < height; ++y) {
-//                    for (int x = 0; x < width; ++x) {
-//                        int tileId = 0; // Obtén el ID del tile según tus datos reales
-//                        tileMap[y][x] = Tile(tileId);
-//                    }
-//                }
-//            }
-//        }
-//
-//        layerElement = layerElement->NextSiblingElement("layer");
-//        layerIndex++;
-//    }
-//}
 //
 
 

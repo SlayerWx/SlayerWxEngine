@@ -61,7 +61,7 @@ public:
 
 	bool importTileMap(std::string filePath);
 	void checkCollision(Entity2D& object);
-
+	float tilemapScale = 0.1f;
 private:
 	std::vector<Tile> tiles;
 	std::vector<Tile**> _tileMapGrid;

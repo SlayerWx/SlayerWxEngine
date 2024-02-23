@@ -11,6 +11,7 @@ public:
 	bool canCollision = false;
 	float GetScaleX();
 	float GetScaleY();
+	void BackToLastPosition();
 	
 };
 

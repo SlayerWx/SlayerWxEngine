@@ -34,11 +34,11 @@ float scaleX = 1.0f;
 float scaleY = 1.0f;
 float scaleZ = 1.0f;
 const float valueModif = 0.001f;
-float cameraX = 0.1f;
-float cameraY = 0.1f;
-float cameraZ = 0.1f;
-float cameraSpeedRotateX = 0.07f;
-float cameraSpeedRotateY = 0.07f;
+float cameraX = 1.0f;
+float cameraY = 1.0f;
+float cameraZ = 1.0f;
+float cameraSpeedRotateX = 1.17f;
+float cameraSpeedRotateY = 1.17f;
 void Game::Update()
 {
 
@@ -61,19 +61,19 @@ void Game::Update()
 
 
 	if (GetKey(KEYCODE_W))
-		CameraMove(CameraDirection::front, 10.0f);
+		CameraMove(CameraDirection::front, 1.0f);
 	if (GetKey(KEYCODE_S))
-		CameraMove(CameraDirection::back, 10.0f);
+		CameraMove(CameraDirection::back, 1.0f);
 
 	if (GetKey(KEYCODE_A))
-		CameraMove(CameraDirection::left, 10.0f);
+		CameraMove(CameraDirection::left, 1.0f);
 	if (GetKey(KEYCODE_D))
-		CameraMove(CameraDirection::right, 10.0f);
+		CameraMove(CameraDirection::right, 1.0f);
 
 	if (GetKey(KEYCODE_Q))
-		CameraMove(CameraDirection::up, 10.0f);
+		CameraMove(CameraDirection::up, 1.0f);
 	if (GetKey(KEYCODE_E))
-		CameraMove(CameraDirection::down, 10.0f);
+		CameraMove(CameraDirection::down, 1.0f);
 
 
 	if (GetKey(KEYCODE_KP_6))
@@ -85,7 +85,6 @@ void Game::Update()
 	if (GetKey(KEYCODE_KP_8))
 		CameraRotate(0, -cameraSpeedRotateY);
 
-	//SetCameraPosition(cameraX, cameraY, cameraZ);
 
 	if (right)a += 0.0001f;
 	else a -= 0.0001f;
@@ -96,11 +95,11 @@ void Game::Update()
 
 	if (GetKey(KEYCODE_SPACE))
 	{		
-		SetCameraProjection(CameraProjection::ortho);
+		SetCameraProjection(CameraProjection::perspective);
 	}
 	else
 	{
-		SetCameraProjection(CameraProjection::perspective);
+		SetCameraProjection(CameraProjection::ortho);
 
 	}
 
@@ -135,29 +134,41 @@ void Game::ShapeStart()
 }
 void Game::SpriteStart()
 {
+
+	SetCameraPosition(cameraX, cameraY, cameraZ);
+
 	itsfineSprite = Sprite("assets/This_Is_Fine.png");
 	dog = Sprite("assets/logo.png");
 	ncat = Sprite("assets/logoCat.png");
-	link = Sprite("assets/link.png");
+	link = Sprite("assets/test.png");
+	//link = Sprite("assets/link.png");
 	dog.canCollision = true;
 	link.canCollision = true;
-	link.strength = 1;
+	link.strength = 0;
 	rightAnim = new Animation();
-	rightAnim->AddFrame(0, 0, 96, 104, 961, 831, 0.001, 10);
+	//rightAnim->AddFrame(0, 0, 96, 104, 961, 831, 0.001, 10);
+	rightAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
 	upAnim = new Animation();
-	upAnim->AddFrame(0, 103, 96, 104, 961, 831, 0.001, 10);
+	//upAnim->AddFrame(0, 103, 96, 104, 961, 831, 0.001, 10);
+	upAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
 	leftAnim = new Animation();
-	leftAnim->AddFrame(2, 208, 96, 102, 961, 831, 0.001, 10);
+	//leftAnim->AddFrame(2, 208, 96, 102, 961, 831, 0.001, 10);
+	leftAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
 	downAnim = new Animation();
-	downAnim->AddFrame(2, 312, 96, 102, 961, 831, 0.001, 10);
+	//downAnim->AddFrame(2, 312, 96, 102, 961, 831, 0.001, 10);
+	downAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
 	idleRightAnim = new Animation();
-	idleRightAnim->AddFrame(2, 415, 96, 102, 961, 831, 0.007, 3);
+	//idleRightAnim->AddFrame(2, 415, 96, 102, 961, 831, 0.007, 3);
+	idleRightAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
 	idleUpAnim = new Animation();
-	idleUpAnim->AddFrame(2, 517, 96, 102, 961, 831, 0.007, 1);
+	//idleUpAnim->AddFrame(2, 517, 96, 102, 961, 831, 0.007, 1);
+	idleUpAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
 	idleLeftAnim = new Animation();
-	idleLeftAnim->AddFrame(2, 620, 96, 102, 961, 831, 0.007, 3);
+	//idleLeftAnim->AddFrame(2, 620, 96, 102, 961, 831, 0.007, 3);
+	idleLeftAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
 	idleDownAnim = new Animation();
-	idleDownAnim->AddFrame(2, 723, 96, 102, 961, 831, 0.007, 3);
+	//idleDownAnim->AddFrame(2, 723, 96, 102, 961, 831, 0.007, 3);
+	idleDownAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
 	link.SetAnimation(idleDownAnim);
 
 	itsfineSprite.SetPosition(0.0f, 0.0f, 2.0f);
@@ -165,12 +176,12 @@ void Game::SpriteStart()
 	dog.SetPosition(-3.5f, 0.0f, -1.0f);
 	dog.Scale(1.0f, 1.0f, 1.0f);
 	ncat.SetPosition(-2.5f, 0.0f, 0.0f);
-	ncat.Scale(1.0f, 1.0f, 1.0f);
-	link.SetPosition(4.0f, 0.0f, -2.0f);
-	link.Scale(1.0f, 1.0f, 1.0f);
+	ncat.Scale(0.006f, 0.006f, 1.0f);
+	link.SetPosition(1.01f, 1.01f, 0.2f);
+	link.Scale(0.1f, 0.1f, 1.0f);
 
 
-	mytilemap = new Tilemap(/*"assets/slayerwxgrid.tmx"*/);
+	mytilemap = new Tilemap();
 	mytilemap->importTileMap("assets/slayerwxgrid.tmx");
 
 }
@@ -196,7 +207,7 @@ void Game::SpriteUpdate()
 	{
 		linkState = Sleft;
 		link.SetAnimation(leftAnim);
-		link.SetPosition(link.GetPositionX() - 0.001f, link.GetPositionY(), link.GetPositionZ());
+		link.SetPosition(link.GetPositionX() - 0.01f, link.GetPositionY(), link.GetPositionZ());
 	}
 	else if (linkState == Sleft)
 	{
@@ -206,7 +217,7 @@ void Game::SpriteUpdate()
 	{
 		linkState = Sright;
 		link.SetAnimation(rightAnim);
-		link.SetPosition(link.GetPositionX() + 0.001f, link.GetPositionY(), link.GetPositionZ());
+		link.SetPosition(link.GetPositionX() + 0.01f, link.GetPositionY(), link.GetPositionZ());
 	}
 	else if (linkState == Sright)
 	{
@@ -216,7 +227,7 @@ void Game::SpriteUpdate()
 	{
 		linkState = Sup;
 		link.SetAnimation(upAnim);
-		link.SetPosition(link.GetPositionX(), link.GetPositionY() + 0.001f, link.GetPositionZ());
+		link.SetPosition(link.GetPositionX(), link.GetPositionY() + 0.01f, link.GetPositionZ());
 	}
 	else if (linkState == Sup)
 	{
@@ -226,23 +237,34 @@ void Game::SpriteUpdate()
 	{
 		linkState = Sdown;
 		link.SetAnimation(downAnim);
-		link.SetPosition(link.GetPositionX(), link.GetPositionY() - 0.001f, link.GetPositionZ());
+		link.SetPosition(link.GetPositionX(), link.GetPositionY() - 0.01f, link.GetPositionZ());
 	}
 	else if (linkState == Sdown)
 	{
 		link.SetAnimation(idleDownAnim);
 	}
-	link.CheckCollisionAABB(dog);
+
+	if (GetKey(KEYCODE_8))
+	{
+		link.Scale(link.GetScaleX()+0.01f, link.GetScaleY() + 0.01f ,1.0f);
+	}
+	if (GetKey(KEYCODE_9))
+	{
+		link.Scale(link.GetScaleX() - 0.01f, link.GetScaleY() - 0.01f , 1.0f);
+	}
+
+
+	mytilemap->checkCollision(link);
+	ncat.SetPosition(link.GetPositionX(),link.GetPositionY(),link.GetPositionZ()-0.0000001f);
 	link.Update();
 }
 void Game::SpriteDraw()
 {
 	
 	//itsfineSprite.Draw();
-	//dog.Draw();
-	//ncat.Draw();
-
-	mytilemap->draw();////////////////////////////////////////////////////////////////
+	dog.Draw();
+	ncat.Draw();
+	mytilemap->draw();
 
 	link.Draw();
 

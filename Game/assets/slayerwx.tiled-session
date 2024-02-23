@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "slayerwxgrid.tmx",
+    "activeFile": "slayerwxtilemap.tsx",
     "expandedProjectPaths": [
         "."
     ],
@@ -24,18 +24,18 @@
         },
         "slayerwxgrid.tmx": {
             "scale": 1,
-            "selectedLayer": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 269.5,
-                "y": 137
+                "x": 207.5,
+                "y": 113.5
             }
         },
         "slayerwxgrid.tmx#slayerwxtilemap": {
-            "scaleInDock": 1
+            "scaleInDock": 1.5
         },
         "slayerwxtilemap.tsx": {
             "scaleInDock": 1,
-            "scaleInEditor": 1
+            "scaleInEditor": 2
         }
     },
     "last.exportedFilePath": "C:/Users/maxi_/OneDrive/Desktop/repos/SlayerWxEngine/Game/assets",
@@ -53,8 +53,8 @@
     "project": "slayerwx.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "slayerwxtilemap.tsx",
         "slayerwxgrid.tmx",
+        "slayerwxtilemap.tsx",
         "myEngine.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",

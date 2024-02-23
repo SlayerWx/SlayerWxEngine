@@ -9,8 +9,7 @@ void main(){
     //gl_FragColor = texture(texture,TexCoord); 
     vec4 texColor = texture(texture0, TexCoord);
 
-    if(texColor.a < 0.1) //when escuchas algo en discord y funciona :D
-    discard;
+    if(texColor.a < 0.1) discard;
 
     gl_FragColor = texColor * outColor;
     // linearly interpolate between both textures (80% container, 20% awesomeface)

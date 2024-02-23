@@ -84,3 +84,23 @@ void Sprite::SetDataTexture(TextureData newData)
 {
 	data = newData;
 }
+
+void Sprite::SetColor(float r, float g, float b)
+{
+	if (r > 1.0f) r = 1.0f;
+	if (g > 1.0f) g = 1.0f;
+	if (b > 1.0f) b = 1.0f;
+	vertexSprite[3] = r;
+	vertexSprite[4] = g;
+	vertexSprite[5] = b;
+	vertexSprite[12] = r;
+	vertexSprite[13] = g;
+	vertexSprite[14] = b;
+	vertexSprite[21] = r;
+	vertexSprite[22] = g;
+	vertexSprite[23] = b;
+	vertexSprite[30] = r;
+	vertexSprite[31] = g;
+	vertexSprite[32] = b;
+
+}
