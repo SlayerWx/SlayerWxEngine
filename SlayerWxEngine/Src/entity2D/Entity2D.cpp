@@ -9,32 +9,47 @@ bool Entity2D::CheckCollisionAABB(Entity2D& vs)
 {
 	if (canCollision &&  vs.canCollision)
 	{
-		if (position.x - (vs.localScale[0] / 2) < vs.position.x + (vs.localScale[0]/2) &&
-			position.x + (localScale[0] / 2 ) > vs.position.x - (localScale[0] / 2) &&
-			position.y - (vs.localScale[1] / 2) < vs.position.y + (vs.localScale[1]/2) &&
-			position.y + (localScale[1]/2) > vs.position.y - (localScale[1] / 2))
+
+		if  (position.x - localScale.x / 2 < vs.position.x + vs.localScale.x / 2 &&
+			 position.x + localScale.x / 2 > vs.position.x - vs.localScale.x / 2 &&
+			 position.y - localScale.y / 2 < vs.position.y + vs.localScale.y / 2 &&
+			 position.y + localScale.y / 2 > vs.position.y - vs.localScale.y / 2)
 		{
-			if (vs.weight < strength)
+
+			float deltaX = std::abs(position.x - vs.position.x);
+			float deltaY = std::abs(position.y - vs.position.y);
+
+			if (deltaX > deltaY) 
 			{
-				bool helpWeight = false;
-				if (vs.weight == 0)
+				if (position.x < vs.position.x) 
 				{
-					helpWeight = true;
-					vs.weight = 0.00001;
+					//left vsRight
+					deltaX = std::abs((vs.position.x - vs.localScale.x / 2) - (position.x + localScale.x / 2));
+					CalculateAfterCollision(deltaX,glm::vec2(-1,0));
 				}
-				vs.SetPosition(vs.GetPositionX() + (position.x - lastPosition.x),
-								vs.GetPositionY() + (position.y - lastPosition.y),
-								vs.GetPositionZ());
-				if (helpWeight)
+				else 
 				{
-					vs.weight = 0.0f;
+					//right vsLeft
+					deltaX = std::abs((vs.position.x + vs.localScale.x / 2) - (position.x - localScale.x / 2));
+					CalculateAfterCollision(deltaX, glm::vec2(1, 0));
 				}
 			}
 			else
 			{
-				BackToLastPosition();
-				
+				if (position.y < vs.position.y)
+				{
+					//up vsDown
+					deltaY = std::abs((vs.position.y - vs.localScale.y/2)- (position.y + localScale.y / 2));
+					CalculateAfterCollision(deltaY, glm::vec2(0, -1));
+				}
+				else 
+				{
+					//down vsUp
+					deltaY = std::abs((vs.position.y + vs.localScale.y / 2) - (position.y - localScale.y / 2));
+					CalculateAfterCollision(deltaY, glm::vec2(0, 1));
+				}
 			}
+			
 			return true;
 		}
 	}
@@ -53,4 +68,9 @@ float Entity2D::GetScaleY()
 void Entity2D::BackToLastPosition()
 {
 	position = lastPosition;
+}
+void Entity2D::CalculateAfterCollision(float distance, glm::vec2 axis)
+{
+	distance = glm::abs(distance);
+	SetPosition(GetPositionX() + (axis.x * distance),GetPositionY() + (axis.y * distance), GetPositionZ());
 }

@@ -96,6 +96,7 @@ void Game::Update()
 	if (GetKey(KEYCODE_SPACE))
 	{		
 		SetCameraProjection(CameraProjection::perspective);
+		link.SetPosition(1.01f, 1.01f, 0.2f);
 	}
 	else
 	{
@@ -139,44 +140,44 @@ void Game::SpriteStart()
 
 	itsfineSprite = Sprite("assets/This_Is_Fine.png");
 	dog = Sprite("assets/logo.png");
-	ncat = Sprite("assets/logoCat.png");
-	link = Sprite("assets/test.png");
-	//link = Sprite("assets/link.png");
+	//ncat = Sprite("assets/logoCat.png");
+	//link = Sprite("assets/test.png");
+	link = Sprite("assets/link.png");
 	dog.canCollision = true;
 	link.canCollision = true;
 	link.strength = 0;
 	rightAnim = new Animation();
-	//rightAnim->AddFrame(0, 0, 96, 104, 961, 831, 0.001, 10);
-	rightAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
+	rightAnim->AddFrame(0, 0, 96, 104, 961, 831, 0.001, 10);
+	//rightAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
 	upAnim = new Animation();
-	//upAnim->AddFrame(0, 103, 96, 104, 961, 831, 0.001, 10);
-	upAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
+	upAnim->AddFrame(0, 103, 96, 104, 961, 831, 0.001, 10);
+	//upAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
 	leftAnim = new Animation();
-	//leftAnim->AddFrame(2, 208, 96, 102, 961, 831, 0.001, 10);
-	leftAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
+	leftAnim->AddFrame(2, 208, 96, 102, 961, 831, 0.001, 10);
+	//leftAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
 	downAnim = new Animation();
-	//downAnim->AddFrame(2, 312, 96, 102, 961, 831, 0.001, 10);
-	downAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
+	downAnim->AddFrame(2, 312, 96, 102, 961, 831, 0.001, 10);
+	//downAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
 	idleRightAnim = new Animation();
-	//idleRightAnim->AddFrame(2, 415, 96, 102, 961, 831, 0.007, 3);
-	idleRightAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
+	idleRightAnim->AddFrame(2, 415, 96, 102, 961, 831, 0.007, 3);
+	//idleRightAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
 	idleUpAnim = new Animation();
-	//idleUpAnim->AddFrame(2, 517, 96, 102, 961, 831, 0.007, 1);
-	idleUpAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
+	idleUpAnim->AddFrame(2, 517, 96, 102, 961, 831, 0.007, 1);
+	//idleUpAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
 	idleLeftAnim = new Animation();
-	//idleLeftAnim->AddFrame(2, 620, 96, 102, 961, 831, 0.007, 3);
-	idleLeftAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
+	idleLeftAnim->AddFrame(2, 620, 96, 102, 961, 831, 0.007, 3);
+	//idleLeftAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
 	idleDownAnim = new Animation();
-	//idleDownAnim->AddFrame(2, 723, 96, 102, 961, 831, 0.007, 3);
-	idleDownAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
+	idleDownAnim->AddFrame(2, 723, 96, 102, 961, 831, 0.007, 3);
+	//idleDownAnim->AddFrame(0, 0, 50, 50, 50, 50, 10, 1);
 	link.SetAnimation(idleDownAnim);
 
 	itsfineSprite.SetPosition(0.0f, 0.0f, 2.0f);
 	itsfineSprite.Scale(1.0f, 1.0f, 1.0f);
 	dog.SetPosition(-3.5f, 0.0f, -1.0f);
 	dog.Scale(1.0f, 1.0f, 1.0f);
-	ncat.SetPosition(-2.5f, 0.0f, 0.0f);
-	ncat.Scale(0.006f, 0.006f, 1.0f);
+	//ncat.SetPosition(-2.5f, 0.0f, 0.0f);
+	//ncat.Scale(0.006f, 0.006f, 1.0f);
 	link.SetPosition(1.01f, 1.01f, 0.2f);
 	link.Scale(0.1f, 0.1f, 1.0f);
 
@@ -255,7 +256,7 @@ void Game::SpriteUpdate()
 
 
 	mytilemap->checkCollision(link);
-	ncat.SetPosition(link.GetPositionX(),link.GetPositionY(),link.GetPositionZ()-0.0000001f);
+	//ncat.SetPosition(link.GetPositionX(),link.GetPositionY(),link.GetPositionZ()-0.0000001f);
 	link.Update();
 }
 void Game::SpriteDraw()
@@ -263,7 +264,7 @@ void Game::SpriteDraw()
 	
 	//itsfineSprite.Draw();
 	dog.Draw();
-	ncat.Draw();
+	//ncat.Draw();
 	mytilemap->draw();
 
 	link.Draw();

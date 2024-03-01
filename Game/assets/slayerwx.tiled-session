@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "slayerwxtilemap.tsx",
+    "activeFile": "slayerwxgrid.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -23,11 +23,11 @@
             "scaleInDock": 1
         },
         "slayerwxgrid.tmx": {
-            "scale": 1,
-            "selectedLayer": 1,
+            "scale": 4,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 207.5,
-                "y": 113.5
+                "x": 411.875,
+                "y": 296.625
             }
         },
         "slayerwxgrid.tmx#slayerwxtilemap": {
@@ -53,8 +53,8 @@
     "project": "slayerwx.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "slayerwxgrid.tmx",
         "slayerwxtilemap.tsx",
+        "slayerwxgrid.tmx",
         "myEngine.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",

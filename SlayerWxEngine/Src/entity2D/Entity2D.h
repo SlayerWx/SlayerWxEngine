@@ -12,7 +12,7 @@ public:
 	float GetScaleX();
 	float GetScaleY();
 	void BackToLastPosition();
-	
+	void CalculateAfterCollision(float distance, glm::vec2 axis);
 };
 
 #endif

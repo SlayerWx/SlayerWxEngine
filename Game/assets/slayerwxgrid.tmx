@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="left-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="1">
+ <editorsettings>
+  <export target="slayerwxgrid..tmx" format="tmx"/>
+ </editorsettings>
  <tileset firstgid="1" name="slayerwxtilemap" tilewidth="16" tileheight="16" spacing="1" tilecount="486" columns="27">
   <image source="tilemap.png" width="458" height="305"/>
   <tile id="0">
@@ -2478,7 +2481,7 @@
 0,0,262,263,264,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,198,199,200,0,0,
 0,0,262,263,264,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,225,226,227,0,0,
 0,0,289,290,291,0,0,394,395,0,0,0,0,0,0,0,0,0,0,0,0,0,400,0,0,0,0,0,0,0,
-55,0,0,0,0,0,57,421,422,223,0,0,0,0,0,0,0,0,0,0,223,223,427,55,0,0,0,0,0,57
+55,0,0,0,0,0,57,421,422,223,0,0,0,0,0,0,0,0,0,0,223,223,427,55,0,0,0,0,289,57
 </data>
  </layer>
  <layer id="3" name="layer3" width="30" height="20">
