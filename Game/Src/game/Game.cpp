@@ -204,41 +204,46 @@ void Game::ShapeUpdate()
 }
 void Game::SpriteUpdate()
 {
-	if (GetKey(KEYCODE_1))
+	bool pressingMove = false;
+	if (GetKey(KEYCODE_1) && !pressingMove)
 	{
 		linkState = Sleft;
 		link.SetAnimation(leftAnim);
 		link.SetPosition(link.GetPositionX() - 0.01f, link.GetPositionY(), link.GetPositionZ());
+		pressingMove = true;
 	}
 	else if (linkState == Sleft)
 	{
 		link.SetAnimation(idleLeftAnim);
 	}
-	if (GetKey(KEYCODE_2))
+	if (GetKey(KEYCODE_2) && !pressingMove)
 	{
 		linkState = Sright;
 		link.SetAnimation(rightAnim);
 		link.SetPosition(link.GetPositionX() + 0.01f, link.GetPositionY(), link.GetPositionZ());
+		pressingMove = true;
 	}
 	else if (linkState == Sright)
 	{
 		link.SetAnimation(idleRightAnim);
 	}
-	if (GetKey(KEYCODE_3))
+	if (GetKey(KEYCODE_3) && !pressingMove)
 	{
 		linkState = Sup;
 		link.SetAnimation(upAnim);
 		link.SetPosition(link.GetPositionX(), link.GetPositionY() + 0.01f, link.GetPositionZ());
+		pressingMove = true;
 	}
 	else if (linkState == Sup)
 	{
 		link.SetAnimation(idleUpAnim);
 	}
-	if (GetKey(KEYCODE_4))
+	if (GetKey(KEYCODE_4) && !pressingMove)
 	{
 		linkState = Sdown;
 		link.SetAnimation(downAnim);
 		link.SetPosition(link.GetPositionX(), link.GetPositionY() - 0.01f, link.GetPositionZ());
+		pressingMove = true;
 	}
 	else if (linkState == Sdown)
 	{

@@ -224,19 +224,19 @@ void Tilemap::checkCollision(Entity2D& object) {
 	convertedPosX = playerPosition.x / _tileMapGrid[0][0][0].GetScaleX();
 	convertedPosY = _tileMapGrid[0][0][0].GetPositionY() / _tileMapGrid[0][0][0].GetScaleY() - playerPosition.y / _tileMapGrid[0][0][0].GetScaleY();
 
-	int left_tile = convertedPosX - (object.GetScaleX() / _tileMapGrid[0][0][0].GetScaleX());
-	int right_tile = convertedPosX + (object.GetScaleX() / _tileMapGrid[0][0][0].GetScaleX());
+	float left_tile = convertedPosX - (object.GetScaleX() / _tileMapGrid[0][0][0].GetScaleX());
+	float right_tile = convertedPosX + (object.GetScaleX() / _tileMapGrid[0][0][0].GetScaleX());
 	
-	int top_tile = convertedPosY - (object.GetScaleY() / _tileMapGrid[0][0][0].GetScaleY());
-	int bottom_tile = convertedPosY + (object.GetScaleY() / _tileMapGrid[0][0][0].GetScaleY());
+	float top_tile = convertedPosY - (object.GetScaleY() / _tileMapGrid[0][0][0].GetScaleY());
+	float bottom_tile = convertedPosY + (object.GetScaleY() / _tileMapGrid[0][0][0].GetScaleY());
 
-
-	if (left_tile < 0)
+	
+	if (_tileMapGrid[0][0][0].GetPositionX() - _tileMapGrid[0][0][0].GetScaleX()
+		> convertedPosX - object.GetScaleX() * _tileMapGrid[0][0][0].GetScaleX()) // esta bien creo, next next
 	{
 		left_tile = 0;
 		object.BackToLastPosition();
 	}
-	
 	if (right_tile >= _width)
 	{
 		right_tile = _width - 1;
